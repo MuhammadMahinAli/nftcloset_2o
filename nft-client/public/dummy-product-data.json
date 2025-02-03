@@ -1,0 +1,102 @@
+[
+
+{
+    "_id": "653e6c3f4c3bbc473dc997d8",
+    "productID": "PR-001",
+    "title": "Blue Hoodies",
+    "description": "description",
+    "sku": "SEW938",
+    "quantity": 45,
+    "collections": [
+        {
+            "name": "common",
+            "collectionID": {
+                "$oid": "653e605db3402951e9a84aa3"
+            },
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997d9"
+            }
+        }
+    ],
+    "colors": [
+        {
+            "name": "blue",
+            "quantity": 20,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997da"
+            }
+        },
+        {
+            "name": "green",
+            "quantity": 25,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997db"
+            }
+        }
+    ],
+    "sizes": [
+        {
+            "size": "40",
+            "quantity": 20,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997dc"
+            }
+        },
+        {
+            "size": "42",
+            "quantity": 20,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997dd"
+            }
+        }
+    ],
+    "owners": [],
+    "versions": [
+        {
+            "name": "NFT",
+            "versionID": {
+                "$oid": "653e6180b3402951e9a84aac"
+            },
+            "price": 27,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997de"
+            }
+        },
+        {
+            "name": "VR",
+            "versionID": {
+                "$oid": "653e614bb3402951e9a84aa9"
+            },
+            "price": 30,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997df"
+            }
+        },
+        {
+            "name": "AR",
+            "versionID": {
+                "$oid": "653e60f9b3402951e9a84aa6"
+            },
+            "price": 30,
+            "_id": {
+                "$oid": "653e6c3f4c3bbc473dc997e0"
+            }
+        }
+    ],
+    "totalViews": 0,
+    "image": "https://i.ibb.co/HCY0XBp/product1.webp",
+    "volume": ".3ETH",
+    "addedBy": "652939969fee78af251eae6c",
+    "addStatus": "pending",
+    "market_X": true,
+    "requestRecycle": false,
+    "onAuction": false,
+    "sold": false,
+    "availability": true,
+    "hasOffers": false,
+    "createdAt":  "1698589759758",
+    "updatedAt": "1698589759758"
+    
+}
+
+]

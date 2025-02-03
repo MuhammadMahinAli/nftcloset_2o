@@ -1,0 +1,133 @@
+[
+    {
+        "_id": 1,
+        "productImage":"https://i.ibb.co/TWBcjN7/image-13-2x.png",
+        "coutures":"Blue Jacket",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$150.63",
+        "mintCurrency":"1.055WETH",
+        "mintedTime":29
+    },
+    {
+        "_id": 2,
+        "productImage":"https://i.ibb.co/31N8fgH/product2.png",
+        "coutures":"Red Jacket",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$201.13",
+        "mintCurrency":"5.155WETH",
+        "mintedTime":35
+    },
+    {
+        "_id": 3,
+        "productImage":"https://i.ibb.co/txZb085/product3.png",
+        "coutures":"White Kurti",
+        "creator":"FTL",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "openEdition":"201D 10H 21M 20S",
+        "mintAmount":"$300.63",
+        "mintCurrency":"10.055WETH",
+        "mintedTime":15
+    },
+    {
+        "_id": 4,
+        "productImage":"https://i.ibb.co/0hW4MBS/product4.png",
+        "coutures":"Mask",
+        "creator":"FTL",
+        "openEdition":"331D 11H 21M 50S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$330.63",
+        "mintCurrency":"0.055WETH",
+        "mintedTime":39
+    },
+    {
+        "_id": 5,
+        "productImage":"https://i.ibb.co/hc5zcbk/product5.png",
+        "coutures":"Cap",
+        "creator":"FTL",
+        "openEdition":"120D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$150.63",
+        "mintCurrency":"1.055WETH",
+        "mintedTime":29
+    },
+    {
+        "_id": 6,
+        "productImage":"https://i.ibb.co/yBMvDMB/product6.png",
+        "coutures":"Blue Shirt",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$175.63",
+        "mintCurrency":"0.055WETH",
+        "mintedTime":20
+    },
+    {
+        "_id": 7,
+        "productImage":"https://i.ibb.co/LRxBzqG/product7.png",
+        "coutures":"White Gown",
+        "creator":"FTL",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "openEdition":"140D 11H 21M 24S",
+        "mintAmount":"$200.63",
+        "mintCurrency":"7.055WETH",
+        "mintedTime":50
+    },
+    {
+        "_id": 8,
+        "productImage":"https://i.ibb.co/KbcCcj8/product8.png",
+        "coutures":"Black Jacket",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$500.63",
+        "mintCurrency":"10.055WETH",
+        "mintedTime":65
+    },
+    {
+        "_id": 9,
+        "productImage":"https://i.ibb.co/ggPdKr3/product9.png",
+        "coutures":"Yellow Suit",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "mintAmount":"$200.63",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintCurrency":"0.055WETH",
+        "mintedTime":24
+    },
+    {
+        "_id": 10,
+        "productImage":"https://i.ibb.co/XXgD5GN/product10.png",
+        "coutures":"Brown Gown",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$330.63",
+        "mintCurrency":"0.055WETH",
+        "mintedTime":20
+    },
+    {
+        "_id": 11,
+        "productImage":"https://i.ibb.co/svckfPW/product11.png",
+        "coutures":"Black Jacket",
+        "creator":"FTL",
+        "openEdition":"141D 11H 21M 24S",
+        "ownerImg":"https://i.ibb.co/09CyY1L/ftl.png",
+        "mintAmount":"$350.63",
+        "mintCurrency":"0.055WETH",
+        "mintedTime":40
+    }
+    
+]
+
+
+
+
+
+
+
+
+

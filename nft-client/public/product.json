@@ -1,0 +1,44 @@
+[
+  {
+    "_id": 1,
+    "productImage": "https://i.ibb.co/TWBcjN7/image-13-2x.png",
+    "productName": "Blue Jacket",
+    "productPrice": "0.3215",
+    "productCurrency": "ETH"
+  },
+  {
+    "_id": 2,
+    "productImage": "https://i.ibb.co/31N8fgH/product2.png",
+    "productName": "Red Suiter",
+    "productPrice": "0.2389",
+    "productCurrency": "ETH"
+  },
+  {
+    "_id": 3,
+    "productImage": "https://i.ibb.co/txZb085/product3.png",
+    "productName": "White Kurti",
+    "productPrice": "0.2049",
+    "productCurrency": "ETH"
+  },
+  {
+    "_id": 4,
+    "productImage": "https://i.ibb.co/hc5zcbk/product5.png",
+    "productName": "Cap",
+    "productPrice": "0.1149",
+    "productCurrency": "ETH"
+  },
+  {
+    "_id": 5,
+    "productImage": "https://i.ibb.co/yBMvDMB/product6.png",
+    "productName": "Blue Shirt",
+    "productPrice": "0.4749",
+    "productCurrency": "ETH"
+  },
+  {
+    "_id": 6,
+    "productImage": "https://i.ibb.co/LRxBzqG/product7.png",
+    "productName": "White Gown",
+    "productPrice": "0.2149",
+    "productCurrency": "ETH"
+  }
+]
