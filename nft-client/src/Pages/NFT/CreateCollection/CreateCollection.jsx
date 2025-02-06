@@ -333,7 +333,27 @@ const CreateCollection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    
+    // Check required fields
+    const requiredFields = {
+      collectionName: "Collection Name",
+      collectionDescription: "Collection Description", 
+      publishType: "Publish Type",
+      publishDate: "Publish Date",
+      displayImage: "Display Image",
+      products: "Products"
+    };
+
+    for (const [field, label] of Object.entries(requiredFields)) {
+      if (!formData[field] || (Array.isArray(formData[field]) && formData[field].length === 0)) {
+        Swal.fire({
+          icon: "error",
+          title: "Required Field Missing",
+          text: `Please fill in the ${label} field`
+        });
+        return;
+      }
+    }
 
     try {
       const response = await addCollection(formData).unwrap();
@@ -341,8 +361,8 @@ const CreateCollection = () => {
       if (response.success) {
         Swal.fire({
           icon: "success",
-          title: "Hurry !",
-          text: "You've added a new collection !",
+          title: "Hurray!",
+          text: "You've added a new collection!"
         });
         setTimeout(() => {
           window.location.reload();
@@ -350,6 +370,11 @@ const CreateCollection = () => {
       }
     } catch (err) {
       console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong while adding the collection!"
+      });
     }
   };
   // --------------- edit collection start -------------------//

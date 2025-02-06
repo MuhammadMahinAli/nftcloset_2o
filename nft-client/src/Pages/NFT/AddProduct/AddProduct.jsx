@@ -189,28 +189,53 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
-    // Send formData to your backend or further processing here
+    // Check required fields
+    const requiredFields = {
+      productName: "Product Name",
+      productDescription: "Product Description",
+      displayImage: "Display Image",
+      price: "Price",
+      stock: "Stock",
+      buyingLink: "Buying Link",
+      colors: "Colors",
+      sizeWithMaterial: "Size with Material"
+    };
+
+    for (const [field, label] of Object.entries(requiredFields)) {
+      if (!formData[field] || 
+          (Array.isArray(formData[field]) && formData[field].length === 0) ||
+          (field === 'sizeWithMaterial' && (!formData[field][0].material || formData[field][0].sizes.length === 0))) {
+        Swal.fire({
+          icon: "error",
+          title: "Required Field Missing",
+          text: `Please fill in the ${label} field`
+        });
+        return;
+      }
+    }
 
     try {
       const response = await addProduct(formData).unwrap();
       console.log(response);
-      if(response.success){
-   Swal.fire({
-      icon: "success",
-      title: "Hurry !",
-      text: "You've added a new product !",
-    });
-    setTimeout(() => {
-      window.location.reload();
-    }, 2500);
+      if(response.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "You've added a new product!"
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
       }
     } catch (err) {
       console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong while adding the product!"
+      });
     }
-
- 
   };
   // --------------- Add product end -------------------//
   // --------------- edit product start -------------------//
