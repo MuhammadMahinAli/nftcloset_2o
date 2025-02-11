@@ -204,6 +204,23 @@ export const Nav = () => {
               Order
               </p>
             </li>
+
+            {
+              userEmail &&
+
+              <li
+              className={`hide-content"
+                 cursor-pointer  relative `}
+            >
+             <Link
+            to='/manageAccount'
+              className={` py-3
+                 flex relative lg:space-x-3 xl:space-x-6 rounded-b-xl items-center justify-center font-semibold`}
+            >
+          Dash
+            </Link>
+            </li>
+}
             {
               userEmail ?
 

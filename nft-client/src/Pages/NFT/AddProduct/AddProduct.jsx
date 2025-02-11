@@ -437,7 +437,7 @@ const AddProduct = () => {
             {/* Extra Videos */}
             <div className="mb-6">
               <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
-              <div className="flex gap-3 items-center">
+       nav       <div className="flex gap-3 items-center">
                 <input
                   type="file"
                   onChange={handleVideoUpload}

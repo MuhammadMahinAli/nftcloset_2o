@@ -9,6 +9,7 @@ import CreateCollection from "../Pages/NFT/CreateCollection/CreateCollection";
 import UpdateProfile from "../Pages/NFT/UpdateProfile/UpdateProfile";
 import ProductDescription from "../Pages/NFT/ProductDescription/ProductDescription";
 import Order from "../Pages/NFT/Order/Order";
+import ManageAccount from "../Pages/Dashboard/ManageAccount";
 
 const router = createBrowserRouter([
   // {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/addProduct",
         element: <AddProduct />,
+      },
+      {
+        path: "/manageAccount",
+        element: <ManageAccount />,
       },
       {
         path: "/collections",
