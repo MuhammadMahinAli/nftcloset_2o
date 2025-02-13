@@ -1,9 +1,5 @@
-import feedIcon from "../assets/icon/feed.png";
-import PropTypes from "prop-types";
-
-
-const FeedIcon = ({openFeed}) => {
-  const fillColor = openFeed ? "#2CBA7A":"#727685"
+const DashboardIcon = ({ openDashboard,isPageActive }) => {
+  const fillColor = openDashboard === true || isPageActive("/manageAccount") ? "#2CBA7A" : "#727685";
   return (
     <>
       <svg
@@ -39,7 +35,4 @@ const FeedIcon = ({openFeed}) => {
   );
 };
 
-export default FeedIcon;
-FeedIcon.propTypes = {
-  theme: PropTypes.string.isRequired,
-};
+export default DashboardIcon;

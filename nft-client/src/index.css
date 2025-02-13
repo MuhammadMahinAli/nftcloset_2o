@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import "react-big-calendar/lib/css/react-big-calendar.css";
-
 
 @tailwind base;
 @tailwind components;
@@ -113,7 +112,8 @@ body {
 
 /* index.css */
 .white-inset-shadow {
-  box-shadow: inset 0 -2px 3px 9px #fff, inset 2px 3px 14px, inset -2px 3px 9px #fff, inset 0 2px 14px ;
+  box-shadow: inset 0 -2px 3px 9px #fff, inset 2px 3px 14px,
+    inset -2px 3px 9px #fff, inset 0 2px 14px;
 }
 .custom-shadow {
   background-color: #c9ebff;
@@ -427,7 +427,7 @@ body.dark .noti {
     0 0 30px #fffa65,
     0 0 60px #fffa65
 } */
-.pdf-container{
+.pdf-container {
   width: 250px;
 }
 @media screen and (min-device-width: 640px) and (max-device-width: 768px) {
@@ -459,7 +459,7 @@ body.dark .noti {
     width: 30px;
     height: 10px;
   }
-  .pdf-container{
+  .pdf-container {
     width: 450px;
     height: 300px;
   }
@@ -478,9 +478,9 @@ body.dark .noti {
     width: 30px;
     height: 10px;
   }
-  .pdf-container{
-    width:600px;
-    height: 350px; 
+  .pdf-container {
+    width: 600px;
+    height: 350px;
   }
 }
 
@@ -491,7 +491,6 @@ body.dark .noti {
 }
 
 .sidebar-open {
-  
   transform: translateX(-110%); /* Move the sidebar to the left */
 }
 
@@ -499,18 +498,18 @@ body.dark .noti {
   animation: 1s ease-in 5s;
 }
 
-.sidebar-list a .box1 .box2 svg {
+/* .sidebar-list a .box1 .box2 svg {
   fill: #838DAA
-}
- .sidebar-list a  .sidebar-text{
+} */
+/* .sidebar-list a  .sidebar-text{
  color: #4c4c4d
-}
+} */
 
-.sidebar-list a:hover .box1 .box2 svg {
-  fill: #2adba4;
-}
-.sidebar-list a:hover .sidebar-text{
- color: #2adba4;
+/* .sidebar-list a:hover .box1 .box2 svg {
+  fill: #2CBA7A;
+} */
+.sidebar-list a:hover .sidebar-text {
+  color: #2cba7a;
 }
 
 /* .gridl{
@@ -518,14 +517,14 @@ body.dark .noti {
   grid-column: 4 !important;
   gap: 50px;
 } */
- /* Hide scrollbar for Chrome, Safari, and Opera */
+/* Hide scrollbar for Chrome, Safari, and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 /* Hide scrollbar for IE, Edge, and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* .lsidebar {
@@ -538,7 +537,7 @@ body.dark .noti {
   transform: translateX(10%); /* Move the sidebar to the left 
 } */
 
-/* From Uiverse.io by cssbuttons-io */ 
+/* From Uiverse.io by cssbuttons-io */
 .fancy {
   background-color: transparent;
   border: 2px solid #000;
@@ -560,9 +559,9 @@ body.dark .noti {
   transition: all 0.3s ease-in-out;
   user-select: none;
   font-size: 13px;
- }
- 
- .fancy::before {
+}
+
+.fancy::before {
   content: " ";
   width: 1.5625rem;
   height: 2px;
@@ -573,9 +572,9 @@ body.dark .noti {
   transform: translateY(-50%);
   transform-origin: center;
   transition: background 0.3s linear, width 0.3s linear;
- }
- 
- .fancy .text {
+}
+
+.fancy .text {
   font-size: 1.125em;
   line-height: 1.33333em;
   padding-left: 2em;
@@ -585,9 +584,9 @@ body.dark .noti {
   text-transform: uppercase;
   text-decoration: none;
   color: black;
- }
- 
- .fancy .top-key {
+}
+
+.fancy .top-key {
   height: 2px;
   width: 1.5625rem;
   top: -2px;
@@ -595,9 +594,9 @@ body.dark .noti {
   position: absolute;
   background: #e8e8e8;
   transition: width 0.5s ease-out, left 0.3s ease-out;
- }
- 
- .fancy .bottom-key-1 {
+}
+
+.fancy .bottom-key-1 {
   height: 2px;
   width: 1.5625rem;
   right: 1.875rem;
@@ -605,9 +604,9 @@ body.dark .noti {
   position: absolute;
   background: #e8e8e8;
   transition: width 0.5s ease-out, right 0.3s ease-out;
- }
- 
- .fancy .bottom-key-2 {
+}
+
+.fancy .bottom-key-2 {
   height: 2px;
   width: 0.625rem;
   right: 0.625rem;
@@ -615,37 +614,35 @@ body.dark .noti {
   position: absolute;
   background: #e8e8e8;
   transition: width 0.5s ease-out, right 0.3s ease-out;
- }
- 
- .fancy:hover {
+}
+
+.fancy:hover {
   color: white;
   background: black;
- }
- 
- .fancy:hover::before {
+}
+
+.fancy:hover::before {
   width: 0.9375rem;
   background: white;
- }
- 
- .fancy:hover .text {
+}
+
+.fancy:hover .text {
   color: white;
   padding-left: 1.5em;
- }
- 
- .fancy:hover .top-key {
+}
+
+.fancy:hover .top-key {
   left: -2px;
   width: 0px;
- }
- 
- .fancy:hover .bottom-key-1,
-  .fancy:hover .bottom-key-2 {
+}
+
+.fancy:hover .bottom-key-1,
+.fancy:hover .bottom-key-2 {
   right: 0;
   width: 0;
- }
+}
 
-
-
-/* From Uiverse.io by Galahhad */ 
+/* From Uiverse.io by Galahhad */
 .payment-input {
   padding: 12px;
   border: none;
@@ -657,7 +654,6 @@ body.dark .noti {
 
 .payment-input:invalid {
   animation: justshake 0.3s forwards;
- 
 }
 
 @keyframes justshake {
@@ -678,8 +674,8 @@ body.dark .noti {
   }
 }
 
-
-.slick-prev, .slick-next {
+.slick-prev,
+.slick-next {
   font-size: 0;
   line-height: 0;
   position: absolute;
@@ -697,8 +693,9 @@ body.dark .noti {
   background: #808080 !important ; /* Gray background */
 }
 
-.slick-prev:before, .slick-next:before {
-  font-family: 'slick';
+.slick-prev:before,
+.slick-next:before {
+  font-family: "slick";
   font-size: 20px;
   line-height: 1;
   opacity: 0.75;
@@ -707,22 +704,22 @@ body.dark .noti {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.slick-prev:hover, .slick-next:hover {
+.slick-prev:hover,
+.slick-next:hover {
   background: #808080; /* Gray background on hover */
 }
 
-.slick-prev:hover:before, .slick-next:hover:before {
+.slick-prev:hover:before,
+.slick-next:hover:before {
   opacity: 1;
 }
-/* From Uiverse.io by PriyanshuGupta28 */ 
-
+/* From Uiverse.io by PriyanshuGupta28 */
 
 .pay-input[type="checkbox"] {
   display: none;
 }
 
-
-  /* Style for the custom checkbox */
+/* Style for the custom checkbox */
 .custom-checkbox {
   display: inline-block;
   width: 20px;
@@ -733,7 +730,7 @@ body.dark .noti {
   cursor: pointer;
 }
 
-  /* Style for the custom checkmark */
+/* Style for the custom checkmark */
 .custom-checkbox::after {
   content: "";
   position: absolute;
@@ -747,7 +744,22 @@ body.dark .noti {
   opacity: 0;
 }
 
-  /* Show the checkmark when checkbox is checked */
+/* Show the checkmark when checkbox is checked */
 .pay-input[type="checkbox"]:checked + .custom-checkbox::after {
   opacity: 1;
+}
+/* ////////////////////////////////////////// */
+
+.PhoneInputInput {
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.PhoneInputInput:focus {
+  outline: none;
+  border-color: #14b8a6; /* Red border */
+  box-shadow: 0 0 0 1px #14b8a6; /* Red shadow with opacity */
 }

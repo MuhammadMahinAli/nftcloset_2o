@@ -10,6 +10,8 @@ import UpdateProfile from "../Pages/NFT/UpdateProfile/UpdateProfile";
 import ProductDescription from "../Pages/NFT/ProductDescription/ProductDescription";
 import Order from "../Pages/NFT/Order/Order";
 import ManageAccount from "../Pages/Dashboard/ManageAccount";
+import AdminLayout from "../Layout/AdminLayout";
+import UpdateUserProfile from "../Pages/Dashboard/UpdateUserProfile";
 
 const router = createBrowserRouter([
   // {
@@ -23,6 +25,19 @@ const router = createBrowserRouter([
 
   //   ],
   // },
+  {
+    path: "/manageAccount",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "/manageAccount",
+        element: <ManageAccount />,
+      },
+      {
+        path: "/manageAccount/profile",
+        element: <UpdateUserProfile />,
+      },
+]},
   {
     path: "/",
     element: <HomepageLayout />,
@@ -43,10 +58,7 @@ const router = createBrowserRouter([
         path: "/addProduct",
         element: <AddProduct />,
       },
-      {
-        path: "/manageAccount",
-        element: <ManageAccount />,
-      },
+     
       {
         path: "/collections",
         element: <CreateCollection />,

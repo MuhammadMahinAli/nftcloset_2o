@@ -1,8 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthCheck } from "../utils/useAuthCheck";
 import { useSelector } from "react-redux";
-import AdminNavbar from "../common/Navbar/AdminNavbar";
+import { Nav } from "../Pages/shared/NavBar/Nav";
 import AdminSideBar from "../common/AdminSidebar/AdminSideBar";
+import Footer from "../Pages/shared/Footer/Footer";
 
 const AdminLayout = () => {
   const authChecked = useAuthCheck();
@@ -15,28 +16,30 @@ const AdminLayout = () => {
     return;
   }
 
-  console.log('uu', user);
+  console.log("uu", user);
 
   return (
     <>
-    { 
-    user?.email === 'researchbdy@gmail.com' &&
-    <>
-      {!authChecked ? (
-        <div>Checking Authentication....</div>
-      ) : (
-        <div className="bg-[#eff4fa] w-full min-h-screen">
-          <AdminNavbar />
-          <div className="flex items-center justify-center  md:items-start p-0 md:pr-7 ">
-            <AdminSideBar />
-            <div className="w-11/12 md:w-11/12 lg:w-11/12 xl:w-9/12 pl-3 md:pl-16 lg:pl-14 xl:pl-8">
-              <Outlet />
+      {/* { 
+    user?.email === 'researchbdy@gmail.com' && */}
+      <>
+        {!authChecked ? (
+          <div>Checking Authentication....</div>
+        ) : (
+          <div className="bg-[url('/dashboard.png')] bg-cover bg-center bg-no-repeat  w-full">
+            <Nav />
+            <div className=" flex items-center justify-center  md:items-start p-0 md:pr-2 ">
+              <AdminSideBar />
+              <div className="w-11/12 md:w-12/12 lg:w-11/12 xl:w-11/12 pl-0 md:pl-0 lg:pl-10 3xl:pl-3">
+                <Outlet />
+              </div>
+           
             </div>
+            <Footer/>
           </div>
-        </div>
-      )}
-    </>
-    }
+        )}
+      </>
+      {/* } */}
     </>
   );
 };
@@ -112,4 +115,3 @@ export default AdminLayout;
 // };
 
 // export default GeneralLayout;
-
