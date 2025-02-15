@@ -1,5 +1,5 @@
-const OrderIcon = ({ openOrder }) => {
-  const fillColor = openOrder ? "#2CBA7A" : "#727685";
+const OrderIcon = ({ openOrder, isPageActive }) => {
+  const fillColor = openOrder === true || isPageActive("/manageAccount/orders") ? "#2CBA7A" : "#727685";
   return (
     <>
       <svg

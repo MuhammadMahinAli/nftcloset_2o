@@ -1,0 +1,194 @@
+.nftClogetlogo2 {
+  width: 23px;
+  position: relative;
+  height: 29px;
+  object-fit: cover;
+}
+.span {
+  color: var(--color-lightskyblue);
+}
+.closet {
+  color: var(--color-turquoise);
+}
+.nftCloset {
+  position: relative;
+  text-transform: capitalize;
+}
+.logo {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+  font-family: var(--font-goldman);
+}
+.home {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+  z-index: 3;
+}
+.market {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.btn {
+  border-radius: var(--br-8xs);
+  background-color: var(--color-whitesmoke-100);
+  height: 39.4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs) var(--padding-3xs);
+  box-sizing: border-box;
+  z-index: 2;
+}
+.collections {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+  z-index: 1;
+}
+.marketX {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+  z-index: 0;
+}
+.navBarTxt {
+  width: 353px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xl);
+  font-size: var(--font-size-base);
+  color: var(--color-gray-100);
+}
+.vectorIcon {
+  width: 22.1px;
+  position: relative;
+  height: 23.1px;
+}
+.lightSvgrepocom {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-8xs);
+}
+.connect {
+  text-transform: capitalize;
+}
+.wallet {
+  text-transform: lowercase;
+}
+.connectWallet {
+  position: relative;
+  font-weight: 500;
+}
+.buton {
+  border-radius: var(--br-7xs);
+  background-color: var(--color-gray-100);
+  height: 33.1px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs) var(--padding-sm);
+  box-sizing: border-box;
+}
+.becomeASeller {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.btuon {
+  border-radius: var(--br-7xs);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+  height: 35.1px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs) var(--padding-7xs);
+  color: var(--color-gray-100);
+}
+.vectorIcon1 {
+  width: 27.5px;
+  position: relative;
+  height: 27.5px;
+  z-index: 0;
+}
+.vectorIcon2 {
+  width: 31.34%;
+  position: absolute;
+  margin: 0 !important;
+  height: 31.34%;
+  top: 28.96%;
+  right: 34.33%;
+  bottom: 39.7%;
+  left: 34.33%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  z-index: 1;
+}
+.profileCircleSvgrepocom {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-10xs);
+  position: relative;
+  gap: var(--gap-3xs);
+}
+.btonAndIcons {
+  width: 333px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap-3xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-white);
+}
+.content {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-11xl);
+}
+.navBar {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.79)
+  );
+  border-bottom: 1px solid var(--color-darkgray-300);
+  box-sizing: border-box;
+  height: 82.7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-lg) var(--padding-21xl);
+  text-align: left;
+  font-size: var(--font-size-7xl);
+  color: var(--color-plum);
+  font-family: var(--font-roboto);
+}

@@ -8,7 +8,7 @@ const UpdateUserProfile = () => {
 
   return (
    
-      <div className="my-5 md:m-10">
+      <div className="my-5 ">
          <h2 className="text-xl font-bold mb-6">Profile</h2>
         {/* <!-- Profile Section --> */}
         <div className="bg-white  rounded-lg shadow-xl px-2 py-4 md:p-6 mb-8">

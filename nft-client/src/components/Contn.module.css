@@ -1,0 +1,161 @@
+.nftClogetlogo2 {
+  width: 23px;
+  position: relative;
+  height: 29px;
+  object-fit: cover;
+}
+.span {
+  color: var(--color-lightskyblue);
+}
+.closet {
+  color: var(--color-turquoise);
+}
+.nftCloset {
+  position: relative;
+  text-transform: capitalize;
+}
+.logo {
+  width: 207px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+}
+.nftClosetIs {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-2xs);
+  line-height: 26px;
+  text-transform: capitalize;
+  font-family: var(--font-roboto);
+  color: var(--color-dimgray-100);
+  text-align: center;
+  display: inline-block;
+  height: 94.5px;
+  flex-shrink: 0;
+}
+.text {
+  align-self: stretch;
+  height: 163px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-2xs);
+}
+.unitedKingdom8363562Icon {
+  width: 23px;
+  position: relative;
+  border-radius: 50%;
+  height: 22px;
+  object-fit: cover;
+}
+.english {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.contnt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-6xs);
+}
+.eng {
+  width: 95px;
+  border-radius: var(--br-7xs);
+  border: 1px solid var(--color-silver);
+  box-sizing: border-box;
+  height: 51.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-sm) var(--padding-3xs);
+}
+.vectorIcon {
+  width: 32.8px;
+  position: relative;
+  height: 24.8px;
+}
+.dicord {
+  width: 61px;
+  border-radius: var(--br-7xs);
+  border: 1.5px solid var(--color-darkgray-100);
+  box-sizing: border-box;
+  height: 52.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs);
+}
+.icons8Twitterx1001 {
+  width: 32.7px;
+  position: relative;
+  height: 32.7px;
+  object-fit: cover;
+}
+.twitter {
+  width: 61px;
+  border-radius: var(--br-7xs);
+  border: 1.5px solid var(--color-darkgray-100);
+  box-sizing: border-box;
+  height: 52.8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-5xs) var(--padding-smi);
+}
+.icons {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-3xl);
+  font-size: var(--font-size-smi);
+  color: var(--color-dimgray-200);
+  font-family: var(--font-roboto);
+}
+.txtPlusIcons {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+}
+.aboutUs {
+  align-self: stretch;
+  position: relative;
+  text-transform: capitalize;
+}
+.text1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+  font-size: var(--font-size-2xl);
+  color: var(--color-dimgray-100);
+  font-family: var(--font-roboto);
+}
+.contn {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px var(--padding-3xs);
+  gap: var(--gap-11xl);
+  text-align: left;
+  font-size: var(--font-size-7xl);
+  color: var(--color-plum);
+  font-family: var(--font-goldman);
+}

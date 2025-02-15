@@ -1,0 +1,291 @@
+.nftClogetlogo2 {
+  width: 24.3px;
+  position: relative;
+  height: 30.8px;
+  object-fit: cover;
+}
+.span {
+  color: var(--color-lightskyblue);
+}
+.closet {
+  color: var(--color-turquoise);
+}
+.nftCloset {
+  width: 213.3px;
+  position: relative;
+  text-transform: capitalize;
+  display: inline-block;
+  height: 29px;
+  flex-shrink: 0;
+}
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+}
+.nftClosetIs {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-lg);
+  line-height: 34px;
+  text-transform: capitalize;
+  font-family: var(--font-roboto);
+  color: var(--color-dimgray-100);
+  display: inline-block;
+  height: 126px;
+  flex-shrink: 0;
+}
+.text {
+  align-self: stretch;
+  height: 182px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+}
+.virtualTryOn {
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.aboutUs {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-51xl);
+}
+.market {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-76xl);
+}
+.contact {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-35xl);
+}
+.links {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--padding-10xs) 0px var(--padding-xl);
+  gap: var(--gap-11xl);
+  font-size: var(--font-size-5xl);
+  color: var(--color-dimgray-100);
+  font-family: var(--font-roboto);
+}
+.content {
+  align-self: stretch;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-11xs) var(--padding-3xs);
+  box-sizing: border-box;
+  gap: var(--gap-6xl);
+}
+.followUs1 {
+  align-self: stretch;
+  position: relative;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.unitedKingdom8363562Icon {
+  width: 23px;
+  position: relative;
+  border-radius: 50%;
+  height: 22px;
+  object-fit: cover;
+}
+.contnt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-6xs);
+}
+.eng {
+  width: 95px;
+  border-radius: var(--br-7xs);
+  border: 1px solid var(--color-silver);
+  box-sizing: border-box;
+  height: 51.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-sm) var(--padding-3xs);
+}
+.vectorIcon {
+  width: 32.8px;
+  position: relative;
+  height: 24.8px;
+}
+.dicord {
+  width: 61px;
+  border-radius: var(--br-7xs);
+  border: 1.5px solid var(--color-darkgray-100);
+  box-sizing: border-box;
+  height: 52.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs);
+}
+.icons8Twitterx1001 {
+  width: 32.7px;
+  position: relative;
+  height: 32.7px;
+  object-fit: cover;
+}
+.twitter {
+  width: 61px;
+  border-radius: var(--br-7xs);
+  border: 1.5px solid var(--color-darkgray-100);
+  box-sizing: border-box;
+  height: 52.8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-5xs) var(--padding-smi);
+}
+.icons {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-3xl);
+  font-size: var(--font-size-smi);
+  color: var(--color-dimgray-200);
+}
+.followUs {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-2xl);
+  font-size: var(--font-size-2xl);
+  color: var(--color-dimgray-100);
+  font-family: var(--font-roboto);
+}
+.section {
+  align-self: stretch;
+  height: 456px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px var(--padding-11xl);
+  box-sizing: border-box;
+  gap: var(--gap-xl);
+}
+.lastChild {
+  align-self: stretch;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.groupChild {
+  position: absolute;
+  top: 3.9px;
+  left: 0px;
+  border-radius: 50%;
+  border: 1px solid var(--color-dimgray-100);
+  box-sizing: border-box;
+  width: 16.4px;
+  height: 15.8px;
+}
+.c {
+  position: absolute;
+  top: 0px;
+  left: 2.9px;
+  text-transform: lowercase;
+  display: inline-block;
+  width: 11.7px;
+  height: 14.2px;
+}
+.ellipseParent {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 16.4px;
+  height: 19.7px;
+}
+.textInner {
+  width: 16.4px;
+  position: relative;
+  height: 19.7px;
+}
+.nftClosetX {
+  position: relative;
+  font-size: var(--font-size-lgi);
+  text-transform: capitalize;
+  font-weight: 500;
+  font-family: var(--font-inter);
+}
+.privicy {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px var(--padding-31xl);
+}
+.last {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+  font-size: var(--font-size-mid);
+  color: var(--color-dimgray-100);
+  font-family: var(--font-arial);
+}
+.footerContent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-3xs);
+  gap: var(--gap-36xl);
+}
+.footer {
+  position: absolute;
+  width: 100%;
+  top: 2498.1px;
+  right: 5px;
+  left: -5px;
+  background-color: var(--color-whitesmoke);
+  height: 597px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-6xl) var(--padding-3xs) var(--padding-21xl);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-8xl);
+  color: var(--color-plum);
+  font-family: var(--font-goldman);
+}

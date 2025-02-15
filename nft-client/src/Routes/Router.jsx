@@ -12,6 +12,11 @@ import Order from "../Pages/NFT/Order/Order";
 import ManageAccount from "../Pages/Dashboard/ManageAccount";
 import AdminLayout from "../Layout/AdminLayout";
 import UpdateUserProfile from "../Pages/Dashboard/UpdateUserProfile";
+import Pages from "../Pages/Ai/Pages";
+import UserSetting from "../Pages/Dashboard/UserSetting";
+import SavedAddreses from "../components/SavedAddreses";
+import ProductDetails from "../components/ProductDetails";
+import AllOrders from "../Pages/Dashboard/AllOrders";
 
 const router = createBrowserRouter([
   // {
@@ -34,8 +39,20 @@ const router = createBrowserRouter([
         element: <ManageAccount />,
       },
       {
-        path: "/manageAccount/profile",
+        path: "/manageAccount/update-profile",
         element: <UpdateUserProfile />,
+      },
+      {
+        path: "/manageAccount/page",
+        element: <Pages />,
+      },
+      {
+        path: "/manageAccount/settings",
+        element: <UserSetting />,
+      },
+      {
+        path: "/manageAccount/orders",
+        element: <AllOrders />,
       },
 ]},
   {
@@ -71,13 +88,17 @@ const router = createBrowserRouter([
   },
 
   {
+    path: "/test",
+    element: <ProductDetails />,
+  },
+  {
     path: "/sign-up",
     element: <Sign />,
   },
   {
     path: "/login",
     element: <Login />,
-  },
+  }
 ]);
 
 export default router;

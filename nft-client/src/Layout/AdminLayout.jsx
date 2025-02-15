@@ -30,7 +30,7 @@ const AdminLayout = () => {
             <Nav />
             <div className=" flex items-center justify-center  md:items-start p-0 md:pr-2 ">
               <AdminSideBar />
-              <div className="w-11/12 md:w-12/12 lg:w-11/12 xl:w-11/12 pl-0 md:pl-0 lg:pl-10 3xl:pl-3">
+              <div className=" w-11/12 md:w-12/12 lg:w-11/12 xl:w-11/12 3xl:w-12/12 pl-0 md:pl-0 lg:pl-14 3xl:pl-10">
                 <Outlet />
               </div>
            
