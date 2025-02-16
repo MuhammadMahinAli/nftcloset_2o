@@ -1,8 +1,7 @@
 const Cube = () => {
   return (
     <svg
-      width="39"
-      height="39"
+  className="h-7 w-7 xl:h-14 xl:w-14"
       viewBox="0 0 39 39"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

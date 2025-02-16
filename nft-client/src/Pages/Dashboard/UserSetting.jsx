@@ -68,7 +68,6 @@ const UserSetting = () => {
           <Link to='/manageAccount/update-profile'>
           <img src={pen} alt="edit" className="w-5 h-5" />
           </Link>
-   
         </div>
 
         {/* Profile Info */}

@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../Layout/MainLayout";
 import Homepage from "../Pages/Homepage/Homepage";
 import Sign from "../Pages/SignUp/Sign";
 import Login from "../Pages/Login/Login";
@@ -14,9 +13,10 @@ import AdminLayout from "../Layout/AdminLayout";
 import UpdateUserProfile from "../Pages/Dashboard/UpdateUserProfile";
 import Pages from "../Pages/Ai/Pages";
 import UserSetting from "../Pages/Dashboard/UserSetting";
-import SavedAddreses from "../components/SavedAddreses";
 import ProductDetails from "../components/ProductDetails";
 import AllOrders from "../Pages/Dashboard/AllOrders";
+import AllProduct from "../Pages/Dashboard/AllProduct";
+import AllCollections from "../Pages/Dashboard/AllCollections";
 
 const router = createBrowserRouter([
   // {
@@ -53,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: "/manageAccount/orders",
         element: <AllOrders />,
+      },
+      {
+        path: "/manageAccount/all-products",
+        element: <AllProduct/>,
+      },
+      {
+        path: "/manageAccount/all-collections",
+        element: <AllCollections/>,
       },
 ]},
   {
