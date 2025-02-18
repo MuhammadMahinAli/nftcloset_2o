@@ -41,7 +41,7 @@ const AllCollections = () => {
             className="w-full pl-9 md:pl-12 py-1 md:py-3 bg-[#F6F4F3] rounded-lg"
           />
         </div>
-        <Link href="/products/new">
+        <Link to="/manageAccount/create-collection">
           <button className="bg-[#26B893] hover:bg-emerald-600 py-2 px-3 flex rounded-lg items-center space-x-2">
             <FaPlus className="h-4 w-4 md:mr-2 text-white" />
             <p className="text-white hidden md:block">Create New Collection</p>

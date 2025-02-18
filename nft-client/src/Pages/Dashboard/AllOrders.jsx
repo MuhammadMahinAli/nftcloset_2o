@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Cube from "../../icons/NFTIcon/Cube";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
+import RequestDetailsModal from "./RequestDetailsModal";
 
 const AllOrders = () => {
   // States for tabs
@@ -11,6 +12,14 @@ const AllOrders = () => {
   const [isClaimed, setIsClaimed] = useState(false);
   const [isReceived, setIsReceived] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+
+
+
+  const onClose = ()=>{
+    setIsOpenModal(false)
+  }
 
   // Function to handle tab clicks
   const handleTabClick = (tab) => {
@@ -160,6 +169,7 @@ const AllOrders = () => {
           Received
         </li>
       </ul>
+      <h1 className="text-3xl font-bold pt-8">User Control</h1>
       <div className="p-4 xs:p-6 rounded-2xl bg-[#f4f4f4] transition-colors duration-200 mt-6 md:mt-10">
         <div className="flex justify-between items-center  py-5">
           {/* left */}
@@ -226,6 +236,77 @@ const AllOrders = () => {
           </p>
         </div>
       </div>
+      <h1 className="text-3xl font-bold pt-8">Admin Control</h1>
+      <div className="p-4 xs:p-6 rounded-2xl bg-[#f4f4f4] transition-colors duration-200 mt-6 md:mt-10">
+        <div className="flex justify-between items-center  py-5">
+          {/* left */}
+          <div className="flex items-center gap-2 xl:gap-6">
+            <div className="px-3 py-1 bg-primary/10 text-primary text-sm dark:bg-primary/20">
+              <Cube />
+            </div>
+            <div>
+              <p className="text-lg xl:text-xl font-semibold  text-gray-900">
+                Approved
+              </p>
+              <p className="text-sm xl:text-base  text-gray-700">
+                on tue, 12 nov
+              </p>
+            </div>
+          </div>
+
+          {/* right */}
+          <div className="flex justify-between items-center space-x-5">
+            {/* <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
+              Confirm Reciept
+            </button> */}
+
+            <p onClick={()=>setIsOpenModal(true)} className="text-sm xl:text-xl  text-gray-700">Details</p>
+          </div>
+        </div>
+
+        <div className=" bg-white border rounded-2xl shadow-lg p-5">
+          <div className="flex flex-col md:flex-row justify-between items-center pb-7 space-y-5">
+            <div className="rounded-lg overflow-hidden flex flex-col md:flex-row  justify-between items-center space-y-2 md:space-x-3">
+              <div className="w-44 h-48 md:w-24 md:h-28 xl:w-44 xl:h-48 bg-gray-200 flex justify-center items-center rounded-xl">
+                <img
+                  src="https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
+                  alt="productName"
+                  className="w-36 h-40 md:w-20 md:h-24 xl:w-36 xl:h-40 object-cover rounded-lg"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <h3 className="text-lg xl:text-2xl font-semibold text-foreground">
+                  Product Name
+                </h3>
+                <p className="text-sm xl:text-lg text-gray-500 -foreground mt-1">
+                  Lorem ipsum dolor icing elit. Quod, at!
+                </p>
+                <p className="text-sm xl:text-lg text-gray-500 -foreground mt-1">
+                  Size: L,S
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full md:w-4/12 xl:w-5/12 flex flex-col gap-3">
+              <button className="py-2 xl:py-4 rounded-md text-[11px] xs:text-sm xl:text-xl font-medium bg-black text-white text-primary-foreground hover:bg-primary/90">
+                Claim Your Digital Assets
+              </button>
+              <button className="py-2 xl:py-4 rounded-md text-[11px] xs:text-sm xl:text-xl font-medium text-black border border-black text-primary-foreground hover:bg-primary/90">
+                Claim Your Digital Assets
+              </button>
+            </div>
+          </div>
+          <hr />
+          <p className="text-sm xl:text-lg pt-5 text-gray-500 text-muted-foreground">
+            The return/exchange window for this item is closed.
+          </p>
+        </div>
+      </div>
+      {
+        isOpenModal &&
+        <RequestDetailsModal isOpenModal={isOpenModal} onClose={onClose} />
+      }
       {/* Tab content sections    */}
       {isAll && <div className="mt-4">All Orders Content</div>}
       {isPending && <div className="mt-4">Pending Orders Content</div>}

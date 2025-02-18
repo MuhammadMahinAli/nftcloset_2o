@@ -17,6 +17,9 @@ import ProductDetails from "../components/ProductDetails";
 import AllOrders from "../Pages/Dashboard/AllOrders";
 import AllProduct from "../Pages/Dashboard/AllProduct";
 import AllCollections from "../Pages/Dashboard/AllCollections";
+import CreateNewCollection from "../Pages/Dashboard/CreateNewCollection";
+import AddANewProduct from "../Pages/Dashboard/AddANewProduct";
+
 
 const router = createBrowserRouter([
   // {
@@ -62,6 +65,14 @@ const router = createBrowserRouter([
         path: "/manageAccount/all-collections",
         element: <AllCollections/>,
       },
+      {
+        path: "/manageAccount/create-collection",
+        element: <CreateNewCollection/>,
+      },
+      {
+        path: "/manageAccount/add-new-product",
+        element: <AddANewProduct/>,
+      },
 ]},
   {
     path: "/",
@@ -79,10 +90,10 @@ const router = createBrowserRouter([
         path: "/order",
         element: <ProductDescription />,
       },
-      {
-        path: "/addProduct",
-        element: <AddProduct />,
-      },
+      // {
+      //   path: "/addProduct",
+      //   element: <AddProduct />,
+      // },
      
       {
         path: "/collections",
