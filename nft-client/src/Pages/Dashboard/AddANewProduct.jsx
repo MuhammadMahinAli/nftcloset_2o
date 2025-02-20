@@ -310,19 +310,19 @@ const AddProduct = () => {
   //console.log(formData.extraVideos);
   return (
     <>
-      <div className="p-8  min-h-screen">
+      <div className="my-4 p-2 lg:p-8  min-h-screen">
         {/* edit end */}
 
-        <h1 className="text-center text-3xl font-bold text-gray-700 rounded-xl py-5">
+        <h1 className="text-xl lg:text-3xl font-bold text-gray-700 rounded-xl py-5">
           Add New Product
         </h1>
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <form onSubmit={handleSubmit} className="my-4">
+          <div className="grid grid-cols-1  lg:grid-cols-3 gap-4 lg:gap-6">
             {/* General Information */}
 
             {/* box 1 */}
             <>
-              <div className="col-span-2 bg-white shadow-lg p-6 rounded-lg">
+              <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   General Information
                 </h2>
@@ -347,7 +347,7 @@ const AddProduct = () => {
                     name="productDescription"
                     value={formData.productDescription}
                     onChange={onInputChange}
-                    className="w-full h-36 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
+                    className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
                     rows="3"
                     placeholder="Lorem Ipsum Dolor Sit Amet Consectetur."
                   ></textarea>
@@ -392,14 +392,9 @@ const AddProduct = () => {
 
             {/* box 2 */}
             <>
-              {/* Display Image */}
               <div className="bg-white shadow-lg p-2">
                 <h2 className="text-lg font-semibold mb-4">Display Image</h2>
-                <label htmlFor="display">
-                  <p className="text-base text-center text-gray-700 font-bold bg-[#a7f8d3] px-4 py-2 rounded-xl">
-                    Select an Image
-                  </p>
-                </label>
+
                 <input
                   type="file"
                   id="display"
@@ -407,20 +402,46 @@ const AddProduct = () => {
                   className="mb-2 hidden"
                 />
                 {formData.displayImage ? (
-                  <div className=" m-2 bg-[#eaeaea] rounded flex items-center justify-center">
+                  <div className="relative m-2 border bg-[#fff] rounded flex flex-col space-y-3 items-center justify-center">
                     <img
                       src={formData.displayImage}
                       alt="Preview"
-                      className="object-cover w-52 rounded"
+                      className="object-cover border border-[#26B893] rounded"
                     />
+                  
+                    <div
+                      onClick={() =>
+                        setFormData({ ...formData, displayImage: "" })
+                      }
+                      className="absolute -top-5 -right-2 bg-[#26B893] text-white rounded-full font-bold mt-2 p-1 "
+                    >
+                <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 ) : (
-                  <div className="m-2 bg-[#eaeaea] rounded flex items-center justify-center">
+                  <div className="m-2 bg-white rounded flex flex-col items-center justify-center">
                     <img
-                      src="https://img.freepik.com/free-vector/gentleman-s-tuxedo-vector-design-element-remixed-from-artworks-by-henry-de-wolfe_53876-115546.jpg"
+                      src="https://img.freepik.com/free-vector/goal-achievement-teamwork-business-concept-career-growth-cooperation-development-project_107791-29.jpg"
                       alt="Preview"
-                      className="object-cover h-full w-52 rounded"
+                      className="object-cover h-full rounded"
                     />
+                    <label htmlFor="display">
+                      <p className="text-base text-center text-gray-700 font-bold bg-[#a7f8d3] px-4 py-2 rounded-xl">
+                        Select an Image
+                      </p>
+                    </label>
                   </div>
                 )}
               </div>
@@ -428,52 +449,7 @@ const AddProduct = () => {
 
             {/* box 3 */}
 
-            {/* <div className="col-span-2 bg-white shadow-lg">
-         
-              <div className="mb-6">
-                <h2 className="text-lg font-semibold mb-4">Extra Images</h2>
-                <input
-                  type="file"
-                  onChange={(e) => handleImageUpload(e, "extraImages")}
-                  className="mb-2"
-                />
-                <div className="flex gap-4 flex-wrap">
-                  {formData.extraImages.map((url, idx) => (
-                    <img
-                      src={url}
-                      alt={`Extra ${idx}`}
-                      key={`image-preview-key-${url}`}
-                      className="w-20 h-20 object-cover rounded-md"
-                    />
-                  ))}
-                </div>
-              </div>
-          
-              <div className="mb-6">
-                <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
-                nav{" "}
-                <div className="flex gap-3 items-center">
-                  <input
-                    type="file"
-                    onChange={handleVideoUpload}
-                    className="mb-2"
-                  />
-                  <div className="flex gap-4 flex-wrap">
-                    {formData?.extraVideos?.map((url, idx) => (
-                      <video
-                        key={url}
-                        src={url}
-                        controls
-                        style={{ borderRadius: "10px", width: "100%" }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div> */}
-
-            <div className="col-span-2 bg-white shadow-lg p-6">
-              {/* Extra Videos */}
+            <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6">
               <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
                 <div className="grid grid-cols-7 gap-5 mb-4">
@@ -486,7 +462,7 @@ const AddProduct = () => {
                         src={url}
                         className="w-full h-full object-cover rounded-lg"
                       />
-                      {/* Delete Video Button */}
+
                       <div
                         onClick={() => handleDeleteVideo(idx)}
                         className="absolute -top-2 -right-2 w-6 h-6 bg-[#26B893] text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-[#5ad8b8]"
@@ -537,7 +513,6 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              {/* Extra Images */}
               <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">Extra Images</h2>
                 <div className="grid grid-cols-7 gap-5">
@@ -551,7 +526,7 @@ const AddProduct = () => {
                         alt={`Extra ${idx}`}
                         className="w-full h-full object-cover rounded-lg"
                       />
-                      {/* Delete Image Button */}
+
                       <div
                         onClick={() => handleDeleteImage(idx)}
                         className="absolute -top-2 -right-2 w-6 h-6 bg-[#26B893] text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-[#5ad8b8]"
@@ -604,8 +579,8 @@ const AddProduct = () => {
             </div>
 
             {/* box 4 */}
+            {/* Pricing And Stock */}
             <>
-              {/* Pricing And Stock */}
               <div className=" bg-white shadow-lg p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   Pricing And Stock
@@ -653,45 +628,9 @@ const AddProduct = () => {
             </>
 
             {/* box 5 */}
+            {/* Digital Assets */}
             <>
-              {/* Digital Assets */}
-              {/* <div className="col-span-2 bg-white shadow-lg p-6 rounded-lg">
-                <h2 className="text-lg font-semibold mb-4">Digital Assets</h2>
-                {[
-                  "AR Version",
-                  "VR Version",
-                  "3D File",
-                  "Technical Design Book",
-                  "Virtual Lobby Access Key",
-                  "Ownership Of Story",
-                //   afterclick
-                  "Certification",
-                  "Sandbox Wearable",
-                  "VR Chat Wearable",
-                  "Animated",
-                ].map((label, index) => (
-                  <div key={index} className="mb-4">
-                    <label className="block text-sm font-medium mb-2">
-                      {label}
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full p-2 border rounded"
-                      name={`digitalAssets.${label
-                        .replace(/[^a-zA-Z]+/g, "")
-                        .toLowerCase()}`}
-                      value={
-                        formData.digitalAssets[
-                          label.replace(/[^a-zA-Z]+/g, "").toLowerCase()
-                        ] || ""
-                      }
-                      onChange={onInputChange}
-                    />
-                  </div>
-                ))}
-              </div> */}
-
-              <div className="col-span-2 bg-white shadow-lg p-6 rounded-lg">
+              <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">Digital Assets</h2>
                 {[
                   "AR Version",
@@ -801,7 +740,6 @@ const AddProduct = () => {
                     Collection
                   </h2>
                   <div className="relative w-full">
-                    {/* Dropdown button */}
                     <div
                       onClick={() => setIsOpenDropDown(!isOpenDropDown)}
                       className="px-3 py-2 my-5 w-full text-gray-600 hover:bg-gray-100 rounded-md flex justify-between items-center border focus:ring-2 focus:ring-[#26B893] border-gray-300"
@@ -810,7 +748,6 @@ const AddProduct = () => {
                       <IoIosArrowDropdownCircle className="text-2xl" />
                     </div>
 
-                    {/* Dropdown menu */}
                     {isOpenDropDown && (
                       <div className="absolute right-0 mt-0 w-full bg-white rounded-md shadow-lg z-10 border border-gray-200">
                         <ul className="py-1">
@@ -858,12 +795,12 @@ const AddProduct = () => {
                   ))}
                 </div>
               </div>
-              {/* Size and Materials */}
-              <div className="col-span-3 bg-white shadow-lg p-6 rounded-lg">
+
+              <div className="col-span-1 lg:col-span-3 bg-white shadow-lg p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   Size And Materials:
                 </h2>
-                <div className="flex items-center space-x-2 mb-4">
+                <div className="flex  items-center space-x-2 mb-4">
                   <h2 className="text-lg font-medium ">Size Chart:</h2>
                   <label htmlFor="size">
                     <img className="h-14 w-24" src={sizeChart} />
@@ -880,12 +817,12 @@ const AddProduct = () => {
                 <div className="relative">
                   {formData.sizeWithMaterial.map((entry, index) => (
                     <div key={index} className="mb-4 w-11/12">
-                      <div className="flex justify-between gap-2 mb-2">
-                        <div className="w-9/12 ">
-                          <p className="text-lg text-gray-900 py-1 font-semibold">
+                      <div className="flex flex-col lg:flex-row justify-between gap-2 mb-2">
+                        <div className="w-full lg:w-9/12 ">
+                          <p className="text-sm text-gray-900 py-1 font-semibold">
                             Seclect Size
                           </p>
-                          <div className="grid grid-cols-7 gap-2">
+                          <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
                             {["XS", "S", "M", "L", "XL", "2XL", "3XL"].map(
                               (size) => (
                                 <button
@@ -907,7 +844,7 @@ const AddProduct = () => {
                           </div>
                         </div>
                         <div>
-                          <p className="text-lg text-gray-900 py-1 font-semibold">
+                          <p className="text-sm text-gray-900 py-1 font-semibold">
                             Metarials
                           </p>
                           <input
@@ -939,7 +876,7 @@ const AddProduct = () => {
             </>
           </div>
 
-          <div className="float-right mt-6">
+          <div className="float-right my-6">
             <button className="w-full text-xl bg-[#2CBA7A] text-white py-2 px-4 rounded hover:bg-[#42bd86]">
               Add Product
             </button>

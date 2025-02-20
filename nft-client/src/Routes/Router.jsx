@@ -19,6 +19,9 @@ import AllProduct from "../Pages/Dashboard/AllProduct";
 import AllCollections from "../Pages/Dashboard/AllCollections";
 import CreateNewCollection from "../Pages/Dashboard/CreateNewCollection";
 import AddANewProduct from "../Pages/Dashboard/AddANewProduct";
+import HomePageControl from "../Pages/Dashboard/HomePageControl";
+import OrderForm from "../Pages/OrderForm/OrderForm";
+import ProductsDetails from "../Pages/Product/ProductsDetails";
 
 
 const router = createBrowserRouter([
@@ -73,6 +76,10 @@ const router = createBrowserRouter([
         path: "/manageAccount/add-new-product",
         element: <AddANewProduct/>,
       },
+      {
+        path: "/manageAccount/home-page-controls",
+        element: <HomePageControl/>,
+      },
 ]},
   {
     path: "/",
@@ -109,6 +116,14 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <ProductDetails />,
+  },
+  {
+    path: "/orders",
+    element: <OrderForm />,
+  },
+  {
+    path: "/products-details",
+    element: <ProductsDetails />,
   },
   {
     path: "/sign-up",
