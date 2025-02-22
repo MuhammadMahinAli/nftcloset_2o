@@ -70,7 +70,7 @@ const HomepageLayout = () => {
         <Nav />
         <div className="bg-[url('locofy.png')] bg-no-repeat text-gray-500">
           <Outlet />
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </>

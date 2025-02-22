@@ -1,5 +1,5 @@
-import { FaPlus, FaTrash } from "react-icons/fa";
-import { FaPencil, FaRegTrashCan } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa";
+import {  FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit3 } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";

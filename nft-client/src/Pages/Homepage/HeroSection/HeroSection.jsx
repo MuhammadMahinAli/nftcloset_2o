@@ -128,19 +128,7 @@ const HeroSection = () => {
       </div>
       {/***************************************** Digital collection  *******************************/}
 
-      <div data-aos="fade-up">
-        <a href="/collections">
-          <img
-            className="overflow-hidden object-cover"
-            alt="Digital collection"
-            src={digitalCollection}
-          />
-        </a>
-      </div>
-      {/* <a href="/collections">
-        <img className="overflow-hidden object-cover" alt="Digital collection" src={digitalCollection} />
-
-      </a> */}
+ 
     </>
   );
 };

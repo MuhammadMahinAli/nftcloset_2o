@@ -3,7 +3,6 @@ import Homepage from "../Pages/Homepage/Homepage";
 import Sign from "../Pages/SignUp/Sign";
 import Login from "../Pages/Login/Login";
 import HomepageLayout from "../Layout/HomepageLayout";
-import AddProduct from "../Pages/NFT/AddProduct/AddProduct";
 import CreateCollection from "../Pages/NFT/CreateCollection/CreateCollection";
 import UpdateProfile from "../Pages/NFT/UpdateProfile/UpdateProfile";
 import ProductDescription from "../Pages/NFT/ProductDescription/ProductDescription";
@@ -22,6 +21,11 @@ import AddANewProduct from "../Pages/Dashboard/AddANewProduct";
 import HomePageControl from "../Pages/Dashboard/HomePageControl";
 import OrderForm from "../Pages/OrderForm/OrderForm";
 import ProductsDetails from "../Pages/Product/ProductsDetails";
+import LandingLayout from "../Layout/LandingLayout";
+import AllProducts from "../Pages/AllProducts/AllProducts";
+import AllCollection from "../Pages/Collections/AllCollection";
+import CollectionDetails from "../Pages/Collections/CollectionDetails";
+
 
 
 const router = createBrowserRouter([
@@ -29,10 +33,10 @@ const router = createBrowserRouter([
   //   path: "/",
   //   element: <LandingLayout />,
   //   children: [
-  //     {
-  //       path: "/",
-  //       element: <LandingPage /> ,
-  //     },
+  //     // {
+  //     //   path: "/",
+  //     //   element: <LandingPage /> ,
+  //     // },
 
   //   ],
   // },
@@ -97,10 +101,18 @@ const router = createBrowserRouter([
         path: "/order",
         element: <ProductDescription />,
       },
-      // {
-      //   path: "/addProduct",
-      //   element: <AddProduct />,
-      // },
+      {
+        path: "/all-products",
+        element: <AllProducts />,
+      },
+      {
+        path: "/all-collection",
+        element: <AllCollection/>,
+      },
+      {
+        path: "/collection-details",
+        element: <CollectionDetails/>,
+      },
      
       {
         path: "/collections",

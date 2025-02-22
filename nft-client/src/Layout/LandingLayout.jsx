@@ -3,8 +3,8 @@ import { useAuthCheck } from "../utils/useAuthCheck";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Loading from "../Pages/Loading/Loading";
-import LandingPage from "../Pages/Landing/LandingPage";
 import { AuthContext } from "../Context/UserContext";
+import HomePage from "../Pages/Homepage/Homepage";
 
 const LandingLayout = () => {
   const authChecked = useAuthCheck();
@@ -31,7 +31,7 @@ const LandingLayout = () => {
             <Loading />
           ) : (
             <>
-              <LandingPage />
+              <HomePage />
             </>
           )}
         </>
