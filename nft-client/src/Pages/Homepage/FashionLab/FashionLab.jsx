@@ -21,7 +21,7 @@ const FashionLab = () => {
 
             {/* Content */}
             <div className="relative p-4 md:p-6 flex flex-col h-full md:mx-14 lg:mx-2">
-              <h2 className="text-xl md:text-2xl 3xl:text-4xl font-semibold text-white mb-3">
+              <h2 className="text-[22px] md:text-2xl 3xl:text-4xl font-semibold text-white mb-3">
                 Future Of Fashion Lab
               </h2>
 
@@ -31,7 +31,7 @@ const FashionLab = () => {
               </p>
             </div>
           </div>
-          <button className="float-right px-4 py-2 bg-white/60 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-white/30 transition-colors">
+          <button className="text-[17px] lg:text-[20px] float-right px-4 py-3 bg-white/60 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-white/30 transition-colors">
             View Details
           </button>
         </div>

@@ -17,23 +17,23 @@ const DeliveryReturnNewsletter = () => {
       setToPath(path);
     }, [role]);
   return (
-    <div className="flex justify-center items-center pb-12">
-  <div className="bg-white rounded-full w-[500px] p-10 shadow-lg relative mx-auto border border-[#EC7CB5]">
+    <div className="flex justify-center items-center py-5 md:py-12">
+  <div className="bg-white rounded-lg md:rounded-full md:w-[500px] p-5 md:p-10 shadow-lg relative mx-auto border border-[#EC7CB5]">
 
     
  
-      <div className="flex flex-col items-center justify-center w-full h-full bg-white rounded-full">
-        <h2 className="text-2xl font-semibold mb-2">Get The Alpha</h2>
+      <div className="flex flex-col items-center justify-center w-full h-full bg-white rounded-lg md:rounded-full">
+        <h2 className="text-2xl text-gray-700 font-bold mb-2">Get The Alpha</h2>
         <p className="text-gray-500 mb-6">Sign Up To Our News Letter List</p>
         
  
-        <div className="flex items-center bg-gray-200 rounded-full overflow-hidden w-72">
+        <div className="flex items-center bg-gray-200 rounded-lg overflow-hidden w-64 md:w-96">
           <input
             type="email"
             placeholder="Your Email Address"
             className="w-full bg-transparent px-4 py-2 text-gray-700 focus:outline-none"
           />
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-full focus:outline-none">
+          <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg focus:outline-none">
             →
           </button>
         </div>

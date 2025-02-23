@@ -1,50 +1,62 @@
 import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 px-10 w-full">
-      <div className="mx-auto flex justify-between items-center p-8">
-        <div className="w-1/3">
-        <img className="" src='nft-logo.png' alt=''/>
-          <p className="mt-4 text-lg text-gray-600">
-            NFT Closet Is The Go-To Marketplace For Digital Fashion. Mint, Buy,
-            And Sell Fashion NFTs With AR, VR, And Virtual Try-On Features.
-            Upgrade Your E-Commerce Site To Web3 With Our API. Partnered With
-            AWS For Seamless Supply Chain Management.
+    <footer className="bg-gray-100 px-5  w-full">
+      <div className="mx-auto flex flex-col lg:flex-row justify-between items-center lg:p-4">
+        <div className="w-full flex flex-col justify-center items-center md:items-start lg:w-1/3">
+          <img className="" src="nft-logo.png" alt="" />
+          <p className="mt-4 text-lg text-gray-600 text-center md:text-left">
+            NFT Closet is the go-to marketplace for digital fashion. Mint, buy,
+            and sell fashion NFTs with AR, VR, and virtual try-on features.
+            Upgrade your e-commerce site to Web3 with our API. Partnered with
+            AWS for seamless supply chain management.
           </p>
-          <h2 className="font-semibold text-xl pt-8 text-gray-800">Follow Us</h2>
+          <h2 className="font-semibold text-xl pt-8 text-gray-800">
+            Follow Us
+          </h2>
           <div className="mt-6 flex items-center space-x-4">
-            {/* <a href="#" className="border rounded-lg p-2">
+            <div className="border rounded-lg p-2 flex justify-center items-center">
               <img
-                src="link-to-english-icon.png"
+                src="https://i.ebayimg.com/images/g/GC8AAOSwHWJbisRS/s-l1200.jpg"
                 alt="English"
-                className="w-6 h-6"
+                className="w-6 h-6 rounded-full"
               />
-            </a> */}
+              <p className="font-bold pl-2 text-[17px]">English</p>
+            </div>
             <a href="#" className="border rounded-lg p-2">
-            <FaDiscord className="text-2xl" />
+              <FaDiscord className="text-2xl" />
             </a>
             <a href="#" className="border rounded-lg p-2">
-            <FaXTwitter className="text-2xl"/>
+              <FaXTwitter className="text-2xl" />
             </a>
           </div>
         </div>
-        <div className="w-1/3 flex justify-between -mt-28">
+        <div className="w-full lg:w-1/3 flex flex-col md:flex-row lg:justify-between py-3 lg:-mt-28 md:space-x-14">
           <div>
             <h2 className="font-semibold text-2xl text-gray-800"></h2>
             <ul className="mt-4 space-y-3">
               <li>
-                <a href="#" className="font-semibold text-xl text-gray-800 hover:text-teal-500">
-                About Us
+                <a
+                  href="#"
+                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                >
+                  About Us
                 </a>
               </li>
-              
+
               <li>
-                <a href="#" className="font-semibold text-xl text-gray-800 hover:text-teal-500">
+                <a
+                  href="#"
+                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                >
                   Market
                 </a>
               </li>
               <li>
-                <a href="#" className="font-semibold text-xl text-gray-800 hover:text-teal-500">
+                <a
+                  href="#"
+                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                >
                   Contact Us
                 </a>
               </li>
@@ -54,17 +66,26 @@ const Footer = () => {
             <h2 className=""></h2>
             <ul className="mt-4 space-y-3">
               <li>
-                <a href="#" className="font-semibold text-xl text-gray-800 hover:text-teal-500">
-                Virtual Try-On
+                <a
+                  href="#"
+                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                >
+                  Virtual Try-On
                 </a>
               </li>
               <li>
-                <a href="#" className="font-semibold text-xl text-gray-800 hover:text-teal-500">
+                <a
+                  href="#"
+                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                >
                   Collections
                 </a>
               </li>
               <li>
-                <a href="#" className="font-semibold text-xl text-gray-800 hover:text-teal-500">
+                <a
+                  href="#"
+                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                >
                   Market X
                 </a>
               </li>
@@ -72,9 +93,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto flex justify-between items-center border-t py-3 px-7">
-        <p className="text-gray-600 font-semibold">&copy; 2023 NFT Closet X</p>
-        <a href="#" className="text-gray-600 font-semibold hover:text-teal-500">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center border-t py-5 px-7">
+        <p className="text-gray-600 text-lg font-semibold">
+          &copy; 2023 NFT Closet X
+        </p>
+        <a
+          href="#"
+          className="text-[#2CBA7A] font-semibold hover:text-teal-500"
+        >
           Privacy & Policy
         </a>
       </div>

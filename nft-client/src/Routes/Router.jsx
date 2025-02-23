@@ -102,11 +102,11 @@ const router = createBrowserRouter([
         element: <ProductDescription />,
       },
       {
-        path: "/all-products",
+        path: "/market",
         element: <AllProducts />,
       },
       {
-        path: "/all-collection",
+        path: "/collections",
         element: <AllCollection/>,
       },
       {
@@ -122,6 +122,14 @@ const router = createBrowserRouter([
         path: "/allOrder",
         element: <Order />,
       },
+      {
+        path: "/products-details",
+        element: <ProductsDetails />,
+      },
+      {
+        path: "/orders",
+        element: <OrderForm />,
+      },
     ],
   },
 
@@ -129,14 +137,8 @@ const router = createBrowserRouter([
     path: "/test",
     element: <ProductDetails />,
   },
-  {
-    path: "/orders",
-    element: <OrderForm />,
-  },
-  {
-    path: "/products-details",
-    element: <ProductsDetails />,
-  },
+
+ 
   {
     path: "/sign-up",
     element: <Sign />,

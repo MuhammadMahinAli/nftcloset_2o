@@ -29,6 +29,24 @@ const AllProducts = () => {
       price: "40 $",
       image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
     },
+    {
+      id: 4,
+      name: "Blue Jacket",
+      price: "40 $",
+      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
+    },
+    {
+      id: 5,
+      name: "Blue Jacket",
+      price: "40 $",
+      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
+    },
+    {
+      id: 6,
+      name: "Blue Jacket",
+      price: "40 $",
+      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
+    },
   ];
 
   const toggleActive = (i) => {

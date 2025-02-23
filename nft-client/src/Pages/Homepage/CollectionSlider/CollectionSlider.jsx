@@ -35,16 +35,16 @@ const CollectionSlider = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsTransitioning(false);
-    }, 500); // Match this with the transition duration
+    }, 700); 
 
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
   return (
-    <div className="relative w-full py-10">
-      {/* Slider container */}
-      <div className="relative h-[150px] md:h-[200px] xl:h-[300px] mx-10 md:mx-14 rounded-xl overflow-hidden">
-        {/* Images container with transition */}
+    <div className="relative w-full pb-10">
+  
+      <div className="relative h-[150px] md:h-[200px] lg:h-[250px] xl:h-[350px] 3xl:h-[400px] mx-10 md:mx-14 rounded-xl overflow-hidden">
+   
         <div
           className="flex transition-transform duration-700 ease-in-out h-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -64,14 +64,14 @@ const CollectionSlider = () => {
       <button
         onClick={prevSlide}
         disabled={isTransitioning}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#EDECEC] rounded-lg md:px-1 h-[150px] md:h-[200px] xl:h-[300px] hover:bg-[#d1d0d0] transition-colors disabled:opacity-50"
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#EDECEC] rounded-lg md:px-1 h-[150px] md:h-[200px] lg:h-[250px] xl:h-[350px] 3xl:h-[400px] hover:bg-[#d1d0d0] transition-colors disabled:opacity-50"
       >
         <IoIosArrowBack className="h-6 w-6 text-gray-600" />
       </button>
       <button
         onClick={nextSlide}
         disabled={isTransitioning}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#EDECEC] rounded-lg md:px-1 h-[150px] md:h-[200px] xl:h-[300px] hover:bg-[#d1d0d0] transition-colors disabled:opacity-50"
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#EDECEC] rounded-lg md:px-1 h-[150px] md:h-[200px] lg:h-[250px] xl:h-[350px] 3xl:h-[400px] hover:bg-[#d1d0d0] transition-colors disabled:opacity-50"
       >
         <IoIosArrowForward className="h-6 w-6 text-gray-600" />
       </button>

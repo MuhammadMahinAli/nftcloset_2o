@@ -671,7 +671,7 @@ const AdminSideBar = () => {
                    onMouseLeave={() => setOpenHomeControl(false)}
                    onClick={()=>setIsOpen(false)}
               className={`${
-                isPageActive("/manageAccount/home-page-control") ? "" : ""
+                isPageActive("/manageAccount/home-page-controls") ? "" : ""
               } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
             >
               <HomePageControlIcon
@@ -680,7 +680,7 @@ const AdminSideBar = () => {
               />
               <p
                 className={`${
-                  isPageActive("/manageAccount/home-page-control")
+                  isPageActive("/manageAccount/home-page-controls")
                     ? "text-[#2cba7a]"
                     : "text-gray-600"
                 } hover:text-[#2cba7a] text-xl font-bold`}
@@ -941,7 +941,7 @@ const AdminSideBar = () => {
          {/* home page control */}
 
          <li className="sidebar-list">
-           <Link to="/manageAccount/home-page-control" className="relative">
+           <Link to="/manageAccount/home-page-controls" className="relative">
              <p>
                <div
                  className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
@@ -951,7 +951,7 @@ const AdminSideBar = () => {
                   onMouseEnter={() => setOpenHomeControl(true)}
                   onMouseLeave={() => setOpenHomeControl(false)}
                    className={`${
-                     isPageActive("/manageAccount/home-page-control") ? "" : ""
+                     isPageActive("/manageAccount/home-page-controls") ? "" : ""
                    } box2 py-2 px-2 md:px-3  rounded-[5px]`}
                  >
                    <HomePageControlIcon
@@ -963,7 +963,7 @@ const AdminSideBar = () => {
              </p>
              {openHomeControl && (
                <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"openHomeControl"} />
+                 <HoveredText text={"Homepage Control"} />
                </div>
              )}
            </Link>

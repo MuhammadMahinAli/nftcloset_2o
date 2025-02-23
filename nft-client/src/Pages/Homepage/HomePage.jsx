@@ -4,6 +4,8 @@ import DeliveryReturnNewsletter from "./DeliveryReturnNewsletter/DeliveryReturnN
 import HeroSection from "./HeroSection/HeroSection";
 import FashionLab from "./FashionLab/FashionLab";
 import CollectionSlider from "./CollectionSlider/CollectionSlider";
+import NewArrivalSlider from "../Sliders/NewArrivalSlider/NewArrivalSlider";
+import BestProductSlider from "../Sliders/BestProductSlider/BestProductSlider";
 //import { connect } from "../utils/ipfs";
 
 const HomePage = () => {
@@ -16,6 +18,8 @@ const HomePage = () => {
       <main>
         <HeroSection />
         <CollectionSlider/>
+        <NewArrivalSlider/>
+        <BestProductSlider/>
         <FashionLab/>
         {/* <RecentItems /> */}
     
