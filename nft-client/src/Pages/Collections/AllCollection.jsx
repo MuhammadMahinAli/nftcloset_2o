@@ -123,9 +123,14 @@ const AllCollection = () => {
               <button className="py-2 xl:py-3 xl:text-xl bg-[#2CBA7A] text-white">
                 Storyline
               </button>
+          
               <button className="py-2 xl:py-3 xl:text-xl bg-[#B5FFDD] text-[#2CBA7A]">
+              <Link to="/collection-details">
                 Details
+                </Link>
               </button>
+              
+              
             </div>
           </div>
         ))}

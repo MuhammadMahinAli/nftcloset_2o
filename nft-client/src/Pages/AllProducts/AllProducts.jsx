@@ -123,7 +123,7 @@ const AllProducts = () => {
             key={product.id}
             className="pb-8  2xl:pb-12 relative overflow-hidden bg-white rounded-xl shadow-xl"
           >
-            <>
+            <Link to="/products-details">
               <div className="flex justify-center items-center py-4">
                 <img
                   src={product.image}
@@ -140,14 +140,14 @@ const AllProducts = () => {
                   {product.price}
                 </p>
               </div>
-            </>
+            </Link>
              {isOpenIndex === i && ( 
-            <div className="absolute bottom-0  w-full flex justify-between bg-[#12C9B5] py-1 xl:py-2">
+            <Link to='/orders' className="absolute bottom-0  w-full flex justify-between bg-[#12C9B5] py-1 xl:py-2">
               <p className="text-center w-10/12 border-r text-lg md:text-lg text-white">
                 Buy now
               </p>
               <IoCartOutline className="text-3xl text-white mr-3 ssm:mr-5 lg:mr-8 xl:mr-5" />
-            </div>
+            </Link >
               )} 
           </div>
         ))}

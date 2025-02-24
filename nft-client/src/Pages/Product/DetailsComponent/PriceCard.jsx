@@ -1,5 +1,6 @@
 import { BiTime } from 'react-icons/bi';
 import { BsCart3 } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const PriceCard = () => {
 
@@ -19,10 +20,10 @@ const PriceCard = () => {
     
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <button className="flex-1 bg-indigo-500 text-white py-3 px-3 md:px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center gap-2">
+          <Link to='/orders' className="flex-1 bg-indigo-500 text-white py-3 px-3 md:px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center gap-2">
               <BsCart3 className="text-xl" />
               Buy now
-            </button>
+            </Link>
             <button className="flex-1 bg-gray-200 text-gray-700 py-3 px-3 md:px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors duration-200">
               AI Try On
             </button>
