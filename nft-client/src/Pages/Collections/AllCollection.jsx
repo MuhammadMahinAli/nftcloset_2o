@@ -34,30 +34,29 @@ const AllCollection = () => {
         <h1 className="text-3xl font-bold">All Collections</h1>
       </div> */}
 
-        <div className="flex justify-between mb-6">
-              {/* filter */}
-              <div className="flex  space-x-3">
-                <div className="p-1 flex justify-center items-center border rounded-md">
-                <IoReloadSharp  className="text-xl md:text-2xl " />
-                </div>
-                <div className="relative w-[200px] md:w-[300px] lg:w-[400px] 3xl:w-[500px]">
-                  <IoIosSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl md:text-3xl" />
-                  <input
-                    placeholder="Search collections"
-                    className="w-full pl-9 md:pl-12 py-1 md:py-2 bg-[#F6F4F3] rounded-lg"
-                  />
-                </div>
-              </div>
-              {/* option */}
-            
+      <div className="flex justify-between mb-6">
+        {/* filter */}
+        <div className="flex  space-x-3">
+          <div className="p-1 flex justify-center items-center border rounded-md">
+            <IoReloadSharp className="text-xl md:text-2xl " />
+          </div>
+          <div className="relative w-[200px] md:w-[300px] lg:w-[400px] 3xl:w-[500px]">
+            <IoIosSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl md:text-3xl" />
+            <input
+              placeholder="Search collections"
+              className="w-full pl-9 md:pl-12 py-1 md:py-2 bg-[#F6F4F3] rounded-lg"
+            />
+          </div>
+        </div>
+        {/* option */}
+
         {/* Status */}
         <div className="hidden md:block">
-        
           <select
             id="statusSelect"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-           // value={status}
-           // onChange={(e) => setStatus(e.target.value)}
+            // value={status}
+            // onChange={(e) => setStatus(e.target.value)}
           >
             <option value="Trending">Trending</option>
             {/* <option value="Shipped">Shipped</option>
@@ -65,15 +64,14 @@ const AllCollection = () => {
             <option value="Cancelled">Cancelled</option> */}
           </select>
         </div>
-            </div>
-            {/* for mbl */}
-            <div className="mb-6 w-32">
-        
+      </div>
+      {/* for mbl */}
+      <div className="mb-6 w-32">
         <select
           id="statusSelect"
           className="md:hidden w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-         // value={status}
-         // onChange={(e) => setStatus(e.target.value)}
+          // value={status}
+          // onChange={(e) => setStatus(e.target.value)}
         >
           <option value="Trending">Trending</option>
           {/* <option value="Shipped">Shipped</option>

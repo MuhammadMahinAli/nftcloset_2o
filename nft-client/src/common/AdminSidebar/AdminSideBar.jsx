@@ -487,6 +487,8 @@ import LogoutIcon from "../../icons/NFTIcon/LogoutIcon";
 import AllProductIcon from "../../icons/NFTIcon/AllProductIcon";
 import AllCollectionIcon from "../../icons/NFTIcon/AllCollectionIcon";
 import HomePageControlIcon from "../../icons/NFTIcon/HomePageControlIcon";
+import { useAuthCheck } from "../../utils/useAuthCheck";
+import Swal from "sweetalert2";
 
 const AdminSideBar = () => {
   //---- states
@@ -503,12 +505,33 @@ const AdminSideBar = () => {
   const isPageActive = (path) => {
     return location.pathname === path;
   };
-
+  const { logout: originalLogout } = useAuthCheck();
   const { singleUser } = useContext(AuthContext);
   const userEmail = singleUser && singleUser?.data?.email;
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const logout = async () => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out!",
+    });
+
+    if (result.isConfirmed) {
+      originalLogout();
+      Swal.fire({
+        icon: "success",
+        text: "Logged out successfully!",
+      });
+      navigate("/login");
+    }
   };
 
   // Shared sidebar content component to avoid duplication
@@ -658,7 +681,7 @@ const AdminSideBar = () => {
       {/* home control */}
       <div className="sidebar-list">
         <Link 
-        // to="/manageAccount/home-page-control" 
+         to="/manageAccount/home-page-controls" 
         className="relative">
           <div
             className={`${
@@ -711,7 +734,7 @@ const AdminSideBar = () => {
                 isPageActive("/manageAccount/settings") ? "" : ""
               } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
             >
-              <SettingIcon openSetting={openSetting} />
+              <SettingIcon  isPageActive={isPageActive} openSetting={openSetting} />
               <p
                 className={`${
                   isPageActive("/manageAccount/settings")
@@ -735,7 +758,7 @@ const AdminSideBar = () => {
             } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
             onMouseEnter={() => setOpenLogout(true)}
             onMouseLeave={() => setOpenLogout(false)}
-            onClick={()=>setIsOpen(false)}
+            onClick={logout}
           >
             <div className="w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3">
               <LogoutIcon openLogout={openLogout} />
@@ -983,7 +1006,7 @@ const AdminSideBar = () => {
                      isPageActive("/manageAccount/settings") ? "" : ""
                    } box2 py-2 px-2 md:px-3  rounded-[5px]`}
                  >
-                   <SettingIcon openSetting={openSetting} />
+                   <SettingIcon  isPageActive={isPageActive} openSetting={openSetting} />
                  </div>
                </div>
              </p>
@@ -1005,6 +1028,7 @@ const AdminSideBar = () => {
               
                >
                  <div
+                 onClick={logout}
                     onMouseEnter={() => setOpenLogout(true)}
                     onMouseLeave={() => setOpenLogout(false)}
                    className={`${

@@ -19,11 +19,11 @@ const PriceCard = () => {
     
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <button className="flex-1 bg-indigo-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center gap-2">
+            <button className="flex-1 bg-indigo-500 text-white py-3 px-3 md:px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center gap-2">
               <BsCart3 className="text-xl" />
               Buy now
             </button>
-            <button className="flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors duration-200">
+            <button className="flex-1 bg-gray-200 text-gray-700 py-3 px-3 md:px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors duration-200">
               AI Try On
             </button>
           </div>

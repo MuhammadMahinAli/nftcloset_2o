@@ -1,23 +1,22 @@
-import glass from "../../assets/nft-image/glass.png";
-import cube from "../../assets/nft-image/cube.png";
-import expand from "../../assets/nft-image/expand.png";
 import VersionSlider from "./DetailsComponent/VersionSlider";
 import ExtraAssets from "./DetailsComponent/ExtraAssets";
 import DescriptionCard from "./DetailsComponent/DescriptionCard";
 import PriceCard from "./DetailsComponent/PriceCard";
-
+import TokenCard from "./DetailsComponent/TokenCard";
+import CollectionCard from "./DetailsComponent/CollectionCard";
+import ActivityCard from "./DetailsComponent/ActivityCard";
+import ProductImage from "./DetailsComponent/ProductImage";
+import ProductInfo from "./DetailsComponent/ProductInfo";
 
 const ProductsDetails = () => {
- 
-
   return (
     <div>
-      <div className="flex justify-between p-10">
-        {/* left */}
+      {/* <div className="flex justify-between p-10">
+
         <div className="w-1/2 space-y-6 relative py-7">
           <div className="border py-14 rounded-xl shadow-lg">
             <div className="flex  flex-col justify-center items-center ">
-              {/* Product Image */}
+
               <div className="border rounded-md w-[400px] h-[400px]">
                 <img
                   src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
@@ -26,7 +25,7 @@ const ProductsDetails = () => {
                 />
               </div>
             </div>
-            {/* Creator Section */}
+           
             <div className="absolute right-4 bottom- flex items-center gap-3 bg-gray-200 rounded-md px-3 py-2">
               <img src={glass} className="w-12" />
               <img src={cube} className="w-8" />
@@ -34,10 +33,10 @@ const ProductsDetails = () => {
             </div>
           </div>
         </div>
-        {/* right */}
+    
         <div className="px-7 w-1/2 space-y-4">
           <h2 className="text-5xl font-bold pb-6">Black Hoodie #43</h2>
-          {/* Creator Section */}
+        
           <div className="flex items-center gap-3 mb-8">
             <img
               src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
@@ -49,16 +48,48 @@ const ProductsDetails = () => {
               <p className="text-xl text-green-600">Online</p>
             </div>
           </div>
-          {/* slider */}
+
          <ExtraAssets/>
          <DescriptionCard/>
          <PriceCard/>
+         <TokenCard/>
+         <CollectionCard/>
+         <ActivityCard/>
           <div>
             
-            {/* --------------------------slider------------------------ */}
+      
         <VersionSlider/>
           </div>
         </div>
+      </div> */}
+
+      <div className="hidden lg:grid grid-cols-2 gap-5 py-10 px-5 xl:px-10">
+        {/* left */}
+        <div className=" space-y-5">
+          <ProductImage />
+          <ExtraAssets />
+          <PriceCard />
+          <TokenCard />
+          <CollectionCard />
+        </div>
+        {/* right */}
+        <div className=" space-y-5">
+          <ProductInfo />
+          <VersionSlider />
+          <DescriptionCard />
+          <ActivityCard />
+        </div>
+      </div>
+      <div className="lg:hidden grid grid-cols-1 gap-3 py-4 px-5">
+        <ProductInfo />
+        <ProductImage />
+        <ExtraAssets />
+        <VersionSlider />
+        <DescriptionCard />
+        <PriceCard />
+        <TokenCard />
+        <CollectionCard />
+        <ActivityCard />
       </div>
     </div>
   );
@@ -185,7 +216,7 @@ export default ProductsDetails;
 //         <div className="lg:w-1/2 space-y-6">
 //           <div className="space-y-4">
 //             <h1 className="text-4xl font-bold">Black Hoodie #43</h1>
-            
+
 //             {/* Creator Info */}
 //             <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
 //               <img
@@ -214,7 +245,7 @@ export default ProductsDetails;
 //               >
 //                 {features.map((feature, index) => (
 //                   <SwiperSlide key={feature.id}>
-//                     <div 
+//                     <div
 //                       className={`
 //                         h-full w-full rounded-xl p-6
 //                         ${feature.bgColor}
@@ -223,8 +254,8 @@ export default ProductsDetails;
 //                       `}
 //                     >
 //                       <div className="flex flex-col items-center justify-center h-full space-y-6">
-//                         <img 
-//                           src={feature.icon} 
+//                         <img
+//                           src={feature.icon}
 //                           alt={feature.text}
 //                           className="w-24 h-24 object-contain"
 //                         />

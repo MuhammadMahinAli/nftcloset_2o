@@ -201,7 +201,7 @@ export const Nav = () => {
               </svg>
               {isDropdownVisible && (
                 <div
-                  className="absolute end-0 z-10 top-20 w-36 divide-y divide-gray-100 rounded-md border border-gray-100 bg-[#e8fefe] shadow-lg"
+                  className="absolute end-0 z-10 top-20 w-36 divide-y divide-gray-100 rounded-md border border-gray-100 bg-[#fff] shadow-lg"
                   role="menu"
                 >
                   <p onClick={() => handleRedirect("/sign-up", navigate)}>

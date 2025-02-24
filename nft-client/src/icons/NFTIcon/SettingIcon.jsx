@@ -1,5 +1,5 @@
-const SettingIcon = ({ openSetting }) => {
-  const fillColor = openSetting ? "#2CBA7A" : "#727685";
+const SettingIcon = ({ openSetting, isPageActive  }) => {
+  const fillColor = openSetting  === true || isPageActive("/manageAccount/settings") ? "#2CBA7A" : "#727685";
   return (
     <>
       <svg

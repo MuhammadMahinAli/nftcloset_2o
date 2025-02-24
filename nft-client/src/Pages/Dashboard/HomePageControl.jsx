@@ -1,6 +1,10 @@
 import { useState } from "react";
 import PageOne from "../Ai/PageOne";
 import Page from "../Ai/Pages";
+import BestProductSlider from "../Sliders/BestProductSlider/BestProductSlider";
+import NewArrivalSlider from "../Sliders/NewArrivalSlider/NewArrivalSlider";
+import CollectionCard from "../Product/DetailsComponent/CollectionCard";
+import CollectionSlider from "../Homepage/CollectionSlider/CollectionSlider";
 
 const HomePageControl = () => {
   const [open, setOpen] = useState(false);
@@ -139,21 +143,17 @@ const HomePageControl = () => {
           </p>
         </div>
 
-        <PageOne />
+        <CollectionSlider/>
       </div>
       {/* banner */}
       <div>
-        <p className="text-lg lg:text-xl font-bold text-gray-700 rounded-xl py-5">
-          New Arrival
-        </p>
-        <Page products={newArraivalProducts} />
+       
+        <NewArrivalSlider/>
       </div>
       {/* banner */}
       <div>
-        <p className="text-lg lg:text-xl font-bold text-gray-700 rounded-xl py-5">
-          Best Products
-        </p>
-        <Page products={bestProducts} />
+       
+        <BestProductSlider/>
       </div>
       {/* banner */}
       <div>

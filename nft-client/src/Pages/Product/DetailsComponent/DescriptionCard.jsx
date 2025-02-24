@@ -26,24 +26,24 @@ const DescriptionCard = () => {
       {/* Content */}
       <div 
         className={`transition-all duration-300 ease-in-out overflow-hidden
-          ${isExpanded ? 'h-auto' : 'h-[219px]'}`}
+          ${isExpanded ? 'h-auto' : 'h-[219px] md:h-[210px]'}`}
       >
-        <div className={`space-y-4 px-6 py-5 ${!isExpanded && 'line-clamp-[6]'}`}>
-          <p className="text-gray-600 leading-relaxed text-lg">
+        <div className={`space-y-4 px-4 py-4 md:px-6 md:py-5 ${!isExpanded && 'line-clamp-[6]'}`}>
+          <p className="text-gray-600 leading-relaxed text-[16px] md:text-lg">
             Lorem ipsum dolor sit amet consectetur, in ante velit molestie id
             suspendisse eu orci neque. Vitae dictum tempus porttitor fermentum turpis lorem, 
             id amet sed aliquam feugiat. efficitur nunc nulla commodo nulla felis, 
             eros hac urna utrique nisi porttitor enim.
           </p>
 
-          <p className="text-gray-600 leading-relaxed text-lg">
+          <p className="text-gray-600 leading-relaxed text-[16px] md:text-lg">
             Lorem ipsum dolor sit amet consectetur, in ante velit molestie id
             suspendisse eu orci neque. Vitae dictum tempus porttitor fermentum turpis lorem, 
             id amet sed aliquam feugiat. efficitur nunc nulla commodo nulla felis, 
             eros hac urna utrique nisi porttitor enim.
           </p>
 
-          <p className="text-gray-600 leading-relaxed text-lg">
+          <p className="text-gray-600 leading-relaxed text-[16px] md:text-lg">
             tempus porttitor fermentum turpis lorem, id amet sed aliquam
             feugiat. efficitur nunc nulla commodo nulla felis, eros hac urna
             utrique nisi porttitor enim.
