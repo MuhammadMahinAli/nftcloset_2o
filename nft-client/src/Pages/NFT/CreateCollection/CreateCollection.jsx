@@ -584,19 +584,6 @@ const CreateCollection = () => {
           )}
         </div>
 
-        {/* Extra Images Preview */}
-        {/* {formData.extraImages && formData.extraImages.length > 0 && (
-          <div className="grid grid-cols-3 gap-4">
-            {formData.extraImages.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Extra Image ${index + 1}`}
-                className="w-32 h-32 object-cover rounded"
-              />
-            ))}
-          </div>
-        )} */}
 
         {/* Discount */}
         <div className="bg-gray-100 p-6 rounded-lg">

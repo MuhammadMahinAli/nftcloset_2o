@@ -25,6 +25,7 @@ import LandingLayout from "../Layout/LandingLayout";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import AllCollection from "../Pages/Collections/AllCollection";
 import CollectionDetails from "../Pages/Collections/CollectionDetails";
+import AddProduct from "../Pages/Dashboard/AddANewProduct";
 
 
 
@@ -110,8 +111,9 @@ const router = createBrowserRouter([
         element: <AllCollection/>,
       },
       {
-        path: "/collection-details",
+        path: "/collection-details/:id",
         element: <CollectionDetails/>,
+        loader: ({ params }) => fetch(`http://localhost:4000/api/v1/collection/getCollectionById/${params.id}`)
       },
      
       {
@@ -130,6 +132,7 @@ const router = createBrowserRouter([
         path: "/orders",
         element: <OrderForm />,
       },
+     
     ],
   },
 

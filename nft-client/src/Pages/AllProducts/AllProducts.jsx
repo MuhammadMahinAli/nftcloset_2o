@@ -6,48 +6,14 @@ import { IoIosSearch } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { CiFilter } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useGetAllProductQuery } from "../../features/product/productApi";
 
 const AllProducts = () => {
+  const { data: getAllProduct } = useGetAllProductQuery();
   const [isOpenOption, setIsOpenOption] = useState(false);
   const [isOpenIndex, setIsOpenIndex] = useState(null);
-  const products = [
-    {
-      id: 1,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 2,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 3,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 4,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 5,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 6,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-  ];
+
+  const products = getAllProduct?.data;
 
   const toggleActive = (i) => {
     setIsOpenIndex(i);
@@ -58,7 +24,7 @@ const AllProducts = () => {
     setIsOpenOption(false);
   };
   return (
-    <div className="p-3 md:p-5 lg:p-10 ">
+    <div className="px-3 py-3 md:px-5 md:py-7 lg:px-14 xl:py-10 xl:px-16 3xl:px-20">
       {/* <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">All Products</h1>
       </div> */}
@@ -116,7 +82,7 @@ const AllProducts = () => {
         <li className="text-[16px] font-bold text-gray-700 px-3 py-1 ">30d</li>
       </ul>
       <div className="xs:p-5 md:p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 pt-3">
-        {products.map((product, i) => (
+        {products?.map((product, i) => (
           <div
             onMouseEnter={() => toggleActive(i)}
             onMouseLeave={toggleInactive}
@@ -124,17 +90,17 @@ const AllProducts = () => {
             className="pb-8  2xl:pb-12 relative overflow-hidden bg-white rounded-xl shadow-xl"
           >
             <Link to="/products-details">
-              <div className="flex justify-center items-center py-4">
+              <div className="flex justify-center items-center py-4 h-[64%] lg:h-[72%] xl:h-[68%] 3xl:h-[72%]">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={product.displayImage}
+                  alt={product.productName}
                   className="w-28 lg:w-44 h-full pt-2 object-cover"
                 />
               </div>
 
               <div className="p-3  space-y-1 md:space-y-2 border-t border-gray-300">
                 <h3 className="font-bold text-xl md:text-xl text-gray-700">
-                  {product.name}
+                  {product.productName}
                 </h3>
                 <p className="text-[18px] md:text-lg text-gray-500">
                   {product.price}

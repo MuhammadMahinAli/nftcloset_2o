@@ -10,12 +10,10 @@ const CollectionSchema = new Schema(
     toDate: { type: Date },
     displayImage: { type: String, required: true },
     discount: { type: Number },
-    // products: [{
-    //   type: String
-    // }],
+   
     products: [
       {
-        product: {
+        productId: {
           type: Schema.Types.ObjectId,
           ref: "Product",
           required: true,

@@ -37,6 +37,7 @@ const ProductSchema = new Schema(
     extraVideos: [{ type: String }],
     extraImages: [{ type: String }],
     digitalAssets: { type: DigitalAssetsSchema, required: true },
+    collection: { type: Schema.Types.ObjectId, ref: 'Collection', required: true },
     tokenDetails: { type: TokenDetailsSchema },
     sizeChart: { type: String },
     sizeWithMaterial: [SizeWithMaterialSchema],

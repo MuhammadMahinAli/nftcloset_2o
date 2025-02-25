@@ -11,14 +11,19 @@ import {
 import UpdateProduct from "../NFT/UpdateProduct/UpdateProduct.jsx";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import sizeChart from "../../assets/nft-image/size-chart.png";
-import { FaPlus } from "react-icons/fa";
+import { FaCheck, FaPlus } from "react-icons/fa";
+import { useGetAllCollectionQuery } from "../../features/collection/collectionApi.js";
+import { FiCheckCircle } from "react-icons/fi";
 
 const AddProduct = () => {
   const [addProduct] = useAddProductMutation();
   const { data: getAllProduct } = useGetAllProductQuery();
-  const [deleteProduct] = useDeleteProductMutation();
+  const { data: getAllCollection } = useGetAllCollectionQuery();
   console.log(getAllProduct?.data);
   const products = getAllProduct?.data;
+  const collections = getAllCollection?.data;
+
+  console.log(collections);
 
   // --------------- Add product start -------------------//
 
@@ -44,6 +49,7 @@ const AddProduct = () => {
       vrchatwearable: "",
       animated: "",
     },
+    collection: null,
     tokenDetails: {
       blockchain: "",
       tokenstandard: "",
@@ -60,6 +66,7 @@ const AddProduct = () => {
   const [currentVideo, setCurrentVideo] = useState("");
   const [isOpenAsset, setIsOpenAsset] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState({});
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
@@ -129,33 +136,227 @@ const AddProduct = () => {
     }
   };
 
+  const [count, setCount] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+
+  useEffect(() => {
+    if (!isUploading) {
+      setCount(0); // Reset count when upload is complete
+      return;
+    }
+
+    const generateRandomSteps = () => {
+      const numberOfSteps = 8;
+      let steps = [];
+      let previousTarget = 0;
+
+      for (let i = 0; i < numberOfSteps - 1; i++) {
+        const minTarget = previousTarget + 5;
+        const maxTarget = Math.min(95, previousTarget + 25);
+        const target = Math.floor(
+          Math.random() * (maxTarget - minTarget) + minTarget
+        );
+
+        steps.push({
+          target,
+          duration: Math.random() * 1000 + 500,
+        });
+
+        previousTarget = target;
+      }
+
+      steps.push({ target: 100, duration: 2000 });
+      return steps;
+    };
+
+    const steps = generateRandomSteps();
+    let currentStep = 0;
+
+    const animate = () => {
+      if (currentStep >= steps.length) return;
+
+      const step = steps[currentStep];
+      const startValue = currentStep > 0 ? steps[currentStep - 1].target : 0;
+      const increment = (step.target - startValue) / (step.duration / 50);
+      let currentValue = startValue;
+
+      const interval = setInterval(() => {
+        currentValue += increment;
+        if (currentValue >= step.target) {
+          currentValue = step.target;
+          clearInterval(interval);
+          currentStep++;
+          if (currentStep < steps.length) {
+            animate();
+          }
+        }
+        setCount(Math.round(currentValue));
+      }, 50);
+
+      return () => clearInterval(interval);
+    };
+
+    animate();
+  }, [isUploading]);
+
   const handleVideoUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
+    setIsUploading(true);
+    const uploadId = Date.now().toString();
+    setUploadProgress((prev) => ({
+      ...prev,
+      [uploadId]: 0,
+    }));
 
     try {
-      const uploadedUrl = await rawFileUpload(file, "video");
+      const uploadedUrl = await rawFileUpload(file, "video", (progress) => {
+        setUploadProgress((prev) => ({
+          ...prev,
+          [uploadId]: progress,
+        }));
+      });
+
       setFormData({
         ...formData,
         extraVideos: [...formData.extraVideos, uploadedUrl],
       });
       setPreviewVideos([...previewVideos, uploadedUrl]);
+      setIsUploading(false);
+
+      // Clear progress after successful upload
+      setUploadProgress((prev) => {
+        const newProgress = { ...prev };
+        delete newProgress[uploadId];
+        return newProgress;
+      });
     } catch (error) {
       console.error("Error uploading video:", error);
+      // Clear progress on error
+      setUploadProgress((prev) => {
+        const newProgress = { ...prev };
+        delete newProgress[uploadId];
+        return newProgress;
+      });
+
+      // Show error message
+      Swal.fire({
+        icon: "error",
+        title: "Upload Failed",
+        text: "Failed to upload video. Please try again.",
+      });
     }
   };
+// size
 
-  const handleSizeChartUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+// Add these states at the top of your component
+const [sizeChartUploadCount, setSizeChartUploadCount] = useState(0);
+const [isSizeChartUploading, setIsSizeChartUploading] = useState(false);
 
-    try {
+// Add this useEffect for size chart upload progress
+useEffect(() => {
+  if (!isSizeChartUploading) {
+    setSizeChartUploadCount(0);
+    return;
+  }
+
+  const generateRandomSteps = () => {
+    const numberOfSteps = 8;
+    let steps = [];
+    let previousTarget = 0;
+
+    for (let i = 0; i < numberOfSteps - 1; i++) {
+      const minTarget = previousTarget + 5;
+      const maxTarget = Math.min(95, previousTarget + 25);
+      const target = Math.floor(Math.random() * (maxTarget - minTarget) + minTarget);
+
+      steps.push({
+        target,
+        duration: Math.random() * 1000 + 500
+      });
+
+      previousTarget = target;
+    }
+
+    steps.push({ target: 100, duration: 2000 });
+    return steps;
+  };
+
+  const steps = generateRandomSteps();
+  let currentStep = 0;
+
+  const animate = () => {
+    if (currentStep >= steps.length) return;
+
+    const step = steps[currentStep];
+    const startValue = currentStep > 0 ? steps[currentStep - 1].target : 0;
+    const increment = (step.target - startValue) / (step.duration / 50);
+    let currentValue = startValue;
+
+    const interval = setInterval(() => {
+      currentValue += increment;
+      if (currentValue >= step.target) {
+        currentValue = step.target;
+        clearInterval(interval);
+        currentStep++;
+        if (currentStep < steps.length) {
+          animate();
+        } else {
+          setIsSizeChartUploading(false);
+        }
+      }
+      setSizeChartUploadCount(Math.round(currentValue));
+    }, 50);
+
+    return () => clearInterval(interval);
+  };
+
+  animate();
+}, [isSizeChartUploading]);
+
+// Update the handleSizeChartUpload function
+const handleSizeChartUpload = async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  setIsSizeChartUploading(true);
+
+     try {
       const uploadedUrl = await rawFileUpload(file, "raw");
       setFormData({ ...formData, sizeChart: uploadedUrl });
     } catch (error) {
       console.error("Error uploading size chart:", error);
     }
-  };
+};
+
+
+  // const handleVideoUpload = async (event) => {
+  //   const file = event.target.files[0];
+  //   if (!file) return;
+
+  //   try {
+  //     const uploadedUrl = await rawFileUpload(file, "video");
+  //     setFormData({
+  //       ...formData,
+  //       extraVideos: [...formData.extraVideos, uploadedUrl],
+  //     });
+  //     setPreviewVideos([...previewVideos, uploadedUrl]);
+  //   } catch (error) {
+  //     console.error("Error uploading video:", error);
+  //   }
+  // };
+
+  // const handleSizeChartUpload = async (event) => {
+  //   const file = event.target.files[0];
+  //   if (!file) return;
+
+  //   try {
+  //     const uploadedUrl = await rawFileUpload(file, "raw");
+  //     setFormData({ ...formData, sizeChart: uploadedUrl });
+  //   } catch (error) {
+  //     console.error("Error uploading size chart:", error);
+  //   }
+  // };
 
   const [currentMaterial, setCurrentMaterial] = useState("");
   const [currentSizes, setCurrentSizes] = useState([]);
@@ -222,16 +423,19 @@ const AddProduct = () => {
       stock: "Stock",
       buyingLink: "Buying Link",
       colors: "Colors",
+      collection: "Collection",
       sizeWithMaterial: "Size with Material",
     };
 
+    // Check all basic required fields
     for (const [field, label] of Object.entries(requiredFields)) {
       if (
         !formData[field] ||
         (Array.isArray(formData[field]) && formData[field].length === 0) ||
         (field === "sizeWithMaterial" &&
           (!formData[field][0].material ||
-            formData[field][0].sizes.length === 0))
+            formData[field][0].sizes.length === 0)) ||
+        (field === "collection" && !formData.collection?._id)
       ) {
         Swal.fire({
           icon: "error",
@@ -242,6 +446,42 @@ const AddProduct = () => {
       }
     }
 
+    // Check if at least one of extraImages or extraVideos has data
+    if (
+      formData.extraImages.length === 0 &&
+      formData.extraVideos.length === 0
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Required Field Missing",
+        text: "Please add either Extra Images or Extra Videos",
+      });
+      return;
+    }
+
+    // Check all token details fields
+    const tokenDetailsFields = [
+      "blockchain",
+      "tokenstandard",
+      "contractaddress",
+      "contractlink",
+    ];
+
+    for (const field of tokenDetailsFields) {
+      if (!formData.tokenDetails[field]) {
+        Swal.fire({
+          icon: "error",
+          title: "Required Field Missing",
+          text: `Please fill in the Token Details - ${
+            field.charAt(0).toUpperCase() + field.slice(1)
+          }`,
+        });
+        return;
+      }
+    }
+
+    console.log("form", formData);
+
     try {
       const response = await addProduct(formData).unwrap();
       console.log(response);
@@ -251,9 +491,47 @@ const AddProduct = () => {
           title: "Success!",
           text: "You've added a new product!",
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2500);
+        setFormData({
+          productName: "",
+          productDescription: "",
+          displayImage: "",
+          colors: [],
+          price: "",
+          stock: "",
+          buyingLink: "",
+          extraVideos: [],
+          extraImages: [],
+          digitalAssets: {
+            arversion: "",
+            vrversion: "",
+            dfile: "",
+            technicaldesignbook: "",
+            virtuallobbyaccesskey: "",
+            ownershipofstory: "",
+            certification: "",
+            sandboxwearable: "",
+            vrchatwearable: "",
+            animated: "",
+          },
+          collection: null,
+          tokenDetails: {
+            blockchain: "",
+            tokenstandard: "",
+            contractaddress: "",
+            contractlink: "",
+          },
+          sizeChart: "",
+          sizeWithMaterial: [
+            { material: "cotton", sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"] },
+          ],
+        });
+
+        // Reset any other state if needed
+        setCurrentColor("");
+        setPreviewImage("");
+        setPreviewVideos([]);
+        setIsOpenAsset(false);
+        setIsOpenDropDown(false);
       }
     } catch (err) {
       console.log(err);
@@ -265,6 +543,7 @@ const AddProduct = () => {
     }
   };
   // --------------- Add product end -------------------//
+
   // --------------- edit product start -------------------//
 
   const [editMode, setEditMode] = useState(false);
@@ -276,34 +555,8 @@ const AddProduct = () => {
     setEditMode(true);
   };
 
-  // ------------------------delete product ------------]
-  const handleDelete = async (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteProduct(id)
-          .unwrap()
-          .then(() => {
-            Swal.fire("Deleted!", "Your product has been deleted.", "success");
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Something went wrong!",
-              footer: error.message,
-            });
-          });
-      }
-    });
-  };
+ 
+
 
   //console.log("sp", selectedProduct);
   //console.log("nf", newFormData);
@@ -408,14 +661,14 @@ const AddProduct = () => {
                       alt="Preview"
                       className="object-cover border border-[#26B893] rounded"
                     />
-                  
+
                     <div
                       onClick={() =>
                         setFormData({ ...formData, displayImage: "" })
                       }
                       className="absolute -top-5 -right-2 bg-[#26B893] text-white rounded-full font-bold mt-2 p-1 "
                     >
-                <svg
+                      <svg
                         className="w-5 h-5"
                         fill="none"
                         stroke="currentColor"
@@ -448,8 +701,177 @@ const AddProduct = () => {
             </>
 
             {/* box 3 */}
-
             <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6">
+              <div className="mb-8">
+                <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
+                <div className="grid grid-cols-7 gap-5 mb-4">
+                  {formData.extraVideos.map((url, idx) => (
+                    <div
+                      key={`video-${idx}`}
+                      className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
+                    >
+                      <video
+                        src={url}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                      <div
+                        onClick={() => handleDeleteVideo(idx)}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-[#26B893] text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-[#5ad8b8]"
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Upload Progress Indicators */}
+                  {Object.entries(uploadProgress).map(
+                    ([uploadId, progress]) => (
+                      <div
+                        key={uploadId}
+                        className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] flex items-center justify-center"
+                      >
+                        <div className="relative">
+                          <svg className="w-12 h-12 transform -rotate-90">
+                            <circle
+                              className="text-gray-200"
+                              strokeWidth="4"
+                              stroke="currentColor"
+                              fill="transparent"
+                              r="20"
+                              cx="24"
+                              cy="24"
+                            />
+                            <circle
+                              className="text-[#26B893]"
+                              strokeWidth="4"
+                              strokeDasharray={125.6}
+                              strokeDashoffset={125.6 * ((100 - count) / 100)}
+                              strokeLinecap="round"
+                              stroke="currentColor"
+                              fill="transparent"
+                              r="20"
+                              cx="24"
+                              cy="24"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-sm font-semibold">
+                              {count}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  )}
+
+                  {/* Upload Button */}
+                  <div
+                    className="border-2 border-dashed border-[#26B893] w-24 h-20 flex items-center justify-center bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
+                    onClick={() =>
+                      document.getElementById("video-upload").click()
+                    }
+                  >
+                    <svg
+                      className="bg-[#26B893] w-6 h-6 text-[#fff] rounded"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    id="video-upload"
+                    type="file"
+                    onChange={handleVideoUpload}
+                    className="hidden"
+                    accept="video/*"
+                  />
+                </div>
+              </div>
+              <div className="mb-8">
+                <h2 className="text-lg font-semibold mb-4">Extra Images</h2>
+                <div className="grid grid-cols-7 gap-5">
+                  {formData.extraImages.map((url, idx) => (
+                    <div
+                      key={`image-${idx}`}
+                      className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
+                    >
+                      <img
+                        src={url}
+                        alt={`Extra ${idx}`}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+
+                      <div
+                        onClick={() => handleDeleteImage(idx)}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-[#26B893] text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-[#5ad8b8]"
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+                  <div
+                    className="w-24 h-20 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
+                    onClick={() =>
+                      document.getElementById("image-upload").click()
+                    }
+                  >
+                    <svg
+                      className="bg-[#26B893] w-6 h-6 text-[#fff] rounded"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    id="image-upload"
+                    type="file"
+                    onChange={(e) => handleImageUpload(e, "extraImages")}
+                    className="hidden"
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6">
               <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
                 <div className="grid grid-cols-7 gap-5 mb-4">
@@ -576,7 +998,7 @@ const AddProduct = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* box 4 */}
             {/* Pricing And Stock */}
@@ -620,7 +1042,7 @@ const AddProduct = () => {
                     name="buyingLink"
                     value={formData.buyingLink}
                     onChange={onInputChange}
-                    className="w-full p-2 border rounded"
+                   className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
                     placeholder="Crossmint link"
                   />
                 </div>
@@ -742,21 +1164,41 @@ const AddProduct = () => {
                   <div className="relative w-full">
                     <div
                       onClick={() => setIsOpenDropDown(!isOpenDropDown)}
-                      className="px-3 py-2 my-5 w-full text-gray-600 hover:bg-gray-100 rounded-md flex justify-between items-center border focus:ring-2 focus:ring-[#26B893] border-gray-300"
+                      className="px-3 py-2 my-5 capitalize w-full text-gray-600 hover:bg-gray-100 rounded-md flex justify-between items-center border focus:ring-2 focus:ring-[#26B893] border-gray-300"
                     >
-                      Select Collection
+                      {formData.collection?.collectionName ||
+                        "Select Collection"}
                       <IoIosArrowDropdownCircle className="text-2xl" />
                     </div>
 
                     {isOpenDropDown && (
                       <div className="absolute right-0 mt-0 w-full bg-white rounded-md shadow-lg z-10 border border-gray-200">
                         <ul className="py-1">
-                          <li className="block cursor-pointer text-base px-4 py-2  text-gray-700 hover:bg-gray-100">
-                            Black Jacket
-                          </li>
-                          <li className="block cursor-pointer text-base px-4 py-2  text-gray-700 hover:bg-gray-100">
-                            Green Jacket
-                          </li>
+                          {collections?.map((collection, i) => (
+                            <li key={i}>
+                              <label className="flex items-center w-full px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                <input
+                                  type="radio"
+                                  name="collection"
+                                  value={collection._id}
+                                  checked={
+                                    formData.collection?._id === collection._id
+                                  }
+                                  onChange={() => {
+                                    setFormData({
+                                      ...formData,
+                                      collection: collection,
+                                    });
+                                    setIsOpenDropDown(false);
+                                  }}
+                                  className="mr-2"
+                                />
+                                <span className="text-base text-gray-700 capitalize">
+                                  {collection.collectionName}
+                                </span>
+                              </label>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     )}
@@ -800,7 +1242,7 @@ const AddProduct = () => {
                 <h2 className="text-lg font-semibold mb-4">
                   Size And Materials:
                 </h2>
-                <div className="flex  items-center space-x-2 mb-4">
+                {/* <div className="flex  items-center space-x-2 mb-4">
                   <h2 className="text-lg font-medium ">Size Chart:</h2>
                   <label htmlFor="size">
                     <img className="h-14 w-24" src={sizeChart} />
@@ -812,7 +1254,70 @@ const AddProduct = () => {
                     onChange={handleSizeChartUpload}
                     className="w-full hidden p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
                   />
-                </div>
+                </div> */}
+
+
+<div className="flex items-center space-x-2 mb-4">
+  <h2 className="text-lg font-medium">Size Chart:</h2>
+  <label htmlFor="size" className="relative cursor-pointer">
+    {formData.sizeChart ? 
+        <div
+        className="py-2 px-3 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
+        onClick={() =>
+          document.getElementById("image-upload").click()
+        }
+      >
+        <span className="text-[#26B893] font-bold">Uploaded</span> <FiCheckCircle className="text-xl ml-2 text-[#26B893]" />
+      </div>
+      
+      :
+      <img className="h-14 w-24" src={sizeChart} alt="Size Chart" />
+     
+    }
+    
+    {/* Progress Indicator */}
+    {isSizeChartUploading && (
+      <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
+        <div className="relative">
+          <svg className="w-12 h-12 transform -rotate-90">
+            <circle
+              className="text-gray-200"
+              strokeWidth="4"
+              stroke="currentColor"
+              fill="transparent"
+              r="20"
+              cx="24"
+              cy="24"
+            />
+            <circle
+              className="text-[#26B893]"
+              strokeWidth="4"
+              strokeDasharray={125.6}
+              strokeDashoffset={125.6 * ((100 - sizeChartUploadCount) / 100)}
+              strokeLinecap="round"
+              stroke="currentColor"
+              fill="transparent"
+              r="20"
+              cx="24"
+              cy="24"
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-sm font-semibold">{sizeChartUploadCount}%</span>
+          </div>
+        </div>
+      </div>
+    )}
+  </label>
+  <input
+    type="file"
+    accept=".pdf, .png, .jpg, .jpeg, .gif, .webp"
+    id="size"
+    onChange={handleSizeChartUpload}
+    className="hidden"
+    disabled={isSizeChartUploading}
+  />
+</div>
 
                 <div className="relative">
                   {formData.sizeWithMaterial.map((entry, index) => (
@@ -867,9 +1372,9 @@ const AddProduct = () => {
                   ))}
                   <div
                     onClick={handleAddRow}
-                    className="bg-[#2CBA7A] rounded-full  absolute bottom-0 right-5"
+                    className="bg-[#2CBA7A] rounded-full  absolute -bottom-9 right-0 md:bottom-0 md:right-5"
                   >
-                    <FaPlus className="m-2 text-white  text-center text-xl" />
+                    <FaPlus className="m-2 text-white  text-center text-[15px] md:text-xl" />
                   </div>
                 </div>
               </div>

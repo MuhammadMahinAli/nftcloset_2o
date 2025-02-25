@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import { catchAsync } from "../../../utils/catchAsync.js";
-import { addCollectionService, deleteCollectionService, getAllCollectionService, updateCollectionInfoService } from "./collection.service.js";
+import { addCollectionService, deleteCollectionService, getAllCollectionService, getCollectionByIdService, updateCollectionInfoService } from "./collection.service.js";
 import { sendResponse } from "../../../utils/sendResponse.js";
 
 
@@ -45,6 +45,19 @@ export const addCollectionController = catchAsync(async (req, res, next) => {
         data: updatedCollection,
       });
     });
+
+    //-----
+    export const getCollectionByIdController = catchAsync(async(req,res)=>{
+      const id = req.params.id;
+      const collection = await getCollectionByIdService(id);
+    
+      sendResponse(res, {
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"Collection's details retrived successfully",
+        data: collection
+      })
+    })
   
 
    //----------------- delete Collection

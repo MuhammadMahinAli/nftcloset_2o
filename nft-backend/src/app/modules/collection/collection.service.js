@@ -23,7 +23,7 @@ export const addCollectionService = async (collectionInfo) => {
 //----- get all collection
 export const getAllCollectionService = async () => {
   const collections = await Collection.find({})
-    .populate("products.product")
+    .populate("products.productId", "productName displayImage price buyingLink")
     .sort({ createdAt: -1 });
   return collections;
 };
@@ -67,6 +67,14 @@ export const updateCollectionInfoService = async (id, data) => {
   } catch (error) {
     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
   }
+};
+
+//-------------- get by id
+export const getCollectionByIdService = async (id) => {
+  const collectionById = await Collection.findOne({ _id: id })
+  .populate("products.productId", "productName displayImage price buyingLink")
+  .sort({ createdAt: -1 });
+  return collectionById;
 };
 
 //----------------- delete collection

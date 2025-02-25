@@ -2,8 +2,23 @@ import { IoIosSearch } from "react-icons/io";
 import banner from "../../assets/nft-image/banner.png";
 import { IoCartOutline, IoReloadSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 const CollectionDetails = () => {
+  const data = useLoaderData();
+  const collectionInfo =data?.data;
+  const {
+    collectionName,
+    collectionDescription,
+    publishType,
+    publishDate,
+    fromDate,
+    toDate,
+    displayImage,
+    discount,
+    products,
+    storyLink,
+  } = collectionInfo;
   const collectionData = {
     image: banner,
     name: "digital collection",
@@ -12,32 +27,6 @@ const CollectionDetails = () => {
   };
   const [isOpenOption, setIsOpenOption] = useState(false);
   const [isOpenIndex, setIsOpenIndex] = useState(null);
-  const products = [
-    {
-      id: 1,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 2,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 3,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 4,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-  ];
 
   const toggleActive = (i) => {
     setIsOpenIndex(i);
@@ -116,7 +105,7 @@ const CollectionDetails = () => {
   return (
     <div className="p-3 md:p-8 lg:p-10 ">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold capitalize">digital collection</h1>
+        <h1 className="text-3xl font-bold capitalize">{collectionName}</h1>
       </div>
 
       <div className="flex justify-between mb-6">
@@ -163,9 +152,9 @@ const CollectionDetails = () => {
       <div className="">
         <div className="w-full flex justify-center items-center">
           <img
-            src={collectionData.image}
-            alt={collectionData.name}
-            className="w-full h-full pt-2 object-cover"
+            src={displayImage}
+            alt={collectionName}
+            className="w-full h-[350px] pt-2 object-cover rounded-2xl"
           />
         </div>
       </div>
@@ -173,7 +162,7 @@ const CollectionDetails = () => {
         {/* left */}
         <div className="w-full lg:w-5/12 p-2 xl:p-5 bg-white shadow-lg space-y-1 lg:space-y-2">
           <p className="text-xl xl:text-3xl font-bold text-red-500">
-            50% discount{" "}
+            {discount}% discount{" "}
           </p>
           <p className="text-[15px] xl:text-[16px] text-gray-500 capitalize">
             will be for 10 days after
@@ -196,7 +185,7 @@ const CollectionDetails = () => {
         <div className="w-full lg:w-1/2 p-2 lg:p-0 space-y-1 ">
           <p className="text-xl xl:text-2xl font-bold text-gray-800">Details</p>
           <p className="text-[16px] text-gray-700 py-2">
-            {collectionData.details}
+            {collectionDescription}
           </p>
           <button className="text-[15px] xl:text-[16px] lg:text-xl font-semibold text-white px-3 py-2 rounded-md bg-[#26B893]">
             Story Line
@@ -222,18 +211,18 @@ const CollectionDetails = () => {
             <>
               <div className="flex justify-center items-center py-4">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={product.productId.displayImage}
+                  alt={product.productId.productName}
                   className="w-28 lg:w-40 h-full pt-2 object-cover"
                 />
               </div>
 
               <div className="p-3  space-y-1 md:space-y-2 border-t border-gray-300">
                 <h3 className="font-bold text-lg md:text-lg text-gray-700">
-                  {product.name}
+                  {product.productId.productName}
                 </h3>
                 <p className="text-[18px] md:text-[17px] text-gray-500">
-                  {product.price}
+                  {product.productId.price}
                 </p>
               </div>
             </>
