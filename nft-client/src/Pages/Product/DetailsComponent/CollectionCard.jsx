@@ -7,8 +7,10 @@ import { BiCheck } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoIosArrowDown } from "react-icons/io";
 import { PiCopySimpleBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
-const CollectionCard = () => {
+const CollectionCard = ({ collection }) => {
+  const { collectionName, displayImage, _id } = collection.collectionId;
   const [isCollectionExpanded, setIsCollectionExpanded] = useState(true);
 
   const toggleCollectionDetails = () =>
@@ -35,7 +37,7 @@ const CollectionCard = () => {
           className="w-full flex items-center justify-between bg-[#edecec] px-2 py-3 rounded-t-xl"
         >
           <div className="flex items-center gap-2">
-          <PiCopySimpleBold className="text-xl text-gray-600" />
+            <PiCopySimpleBold className="text-xl text-gray-600" />
             <span className="font-bold text-gray-700 text-xl">
               Collection Details
             </span>
@@ -51,7 +53,8 @@ const CollectionCard = () => {
           <>
             <div className="flex justify-between items-center py-2  px-4">
               <img
-                src="https://i.ebayimg.com/images/g/GC8AAOSwHWJbisRS/s-l1200.jpg"
+                //src="https://i.ebayimg.com/images/g/GC8AAOSwHWJbisRS/s-l1200.jpg"
+                src={displayImage}
                 alt="Mutant Ape"
                 className="w-12 h-12 rounded-full"
               />
@@ -59,7 +62,7 @@ const CollectionCard = () => {
               <div className=" flex-1 p-4 lg:hidden">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-gray-700 leading-relaxed text-[15px]">
-                    Mutant Ape Yasht Club #6247
+                    {collectionName}
                   </span>
                   <RiVerifiedBadgeFill className="text-blue-500 bg-blue-100 rounded-full text-2xl" />
                 </div>
@@ -112,13 +115,15 @@ const CollectionCard = () => {
             <div className="lg:flex flex-col p-4 hidden  ">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-gray-700 leading-relaxed text-[20px]">
-                  Mutant Ape Yasht Club #6247
+                  {collectionName}
                 </span>
                 <RiVerifiedBadgeFill className="text-blue-500 bg-blue-100 rounded-full text-2xl" />
               </div>
               <div className=" leading-relaxed  text-[17px] flex items-center gap-1">
-                <span>0x5C4...F13D</span>
-                <FiExternalLink className="cursor-pointer hover:opacity-80" />
+                <span>View Collection</span>
+                <Link to={`/collection-details/${_id}`}>
+                  <FiExternalLink className="cursor-pointer hover:opacity-80" />
+                </Link>
               </div>
             </div>
           </>

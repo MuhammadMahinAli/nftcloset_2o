@@ -1,23 +1,24 @@
 import { Schema, model } from "mongoose";
 
 const DigitalAssetsSchema = new Schema({
-  arversion:  { type: String },
-  vrversion:  { type: String },
-  dfile:  { type: String },
-  technicaldesignbook:  { type: String },
-  virtuallobbyaccesskey:  { type: String },
-  ownershipofstory:  { type: String },
-  certification:  { type: String },
-  sandboxwearable:  { type: String },
-  vrchatwearable:  { type: String },
-  animated:  { type: String },
+  arversion: { type: String },
+  vrversion: { type: String },
+  dfile: { type: String },
+  technicaldesignbook: { type: String },
+  virtuallobbyaccesskey: { type: String },
+  ownershipofstory: { type: String },
+  certification: { type: String },
+  sandboxwearable: { type: String },
+  vrchatwearable: { type: String },
+  animated: { type: String },
+  recroom: { type: String },
 });
 
 const TokenDetailsSchema = new Schema({
-  blockchain:  { type: String },
-      tokenstandard:  { type: String },
-      contractaddress:  { type: String },
-      contractlink:  { type: String },
+  blockchain: { type: String },
+  tokenstandard: { type: String },
+  contractaddress: { type: String },
+  contractlink: { type: String },
 });
 
 const SizeWithMaterialSchema = new Schema({
@@ -37,11 +38,18 @@ const ProductSchema = new Schema(
     extraVideos: [{ type: String }],
     extraImages: [{ type: String }],
     digitalAssets: { type: DigitalAssetsSchema, required: true },
-    collection: { type: Schema.Types.ObjectId, ref: 'Collection', required: true },
+    collection: {
+      collectionId: {
+        type: Schema.Types.ObjectId,
+        ref: "Collection",
+        required: true
+      }
+    },
     tokenDetails: { type: TokenDetailsSchema },
     sizeChart: { type: String },
     sizeWithMaterial: [SizeWithMaterialSchema],
-    isFeatured:{type:Boolean}
+    isFeatured: { type: Boolean },
+    isBestProduct: { type: Boolean },
   },
   {
     timestamps: true,

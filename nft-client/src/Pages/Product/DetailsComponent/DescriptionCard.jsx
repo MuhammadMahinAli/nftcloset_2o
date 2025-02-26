@@ -2,7 +2,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
-const DescriptionCard = () => {
+const DescriptionCard = ({productDescription}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -30,24 +30,8 @@ const DescriptionCard = () => {
       >
         <div className={`space-y-4 px-4 py-4 md:px-6 md:py-5 ${!isExpanded && 'line-clamp-[6]'}`}>
           <p className="text-gray-600 leading-relaxed text-[16px] md:text-lg">
-            Lorem ipsum dolor sit amet consectetur, in ante velit molestie id
-            suspendisse eu orci neque. Vitae dictum tempus porttitor fermentum turpis lorem, 
-            id amet sed aliquam feugiat. efficitur nunc nulla commodo nulla felis, 
-            eros hac urna utrique nisi porttitor enim.
-          </p>
-
-          <p className="text-gray-600 leading-relaxed text-[16px] md:text-lg">
-            Lorem ipsum dolor sit amet consectetur, in ante velit molestie id
-            suspendisse eu orci neque. Vitae dictum tempus porttitor fermentum turpis lorem, 
-            id amet sed aliquam feugiat. efficitur nunc nulla commodo nulla felis, 
-            eros hac urna utrique nisi porttitor enim.
-          </p>
-
-          <p className="text-gray-600 leading-relaxed text-[16px] md:text-lg">
-            tempus porttitor fermentum turpis lorem, id amet sed aliquam
-            feugiat. efficitur nunc nulla commodo nulla felis, eros hac urna
-            utrique nisi porttitor enim.
-          </p>
+           {productDescription}
+           </p>
         </div>
       </div>
     </div>

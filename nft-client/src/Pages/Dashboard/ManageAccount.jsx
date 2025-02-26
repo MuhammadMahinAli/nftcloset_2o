@@ -8,21 +8,29 @@ import { FaPlus, FaTrash } from "react-icons/fa6";
 import CollectionOne from "../../icons/NFTIcon/DashboardIcons/CollectionOne";
 import OrderOne from "../../icons/NFTIcon/DashboardIcons/OrderOne";
 import ProductOne from "../../icons/NFTIcon/DashboardIcons/ProductOne";
+import { useContext } from "react";
+import { useGetSingleUserQuery } from "../../features/auth/authApi";
+import { AuthContext } from "../../Context/UserContext";
 
 const ManageAccount = () => {
-  const userInfo = {
-    name: "Connie Robertson",
-    email: "victoriasimmmons@2020.com",
-    phone: "04978602356",
-    location: "United States",
-    address: {
-      name: "Mehajabin Tonni",
-      street: "Block A 111 Jln Meru New City Centre",
-      city: "Klang",
-      state: "Selangor",
-      country: "Malaysia",
-    },
-  };
+  const { userId } = useContext(AuthContext);
+  const { data: getSingleUser } = useGetSingleUserQuery(userId);
+  const userInfo = getSingleUser?.data;
+
+  const totalAddress = userInfo?.addresses;
+  // const userInfo = {
+  //   name: "Connie Robertson",
+  //   email: "victoriasimmmons@2020.com",
+  //   phone: "04978602356",
+  //   location: "United States",
+  //   address: {
+  //     name: "Mehajabin Tonni",
+  //     street: "Block A 111 Jln Meru New City Centre",
+  //     city: "Klang",
+  //     state: "Selangor",
+  //     country: "Malaysia",
+  //   },
+  // };
 
   const orders = [
     {
@@ -122,16 +130,18 @@ const ManageAccount = () => {
         <div className="w-full ">
           {/* Header Section */}
           <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-lg">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between py-5">
               <div>
-                <h1 className="text-2xl xl:text-3xl font-bold">Hello Mahin!</h1>
+                <h1 className="text-2xl xl:text-3xl font-bold">
+                  Hello {userInfo?.name?.firstName}!
+                </h1>
                 <p className="text-[16px] xl:text-[18px] text-gray-500 pt-2">
                   Here's An Overview Of Your Recent Activities.
                 </p>
               </div>
               <div className="">
                 <img
-                  src={dashboard}
+                  src="https://plus.unsplash.com/premium_photo-1671077420134-4cce62252a2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
                   alt="Activity Overview"
                   className="w-40 md:w-52"
                 />
@@ -200,7 +210,7 @@ const ManageAccount = () => {
                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mb-4">
                   <img
                     src={
-                      userInfo.avatar ||
+                      userInfo?.profilePic ||
                       "https://plus.unsplash.com/premium_photo-1671077420134-4cce62252a2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
                     }
                     alt="Profile"
@@ -208,10 +218,10 @@ const ManageAccount = () => {
                   />
                   <div>
                     <h3 className="font-semibold text-lg  xl:text-xl  text-center md:text-left">
-                      {userInfo.name}
+                      {userInfo?.name?.firstName}   {userInfo?.name?.lastName}
                     </h3>
                     <p className="text-gray-500 text-base  xl:text-lg  text-center md:text-left">
-                      {userInfo.email}
+                      {userInfo?.email}
                     </p>
                   </div>
                 </div>
@@ -228,7 +238,9 @@ const ManageAccount = () => {
                 </div>
 
                 <p className="text-[14px] text-gray-600 xl:text-[19px]">
-                  {userInfo.phone}
+                  {userInfo?.phoneNumber
+                    ? userInfo?.phoneNumber
+                    : "No Number Added"}
                 </p>
               </div>
               <div className="flex flex-col space-y-1">
@@ -240,7 +252,9 @@ const ManageAccount = () => {
                 </div>
 
                 <p className="text-[14px] xl:text-[19px] text-gray-600">
-                  {userInfo.location}
+                  {userInfo?.addresses[0]?.country
+                    ? userInfo?.addresses[0]?.country
+                    : "No Location Added"}
                 </p>
               </div>
             </div>
@@ -251,13 +265,17 @@ const ManageAccount = () => {
                   Phone Number
                 </p>
 
-                <p className="text-[14px] ">{userInfo.phone}</p>
+                <p className="text-[14px] "> {userInfo?.phoneNumber
+                    ? userInfo?.phoneNumber
+                    : "No Number Added"}</p>
               </div>
               <div className="flex flex-col justify-center items-center space-y-1">
                 <img src={location} alt="phone" className="w-6 h-7" />
                 <p className="text-gray-700 text-[15px] font-bold">Location</p>
 
-                <p className="text-[14px] ">{userInfo.location}</p>
+                <p className="text-[14px] ">     {userInfo?.addresses[0]?.country
+                    ? userInfo?.addresses[0]?.country
+                    : "No Location Added"}</p>
               </div>
             </div>
 
@@ -274,25 +292,27 @@ const ManageAccount = () => {
             {/* Address Book List */}
             <div className="">
               <div className="grid md:grid-cols-2 gap-4 pt-2">
-                {[1, 2].map((i) => (
+                {totalAddress?.map((address,i) => (
                   <div
                     key={i}
                     className={`${i === 1 ? "border-r" : ""} rounded-lg py-2`}
                   >
+                   { address?.isDefault === true &&
                     <p className="text-gray-500 text-[12px] xl:text-[16px] mb-2">
                       DEFAULT SHIPPING ADDRESS
                     </p>
+                }
                     <h4 className="font-bold text-gray-700 mb-2  xl:text-[24px]">
-                      {userInfo.address.name}
+                      Address {i+1}
                     </h4>
                     <p className="text-gray-600 text-[14px] xl:text-[17px]">
-                      Street: {userInfo.address.street}
+                      Street:  {address.street}
                       <br />
-                      City: {userInfo.address.city}
+                      City: {address.city}
                       <br />
-                      State/province/area: {userInfo.address.state}
+                      State/province/area: {address.homeAddress}
                       <br />
-                      Country: {userInfo.address.country}
+                      Country: {address.country}
                     </p>
                   </div>
                 ))}
@@ -349,7 +369,7 @@ const ManageAccount = () => {
           <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-lg">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl xl:text-3xl font-bold">Hello Mahin!</h1>
+                <h1 className="text-2xl xl:text-3xl font-bold">Hello   {userInfo?.name?.firstName}   {userInfo?.name?.lastName} !</h1>
                 <p className="text-[16px] xl:text-[18px] text-gray-500 pt-2">
                   Here's An Overview Of Your Recent Activities.
                 </p>
@@ -436,8 +456,6 @@ const ManageAccount = () => {
         </div>
         {/* </div> */}
       </div>
-
-    
     </>
   );
 };

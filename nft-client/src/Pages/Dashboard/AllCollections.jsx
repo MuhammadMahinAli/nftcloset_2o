@@ -125,7 +125,9 @@ const AllCollections = () => {
 
             <div className="grid grid-cols-2">
               <button className="py-2 xl:py-3 xl:text-xl bg-[#2CBA7A] text-white">
-                Storyline
+              <a href={product.storyLink}>
+              Storyline
+                </a>
               </button>
           
               <button className="py-2 xl:py-3 xl:text-xl bg-[#B5FFDD] text-[#2CBA7A]">

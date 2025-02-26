@@ -2,7 +2,7 @@ import glass from "../../../assets/nft-image/glass.png";
 import cube from "../../../assets/nft-image/cube.png";
 import expand from "../../../assets/nft-image/expand.png";
 
-const ProductImage = () => {
+const ProductImage = ({displayImage}) => {
     return (
         <div className="bg-white shadow-xl  space-y-5">
         {/* img */}
@@ -10,8 +10,9 @@ const ProductImage = () => {
              <div className="flex justify-center items-center">
                <div className="relative w-[300px] lg:w-[400px] aspect-square">
                  <img
-                   src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
-                   alt="Black Hoodie #43"
+                  // src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
+                  src={displayImage}
+                  alt="Black Hoodie #43"
                    className="w-full h-full object-cover rounded-lg"
                  />
                </div>

@@ -54,6 +54,7 @@ const ProductDescription = () => {
       },
     ],
     isFeatured: false,
+    isBestProduct: false,
   };
   const onInputChange = (e) => {
     const { name, value } = e.target;

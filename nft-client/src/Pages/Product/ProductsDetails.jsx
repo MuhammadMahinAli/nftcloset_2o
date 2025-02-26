@@ -7,8 +7,26 @@ import CollectionCard from "./DetailsComponent/CollectionCard";
 import ActivityCard from "./DetailsComponent/ActivityCard";
 import ProductImage from "./DetailsComponent/ProductImage";
 import ProductInfo from "./DetailsComponent/ProductInfo";
+import { useLoaderData } from "react-router-dom";
 
 const ProductsDetails = () => {
+  const data = useLoaderData();
+    const productInfo = data?.data;
+const { productName,
+  productDescription,
+  displayImage,
+  price,
+  stock,
+  buyingLink,
+  digitalAssets,
+  collection,
+  colors,
+  extraVideos,
+  extraImages,
+  tokenDetails,
+  sizeWithMaterial,
+  sizeChart} = productInfo;
+
   return (
     <div>
       {/* <div className="flex justify-between p-10">
@@ -66,29 +84,29 @@ const ProductsDetails = () => {
       <div className="hidden lg:grid grid-cols-2 gap-5 py-10 px-5 xl:px-10">
         {/* left */}
         <div className=" space-y-5">
-          <ProductImage />
-          <ExtraAssets />
-          <PriceCard />
-          <TokenCard />
-          <CollectionCard />
+          <ProductImage displayImage={displayImage} />
+          <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} />
+          <PriceCard price={price} collection={collection} />
+          <TokenCard tokenDetails={tokenDetails} />
+          <CollectionCard collection={collection} />
         </div>
         {/* right */}
         <div className=" space-y-5">
-          <ProductInfo />
-          <VersionSlider />
-          <DescriptionCard />
+          <ProductInfo productName={productName} />
+          <VersionSlider digitalAssets={digitalAssets} displayImage={displayImage} />
+          <DescriptionCard  productDescription={productDescription} />
           <ActivityCard />
         </div>
       </div>
       <div className="lg:hidden grid grid-cols-1 gap-3 py-4 px-5">
-        <ProductInfo />
-        <ProductImage />
-        <ExtraAssets />
-        <VersionSlider />
-        <DescriptionCard />
-        <PriceCard />
-        <TokenCard />
-        <CollectionCard />
+        <ProductInfo  productName={productName}/>
+        <ProductImage displayImage={displayImage}/>
+        <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} />
+        <VersionSlider digitalAssets={digitalAssets} displayImage={displayImage} />
+        <DescriptionCard  productDescription={productDescription} />
+        <PriceCard price={price} collection={collection}   />
+        <TokenCard tokenDetails={tokenDetails} />
+        <CollectionCard collection={collection}   />
         <ActivityCard />
       </div>
     </div>

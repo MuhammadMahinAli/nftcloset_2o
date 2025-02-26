@@ -89,7 +89,7 @@ const AllProducts = () => {
             key={product.id}
             className="pb-8  2xl:pb-12 relative overflow-hidden bg-white rounded-xl shadow-xl"
           >
-            <Link to="/products-details">
+            <Link to={`/products-details/${product._id}`}>
               <div className="flex justify-center items-center py-4 h-[64%] lg:h-[72%] xl:h-[68%] 3xl:h-[72%]">
                 <img
                   src={product.displayImage}

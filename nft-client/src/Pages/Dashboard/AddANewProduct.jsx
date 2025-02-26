@@ -48,8 +48,11 @@ const AddProduct = () => {
       sandboxwearable: "",
       vrchatwearable: "",
       animated: "",
+      recroom: "",
     },
-    collection: null,
+    collection: {
+      collectionId:""
+    },
     tokenDetails: {
       blockchain: "",
       tokenstandard: "",
@@ -435,7 +438,7 @@ const handleSizeChartUpload = async (event) => {
         (field === "sizeWithMaterial" &&
           (!formData[field][0].material ||
             formData[field][0].sizes.length === 0)) ||
-        (field === "collection" && !formData.collection?._id)
+        (field === "collection" && !formData.collection?.collectionId)
       ) {
         Swal.fire({
           icon: "error",
@@ -445,6 +448,7 @@ const handleSizeChartUpload = async (event) => {
         return;
       }
     }
+
 
     // Check if at least one of extraImages or extraVideos has data
     if (
@@ -513,7 +517,9 @@ const handleSizeChartUpload = async (event) => {
             vrchatwearable: "",
             animated: "",
           },
-          collection: null,
+          collection: {
+            collectionId:""
+          },
           tokenDetails: {
             blockchain: "",
             tokenstandard: "",
@@ -605,7 +611,7 @@ const handleSizeChartUpload = async (event) => {
                     placeholder="Lorem Ipsum Dolor Sit Amet Consectetur."
                   ></textarea>
                 </div>
-
+                
                 <div>
                   <label className="block text-sm font-medium">Colors</label>
                   <div className="flex  items-center space-x-2">
@@ -704,11 +710,11 @@ const handleSizeChartUpload = async (event) => {
             <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6">
               <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
-                <div className="grid grid-cols-7 gap-5 mb-4">
+                <div className="grid grid-cols-3 gap-y-2 md:gap-y-4 md:grid-cols-6 lg:grid-cols-4 xl:grid-cols-6 3xl:grid-cols-7 xl:gap-x-1 mb-4">
                   {formData.extraVideos.map((url, idx) => (
                     <div
                       key={`video-${idx}`}
-                      className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
+                      className="relative w-16 xs:w-20 h-16  md:w-24 md:h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
                     >
                       <video
                         src={url}
@@ -740,7 +746,7 @@ const handleSizeChartUpload = async (event) => {
                     ([uploadId, progress]) => (
                       <div
                         key={uploadId}
-                        className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] flex items-center justify-center"
+                        className="relative w-16 xs:w-20 h-16  md:w-24 md:h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] flex items-center justify-center"
                       >
                         <div className="relative">
                           <svg className="w-12 h-12 transform -rotate-90">
@@ -778,7 +784,7 @@ const handleSizeChartUpload = async (event) => {
 
                   {/* Upload Button */}
                   <div
-                    className="border-2 border-dashed border-[#26B893] w-24 h-20 flex items-center justify-center bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
+                    className="border-2 border-dashed border-[#26B893] w-16 xs:w-20 h-16  md:w-24 md:h-20 flex items-center justify-center bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
                     onClick={() =>
                       document.getElementById("video-upload").click()
                     }
@@ -808,11 +814,11 @@ const handleSizeChartUpload = async (event) => {
               </div>
               <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">Extra Images</h2>
-                <div className="grid grid-cols-7 gap-5">
+                <div className="grid grid-cols-3 gap-y-2 md:gap-y-4 md:grid-cols-6 lg:grid-cols-4 xl:grid-cols-6 3xl:grid-cols-7 xl:gap-x-1 mb-4">
                   {formData.extraImages.map((url, idx) => (
                     <div
                       key={`image-${idx}`}
-                      className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
+                      className="relative w-w-16 xs:w-20 h-16  md:w-24 md:h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
                     >
                       <img
                         src={url}
@@ -841,7 +847,7 @@ const handleSizeChartUpload = async (event) => {
                     </div>
                   ))}
                   <div
-                    className="w-24 h-20 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
+                    className="w-w-16 xs:w-20 h-16  md:w-24 md:h-20 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
                     onClick={() =>
                       document.getElementById("image-upload").click()
                     }
@@ -870,135 +876,6 @@ const handleSizeChartUpload = async (event) => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6">
-              <div className="mb-8">
-                <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
-                <div className="grid grid-cols-7 gap-5 mb-4">
-                  {formData.extraVideos.map((url, idx) => (
-                    <div
-                      key={`video-${idx}`}
-                      className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
-                    >
-                      <video
-                        src={url}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-
-                      <div
-                        onClick={() => handleDeleteVideo(idx)}
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-[#26B893] text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-[#5ad8b8]"
-                      >
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  ))}
-                  <div
-                    className="border-2 border-dashed border-[#26B893] w-24 h-20 flex items-center justify-center bg-gray-50 rounded-lg  hover:bg-gray-100 cursor-pointer"
-                    onClick={() =>
-                      document.getElementById("video-upload").click()
-                    }
-                  >
-                    <svg
-                      className="bg-[#26B893] w-6 h-6 text-[#fff] rounded"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 4v16m8-8H4"
-                      />
-                    </svg>
-                  </div>
-                  <input
-                    id="video-upload"
-                    type="file"
-                    onChange={handleVideoUpload}
-                    className="hidden"
-                    accept="video/*"
-                  />
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <h2 className="text-lg font-semibold mb-4">Extra Images</h2>
-                <div className="grid grid-cols-7 gap-5">
-                  {formData.extraImages.map((url, idx) => (
-                    <div
-                      key={`image-${idx}`}
-                      className="relative w-24 h-20 bg-gray-100 rounded-lg border-2 border-[#26B893] group"
-                    >
-                      <img
-                        src={url}
-                        alt={`Extra ${idx}`}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-
-                      <div
-                        onClick={() => handleDeleteImage(idx)}
-                        className="absolute -top-2 -right-2 w-6 h-6 bg-[#26B893] text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-[#5ad8b8]"
-                      >
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  ))}
-                  <div
-                    className="w-24 h-20 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
-                    onClick={() =>
-                      document.getElementById("image-upload").click()
-                    }
-                  >
-                    <svg
-                      className="bg-[#26B893] w-6 h-6 text-[#fff] rounded"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 4v16m8-8H4"
-                      />
-                    </svg>
-                  </div>
-                  <input
-                    id="image-upload"
-                    type="file"
-                    onChange={(e) => handleImageUpload(e, "extraImages")}
-                    className="hidden"
-                    accept="image/*"
-                  />
-                </div>
-              </div>
-            </div> */}
 
             {/* box 4 */}
             {/* Pricing And Stock */}
@@ -1089,6 +966,7 @@ const handleSizeChartUpload = async (event) => {
                       "Sandbox Wearable",
                       "VR Chat Wearable",
                       "Animated",
+                      "Recroom Wearable"
                     ].map((label, index) => (
                       <div key={index} className="mb-4">
                         <label className="block text-sm font-medium mb-2 ">
@@ -1166,8 +1044,8 @@ const handleSizeChartUpload = async (event) => {
                       onClick={() => setIsOpenDropDown(!isOpenDropDown)}
                       className="px-3 py-2 my-5 capitalize w-full text-gray-600 hover:bg-gray-100 rounded-md flex justify-between items-center border focus:ring-2 focus:ring-[#26B893] border-gray-300"
                     >
-                      {formData.collection?.collectionName ||
-                        "Select Collection"}
+                    {collections?.find(c => c._id === formData.collection?.collectionId)?.collectionName || 
+     "Select Collection"}
                       <IoIosArrowDropdownCircle className="text-2xl" />
                     </div>
 
@@ -1187,7 +1065,9 @@ const handleSizeChartUpload = async (event) => {
                                   onChange={() => {
                                     setFormData({
                                       ...formData,
-                                      collection: collection,
+                                      collection: {
+                                        collectionId: collection._id
+                                      }
                                     });
                                     setIsOpenDropDown(false);
                                   }}

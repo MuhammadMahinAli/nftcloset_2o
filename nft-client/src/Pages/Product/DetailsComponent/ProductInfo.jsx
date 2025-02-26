@@ -1,16 +1,16 @@
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 
-const ProductInfo = () => {
+const ProductInfo = ({productName}) => {
     return (
    
         <div className="space-y-4">
             <div className="flex items-center space-x-2">
-                <p className="text-blue-500 font-bold">Black hoodie by merina</p>
+                <p className="text-blue-500 font-bold capitalize">{productName}</p>
                 <RiVerifiedBadgeFill className="text-blue-500 bg-blue-100 rounded-full text-xl" />
           
             </div>
-          <h1 className="text-2xl md:text-4xl font-bold">Black Hoodie #43</h1>
+          <h1 className="text-2xl md:text-4xl font-bold">{productName}</h1>
          
           {/* Creator Info */}
           <div className="flex items-center gap-2 md:gap-4 lg:p-4  rounded-lg">
