@@ -8,29 +8,18 @@ import { FaPlus, FaTrash } from "react-icons/fa6";
 import CollectionOne from "../../icons/NFTIcon/DashboardIcons/CollectionOne";
 import OrderOne from "../../icons/NFTIcon/DashboardIcons/OrderOne";
 import ProductOne from "../../icons/NFTIcon/DashboardIcons/ProductOne";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useGetSingleUserQuery } from "../../features/auth/authApi";
 import { AuthContext } from "../../Context/UserContext";
+import AddOrUpdateAddress from "./AddOrUpdateAddress";
 
 const ManageAccount = () => {
   const { userId } = useContext(AuthContext);
+  const [isOpenEditAddress, setIsOpenEditAddress] = useState(false);
   const { data: getSingleUser } = useGetSingleUserQuery(userId);
   const userInfo = getSingleUser?.data;
 
   const totalAddress = userInfo?.addresses;
-  // const userInfo = {
-  //   name: "Connie Robertson",
-  //   email: "victoriasimmmons@2020.com",
-  //   phone: "04978602356",
-  //   location: "United States",
-  //   address: {
-  //     name: "Mehajabin Tonni",
-  //     street: "Block A 111 Jln Meru New City Centre",
-  //     city: "Klang",
-  //     state: "Selangor",
-  //     country: "Malaysia",
-  //   },
-  // };
 
   const orders = [
     {
@@ -109,19 +98,6 @@ const ManageAccount = () => {
   ];
   return (
     <>
-      {/* <div className="grid grid-cols-2 gap-4">
-      {actions.map((action) => (
-        <Link key={action.name} href={action.href}>
-          <div className="p-6 cursor-pointer hover:shadow-md transition-shadow">
-            <div className={`w-12 h-12 ${action.color} rounded-lg flex items-center justify-center mb-4`}>
-              
-            </div>
-            <h3 className="font-medium">{action.name}</h3>
-          </div>
-        </Link>
-      ))}
-    </div> */}
-
       <h1 className="text-2xl xl:text-3xl font-bold pl-6 py-6 text-center">
         Admin Dashboard!
       </h1>
@@ -201,7 +177,9 @@ const ManageAccount = () => {
               <h2 className="text-xl  xl:text-3xl  font-bold">
                 Manage My Account
               </h2>
-              <img src={pen} alt="edit" className="w-5 h-5" />
+              <Link to="/manageAccount/update-profile">
+                <img src={pen} alt="edit" className="w-5 h-5" />
+              </Link>
             </div>
 
             {/* Profile Info */}
@@ -218,7 +196,7 @@ const ManageAccount = () => {
                   />
                   <div>
                     <h3 className="font-semibold text-lg  xl:text-xl  text-center md:text-left">
-                      {userInfo?.name?.firstName}   {userInfo?.name?.lastName}
+                      {userInfo?.name?.firstName} {userInfo?.name?.lastName}
                     </h3>
                     <p className="text-gray-500 text-base  xl:text-lg  text-center md:text-left">
                       {userInfo?.email}
@@ -265,17 +243,23 @@ const ManageAccount = () => {
                   Phone Number
                 </p>
 
-                <p className="text-[14px] "> {userInfo?.phoneNumber
+                <p className="text-[14px] ">
+                  {" "}
+                  {userInfo?.phoneNumber
                     ? userInfo?.phoneNumber
-                    : "No Number Added"}</p>
+                    : "No Number Added"}
+                </p>
               </div>
               <div className="flex flex-col justify-center items-center space-y-1">
                 <img src={location} alt="phone" className="w-6 h-7" />
                 <p className="text-gray-700 text-[15px] font-bold">Location</p>
 
-                <p className="text-[14px] ">     {userInfo?.addresses[0]?.country
+                <p className="text-[14px] ">
+                  {" "}
+                  {userInfo?.addresses[0]?.country
                     ? userInfo?.addresses[0]?.country
-                    : "No Location Added"}</p>
+                    : "No Location Added"}
+                </p>
               </div>
             </div>
 
@@ -284,7 +268,10 @@ const ManageAccount = () => {
               <h3 className="text-[12px] xl:text-[18px] font-bold text-gray-700">
                 Address Book
               </h3>
-              <button className="text-green-500 text-sm border-l pl-1">
+              <button
+                onClick={() => setIsOpenEditAddress(true)}
+                className="text-green-500 text-sm border-l pl-1"
+              >
                 EDIT
               </button>
             </div>
@@ -292,21 +279,21 @@ const ManageAccount = () => {
             {/* Address Book List */}
             <div className="">
               <div className="grid md:grid-cols-2 gap-4 pt-2">
-                {totalAddress?.map((address,i) => (
+                {totalAddress?.map((address, i) => (
                   <div
                     key={i}
                     className={`${i === 1 ? "border-r" : ""} rounded-lg py-2`}
                   >
-                   { address?.isDefault === true &&
-                    <p className="text-gray-500 text-[12px] xl:text-[16px] mb-2">
-                      DEFAULT SHIPPING ADDRESS
-                    </p>
-                }
+                   
                     <h4 className="font-bold text-gray-700 mb-2  xl:text-[24px]">
-                      Address {i+1}
+                      Address {i + 1} <span> {address?.isDefault && (
+                          <span className="ml-2 text-xs bg-teal-100 text-teal-600 px-2 py-1 rounded">
+                            DEFAULT
+                          </span>
+                        )}</span>
                     </h4>
                     <p className="text-gray-600 text-[14px] xl:text-[17px]">
-                      Street:  {address.street}
+                      Street: {address.street}
                       <br />
                       City: {address.city}
                       <br />
@@ -317,6 +304,11 @@ const ManageAccount = () => {
                   </div>
                 ))}
               </div>
+              {totalAddress?.length === 0 && (
+                <h4 className="font-bold text-gray-700 xl:text-xl ">
+                  No Address Available to show
+                </h4>
+              )}
             </div>
 
             <div className="lg:hidden mt-8">
@@ -369,7 +361,9 @@ const ManageAccount = () => {
           <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-lg">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl xl:text-3xl font-bold">Hello   {userInfo?.name?.firstName}   {userInfo?.name?.lastName} !</h1>
+                <h1 className="text-2xl xl:text-3xl font-bold">
+                  Hello {userInfo?.name?.firstName} {userInfo?.name?.lastName} !
+                </h1>
                 <p className="text-[16px] xl:text-[18px] text-gray-500 pt-2">
                   Here's An Overview Of Your Recent Activities.
                 </p>
@@ -454,6 +448,9 @@ const ManageAccount = () => {
             ))}
           </div>
         </div>
+        {isOpenEditAddress && (
+          <AddOrUpdateAddress setIsOpenEditAddress={setIsOpenEditAddress} />
+        )}
         {/* </div> */}
       </div>
     </>

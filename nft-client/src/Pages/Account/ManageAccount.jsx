@@ -111,6 +111,11 @@ const ManageAccount = () => {
                 </div>
               ))}
             </div>
+            {userInfo?.addresses?.length === 0 && (
+          <h4 className="font-bold text-gray-700 xl:text-lg ">
+            No Address Available to show
+          </h4>
+        )}
           </div>
         </div>
 

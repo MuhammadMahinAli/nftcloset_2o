@@ -1,11 +1,14 @@
 import {
+  addMemberAddressService,
   createMemberService,
+  deleteMemberAddressService,
   getAllMemberByFilterService,
   getAllMemberService,
   getSingleMember,
   resendEmailService,
   resetPasswordService,
   sendForgetPasswordEmailService,
+  updateMemberAddressService,
   updateMemberCoverPicService,
   updateMemberInfoService,
   updateMemberProfilePicService,
@@ -183,6 +186,53 @@ export const updateMemberById = catchAsync(async (req, res) => {
   });
 });
 
+//----update address
+
+export const updateMemberAddress = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const addressId = req.params.addressId;
+  const updateData = req.body;
+  
+  const updatedMember = await updateMemberAddressService(id, addressId, updateData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Address updated successfully!",
+    data: updatedMember,
+  });
+});
+
+// add new address
+
+export const addMemberAddress = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const addressData = req.body;
+  
+  const result = await addMemberAddressService(id, addressData);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Address added successfully!",
+    data: result,
+  });
+});
+
+//--- delete address
+export const deleteMemberAddress = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const addressId = req.params.addressId;
+  
+  const result = await deleteMemberAddressService(id, addressId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Address deleted successfully!",
+    data: result,
+  });
+});
 //------------- update cover pic
 
 export const updateMemberCoverPicController = catchAsync(async (req, res) => {

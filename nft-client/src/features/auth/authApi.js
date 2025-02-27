@@ -78,6 +78,31 @@ export const authApi = apiSlice.injectEndpoints({
       }),
       invalidateTags: ["SingleMember"],
     }),
+    updateAddress: builder.mutation({
+      query: ({ id, addressId, data }) => ({
+        url: `/member/${id}/address/${addressId}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidateTags: ["SingleMember"]
+    }),
+    // Add to your existing authApi endpoints
+addAddress: builder.mutation({
+  query: ({ id, data }) => ({
+    url: `/member/${id}/address`,
+    method: 'POST',
+    body: data,
+  }),
+  invalidatesTags: ['SingleMember']
+}),
+
+deleteAddress: builder.mutation({
+  query: ({ id, addressId }) => ({
+    url: `/member/${id}/address/${addressId}`,
+    method: 'DELETE',
+  }),
+  invalidatesTags: ['SingleMember']
+}),
     updateUserInfo: builder.mutation({
       query: ({id, data}) => ({
         url: `/member/updateUserInfo/${id}`,
@@ -132,5 +157,5 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
- export const {useResetPasswordMutation, useUpdatePasswordMutation,useLoginMutation,useSignUpMutation,useUpdateCoverPicMutation, useUpdateUserInfoMutation,useUpdateProfilePicMutation,useGetAllUsersQuery,useGetFilteredUsersQuery,useGetSingleUserQuery,useDeleteUserMutation,  useVerifyEmailQuery} = authApi;
+ export const {useAddAddressMutation,useDeleteAddressMutation,useUpdateAddressMutation,useResetPasswordMutation, useUpdatePasswordMutation,useLoginMutation,useSignUpMutation,useUpdateCoverPicMutation, useUpdateUserInfoMutation,useUpdateProfilePicMutation,useGetAllUsersQuery,useGetFilteredUsersQuery,useGetSingleUserQuery,useDeleteUserMutation,  useVerifyEmailQuery} = authApi;
 

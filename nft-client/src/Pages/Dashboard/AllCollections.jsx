@@ -142,7 +142,10 @@ const AllCollections = () => {
 
             <div className="absolute top-2 right-2 flex gap-3 p-3">
               <button size="icon">
-                <FiEdit3 className=" text-blue-500 text-[23px] lg:text-2xl" />
+                <Link to={`/manageAccount/update-collection/${product._id}`}>
+                <FiEdit3 className=" text-blue-900 text-[23px] lg:text-2xl" />
+                </Link>
+              
               </button>
               <button
                 size="icon"

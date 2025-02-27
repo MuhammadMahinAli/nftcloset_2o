@@ -25,7 +25,8 @@ import LandingLayout from "../Layout/LandingLayout";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import AllCollection from "../Pages/Collections/AllCollection";
 import CollectionDetails from "../Pages/Collections/CollectionDetails";
-import AddProduct from "../Pages/Dashboard/AddANewProduct";
+import AddProduct from "../Pages/NFT/AddProduct/AddProduct";
+import UpdateACollection from "../Pages/Dashboard/UpdateACollection";
 
 
 
@@ -85,6 +86,11 @@ const router = createBrowserRouter([
         path: "/manageAccount/home-page-controls",
         element: <HomePageControl/>,
       },
+      {
+        path: "/manageAccount/update-collection/:id",
+        element: <UpdateACollection/>,
+        loader: ({ params }) => fetch(`http://localhost:4000/api/v1/collection/getCollectionById/${params.id}`)
+      },
 ]},
   {
     path: "/",
@@ -133,14 +139,18 @@ const router = createBrowserRouter([
         path: "/orders",
         element: <OrderForm />,
       },
-     
+      {
+        path: "/tests",
+        element: <AddProduct />,
+      },
+    
     ],
   },
 
-  {
-    path: "/test",
-    element: <ProductDetails />,
-  },
+  // {
+  //   path: "/test",
+  //   element: <ProductDetails />,
+  // },
 
  
   {

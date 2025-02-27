@@ -192,6 +192,100 @@ export const updateMemberProfilePicService = async (userId, data) => {
   }
 };
 
+//-----update address
+
+export const updateMemberAddressService = async (id, addressId, data) => {
+  try {
+    const member = await Member.findById(id);
+    if (!member) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Member not found");
+    }
+
+    // If setting as default, unset any existing default address
+    if (data.isDefault) {
+      await Member.updateOne(
+        { _id: id },
+        { $set: { "addresses.$[].isDefault": false } }
+      );
+    }
+
+    const updatedMember = await Member.findOneAndUpdate(
+      { 
+        _id: id,
+        "addresses._id": addressId 
+      },
+      {
+        $set: {
+          "addresses.$": {
+            ...data,
+            _id: addressId // Preserve the original address ID
+          }
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedMember) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "Failed to update address"
+      );
+    }
+
+    return updatedMember;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
+  }
+};
+// Add new address
+export const addMemberAddressService = async (id, addressData) => {
+  try {
+    // If setting as default, unset any existing default
+    if (addressData.isDefault) {
+      await Member.updateOne(
+        { _id: id },
+        { $set: { "addresses.$[].isDefault": false } }
+      );
+    }
+
+    const updatedMember = await Member.findByIdAndUpdate(
+      id,
+      { 
+        $push: { addresses: addressData } 
+      },
+      { new: true }
+    );
+
+    if (!updatedMember) {
+      throw new ApiError(httpStatus.BAD_REQUEST, "Failed to add address");
+    }
+
+    return updatedMember;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
+  }
+};
+
+// Delete address
+export const deleteMemberAddressService = async (id, addressId) => {
+  try {
+    const updatedMember = await Member.findByIdAndUpdate(
+      id,
+      { 
+        $pull: { addresses: { _id: addressId } } 
+      },
+      { new: true }
+    );
+
+    if (!updatedMember) {
+      throw new ApiError(httpStatus.BAD_REQUEST, "Failed to delete address");
+    }
+
+    return updatedMember;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
+  }
+};
 //--------------- update cover pic 
 export const updateMemberCoverPicService = async (userId, data) => {
   try {
