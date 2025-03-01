@@ -27,6 +27,7 @@ import AllCollection from "../Pages/Collections/AllCollection";
 import CollectionDetails from "../Pages/Collections/CollectionDetails";
 import AddProduct from "../Pages/NFT/AddProduct/AddProduct";
 import UpdateACollection from "../Pages/Dashboard/UpdateACollection";
+import UpdateAProduct from "../Pages/Dashboard/UpdateAProduct";
 
 
 
@@ -90,6 +91,11 @@ const router = createBrowserRouter([
         path: "/manageAccount/update-collection/:id",
         element: <UpdateACollection/>,
         loader: ({ params }) => fetch(`http://localhost:4000/api/v1/collection/getCollectionById/${params.id}`)
+      },
+      {
+        path: "/manageAccount/update-product/:id",
+        element: <UpdateAProduct/>,
+        loader: ({ params }) => fetch(`http://localhost:4000/api/v1/product/getProductById/${params.id}`)
       },
 ]},
   {

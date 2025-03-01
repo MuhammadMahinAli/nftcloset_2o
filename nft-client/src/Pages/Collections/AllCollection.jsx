@@ -1,6 +1,3 @@
-import { FaPlus } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FiEdit3 } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 import banner1280 from "../../assets/nft-image/banner1280.jpg";

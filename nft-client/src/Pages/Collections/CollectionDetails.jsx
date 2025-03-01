@@ -34,15 +34,58 @@ const CollectionDetails = () => {
 
 
   const publishDatee = new Date(publishDate);
+  const toDatee = new Date(toDate);
 
+  // const [timeLeft, setTimeLeft] = useState(() => {
+  //   const now = new Date();
+  //   const difference = publishDatee.getTime() - now.getTime();
+
+  //   if (difference <= 0) {
+  //     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  //   }
+
+  //   return {
+  //     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+  //     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+  //     minutes: Math.floor((difference / (1000 * 60)) % 60),
+  //     seconds: Math.floor((difference / 1000) % 60),
+  //   };
+  // });
+
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     const now = new Date();
+  //     const difference = publishDatee.getTime() - now.getTime();
+
+  //     if (difference <= 0) {
+  //       clearInterval(timer);
+  //       setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  //       return;
+  //     }
+
+  //     setTimeLeft({
+  //       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+  //       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+  //       minutes: Math.floor((difference / 1000 / 60) % 60),
+  //       seconds: Math.floor((difference / 1000) % 60),
+  //     });
+  //   }, 1000);
+
+  //   return () => clearInterval(timer);
+  // }, []);
+ 
+ 
   const [timeLeft, setTimeLeft] = useState(() => {
     const now = new Date();
-    const difference = publishDatee.getTime() - now.getTime();
-
+    // For Scheduled collections, calculate time until publish date
+    // For Instant collections with active offer, calculate time until offer ends
+    const targetDate = publishType === "Scheduled" ? publishDatee : toDatee;
+    const difference = targetDate.getTime() - now.getTime();
+  
     if (difference <= 0) {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
-
+  
     return {
       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -50,28 +93,30 @@ const CollectionDetails = () => {
       seconds: Math.floor((difference / 1000) % 60),
     };
   });
-
+  
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
-      const difference = publishDatee.getTime() - now.getTime();
-
+      const targetDate = publishType === "Scheduled" ? publishDatee : toDatee;
+      const difference = targetDate.getTime() - now.getTime();
+  
       if (difference <= 0) {
         clearInterval(timer);
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
-
+  
       setTimeLeft({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
+        minutes: Math.floor((difference / 1000 * 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
       });
     }, 1000);
-
+  
     return () => clearInterval(timer);
-  }, []);
+  }, [publishType, publishDatee, toDatee]);
+ 
   const timeBlocks = [
     { label: "DAYS", value: timeLeft.days },
     { label: "HOURS", value: timeLeft.hours },
@@ -131,7 +176,7 @@ const CollectionDetails = () => {
       <div className="">
         <div className="w-full  flex justify-center items-center">
           <img
-            src={banner1280}
+            src={displayImage}
             alt={collectionName}
             className="w-full  pt-2 object-cover rounded-2xl"
           />
@@ -144,32 +189,61 @@ const CollectionDetails = () => {
             {discount}% discount{" "}
           </p>
           <p className="text-[15px] xl:text-[16px] text-gray-500 capitalize">
-            {new Date() > publishDatee
-              ? timeBlocks[0].value === 0
-                ? "Available now"
-                : `${timeBlocks[0].value} days remaining`
-              : timeBlocks[0].value === 0
-              ? "Available today"
-              : timeBlocks[0].value === 1
-              ? "Available tomorrow"
-              : `Available in ${timeBlocks[0].value} days`}
-          </p>
-
-          {publishType !== "Instant" && (
-            <div className="flex gap-4 py-4">
-              {timeBlocks.map((block, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center justify-center px-1 w-20 h-16 bg-gray-800 text-white rounded-lg"
-                >
-                  <span className="text-[14px] md:text-xl font-bold">
-                    {block.value}
-                  </span>
-                  <span className="text-[13px] md:text-sm">{block.label}</span>
-                </div>
-              ))}
-            </div>
-          )}
+  {publishType === "Scheduled" ? (
+    // For Scheduled collections
+    new Date() > publishDatee ? (
+      timeBlocks[0].value === 0 ? (
+        "Collection is now available"
+      ) : (
+        `Collection will be available in ${timeBlocks[0].value} days`
+      )
+    ) : timeBlocks[0].value === 0 ? (
+      "Collection will launche in"
+    ) : timeBlocks[0].value === 1 ? (
+      "Collection will launche in"
+    ) : (
+      `Collection launches in ${timeBlocks[0].value} days`
+    )
+  ) : (
+    // For Instant collections
+    new Date() <= toDatee ? (
+      <>
+        <span className="block mb-1">This offer is currently available!</span>
+        {timeBlocks[0].value === 0 ? (
+          timeBlocks[1].value === 0 ? (
+            timeBlocks[2].value === 0 ? (
+              "Hurry! Offer ends in less than a minute"
+            ) : (
+              `Hurry! Offer ends in ${timeBlocks[2].value} minutes`
+            )
+          ) : (
+            `Limited time offer - ends in ${timeBlocks[1].value} hours ${timeBlocks[2].value} minutes`
+          )
+        ) : (
+          `Special offer available for ${timeBlocks[0].value} days and ${timeBlocks[1].value} hours`
+        )}
+      </>
+    ) : (
+      "This offer has ended"
+    )
+  )}
+</p>
+          {((publishType === "Scheduled") || 
+  (publishType === "Instant" && new Date() <= toDatee)) && (
+  <div className="flex gap-4 py-4">
+    {timeBlocks.map((block, index) => (
+      <div
+        key={index}
+        className="flex flex-col items-center justify-center px-1 w-20 h-16 bg-gray-800 text-white rounded-lg"
+      >
+        <span className="text-[14px] md:text-xl font-bold">
+          {block.value}
+        </span>
+        <span className="text-[13px] md:text-sm">{block.label}</span>
+      </div>
+    ))}
+  </div>
+)}
         </div>
         {/* right */}
         <div className="w-full p-2 lg:p-0 space-y-1 ">
@@ -206,7 +280,7 @@ const CollectionDetails = () => {
               onMouseEnter={() => toggleActive(i)}
               onMouseLeave={toggleInactive}
               key={product.id}
-              className="pb-12 md:pb-14 3xl:pb-[75px] relative overflow-hidden bg-white rounded-xl shadow-xl"
+              className="pb-12 md:pb-14 3xl:pb-[60px] relative overflow-hidden bg-white rounded-xl shadow-xl"
             >
               <>
                 <div className="flex justify-center items-center py-4 h-[65%] lg:h-[70%] xl:h-[65%] 2xl:h-[70%] 3xl:h-[72%] relative">
@@ -223,7 +297,7 @@ const CollectionDetails = () => {
                 </div>
 
                 <div className="p-3 space-y-1 md:space-y-2 border-t border-gray-300">
-                  <h3 className="font-bold text-lg md:text-lg text-gray-700">
+                  <h3 className="font-bold text-lg md:text-lg text-gray-700 capitalize">
                     {product.productId.productName}
                   </h3>
                   <div className="flex items-center gap-2">
@@ -242,29 +316,7 @@ const CollectionDetails = () => {
                       </p>
                     )}
                   </div>
-                  {isOfferValid && (
-                    <p className="text-[14px] text-orange-500 font-bold flex items-center gap-1">
-                      {/* <span>Limited time offer</span>
-    <span className="text-[12px]">•</span> */}
-                      {(() => {
-                        const now = new Date();
-                        const diffTime = toDatee - now;
-                        const daysLeft = Math.ceil(
-                          diffTime / (1000 * 60 * 60 * 24)
-                        );
-
-                        return (
-                          <span className="text-[13px]">
-                            {daysLeft === 1
-                              ? "Offer Ends Today"
-                              : daysLeft === 2
-                              ? "Offer Ends Tomorrow"
-                              : `${daysLeft} days remaining`}
-                          </span>
-                        );
-                      })()}
-                    </p>
-                  )}
+            
                 </div>
               </>
               {isOpenIndex === i && (

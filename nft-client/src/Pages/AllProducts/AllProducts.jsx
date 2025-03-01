@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { FaPlus } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FiEdit3 } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { CiFilter } from "react-icons/ci";
@@ -99,11 +96,11 @@ const AllProducts = () => {
               </div>
 
               <div className="p-3  space-y-1 md:space-y-2 border-t border-gray-300">
-                <h3 className="font-bold text-xl md:text-xl text-gray-700">
+                <h3 className="font-bold text-xl md:text-xl text-gray-700 capitalize">
                   {product.productName}
                 </h3>
                 <p className="text-[18px] md:text-lg text-gray-500">
-                  {product.price}
+                  ${product.price}
                 </p>
               </div>
             </Link>

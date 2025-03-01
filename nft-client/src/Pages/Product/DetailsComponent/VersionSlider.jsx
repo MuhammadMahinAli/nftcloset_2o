@@ -18,6 +18,7 @@ import threeD from "../../../assets/nft-image/3d.png";
 import { useEffect, useState } from "react";
 
 const VersionSlider = ({digitalAssets,displayImage}) => {
+  console.log(digitalAssets);
   const [activeIndex, setActiveIndex] = useState(0);
   const [topSwiper, setTopSwiper] = useState(null);
   const [bottomSwiper, setBottomSwiper] = useState(null);
@@ -171,18 +172,46 @@ const VersionSlider = ({digitalAssets,displayImage}) => {
     },
   ];
 
+
+  // Create a mapping object for feature text to digitalAssets keys
+const featureKeyMap = {
+  "View In AR": "arversion",
+  "View In VR": "vrversion",
+  "3D File": "dfile",
+  "Technical design book": "technicaldesignbook",
+  "Virtual lobby access key": "virtuallobbyaccesskey",
+  "Ownership of story": "ownershipofstory",
+  "Certification": "certification",
+  "Sandbox wearable": "sandboxwearable",
+  "VR Chat Wearable": "vrchatwearable",
+  "Animated": "animated",
+  "Recroom wearable": "recroom",
+  // Add other mappings as needed
+};
+
+// Filter available features using the mapping
+const availableFeatures = features.filter(feature => {
+  const digitalAssetsKey = featureKeyMap[feature.text];
+  return digitalAssetsKey && digitalAssets[digitalAssetsKey] && digitalAssets[digitalAssetsKey] !== "";
+});
+
+// Filter slider data using the same mapping
+const availableSliderData = sliderData.filter(slide => {
+  const digitalAssetsKey = featureKeyMap[slide.title];
+  return digitalAssetsKey && digitalAssets[digitalAssetsKey] && digitalAssets[digitalAssetsKey] !== "";
+});
     // ... keep all your imports and initial states ...
   
-    // Filter available features and slider data based on digitalAssets
-    const availableFeatures = features.filter(feature => {
-      const featureKey = feature.text.toLowerCase().replace(/\s+/g, '');
-      return digitalAssets[featureKey] && digitalAssets[featureKey] !== "";
-    });
+    // // Filter available features and slider data based on digitalAssets
+    // const availableFeatures = features.filter(feature => {
+    //   const featureKey = feature.text.toLowerCase().replace(/\s+/g, '');
+    //   return digitalAssets[featureKey] && digitalAssets[featureKey] !== "";
+    // });
   
-    const availableSliderData = sliderData.filter(slide => {
-      const slideKey = slide.title.toLowerCase().replace(/\s+/g, '');
-      return digitalAssets[slideKey] && digitalAssets[slideKey] !== "";
-    });
+    // const availableSliderData = sliderData.filter(slide => {
+    //   const slideKey = slide.title.toLowerCase().replace(/\s+/g, '');
+    //   return digitalAssets[slideKey] && digitalAssets[slideKey] !== "";
+    // });
   
     // Reset activeIndex if it's out of bounds after filtering
     useEffect(() => {

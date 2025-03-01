@@ -8,6 +8,6 @@ export const apiSlice = createApi({
     //https://test-two-22w0.onrender.com/api/v1 http://localhost:3000/api/v1
   }),
   endpoints: (builder) => ({}),
-  tagTypes: ["Memmer","Product", "Collection"],
+  tagTypes: ["Memmer","Product", "Collection","HomePageControl"],
 });
 

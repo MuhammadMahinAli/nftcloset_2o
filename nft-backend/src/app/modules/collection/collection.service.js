@@ -29,13 +29,21 @@ export const getAllCollectionService = async () => {
 };
 
 //---------- update collection
+
+
+
+// updateCollectionInfoService function
 export const updateCollectionInfoService = async (id, data) => {
-  //console.log(id,data);
   try {
     const collection = await Collection.findById(id);
     if (!collection) {
       throw new ApiError(httpStatus.NOT_FOUND, "Collection not found");
     }
+
+    // Format products array to match the schema
+    const formattedProducts = data.products.map(product => ({
+      productId: product.productId._id // Just the ObjectId reference
+    }));
 
     const updatedData = {
       collectionName: data.collectionName,
@@ -46,7 +54,7 @@ export const updateCollectionInfoService = async (id, data) => {
       toDate: data.toDate,
       displayImage: data.displayImage,
       discount: data.discount,
-      products: data.products,
+      products: formattedProducts,
       storyLink: data.storyLink,
     };
 

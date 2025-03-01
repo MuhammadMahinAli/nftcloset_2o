@@ -77,7 +77,10 @@ const AllProduct = () => {
               </div>
               <div className="absolute top-2 right-2 flex gap-3 py-1">
                 <button size="icon">
+                  <Link to={`/manageAccount/update-product/${product?._id}`}>
                   <FiEdit3 className=" text-blue-500 text-2xl" />
+                  </Link>
+              
                 </button>
                 <button onClick={()=>handleDelete(product?._id)} size="icon" className="text-red-500 text-xl">
                   <FaRegTrashCan />
