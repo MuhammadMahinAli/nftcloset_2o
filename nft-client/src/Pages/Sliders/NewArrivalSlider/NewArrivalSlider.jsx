@@ -1,47 +1,13 @@
 import { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useGetAllHomePageControlQuery } from "../../../features/homePageControl/homePageControlApi";
 
 const NewArrivalSlider = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 2,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 3,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 4,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 5,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-    {
-      id: 6,
-      name: "Blue Jacket",
-      price: "40 $",
-      image: "https://i.ibb.co.com/k0RjY1J/s1.jpg",
-    },
-  ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const { data: getAllHomePageControl } = useGetAllHomePageControlQuery();
+  const getAllHomePageControlItem = getAllHomePageControl?.data;
+  const getNewArrival = getAllHomePageControlItem?.newArrivalProducts;
 
   // Replace slides array with products array and calculate slides based on viewport
   const getItemsPerSlide = () => {
@@ -64,7 +30,7 @@ const NewArrivalSlider = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const totalSlides = Math.ceil(products.length / itemsPerSlide);
+  const totalSlides = Math.ceil(getNewArrival?.length / itemsPerSlide);
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -103,29 +69,29 @@ const NewArrivalSlider = () => {
                 key={slideIndex}
                 className="w-full h-full flex-shrink-0 flex gap-4 py-3"
               >
-                {products
+                {getNewArrival
                   .slice(
                     slideIndex * itemsPerSlide,
                     (slideIndex + 1) * itemsPerSlide
                   )
-                  .map((product) => (
+                  ?.map((product) => (
                     <div
                       key={product.id}
                       className="flex-1 h-full bg-white hover:bg-[#edecec] rounded-lg overflow-hidden shadow-xl hover:shadow-md transition-shadow duration-300"
                     >
                       <div className="relative  overflow-hidden flex justify-center items-center">
                         <img
-                          src={product.image}
-                          alt={product.name}
+                          src={product?.product?.displayImage}
+                          alt={product?.product?.productName}
                           className="w-40 xl:w-44 3xl:w-60 py-3 h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                       <div className="p-4 border-t border-gray-300">
-                        <h3 className="text-gray-800 font-bold text-xl xl:text-2xl mb-2">
-                          {product.name}
+                        <h3 className="text-gray-800 font-bold text-xl xl:text-2xl mb-2 capitalize">
+                          {product?.product?.productName}
                         </h3>
                         <p className="text-gray-500 font-semibold lg:text-lg ">
-                          {product.price}
+                          ${product?.product?.price}
                         </p>
                       </div>
                     </div>

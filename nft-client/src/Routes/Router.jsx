@@ -28,6 +28,7 @@ import CollectionDetails from "../Pages/Collections/CollectionDetails";
 import AddProduct from "../Pages/NFT/AddProduct/AddProduct";
 import UpdateACollection from "../Pages/Dashboard/UpdateACollection";
 import UpdateAProduct from "../Pages/Dashboard/UpdateAProduct";
+import UpdateHomepageContent from "../Pages/Dashboard/UpdateHomepageContent";
 
 
 
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
       {
         path: "/manageAccount/home-page-controls",
         element: <HomePageControl/>,
+      },
+      {
+        path: "/manageAccount//update-home-page-content",
+        element: <UpdateHomepageContent/>,
       },
       {
         path: "/manageAccount/update-collection/:id",

@@ -1303,7 +1303,7 @@ const UpdateAProduct = () => {
 
           <div className="float-right my-6">
             <button className="w-full text-xl bg-[#2CBA7A] text-white py-2 px-4 rounded hover:bg-[#42bd86]">
-              Add Product
+              Update Product
             </button>
           </div>
         </form>

@@ -6,31 +6,34 @@ const HomePageControlSchema = new Schema(
    
     BannerCollection: [
       {
-        productId: {
+        collection: {
           type: Schema.Types.ObjectId,
           ref: "Collection",
-          required: true,
+      
         },
       },
     ],
     bestProducts: [
       {
-        productId: {
+        product: {
           type: Schema.Types.ObjectId,
           ref: "Product",
-          required: true,
+        
         },
       },
     ],
     newArrivalProducts: [
       {
-        productId: {
+        product: {
           type: Schema.Types.ObjectId,
           ref: "Product",
-          required: true,
+ 
         },
       },
     ],
+    fofLabLink:{
+      type:String
+    }
 
   },
   {

@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import { catchAsync } from "../../../utils/catchAsync.js";
 import { sendResponse } from "../../../utils/sendResponse.js";
-import { addHomePageControlService, getAllHomePageControlService } from "./homePageControl.service.js";
+import { addHomePageControlService, getAllHomePageControlService, updateHomePageControlInfoService } from "./homePageControl.service.js";
 
 
 
@@ -32,16 +32,16 @@ export const addHomePageControlController = catchAsync(async (req, res, next) =>
     });
   });
 
-  //---------------- update collection
+  //---------------- update updateHomePageControlInfo
     
-    // export const updateCollectionInfoController = catchAsync(async (req, res) => {
-    //   const data = req.body;
+    export const updateHomePageControlInfoController = catchAsync(async (req, res) => {
+      const data = req.body;
 
-    //   const updatedCollection = await updateCollectionInfoService(req.params.id, data);
-    //   sendResponse(res, {
-    //     statusCode: httpStatus.OK,
-    //     success: true,
-    //     message: "Collection information updated successfully!",
-    //     data: updatedCollection,
-    //   });
-    // });
+      const updatedCollection = await updateHomePageControlInfoService(req.params.id, data);
+      sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "HomePage Content is updated successfully!",
+        data: updatedCollection,
+      });
+    });

@@ -22,8 +22,10 @@ export const addHomePageControlService = async (homePageControlInfo) => {
 
 //----- get all HomePageControl
 export const getAllHomePageControlService = async () => {
-  const homePageControl = await HomePageControl.find({})
-    .populate("products.productId", "productName displayImage price buyingLink")
+  const homePageControl = await HomePageControl.findOne({})
+    .populate("BannerCollection.collection", "collectionName displayImage")
+    .populate("newArrivalProducts.product", "productName displayImage price buyingLink")
+    .populate("bestProducts.product", "productName displayImage price buyingLink")
     .sort({ createdAt: -1 });
   return homePageControl;
 };
@@ -33,48 +35,51 @@ export const getAllHomePageControlService = async () => {
 
 
 // updateHomePageControlInfoService function
-// export const updateHomePageControlInfoService = async (id, data) => {
-//   try {
-//     const collection = await HomePageControl.findById(id);
-//     if (!collection) {
-//       throw new ApiError(httpStatus.NOT_FOUND, "Collection not found");
-//     }
+export const updateHomePageControlInfoService = async (id, data) => {
+  try {
+    const homePageControl = await HomePageControl.findById(id);
+    if (!homePageControl) {
+      throw new ApiError(httpStatus.NOT_FOUND, "homePageControl not found");
+    }
 
-//     // Format products array to match the schema
-//     const formattedProducts = data.products.map(product => ({
-//       productId: product.productId._id // Just the ObjectId reference
-//     }));
+    // Format products array to match the schema
+    const formattedCollection = data.BannerCollection.map(pt => ({
+      collection: pt.collection._id // Just the ObjectId reference
+    }));
 
-//     const updatedData = {
-//       collectionName: data.collectionName,
-//       collectionDescription: data.collectionDescription,
-//       publishType: data.publishType,
-//       publishDate: data.publishDate,
-//       fromDate: data.fromDate,
-//       toDate: data.toDate,
-//       displayImage: data.displayImage,
-//       discount: data.discount,
-//       products: formattedProducts,
-//       storyLink: data.storyLink,
-//     };
+    // Format products array to match the schema
+    const formattedBestProducts = data.bestProducts.map(pt => ({
+      product: pt.product._id // Just the ObjectId reference
+    }));
+    // Format products array to match the schema
+    const formattedNewProducts = data.newArrivalProducts.map(pt => ({
+      product: pt.product._id // Just the ObjectId reference
+    }));
 
-//     const updatedCollection = await Collection.findByIdAndUpdate(
-//       id,
-//       { $set: updatedData },
-//       { new: true }
-//     );
+    const updatedData = {
+      BannerCollection: formattedCollection,
+      newArrivalProducts: formattedNewProducts,
+      bestProducts: formattedBestProducts,
+      fofLabLink: data.fofLabLink,
+    };
 
-//     if (!updatedCollection) {
-//       throw new ApiError(
-//         httpStatus.BAD_REQUEST,
-//         "Failed to update collection information"
-//       );
-//     }
+    const updatedHomePage = await HomePageControl.findByIdAndUpdate(
+      id,
+      { $set: updatedData },
+      { new: true }
+    );
 
-//     return updatedCollection;
-//   } catch (error) {
-//     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
-//   }
-// };
+    if (!updatedHomePage) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "Failed to update HomePage information"
+      );
+    }
+
+    return updatedHomePage;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
+  }
+};
 
 

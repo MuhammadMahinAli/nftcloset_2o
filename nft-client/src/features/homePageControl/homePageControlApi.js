@@ -30,9 +30,9 @@ export const homePageControlApi = apiSlice.injectEndpoints({
     // }),
  
 
-    updateHomePageControlInfo: builder.mutation({
+    updateHomePageContent: builder.mutation({
       query: ({id, data}) => ({
-        url: `/homePageControl/updateHomePageControlInfo/${id}`,
+        url: `/homePageControl/updateHomePageContent/${id}`,
         method: "PUT",
         body: data,
       }),
@@ -50,6 +50,6 @@ export const homePageControlApi = apiSlice.injectEndpoints({
   }),
 });
 
- export const {useAddHomePageControlMutation, useGetAllHomePageControlQuery,useUpdateHomePageControlInfoMutation, useDeleteHomePageControlMutation } = homePageControlApi;
+ export const {useAddHomePageControlMutation, useGetAllHomePageControlQuery,useUpdateHomePageContentMutation, useDeleteHomePageControlMutation } = homePageControlApi;
 
 // useGetAllPostQuery   useDeleteFriendRequestMutation ,useGetAllSentPendingFriendRequestQuery,useGetAllStatusFriendRequestQuery, useGetFriendRequestQuery,useGetAcceptedFriendRequestQuery, useGetOthersAcceptedFriendRequestQuery,useUpdateFriendRequestStatusMutation

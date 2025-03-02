@@ -1,35 +1,28 @@
 import { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useGetAllHomePageControlQuery } from "../../../features/homePageControl/homePageControlApi";
 
 const CollectionSlider = () => {
+
+ 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const { data: getAllHomePageControl } = useGetAllHomePageControlQuery();
+  const getAllHomePageControlItem = getAllHomePageControl?.data;
+  const getFeaturedCollection = getAllHomePageControlItem?.BannerCollection;
 
-  const slides = [
-    {
-      image:
-        "https://img.freepik.com/free-vector/abstract-yellow-comic-zoom_1409-923.jpg",
-    },
-    {
-      image:
-        "https://img.freepik.com/free-photo/red-light-round-podium-black-background-mock-up_43614-950.jpg",
-    },
-    {
-      image:
-        "https://img.freepik.com/free-vector/paper-style-dynamic-lines-background_79603-1822.jpg",
-    },
-  ];
+ 
 
   const nextSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % getFeaturedCollection.length);
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + getFeaturedCollection.length) % getFeaturedCollection.length);
   };
 
   useEffect(() => {
@@ -49,10 +42,10 @@ const CollectionSlider = () => {
           className="flex transition-transform duration-700 ease-in-out h-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {slides.map((slide, index) => (
+          {getFeaturedCollection?.map((slide, index) => (
             <img
               key={index}
-              src={slide.image}
+              src={slide.collection.displayImage}
               alt={`Slide ${index + 1}`}
               className="w-full h-full object-cover flex-shrink-0"
             />
@@ -78,7 +71,7 @@ const CollectionSlider = () => {
 
       {/* Dots indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-        {slides.map((_, index) => (
+        {getFeaturedCollection?.map((_, index) => (
           <button
             key={index}
             onClick={() => {
