@@ -2,6 +2,14 @@ import { useState } from "react";
 import Cube from "../../icons/NFTIcon/Cube";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import RequestDetailsModal from "./RequestDetailsModal";
+import DashboardAllOrder from "./orders/DashboardAllOrder";
+import DashboardPendingOrder from "./orders/DashboardPendingOrder";
+import DashboardApprovedOrder from "./orders/DashboardApprovedOrder";
+import DashboardDeclinedOrder from "./orders/DashboardDeclinedOrder";
+import DashboardNotClaimedOrder from "./orders/DashboardNotClaimedOrder";
+import DashboardRecievedOrder from "./orders/DashboardRecievedOrder";
+import Swal from "sweetalert2";
+import { useSendDigitalAssetsEmailMutation } from "../../features/auth/authApi";
 
 const AllOrders = () => {
   // States for tabs
@@ -14,7 +22,7 @@ const AllOrders = () => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-
+  const [sendDigitalAssetsEmail] = useSendDigitalAssetsEmailMutation();
 
 
   const onClose = ()=>{
@@ -56,6 +64,61 @@ const AllOrders = () => {
     }
   };
 
+  function formatIsoDateToHumanReadable(isoDateString) {
+    const date = new Date(isoDateString);
+  
+  
+    if (isNaN(date.getTime())) {
+      return "";
+    }
+  
+  
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+  
+    const day = date.getDate(); 
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+  
+    return `${day} ${month}, ${year}`;
+  }
+
+  const handleSendAssetsByEmail = async (e, email, orderID, digitalAssets) => {
+    e.preventDefault(); 
+    try {
+      const result = await sendDigitalAssetsEmail({
+        email,
+        orderID,
+        digitalAssets,
+      }).unwrap();
+      alert(result.message);
+ 
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
+  };
+
+  const handlePendingOrder = () => {
+    Swal.fire({
+      icon: "info",
+      title: "Mission Failed!",
+      text: "Your Order is not approved yet.",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
   return (
     <div className="p-3 xs:p-4 md:p-7">
       <div className="flex justify-between items-center">
@@ -169,10 +232,10 @@ const AllOrders = () => {
           Received
         </li>
       </ul>
-      <h1 className="text-3xl font-bold pt-8">User Control</h1>
+      {/* <h1 className="text-3xl font-bold pt-8">User Control</h1>
       <div className="p-4 xs:p-6 rounded-2xl bg-[#f4f4f4] transition-colors duration-200 mt-6 md:mt-10">
         <div className="flex justify-between items-center  py-5">
-          {/* left */}
+          left
           <div className="flex items-center gap-2 xl:gap-6">
             <div className="px-3 py-1 bg-primary/10 text-primary text-sm dark:bg-primary/20">
               <Cube />
@@ -187,7 +250,7 @@ const AllOrders = () => {
             </div>
           </div>
 
-          {/* right */}
+          right
           <div className="flex justify-between items-center space-x-5">
             <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
               Confirm Reciept
@@ -235,11 +298,11 @@ const AllOrders = () => {
             The return/exchange window for this item is closed.
           </p>
         </div>
-      </div>
-      <h1 className="text-3xl font-bold pt-8">Admin Control</h1>
+      </div> */}
+      {/* <h1 className="text-3xl font-bold pt-8">Admin Control</h1>
       <div className="p-4 xs:p-6 rounded-2xl bg-[#f4f4f4] transition-colors duration-200 mt-6 md:mt-10">
         <div className="flex justify-between items-center  py-5">
-          {/* left */}
+          left 
           <div className="flex items-center gap-2 xl:gap-6">
             <div className="px-3 py-1 bg-primary/10 text-primary text-sm dark:bg-primary/20">
               <Cube />
@@ -254,11 +317,9 @@ const AllOrders = () => {
             </div>
           </div>
 
-          {/* right */}
+    right 
           <div className="flex justify-between items-center space-x-5">
-            {/* <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
-              Confirm Reciept
-            </button> */}
+           
 
             <p onClick={()=>setIsOpenModal(true)} className="text-sm xl:text-xl  text-gray-700">Details</p>
           </div>
@@ -302,20 +363,35 @@ const AllOrders = () => {
             The return/exchange window for this item is closed.
           </p>
         </div>
-      </div>
+      </div> */}
+      <div className="min-h-screen">
       {
         isOpenModal &&
         <RequestDetailsModal isOpenModal={isOpenModal} onClose={onClose} />
       }
       {/* Tab content sections    */}
-      {isAll && <div className="mt-4">All Orders Content</div>}
-      {isPending && <div className="mt-4">Pending Orders Content</div>}
-      {isApproved && <div className="mt-4">Approved Orders Content</div>}
-      {isDeclined && <div className="mt-4">Declined Orders Content</div>}
-      {isClaimed && <div className="mt-4">Claimed Orders Content</div>}
-      {isReceived && <div className="mt-4">Received Orders Content</div>}
+      {isAll && <div className="">
+        <DashboardAllOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
+        </div>}
+      {isPending && <div className="mt-4">
+        <DashboardPendingOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
+        </div>}
+      {isApproved && <div className="mt-4">
+        <DashboardApprovedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
+        </div>}
+      {isDeclined && <div className="mt-4">
+        <DashboardDeclinedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
+        </div>}
+      {isClaimed && <div className="mt-4">
+        <DashboardNotClaimedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
+        </div>}
+      {isReceived && <div className="mt-4">
+        <DashboardRecievedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
+        </div>}
+        </div>
     </div>
   );
 };
 
 export default AllOrders;
+

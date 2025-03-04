@@ -147,8 +147,9 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:4000/api/v1/product/getProductById/${params.id}`)
       },
       {
-        path: "/orders",
+        path: "/orders/:id",
         element: <OrderForm />,
+        loader: ({ params }) => fetch(`http://localhost:4000/api/v1/product/getProductById/${params.id}`)
       },
       {
         path: "/tests",

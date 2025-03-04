@@ -9,8 +9,16 @@ const OrderSchema = new Schema(
       required: true,
     },
     productInfo: {
-      metarial: { type: String },
+      material: { type: String },
       size: { type: String },
+      color:{ type: String },
+    },
+    deliveryAddress: {
+      homeAddress: { type: String },
+      country: { type: String },
+      city: { type: String },
+      street: { type: String },
+      isDefault: { type: Boolean },
     },
     orderedBy: {
       type: Schema.Types.ObjectId,

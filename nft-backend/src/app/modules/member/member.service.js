@@ -74,7 +74,7 @@ export const verifyEmailService = async (token) => {
     lastName: user.name.lastName,
     phoneNumber: user.phoneNumber,
     email: user.email,
-    uniqueId:user.uniqueId
+    uniqueId: user.uniqueId,
   };
 
   return userDetails;
@@ -133,9 +133,7 @@ export const getAllMemberService = async (filter, page = 1) => {
     ...filter, // Add dynamic filtering based on the request
   };
 
-  const members = await Member.find(query)
-    .skip(skip)
-    .limit(pageSize);
+  const members = await Member.find(query).skip(skip).limit(pageSize);
 
   const totalMembers = await Member.countDocuments(query);
 
@@ -146,7 +144,6 @@ export const getAllMemberService = async (filter, page = 1) => {
     currentPage: page,
   };
 };
-
 
 export const getSingleMember = async (id) => {
   const user = await Member.findOne({ _id: id });
@@ -210,26 +207,23 @@ export const updateMemberAddressService = async (id, addressId, data) => {
     }
 
     const updatedMember = await Member.findOneAndUpdate(
-      { 
+      {
         _id: id,
-        "addresses._id": addressId 
+        "addresses._id": addressId,
       },
       {
         $set: {
           "addresses.$": {
             ...data,
-            _id: addressId // Preserve the original address ID
-          }
-        }
+            _id: addressId, // Preserve the original address ID
+          },
+        },
       },
       { new: true }
     );
 
     if (!updatedMember) {
-      throw new ApiError(
-        httpStatus.BAD_REQUEST,
-        "Failed to update address"
-      );
+      throw new ApiError(httpStatus.BAD_REQUEST, "Failed to update address");
     }
 
     return updatedMember;
@@ -250,8 +244,8 @@ export const addMemberAddressService = async (id, addressData) => {
 
     const updatedMember = await Member.findByIdAndUpdate(
       id,
-      { 
-        $push: { addresses: addressData } 
+      {
+        $push: { addresses: addressData },
       },
       { new: true }
     );
@@ -271,8 +265,8 @@ export const deleteMemberAddressService = async (id, addressId) => {
   try {
     const updatedMember = await Member.findByIdAndUpdate(
       id,
-      { 
-        $pull: { addresses: { _id: addressId } } 
+      {
+        $pull: { addresses: { _id: addressId } },
       },
       { new: true }
     );
@@ -286,7 +280,7 @@ export const deleteMemberAddressService = async (id, addressId) => {
     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
   }
 };
-//--------------- update cover pic 
+//--------------- update cover pic
 export const updateMemberCoverPicService = async (userId, data) => {
   try {
     const member = await Member.findById(userId);
@@ -312,7 +306,7 @@ export const updateMemberCoverPicService = async (userId, data) => {
 //--------------- update user info
 
 export const updateMemberInfoService = async (userId, data) => {
-  console.log(userId,data);
+  console.log(userId, data);
   try {
     const member = await Member.findById(userId);
     if (!member) {
@@ -397,13 +391,13 @@ export const resetPasswordService = async (id, token, newPassword) => {
   // Hash the new password before saving
   //user.password = await bcrypt.hash(newPassword, 10);
   const hashedPassword = await bcrypt.hash(newPassword, 10);
-  console.log('Hashed password:', hashedPassword);
-  
+  console.log("Hashed password:", hashedPassword);
+
   user.password = hashedPassword;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpires = undefined;
   await user.save();
-  console.log('Password updated successfully');
+  console.log("Password updated successfully");
   return { message: "Password has been reset successfully." };
 };
 
@@ -418,7 +412,7 @@ export const getAllMemberByFilterService = async (page, limit, uniqueId) => {
       return { message: "No project matched with the provided uniqueId." };
     }
     return { users: [user], totalPages: 1, currentPage: page };
-  } 
+  }
 
   // If no uniqueId, fetch paginated results
   const users = await Member.find().skip(skip).limit(limit);
@@ -431,4 +425,158 @@ export const getAllMemberByFilterService = async (page, limit, uniqueId) => {
   };
 };
 
+// export const sendDigitalAssetsEmailService = async (email, orderID, digitalAssets) => {
+//   // 1. Find the member by email
+//   const member = await Member.findOne({ email });
+//   if (!member) {
+//     throw new ApiError(httpStatus.NOT_FOUND, "Member not found");
+//   }
 
+//   // 2. Extract assets (defaults to empty strings if undefined)
+//   const {
+//     arversion = "",
+//     vrversion = "",
+//     dfile = "",
+//     technicaldesignbook = "",
+//     virtuallobbyaccesskey = "",
+//     ownershipofstory = "",
+//     certification = "",
+//     sandboxwearable = "",
+//     vrchatwearable = "",
+//     animated = "",
+//     recroom = "",
+//   } = digitalAssets || {};
+
+//   // 3. Build the digital assets HTML
+//   const digitalAssetsHTML = `
+//     <ul>
+//       <li><strong>AR Version:</strong> ${arversion}</li>
+//       <li><strong>VR Version:</strong> ${vrversion}</li>
+//       <li><strong>D File:</strong> ${dfile}</li>
+//       <li><strong>Technical Design Book:</strong> ${technicaldesignbook}</li>
+//       <li><strong>Virtual Lobby Access Key:</strong> ${virtuallobbyaccesskey}</li>
+//       <li><strong>Ownership of Story:</strong> ${ownershipofstory}</li>
+//       <li><strong>Certification:</strong> ${certification}</li>
+//       <li><strong>Sandbox Wearable:</strong> ${sandboxwearable}</li>
+//       <li><strong>VRChat Wearable:</strong> ${vrchatwearable}</li>
+//       <li><strong>Animated:</strong> ${animated}</li>
+//       <li><strong>Rec Room:</strong> ${recroom}</li>
+//     </ul>
+//   `;
+
+//   // 4. Compose and send the email
+//   await sendEmail({
+//     to: email,
+//     subject: "Your Digital Assets",
+//     html: `
+//       <div style="font-family: Arial, sans-serif;">
+//         <img
+//           src="https://i.ibb.co/g9fcnQq/logo.png"
+//           alt="Research Buddy"
+//           style="width:50px; height:auto;"
+//         />
+//         <p>Dear ${member.name.firstName} ${member.name.lastName},</p>
+//         <p>
+//          You've requested for digital assets.
+//         </p>
+//         <p>
+//           Below are your digital assets for order id: ${orderID}
+//         </p>
+//         ${digitalAssetsHTML}
+//         <p>
+//           If you have any questions, feel free to contact us.
+//         </p>
+//         <p>
+//           Best regards,<br />
+//           The Research Buddy Team
+//         </p>
+//       </div>
+//     `,
+//   });
+
+//   // 5. Return a success message
+//   return { message: "Digital assets email sent" };
+// };
+export const sendDigitalAssetsEmailService = async (
+  email,
+  orderID,
+  digitalAssets = {}
+) => {
+  // 1. Find the member by email
+  const member = await Member.findOne({ email });
+  if (!member) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Member not found");
+  }
+
+  // 2. Map your asset keys to human-readable labels
+  const assetLabels = {
+    arversion: "AR Version",
+    vrversion: "VR Version",
+    dfile: "3D File",
+    technicaldesignbook: "Technical Design Book",
+    virtuallobbyaccesskey: "Virtual Lobby Access Key",
+    ownershipofstory: "Ownership of Story",
+    certification: "Certification",
+    sandboxwearable: "Sandbox Wearable",
+    vrchatwearable: "VRChat Wearable",
+    animated: "Animated",
+    recroom: "Rec Room",
+  };
+
+  // 3. Filter out empty fields
+  //    For instance, if "arversion" is "", skip it.
+  //    We'll build an array of "<li>...</li>" strings for the non-empty ones.
+  const filteredAssetsList = Object.entries(digitalAssets)
+    .filter(([key, value]) => !!value) // keep only fields where value is truthy
+    .map(([key, value]) => {
+      const label = assetLabels[key] ?? key;
+      return `<li><strong>${label}:</strong> ${value}</li>`;
+    });
+
+  // If there are no non-empty assets, show a placeholder message
+  const digitalAssetsHTML =
+    filteredAssetsList.length > 0
+      ? `<ul>${filteredAssetsList.join("")}</ul>`
+      : "<p>No digital assets available.</p>";
+
+  // 4. Compose and send the email
+  await sendEmail({
+    to: email,
+    subject: "Your Digital Assets",
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8" />
+          <title>Your Digital Assets</title>
+        </head>
+        <body style="font-family: Arial, sans-serif;">
+          <div>
+            <img 
+              src="https://i.ibb.co/g9fcnQq/logo.png"
+              alt="Research Buddy"
+              style="width:50px; height:auto;"
+            />
+            <p>Dear ${member.name.firstName} ${member.name.lastName},</p>
+            <p>
+             You've requested digital assets.
+            </p>
+            <p>
+              Below are your digital assets for Order ID: <strong>${orderID}</strong>
+            </p>
+            ${digitalAssetsHTML}
+            <p>
+              If you have any questions, feel free to contact us.
+            </p>
+            <p>
+              Best regards,<br />
+              The Research Buddy Team
+            </p>
+          </div>
+        </body>
+      </html>
+    `,
+  });
+
+  return { message: "Digital assets email sent" };
+};

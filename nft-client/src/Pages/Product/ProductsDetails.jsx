@@ -13,6 +13,7 @@ const ProductsDetails = () => {
   const data = useLoaderData();
     const productInfo = data?.data;
 const { productName,
+  _id,
   productDescription,
   displayImage,
   price,
@@ -86,7 +87,7 @@ const { productName,
         <div className=" space-y-5">
           <ProductImage displayImage={displayImage} />
           <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} />
-          <PriceCard price={price} collection={collection} />
+          <PriceCard _id={_id} price={price} collection={collection} />
           <TokenCard tokenDetails={tokenDetails} />
           <CollectionCard collection={collection} />
         </div>
@@ -104,7 +105,7 @@ const { productName,
         <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} />
         <VersionSlider digitalAssets={digitalAssets} displayImage={displayImage} />
         <DescriptionCard  productDescription={productDescription} />
-        <PriceCard price={price} collection={collection}   />
+        <PriceCard _id={_id} price={price} collection={collection}   />
         <TokenCard tokenDetails={tokenDetails} />
         <CollectionCard collection={collection}   />
         <ActivityCard />

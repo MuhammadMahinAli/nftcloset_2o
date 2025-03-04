@@ -1,5 +1,5 @@
 import express from "express";
-import {addMemberAddress, createMember,deleteMemberAddress,getAllMemberByFilterController,getAllMembers,getSingleMemberById,resendVerificationEmail,resetPasswordController,sendForgetPasswordEmailController,updateMemberAddress,updateMemberById, updateMemberCoverPicController, updateMemberInfoController, updateMemberProfilePicController, verifyEmail} from "./member.controller.js";
+import {addMemberAddress, createMember,deleteMemberAddress,getAllMemberByFilterController,getAllMembers,getSingleMemberById,resendVerificationEmail,resetPasswordController,sendDigitalAssetsEmailController,sendForgetPasswordEmailController,updateMemberAddress,updateMemberById, updateMemberCoverPicController, updateMemberInfoController, updateMemberProfilePicController, verifyEmail} from "./member.controller.js";
 import {validateRequest} from "../../middlewars/validateRequest.js";
 import {createMemberZodSchema, updateMemberCoverPicZodSchema} from "./member.validation.js";
 const router = express.Router();
@@ -19,6 +19,6 @@ router.put("/updateUserInfo/:id", updateMemberInfoController);
 router.post('/sendResetPasswordEmail', sendForgetPasswordEmailController);
 router.put('/reset-password', resetPasswordController);
 router.get("/getAllMember", getAllMemberByFilterController);
-  
+router.post("/send-digital-assets", sendDigitalAssetsEmailController);
 
 export const MemberRoutes = router;

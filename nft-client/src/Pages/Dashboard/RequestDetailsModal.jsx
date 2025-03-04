@@ -1,17 +1,89 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useUpdateOrderStatusMutation } from '../../features/order/orderApi';
+import Swal from 'sweetalert2';
 
-const RequestDetailsModal = ({ isOpenModal, onClose }) => {
+const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
   // State for form data — adjust or remove as needed
-  const [trackingLink, setTrackingLink] = useState('');
-  const [status, setStatus] = useState('Processing');
+const [updateOrderStatus] = useUpdateOrderStatusMutation()
+  console.log(order);
+  const product = order?.productID;
+  const orderInfo = order?.productInfo;
+  const customerInfo = order?.orderedBy;
+  const deliveryAddress = order?.deliveryAddress;
 
+  const {productName, displayImage} = product;
+  const {material, size, color} = orderInfo;
+  const {email, name, phoneNumber} = customerInfo;
+  const {street, country, city, homeAddress } = deliveryAddress;
   // Only show the modal if isOpen is true
-  if (!isOpenModal) return null;
 
+
+  const [formData, setFormData] = useState({
+    trackingLink: "",
+    status: "",
+    digitalAsset: "",
+  });
+
+    useEffect(() => {
+      if (order) {
+        setFormData({
+          trackingLink: order.trackingLink,
+          status: order.status,
+          digitalAsset: order.digitalAsset,
+        });
+;
+      }
+    }, [order]);
+        
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const orderId = order?._id
+  ;
+    console.log(formData);
+        try {
+          const response = await   updateOrderStatus ({
+            id:orderId,
+            data: formData,
+          }).unwrap();
+    
+          if (response.success) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: 'Status are updated successfully',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            setFormData({
+              trackingLink: "",
+              status: "",
+              digitalAsset: "",
+            });
+            onClose()
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.data?.message || 'Something went wrong!',
+          });
+        }
+  }
+
+  if (!isOpenModal) return null;
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-      onClick={onClose}
+      //onClick={onClose}
     >
       {/* Stop click propagation so clicking on the modal content doesn’t close it */}
       <div
@@ -46,8 +118,8 @@ const RequestDetailsModal = ({ isOpenModal, onClose }) => {
         {/* Product Image (replace src with your product image) */}
         <div className="flex justify-center mb-4">
           <img
-            src="https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
-            alt="Product"
+            src={displayImage}
+            alt={productName}
             className="w-32  rounded"
           />
         </div>
@@ -55,34 +127,37 @@ const RequestDetailsModal = ({ isOpenModal, onClose }) => {
         {/* Product Information */}
         <div className="mb-4 space-y-1">
           <p className="text-gray-900 font-bold text-[20px]">
-            Product Name: <span >Black Hoodie</span>
+            Product Name: <span >{productName}</span>
           </p>
           <p className="text-gray-500 font-medium text-[18px]">
-            Size: <span className="font-normal">XL</span>
+            Size: <span className="font-normal">{size}</span>
           </p>
           <p className="text-gray-500 font-medium text-[18px]">
-            Color: <span className="font-normal">Black</span>
+            Color: <span className="font-normal">{color}</span>
           </p>
         </div>
 
         {/* Customer Details */}
         <div className="mb-4 space-y-1">
           <p className="text-gray-700 font-bold mb-1 text-[20px]">Customer Details</p>
-          <p className="text-gray-500 text-[18px]">Email: mahinali@gmail.com</p>
-          <p className="text-gray-500 text-[18px]">Name: Mahin Ali</p>
-          <p className="text-gray-500 text-[18px]">Phone Number: +88017654234</p>
+          <p className="text-gray-500 text-[18px]">Email:{email}</p>
+          <p className="text-gray-500 text-[18px]">Name: {name?.firstName} {name?.lastName}</p>
+          <p className="text-gray-500 text-[18px]">Phone Number: {phoneNumber}</p>
         </div>
 
         {/* Address Details */}
         <div className="mb-4 space-y-1">
           <p className="text-gray-700 font-bold mb-1 text-[20px]">Customer Details</p>
           <p className="text-gray-500 text-[18px]">
-            Street: Ct-06-19 6Th Floor Subang Square Jin Ss 15/4G Ss15
+            Address: {homeAddress}
           </p>
-          <p className="text-gray-500 text-[18px]">City: Petaling Jaya</p>
-          <p className="text-gray-500 text-[18px]">Area: Selangor</p>
+          <p className="text-gray-500 text-[18px]">
+            Street: {street}
+          </p>
+          <p className="text-gray-500 text-[18px]">City: {city}</p>
+          <p className="text-gray-500 text-[18px]">Country: {country}</p>
         </div>
-
+<form onClick={handleSubmit}>
         {/* Tracking Link */}
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-1 text-[20px]" htmlFor="trackingLink">
@@ -90,11 +165,12 @@ const RequestDetailsModal = ({ isOpenModal, onClose }) => {
           </label>
           <input
             id="trackingLink"
+            name="trackingLink"
             type="text"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter tracking link"
-            value={trackingLink}
-            onChange={(e) => setTrackingLink(e.target.value)}
+            value={formData.trackingLink}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -104,31 +180,43 @@ const RequestDetailsModal = ({ isOpenModal, onClose }) => {
             Status:
           </label>
           <select
-            id="statusSelect"
+            id="status"
+            name="status"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            value={formData.status}
+            onChange={handleInputChange}
           >
-            <option value="Processing">Processing</option>
-            <option value="Shipped">Shipped</option>
-            <option value="Completed">Completed</option>
-            <option value="Cancelled">Cancelled</option>
+            <option value="approved">Approved</option>
+            <option value="declined">Declined</option>
+          </select>
+        </div>
+        {/* Status */}
+        <div className="mb-6">
+          <label className="font-bold block text-gray-700 mb-1 text-[20px]" htmlFor="statusSelect">
+          Digital Assets claim  Status:
+          </label>
+          <select
+            id="digitalAsset"
+            name="digitalAsset"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            value={formData.digitalAsset}
+            onChange={handleInputChange}
+          >
+            <option value="claimed">Claimed</option>
+            <option value="recieved">Recieved</option>
           </select>
         </div>
 
         {/* Save Button */}
         <div className="flex justify-end">
           <button
-            onClick={() => {
-              // Handle saving the changes here
-              console.log(`Tracking Link: ${trackingLink}, Status: ${status}`);
-              onClose();
-            }}
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded"
           >
             Save
           </button>
+          
         </div>
+        </form>
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ import { BiTime } from 'react-icons/bi';
 import { BsCart3 } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
-const PriceCard = ({ price, collection }) => {
+const PriceCard = ({ _id, price, collection }) => {
   
   const {discount, toDate,} = collection.collectionId;
 
@@ -100,7 +100,7 @@ const PriceCard = ({ price, collection }) => {
       {/* Action Buttons */}
       <div className="flex gap-3">
         <Link 
-          to='/orders' 
+          to={`/orders/${_id}`} 
           className={`flex-1 py-3 px-3 md:px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 ${
             isOfferValid && discount > 0 
               ? 'bg-indigo-600 hover:bg-indigo-700 text-white'

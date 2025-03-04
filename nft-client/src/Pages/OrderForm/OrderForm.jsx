@@ -1,29 +1,587 @@
+// import ar from "../../assets/nft-image/vr.png";
+// import darkAr from "../../assets/nft-image/darkvr.png";
+// import vvr from "../../assets/nft-image/vvr.png";
+// import book from "../../assets/nft-image/book.png";
+// import cartNft from "../../assets/nft-image/cart-nft.png";
+// import lobby from "../../assets/nft-image/lobby.png";
+// import certification from "../../assets/nft-image/certification.png";
+// import recroom from "../../assets/nft-image/recroom.png";
+// import animated from "../../assets/nft-image/animated.png";
+// import vrChat from "../../assets/nft-image/vr-chat.png";
+// import sandbox from "../../assets/nft-image/sandbox.png";
+// import story from "../../assets/nft-image/story.png";
+// import pd from "../../assets/nft-image/pd.png";
+// import threeD from "../../assets/nft-image/3d.png";
+// import { FaPlus } from "react-icons/fa";
+// import { useContext, useEffect, useRef, useState } from "react";
+// import { useLoaderData } from "react-router-dom";
+// import namer from "color-namer";
+// import { AuthContext } from "../../Context/UserContext";
+// import { useGetSingleUserQuery } from "../../features/auth/authApi";
+
+// const OrderForm = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const { userId } = useContext(AuthContext);
+//   const { data: getSingleUser } = useGetSingleUserQuery(userId);
+//   const dropdownRef = useRef(null);
+//   const data = useLoaderData();
+//   const productInfo = data?.data;
+//   const userInfo = getSingleUser?.data;
+//   console.log(productInfo);
+//   const {
+//     productName,
+//     _id,
+//     displayImage,
+//     digitalAssets,
+//     colors,
+//     sizeWithMaterial,
+//     sizeChart,
+//   } = productInfo;
+
+//   const [selectedMaterial, setSelectedMaterial] = useState(
+//     sizeWithMaterial[0].material
+//   );
+//   const allSizes = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
+//   const sizeMap = {
+//     XS: "X-Small",
+//     S: "Small",
+//     M: "Medium",
+//     L: "Large",
+//     XL: "X-Large",
+//     "2XL": "2X-Large",
+//     "3XL": "3X-Large",
+//   };
+//   const hexColors = colors?.map((hex) => {
+//     const names = namer(hex);
+//     return {
+//       hex,
+//       name: names.basic[0].name, // gets the most basic matching color name
+//     };
+//   });
+//   // Close dropdown when clicking outside
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+//         setIsOpen(false);
+//       }
+//     };
+
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, []);
+
+//   const features = [
+//     {
+//       id: 1,
+//       icon: ar,
+//       text: "View In AR",
+//       isPrimary: true,
+//     },
+//     {
+//       id: 2,
+//       icon: vvr,
+//       text: "View In VR",
+//     },
+//     {
+//       id: 3,
+//       icon: threeD,
+//       text: "3D File",
+//     },
+//     {
+//       id: 4,
+//       icon: book,
+//       text: "Technical design book",
+//     },
+//     {
+//       id: 5,
+//       icon: pd,
+//       text: "Physical Dress",
+//     },
+//     {
+//       id: 6,
+//       icon: cartNft,
+//       text: "NFT",
+//     },
+//     {
+//       id: 7,
+//       icon: lobby,
+//       text: "Virtual lobby access key",
+//     },
+//     {
+//       id: 8,
+//       icon: certification,
+//       text: "Certification",
+//     },
+//     {
+//       id: 9,
+//       icon: recroom,
+//       text: "Recroom wearable",
+//     },
+//     {
+//       id: 10,
+//       icon: animated,
+//       text: "Animated",
+//     },
+//     {
+//       id: 11,
+//       icon: vrChat,
+//       text: "VR Chat Wearable",
+//     },
+//     {
+//       id: 12,
+//       icon: sandbox,
+//       text: "Sandbox wearable",
+//     },
+//     {
+//       id: 13,
+//       icon: story,
+//       text: "Ownership of story",
+//     },
+//   ];
+
+//   const featureKeyMap = {
+//     "View In AR": "arversion",
+//     "View In VR": "vrversion",
+//     "3D File": "dfile",
+
+//     "Ownership of story": "ownershipofstory",
+//     "Certification": "certification",
+//     "Sandbox wearable": "sandboxwearable",
+//     "VR Chat Wearable": "vrchatwearable",
+//     "Animated": "animated",
+//     "Recroom wearable": "recroom",
+//     "Technical design book": "technicaldesignbook",
+//     "Virtual lobby access key": "virtuallobbyaccesskey",
+//   };
+
+//     // Filter features that have available values in digitalAssets
+//     const availableFeatures = features.filter(feature => {
+//       const assetKey = featureKeyMap[feature.text];
+//       return assetKey && digitalAssets[assetKey] && digitalAssets[assetKey].length > 0;
+//     });
+
+//     // Group features by category
+//     const groupedFeatures = availableFeatures.reduce((acc, feature) => {
+//       if (!acc[feature.category]) {
+//         acc[feature.category] = [];
+//       }
+//       acc[feature.category].push(feature);
+//       return acc;
+//     }, {});
+
+//   return (
+//     <>
+//       <h1 className="text-gray-800 text-3xl lg:text-5xl font-bold capitalize text-center py-4 md:py-3 lg:py-7">
+//         Order Summary
+//       </h1>
+//       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 p-5 md:p-10 lg:p-5">
+//         {/* left */}
+//         <div className="space-y-6 ">
+//           <div className="flex  flex-col justify-center items-center ">
+//             {/* Product Image */}
+//             <div className="border  w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-lg rounded-lg">
+//               <img
+//                 src={displayImage}
+//                 alt="Black Hoodie #43"
+//                 className="w-full h-full object-cover rounded-lg"
+//               />
+//             </div>
+//           </div>
+//           {/* Creator Section */}
+//           <div className="flex items-center gap-3 mb-8">
+//             <img
+//               src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
+//               alt="Creator"
+//               className="w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full"
+//             />
+//             <div>
+//               <p className="text-[17px] md:text-2xl font-bold">Creator</p>
+//               <p className="text-[16px] md:text-xl text-green-600">Online</p>
+//             </div>
+//           </div>
+//         </div>
+//         {/* right */}
+//         <div className=" space-y-4">
+//           {/* Product Details */}
+//           <div className="flex-1">
+//             <h2 className="text-3xl text-gray-800 font-bold pb-6">
+//               {productName}
+//             </h2>
+
+//             {/* version */}
+//             <div className="mb-3 md:hidden relative" ref={dropdownRef}>
+//               {/* Dropdown Button */}
+//               <button
+//                 onClick={() => setIsOpen(!isOpen)}
+//                 className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+//               >
+//                 <span className="flex items-center space-x-3 font-semibold text-gray-700">
+//                   <img src={darkAr} className="h-5 w-5" alt="Ar" />
+//                   <p> View in AR</p>
+//                 </span>
+//                 <svg
+//                   className={`w-4 h-4 transition-transform duration-200 ${
+//                     isOpen ? "rotate-180" : ""
+//                   }`}
+//                   fill="none"
+//                   stroke="currentColor"
+//                   viewBox="0 0 24 24"
+//                 >
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     strokeWidth={2}
+//                     d="M19 9l-7 7-7-7"
+//                   />
+//                 </svg>
+//               </button>
+
+//               {/* Dropdown Menu */}
+//               {isOpen && (
+//                 <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+//                   <div className="p-2 flex flex-col gap-2">
+//                     {features.map((feature) => (
+//                       <button
+//                         key={feature.id}
+//                         className={`
+//                   flex items-center gap-3 px-4 py-2 rounded-lg w-full text-left
+//                   ${
+//                     feature.isPrimary
+//                       ? "bg-indigo-500 text-white hover:bg-indigo-600"
+//                       : "text-gray-700 hover:bg-gray-50"
+//                   }
+//                   transition-colors duration-200
+//                 `}
+//                       >
+//                         <img
+//                           src={feature.icon}
+//                           className="h-5 w-5"
+//                           alt={feature.text}
+//                         />
+//                         <span className="whitespace-nowrap font-medium text-sm">
+//                           {feature.text}
+//                         </span>
+//                       </button>
+//                     ))}
+//                   </div>
+//                 </div>
+//               )}
+//             </div>
+//             <div className="space-y-6">
+//       {Object.entries(groupedFeatures).map(([category, categoryFeatures]) => (
+//         <div key={category} className="space-y-2">
+
+//           <div className="hidden md:flex flex-wrap gap-3">
+//             {categoryFeatures.map((feature) => (
+//               <button
+//                 key={feature.id}
+//                 className={`flex justify-center items-center gap-2 p-3 rounded-lg transition-all
+//                      ${
+//               feature.isPrimary
+//                 ? "bg-indigo-500 text-white hover:bg-indigo-600"
+//                 : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
+//             }
+//             transition-colors duration-200
+//           `}
+//               >
+//                 <img className="text-2xl" src={feature.icon} />
+//                 <span className="whitespace-nowrap font-semibold text-sm md:text-lg lg:text-xl">{feature.text}</span>
+//               </button>
+//             ))}
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+
+//             {/* color, size, m */}
+//             <div className="space-y-6 md:p-4">
+//               {/* Color Selection */}
+//               <div>
+//                 <h3 className="text-gray-700 text-[17px] md:text-xl font-medium mb-2">
+//                   Color
+//                 </h3>
+//                 <div className="flex gap-2">
+//                   {hexColors.map((color, index) => (
+//                     <>
+//                       <button
+//                         style={{ color: color.hex }}
+//                         className="capitalize px-4 py-1 border border-gray-300 rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+//                       >
+//                         {color.name}
+//                       </button>
+//                     </>
+//                   ))}
+//                 </div>{" "}
+//               </div>
+
+//               {/* Material Selection */}
+//               <div className="w-full">
+//                 <h3 className="text-gray-700 text-[17px] md:text-xl font-medium mb-2">
+//                   Material
+//                 </h3>
+//                 {/* Material Tabs */}
+//                 <div className="flex gap-2 mb-4">
+//                   {sizeWithMaterial?.map((item) => (
+//                     <button
+//                       key={item._id}
+//                       onClick={() => setSelectedMaterial(item.material)}
+//                       className={`capitalize px-4 py-1 border border-gray-300 rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none
+//                          ${
+//                            selectedMaterial === item.material
+//                              ? "border-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+//                              : "border-gray-300 hover:bg-gray-200"
+//                          }
+//                         `}
+//                       // className={`px-4 py-2 rounded-lg text-[17px] md:text-xl transition-all ${
+//                       //   selectedMaterial === item.material
+//                       //     ? 'bg-blue-500 text-white'
+//                       //     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+//                       // }`}
+//                     >
+//                       {item.material}
+//                     </button>
+//                   ))}
+//                 </div>
+
+//                 {/* Sizes */}
+//                 <div className="mt-4">
+//                   <div className="flex items-center gap-2 mb-2">
+//                     <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
+//                       Size -
+//                     </h3>
+//                     <a
+//                       href={sizeChart}
+//                       target="blank"
+//                       className="text-[17px] md:text-xl text-gray-600 underline flex items-center"
+//                     >
+//                       Size Chart
+//                       <svg
+//                         className="w-4 h-4 ml-1"
+//                         fill="none"
+//                         stroke="currentColor"
+//                         viewBox="0 0 24 24"
+//                       >
+//                         <path
+//                           strokeLinecap="round"
+//                           strokeLinejoin="round"
+//                           strokeWidth="2"
+//                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+//                         />
+//                       </svg>
+//                     </a>
+//                   </div>
+//                   <div className="flex flex-wrap gap-2">
+//                     {allSizes.map((size) => {
+//                       const currentMaterial = sizeWithMaterial?.find(
+//                         (item) => item.material === selectedMaterial
+//                       );
+//                       const isAvailable = currentMaterial?.sizes.includes(size);
+
+//                       return (
+//                         <span
+//                           key={size}
+//                           className={`px-4 py-1 border border-gray-300 rounded-full text-center text-[17px] md:text-xl
+//                   ${
+//                     isAvailable
+//                       ? "text-gray-700"
+//                       : "text-gray-400 line-through "
+//                   }`}
+//                         >
+//                           {sizeMap[size]}
+//                         </span>
+//                       );
+//                     })}
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Stock Status */}
+//               <div className="flex items-center gap-2">
+//                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+//                 <span className="text-[17px] md:text-xl text-gray-600">
+//                   In Stock
+//                 </span>
+//               </div>
+//             </div>
+
+//             {/* Delivery Address */}
+//             <div className="md:p-4">
+//               <div className="flex justify-between items-center mb-6">
+//                 <h2 className="text-[23px] md:text-2xl font-semibold">
+//                   Delivery Address
+//                 </h2>
+//                 <button className="bg-black text-[17px] md:text-xl text-white px-2 md:px-4 py-2 rounded-md md:rounded-lg hover:bg-gray-800 transition-colors">
+//                   <p className="hidden"> Add New Address</p>
+//                   <FaPlus className="text-white" />
+//                 </button>
+//               </div>
+
+//               <div className="mb-4">
+//                 <h3 className="text-gray-700 text-[17px] md:text-xl font-bold mb-3">
+//                   Saved Addresses
+//                 </h3>
+
+//                 <div className="space-y-3">
+//                   {userInfo?.addresses?.map((address) => (
+//                     <div
+//                       key={address.id}
+//                       className="border border-gray-900 shadow-md rounded-lg p-2 md:p-4"
+//                     >
+//                       <div className="flex items-start">
+//                         <input
+//                           type="radio"
+//                           name="address"
+//                           checked={address.isSelected}
+//                           className="mt-1 mr-3"
+//                           onChange={() => {}}
+//                         />
+
+//                         <div className="flex-grow">
+//                           <div className="flex items-center mb-2">
+//                             <div className="flex items-center gap-2">
+//                               {address.label === "Home" ? (
+//                                 <svg
+//                                   className="w-6 h-6 md:w-8 md:h-8"
+//                                   fill="none"
+//                                   stroke="currentColor"
+//                                   viewBox="0 0 24 24"
+//                                 >
+//                                   <path
+//                                     strokeLinecap="round"
+//                                     strokeLinejoin="round"
+//                                     strokeWidth="2"
+//                                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+//                                   />
+//                                 </svg>
+//                               ) : (
+//                                 <svg
+//                                   className="w-6 h-6 md:w-8 md:h-8"
+//                                   fill="none"
+//                                   stroke="currentColor"
+//                                   viewBox="0 0 24 24"
+//                                 >
+//                                   <path
+//                                     strokeLinecap="round"
+//                                     strokeLinejoin="round"
+//                                     strokeWidth="2"
+//                                     d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+//                                   />
+//                                   <path
+//                                     strokeLinecap="round"
+//                                     strokeLinejoin="round"
+//                                     strokeWidth="2"
+//                                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+//                                   />
+//                                 </svg>
+//                               )}
+//                               <span className="text-[17px] md:text-[22px]">
+//                                 {address.country}
+//                               </span>
+//                             </div>
+//                           </div>
+
+//                           <div className="text-gray-600 text-[17px] md:text-[20px]">
+//                             <p className="text-[15px] md:text-[20px]">
+//                               Address: {address.homeAddress}
+//                             </p>
+//                             <p className="text-[15px] md:text-[20px]">
+//                               Street: {address.street}
+//                             </p>
+
+//                             <p className="text-[15px] md:text-[20px]">
+//                               City: {address.city}
+//                             </p>
+//                           </div>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default OrderForm;
+
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Context/UserContext";
+import { useGetSingleUserQuery } from "../../features/auth/authApi";
+import { FaPlus } from "react-icons/fa";
+import namer from "color-namer";
 import ar from "../../assets/nft-image/vr.png";
 import darkAr from "../../assets/nft-image/darkvr.png";
 import vvr from "../../assets/nft-image/vvr.png";
 import book from "../../assets/nft-image/book.png";
 import cartNft from "../../assets/nft-image/cart-nft.png";
 import lobby from "../../assets/nft-image/lobby.png";
+import certification from "../../assets/nft-image/certification.png";
+import recroom from "../../assets/nft-image/recroom.png";
+import animated from "../../assets/nft-image/animated.png";
+import vrChat from "../../assets/nft-image/vr-chat.png";
+import sandbox from "../../assets/nft-image/sandbox.png";
+import story from "../../assets/nft-image/story.png";
 import pd from "../../assets/nft-image/pd.png";
 import threeD from "../../assets/nft-image/3d.png";
-import { FaPlus } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+import { useAddOrderMutation} from "../../features/order/orderApi";
+import Swal from "sweetalert2";
 
 const OrderForm = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [addOrder] = useAddOrderMutation();
+  const { userId } = useContext(AuthContext);
+  const { data: getSingleUser } = useGetSingleUserQuery(userId);
+
+
   const dropdownRef = useRef(null);
+  const data = useLoaderData();
+  const productInfo = data?.data;
+  const userInfo = getSingleUser?.data;
+  const {
+    productName,
+    _id,
+    displayImage,
+    digitalAssets,
+    colors,
+    sizeWithMaterial,
+    sizeChart,
+  } = productInfo || {};
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
+  // Form state
+  const [formData, setFormData] = useState({
+    productID: _id || "",
+    productInfo: {
+      material: "",
+      size: "",
+      color: "",
+    },
+    deliveryAddress: {
+      homeAddress: "",
+      country: "",
+      city: "",
+      street: "",
+      isDefault: false,
+    },
+    orderedBy: userId || "",
+    crossMintOrderId: "",
+    trackingLink: "",
+    status: "pending",
+    digitalAsset: "notClaimed",
+  });
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  // Local state for selections
+  const [selectedMaterial, setSelectedMaterial] = useState(
+    sizeWithMaterial?.[0]?.material || ""
+  );
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
   const features = [
     {
       id: 1,
@@ -61,47 +619,198 @@ const OrderForm = () => {
       icon: lobby,
       text: "Virtual lobby access key",
     },
+    {
+      id: 8,
+      icon: certification,
+      text: "Certification",
+    },
+    {
+      id: 9,
+      icon: recroom,
+      text: "Recroom wearable",
+    },
+    {
+      id: 10,
+      icon: animated,
+      text: "Animated",
+    },
+    {
+      id: 11,
+      icon: vrChat,
+      text: "VR Chat Wearable",
+    },
+    {
+      id: 12,
+      icon: sandbox,
+      text: "Sandbox wearable",
+    },
+    {
+      id: 13,
+      icon: story,
+      text: "Ownership of story",
+    },
   ];
-  const addresses = [
-    {
-      id: 1,
-      label: "Home",
-      street: "Ct-06-19 6Th Floor Subang Square Jln Ss 15/4G Ss15",
-      city: "Petaling Jaya",
-      area: "Selangor",
-      isSelected: true,
-    },
-    {
-      id: 2,
-      label: "Kuala Lumper",
-      street: "Ct-06-19 6Th Floor Subang Square Jln Ss 15/4G Ss15",
-      city: "Petaling Jaya",
-      area: "Selangor",
-      isSelected: false,
-    },
-    {
-      id: 3,
-      label: "Kuala Lumper",
-      street: "Ct-06-19 6Th Floor Subang Square Jln Ss 15/4G Ss15",
-      city: "Petaling Jaya",
-      area: "Selangor",
-      isSelected: false,
-    },
-  ];
+
+  const featureKeyMap = {
+    "View In AR": "arversion",
+    "View In VR": "vrversion",
+    "3D File": "dfile",
+    "Technical design book": "technicaldesignbook",
+    "Virtual lobby access key": "virtuallobbyaccesskey",
+    "Ownership of story": "ownershipofstory",
+    Certification: "certification",
+    "Sandbox wearable": "sandboxwearable",
+    "VR Chat Wearable": "vrchatwearable",
+    Animated: "animated",
+    "Recroom wearable": "recroom",
+  };
+
+  // Filter features that have available values in digitalAssets
+  const availableFeatures = features.filter((feature) => {
+    const assetKey = featureKeyMap[feature.text];
+    return (
+      assetKey &&
+      digitalAssets?.[assetKey] &&
+      digitalAssets[assetKey].length > 0
+    );
+  });
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Update form data when selections change
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      productInfo: {
+        ...prev.productInfo,
+        material: selectedMaterial,
+        size: selectedSize,
+        color: selectedColor,
+      },
+    }));
+  }, [selectedMaterial, selectedSize, selectedColor]);
+
+  // Update form data when address is selected
+  useEffect(() => {
+    if (selectedAddress) {
+      setFormData((prev) => ({
+        ...prev,
+        deliveryAddress: {
+          homeAddress: selectedAddress.homeAddress,
+          country: selectedAddress.country,
+          city: selectedAddress.city,
+          street: selectedAddress.street,
+          isDefault: selectedAddress.isSelected,
+        },
+      }));
+    }
+  }, [selectedAddress]);
+
+  // Handle address selection
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+  };
+
+  // Handle size selection
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+  };
+
+  // Handle color selection
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate required fields
+    if (!formData.productID || !formData.orderedBy || !selectedAddress) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    try {
+      const response = await addOrder(formData).unwrap();
+      console.log(response);
+      if (response.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Your order has been placed!",
+        });
+        setFormData({
+          productID: "",
+          productInfo: {
+            material: "",
+            size: "",
+            color: "",
+          },
+          deliveryAddress: {
+            homeAddress: "",
+            country: "",
+            city: "",
+            street: "",
+            isDefault: false,
+          },
+          orderedBy: userId || "",
+          crossMintOrderId: "",
+          trackingLink: "",
+          status: "pending",
+          digitalAsset: "notClaimed",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong. !",
+      });
+    }
+
+    // try {
+
+    //   console.log("Form data to submit:", formData);
+    //   addOrder(formData)
+    // } catch (error) {
+    //   console.error("Error submitting order:", error);
+    // }
+  };
+
+  const hexColors = colors?.map((hex) => {
+    const names = namer(hex);
+    return {
+      hex,
+      name: names.basic[0].name,
+    };
+  });
+
   return (
-    <>
+    <form onSubmit={handleSubmit} className="max-w-7xl mx-auto">
       <h1 className="text-gray-800 text-3xl lg:text-5xl font-bold capitalize text-center py-4 md:py-3 lg:py-7">
         Order Summary
       </h1>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 p-5 md:p-10 lg:p-5">
-        {/* left */}
-        <div className="space-y-6 ">
-          <div className="flex  flex-col justify-center items-center ">
-            {/* Product Image */}
-            <div className="border  w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-lg rounded-lg">
+        {/* Left side - Product Image */}
+        <div className="space-y-6">
+          <div className="flex flex-col justify-center items-center">
+            <div className="border w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-lg rounded-lg">
               <img
-                src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
-                alt="Black Hoodie #43"
+                src={displayImage}
+                alt={productName}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
@@ -119,305 +828,350 @@ const OrderForm = () => {
             </div>
           </div>
         </div>
-        {/* right */}
-        <div className=" space-y-4">
-          {/* Product Details */}
-          <div className="flex-1">
-            <h2 className="text-3xl text-gray-800 font-bold pb-6">
-              Black Hoodie #43
-            </h2>
 
-            {/* version */}
-            <div className="mb-3 md:hidden relative" ref={dropdownRef}>
-      {/* Dropdown Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-      >
-        <span className="flex items-center space-x-3 font-semibold text-gray-700">
-        <img src={darkAr} className="h-5 w-5" alt="Ar" />
-      <p>    View in AR</p>
-          </span>
-        <svg
-          className={`w-4 h-4 transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
+        {/* Right side - Form Fields */}
+        <div className="space-y-6">
+          <h2 className="text-3xl text-gray-800 font-bold">{productName}</h2>
 
-      {/* Dropdown Menu */}
-      {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-          <div className="p-2 flex flex-col gap-2">
-            {features.map((feature) => (
+          {/* Digital Assets Mobile Dropdown */}
+          <div className="mb-3 md:hidden relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+            >
+              <span className="flex items-center space-x-3 font-semibold text-gray-700">
+                <img src={darkAr} className="h-5 w-5" alt="Ar" />
+                <p>View in AR</p>
+              </span>
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  isOpen ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Mobile Dropdown Menu */}
+            {isOpen && (
+              <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="p-2 flex flex-col gap-2">
+                  {availableFeatures.map((feature) => (
+                    <button
+                      key={feature.id}
+                      type="button"
+                      className={`
+                        flex items-center gap-3 px-4 py-2 rounded-lg w-full text-left
+                        ${
+                          feature.isPrimary
+                            ? "bg-indigo-500 text-white hover:bg-indigo-600"
+                            : "text-gray-700 hover:bg-gray-50"
+                        }
+                        transition-colors duration-200
+                      `}
+                    >
+                      <img
+                        src={feature.icon}
+                        className="h-5 w-5"
+                        alt={feature.text}
+                      />
+                      <span className="whitespace-nowrap font-medium text-sm">
+                        {feature.text}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Digital Assets Desktop */}
+          <div className="hidden md:flex flex-wrap gap-3">
+            {availableFeatures.map((feature) => (
               <button
                 key={feature.id}
-                className={`
-                  flex items-center gap-3 px-4 py-2 rounded-lg w-full text-left
+                type="button"
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all
                   ${
                     feature.isPrimary
                       ? "bg-indigo-500 text-white hover:bg-indigo-600"
-                      : "text-gray-700 hover:bg-gray-50"
+                      : "bg-white border border-gray-200 hover:bg-gray-50"
                   }
-                  transition-colors duration-200
                 `}
               >
-                <img src={feature.icon} className="h-5 w-5" alt={feature.text} />
-                <span className="whitespace-nowrap font-medium text-sm">
+                <img
+                  src={feature.icon}
+                  className="h-5 w-5"
+                  alt={feature.text}
+                />
+                <span className="whitespace-nowrap font-semibold text-sm md:text-lg lg:text-xl">
                   {feature.text}
                 </span>
               </button>
             ))}
           </div>
-        </div>
-      )}
-    </div>
-            <div className="hidden md:flex flex-wrap gap-5 p-4">
-              {features.map((feature) => (
+
+          {/* Color Selection */}
+          <div className="space-y-2">
+            <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
+              Color
+            </h3>
+            <div className="flex gap-2">
+              {hexColors?.map((color, index) => (
                 <button
-                  key={feature.id}
-                  className={`
-            flex items-center gap-3 px-4 py-3 rounded-lg
-            ${
-              feature.isPrimary
-                ? "bg-indigo-500 text-white hover:bg-indigo-600"
-                : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
-            }
-            transition-colors duration-200
-          `}
+                  key={index}
+                  type="button"
+                  onClick={() => handleColorSelect(color.name)}
+                  className={`capitalize px-4 py-1 border rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ${
+                    selectedColor === color.name
+                      ? "border-gray-600 bg-gray-100"
+                      : "border-gray-300"
+                  }`}
+                  style={{ color: color.hex }}
                 >
-                  <img src={feature.icon} className="h-6" />
-                  <span className="whitespace-nowrap font-semibold text-sm md:text-lg lg:text-xl">
-                    {feature.text}
-                  </span>
+                  {color.name}
                 </button>
               ))}
             </div>
+          </div>
 
-            {/* color, size, m */}
-            <div className="space-y-6 md:p-4">
-              {/* Color Selection */}
-              <div>
-                <h3 className="text-gray-700 text-[17px] md:text-xl font-medium mb-2">
-                  Color
-                </h3>
-                <div className="flex gap-2">
-                  <button className="px-4 py-1 border border-gray-300 rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    Red
-                  </button>
-                </div>
-              </div>
-
-              {/* Material Selection */}
-              <div>
-                <h3 className="text-gray-700 text-[17px] md:text-xl font-medium mb-2">
-                  Material
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  <button className="px-4 py-1 border border-gray-300 rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    Cotton
-                  </button>
-                  <button className="px-4 py-1 border border-gray-300 rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    Cotton-Polyester Blend
-                  </button>
-                </div>
-              </div>
-
-              {/* Size Selection */}
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
-                    Size
-                  </h3>
-                  <button className="text-[17px] md:text-xl text-gray-600 underline flex items-center">
-                    Size Chart
-                    <svg
-                      className="w-4 h-4 ml-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {["X-Small", "Small", "Medium", "Large", "X-Large"].map(
-                    (size, index) => (
-                      <button
-                        key={size}
-                        disabled={index > 0}
-                        className={`px-4 py-1 rounded-full text-[17px] md:text-xl
-                ${
-                  index === 0
-                    ? "border-2 border-gray-900"
-                    : "border border-gray-200 text-gray-400"
-                }`}
-                      >
-                        {size}
-                      </button>
-                    )
-                  )}
-                </div>
-              </div>
-
-              {/* Stock Status */}
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-[17px] md:text-xl text-gray-600">
-                  In Stock
-                </span>
-              </div>
-            </div>
-
-            {/* Delivery Address */}
-            <div className="md:p-4">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-[23px] md:text-2xl font-semibold">
-                  Delivery Address
-                </h2>
-                <button className="bg-black text-[17px] md:text-xl text-white px-2 md:px-4 py-2 rounded-md md:rounded-lg hover:bg-gray-800 transition-colors">
-                  <p className="hidden"> Add New Address</p>
-                  <FaPlus className="text-white" />
+          {/* Material Selection */}
+          <div className="space-y-2">
+            <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
+              Material
+            </h3>
+            <div className="flex gap-2">
+              {sizeWithMaterial?.map((item) => (
+                <button
+                  key={item._id}
+                  type="button"
+                  onClick={() => setSelectedMaterial(item.material)}
+                  className={`capitalize px-4 py-1 border rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none ${
+                    selectedMaterial === item.material
+                      ? "border-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                      : "border-gray-300 hover:bg-gray-200"
+                  }`}
+                >
+                  {item.material}
                 </button>
-              </div>
-
-              <div className="mb-4">
-                <h3 className="text-gray-700 text-[17px] md:text-xl font-bold mb-3">
-                  Saved Addresses
-                </h3>
-
-                <div className="space-y-3">
-                  {addresses.map((address) => (
-                    <div
-                      key={address.id}
-                      className="border border-gray-900 shadow-md rounded-lg p-2 md:p-4"
-                    >
-                      <div className="flex items-start">
-                        <input
-                          type="radio"
-                          name="address"
-                          checked={address.isSelected}
-                          className="mt-1 mr-3"
-                          onChange={() => {}}
-                        />
-
-                        <div className="flex-grow">
-                          <div className="flex items-center mb-2">
-                            <div className="flex items-center gap-2">
-                              {address.label === "Home" ? (
-                                <svg
-                                  className="w-6 h-6 md:w-8 md:h-8"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                                  />
-                                </svg>
-                              ) : (
-                                <svg
-                                  className="w-6 h-6 md:w-8 md:h-8"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                  />
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                  />
-                                </svg>
-                              )}
-                              <span className="text-[17px] md:text-[22px]">
-                                {address.label}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="text-gray-600 text-[17px] md:text-[20px]">
-                            <p className="text-[15px] md:text-[20px]">
-                              Street: {address.street}
-                            </p>
-                            <div className="flex gap-1 md:gap-2">
-                              <p className="text-[15px] md:text-[20px]">
-                                City: {address.city}
-                              </p>
-                              <p className="text-[15px] md:text-[20px]">
-                                Area: {address.area}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-2">
-                          <button className="text-gray-400 hover:text-gray-600">
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                              />
-                            </svg>
-                          </button>
-                          <button className="text-gray-400 hover:text-gray-600">
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
+
+          {/* Size Selection */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
+                Size
+              </h3>
+              {sizeChart && (
+                <a
+                  href={sizeChart}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[17px] md:text-xl text-gray-600 underline flex items-center"
+                >
+                  Size Chart
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {["XS", "S", "M", "L", "XL", "2XL", "3XL"].map((size) => {
+                const currentMaterial = sizeWithMaterial?.find(
+                  (item) => item.material === selectedMaterial
+                );
+                const isAvailable = currentMaterial?.sizes.includes(size);
+
+                return (
+                  <button
+                    key={size}
+                    type="button"
+                    onClick={() => isAvailable && handleSizeSelect(size)}
+                    className={`px-4 py-1 border rounded-full text-center text-[17px] md:text-xl
+                      ${
+                        isAvailable
+                          ? selectedSize === size
+                            ? "border-gray-600 text-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                            : "border-gray-300 text-gray-700 hover:border-gray-400"
+                          : "border-gray-300 text-gray-400 line-through cursor-not-allowed"
+                      }`}
+                    disabled={!isAvailable}
+                  >
+                    {size}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Stock Status */}
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span className="text-[17px] md:text-xl text-gray-600">
+              In Stock
+            </span>
+          </div>
+
+          {/* Delivery Address */}
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[23px] md:text-2xl font-semibold">
+                Delivery Address
+              </h3>
+              <button
+                type="button"
+                className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                <FaPlus />
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              {userInfo?.addresses?.map((address) => (
+                <div
+                  key={address._id}
+                  className={`border rounded-lg p-4 cursor-pointer transition-all
+                    ${
+                      selectedAddress?._id === address._id
+                        ? "border-gray-900 shadow-md"
+                        : "border-gray-300 hover:border-gray-400"
+                    }`}
+                  onClick={() => handleAddressSelect(address)}
+                >
+                  <div className="flex items-start">
+                    <input
+                      type="radio"
+                      name="address"
+                      checked={selectedAddress?._id === address._id}
+                      onChange={() => handleAddressSelect(address)}
+                      className="mt-1 mr-3"
+                    />
+                    <div className="flex-grow">
+                      <div className="flex items-center mb-2">
+                        <div className="flex items-center gap-2">
+                          {address.label === "Home" ? (
+                            <svg
+                              className="w-6 h-6 md:w-8 md:h-8"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                              />
+                            </svg>
+                          ) : (
+                            <svg
+                              className="w-6 h-6 md:w-8 md:h-8"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                              />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                              />
+                            </svg>
+                          )}
+                          <span className="text-[17px] md:text-[22px]">
+                            {address.country}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-gray-600 text-[17px] md:text-[20px]">
+                        <p className="text-[15px] md:text-[20px]">
+                          Address: {address.homeAddress}
+                        </p>
+                        <p className="text-[15px] md:text-[20px]">
+                          Street: {address.street}
+                        </p>
+
+                        <p className="text-[15px] md:text-[20px]">
+                          City: {address.city}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* crossmint id */}
+          <div className="max-w-2xl">
+            <label
+              htmlFor="crossMintOrderId"
+              className="block text-lg font-bold text-gray-700 mb-2"
+            >
+              Crossmint Order Id
+            </label>
+            <input
+              type="text"
+              id="crossMintOrderId"
+              name="crossMintOrderId"
+              value={formData.crossMintOrderId}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  crossMintOrderId: e.target.value,
+                }))
+              }
+              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
+              placeholder="Enter FOF Lab Link"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={!formData.crossMintOrderId}
+            className={`w-full py-3 rounded-lg text-lg font-medium transition-colors
+              ${
+                formData.crossMintOrderId
+                  ? "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+          >
+            {formData.crossMintOrderId
+              ? "Place Order"
+              : "CrossMint Order Id is Required"}
+          </button>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 

@@ -8,6 +8,7 @@ import {
   getClaimedOrdersByMemberController,
   getDeclinedOrdersByMemberController,
   getOrderByIdController,
+  getOrdersByStatusController,
   getPendingOrdersByMemberController,
   getReceivedOrdersByMemberController,
   updateOrderDigitalAssetStatusController,
@@ -28,5 +29,14 @@ router.put('/updatedigitalAssetStatus/:id', updateOrderDigitalAssetStatusControl
 router.get("/getReceivedOrder/:id", getReceivedOrdersByMemberController);
 router.delete("/deleteOrder/:id", deleteOrderController);
 // router.put('/updateUser/:id', updateMemberById);
+
+
+
+
+// Route: GET /getOrderStatus/:status/:id
+// Example: /getOrderStatus/pending/63fa052d33b8560012345678
+router.get("/getOrderStatus/:status/:id", getOrdersByStatusController);
+
+
 
 export const OrderRoutes = router;

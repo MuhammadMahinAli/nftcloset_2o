@@ -7,6 +7,7 @@ import {
   getSingleMember,
   resendEmailService,
   resetPasswordService,
+  sendDigitalAssetsEmailService,
   sendForgetPasswordEmailService,
   updateMemberAddressService,
   updateMemberCoverPicService,
@@ -347,6 +348,17 @@ export const getAllMemberByFilterController = catchAsync(async (req, res) => {
   });
 });
 
+export const sendDigitalAssetsEmailController = async (req, res) => {
+  try {
+    const { email, orderID, digitalAssets } = req.body;
+    const result = await sendDigitalAssetsEmailService(email, orderID, digitalAssets);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(error.statusCode || 500).json({
+      message: error.message || "Server Error",
+    });
+  }
+};
 
 
 

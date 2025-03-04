@@ -147,6 +147,14 @@ deleteAddress: builder.mutation({
         method: "GET",
       }),
     }),
+    
+      sendDigitalAssetsEmail: builder.mutation({
+        query: ({ email,orderID, digitalAssets }) => ({
+          url: "/member/send-digital-assets",
+          method: "POST",
+          body: { email,orderID, digitalAssets },
+        }),
+      }),
     resetPassword: builder.mutation({
       query: ({ id, newPassword, token }) => ({
         url: `/member/reset-password?id=${id}`,
@@ -157,5 +165,5 @@ deleteAddress: builder.mutation({
   }),
 });
 
- export const {useAddAddressMutation,useDeleteAddressMutation,useUpdateAddressMutation,useResetPasswordMutation, useUpdatePasswordMutation,useLoginMutation,useSignUpMutation,useUpdateCoverPicMutation, useUpdateUserInfoMutation,useUpdateProfilePicMutation,useGetAllUsersQuery,useGetFilteredUsersQuery,useGetSingleUserQuery,useDeleteUserMutation,  useVerifyEmailQuery} = authApi;
+ export const {useSendDigitalAssetsEmailMutation,useAddAddressMutation,useDeleteAddressMutation,useUpdateAddressMutation,useResetPasswordMutation, useUpdatePasswordMutation,useLoginMutation,useSignUpMutation,useUpdateCoverPicMutation, useUpdateUserInfoMutation,useUpdateProfilePicMutation,useGetAllUsersQuery,useGetFilteredUsersQuery,useGetSingleUserQuery,useDeleteUserMutation,  useVerifyEmailQuery} = authApi;
 

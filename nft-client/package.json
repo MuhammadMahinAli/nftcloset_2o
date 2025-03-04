@@ -49,6 +49,7 @@
     "@syncfusion/ej2-react-schedule": "^24.2.4",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
+    "color-namer": "^1.4.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "html2canvas": "^1.4.1",

@@ -186,7 +186,7 @@ const featureKeyMap = {
   "VR Chat Wearable": "vrchatwearable",
   "Animated": "animated",
   "Recroom wearable": "recroom",
-  // Add other mappings as needed
+ 
 };
 
 // Filter available features using the mapping

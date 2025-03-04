@@ -27,7 +27,7 @@ export const addOrderService = async (orderInfo) => {
 //----- get all order
 export const getAllOrderService = async () => {
   const orders = await Order.find({})
-    .populate("productID")
+    .populate("productID", "productName displayImage")
     .populate("orderedBy")
     .sort({ createdAt: -1 });
   return orders;
@@ -49,6 +49,39 @@ export const getOrderByIdService = async (id) => {
     .populate("orderedBy")
     .sort({ createdAt: -1 });
   return order;
+};
+
+export const getOrdersByStatusService = async (status, userId) => {
+  try {
+    // Build a query object
+    const query = { orderedBy: userId };
+
+    // Decide if we use `status` or `digitalAsset` in the query
+    switch (status) {
+      case "pending":
+      case "approved":
+      case "declined":
+        query.status = status;
+        break;
+      case "claimed":
+      case "notClaimed":
+      case "received":
+        query.digitalAsset = status;
+        break;
+      default:
+        throw new Error("Invalid status. Must be pending, approved, declined, claimed, or received.");
+    }
+
+    // Fetch matching orders
+    const orders = await Order.find(query)
+      .populate("productID")
+      .populate("orderedBy")
+      .sort({ createdAt: -1 });
+
+    return orders;
+  } catch (error) {
+    throw new Error(`Error fetching "${status}" orders for user ${userId}: ${error.message}`);
+  }
 };
 
 // ---------- get pending order
@@ -78,7 +111,7 @@ export const getApprovedOrdersByMemberService = async (id) => {
       status: "approved",
       orderedBy: id,
     })
-      .populate("productID")
+      .populate("productID", "productName displayImage")
       .populate("orderedBy")
       .sort({ createdAt: -1 });
     return approvedOrders;
@@ -153,7 +186,9 @@ export const updateOrderStatusService = async (id, data) => {
     }
 
     const updatedData = {
+      trackingLink: data.trackingLink,
       status: data.status,
+      digitalAsset: data.digitalAsset
     };
 
     const updatedProduct = await Order.findByIdAndUpdate(
