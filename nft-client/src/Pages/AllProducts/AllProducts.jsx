@@ -105,7 +105,8 @@ const AllProducts = () => {
               </div>
             </Link>
              {isOpenIndex === i && ( 
-            <Link to='/orders' className="absolute bottom-0  w-full flex justify-between bg-[#12C9B5] py-1 xl:py-2">
+            <Link 
+            to={`/orders/${product?._id}`}  className="absolute bottom-0  w-full flex justify-between bg-[#12C9B5] py-1 xl:py-2">
               <p className="text-center w-10/12 border-r text-lg md:text-lg text-white">
                 Buy now
               </p>

@@ -9,6 +9,7 @@ import {
   getDeclinedOrdersByMemberController,
   getOrderByIdController,
   getOrdersByStatusController,
+  getOrdersByStatusForAdminController,
   getPendingOrdersByMemberController,
   getReceivedOrdersByMemberController,
   updateOrderDigitalAssetStatusController,
@@ -36,6 +37,7 @@ router.delete("/deleteOrder/:id", deleteOrderController);
 // Route: GET /getOrderStatus/:status/:id
 // Example: /getOrderStatus/pending/63fa052d33b8560012345678
 router.get("/getOrderStatus/:status/:id", getOrdersByStatusController);
+router.get("/getOrderStatusForAdmin/:status", getOrdersByStatusForAdminController);
 
 
 

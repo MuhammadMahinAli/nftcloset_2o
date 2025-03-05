@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 const HoveredText = ({ text }) => {
   return (
-    <div className="flex items-center -space-x-1" style={{ zIndex: 9999 }}>
+    <div className="flex items-center -space-x-1" style={{ zIndex: 1000000 }}>
       <svg
         className="w-3 z-50"
         viewBox="0 0 7 10"

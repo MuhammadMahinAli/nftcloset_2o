@@ -509,7 +509,7 @@
 // export default OrderForm;
 
 import React, { useState, useContext, useEffect, useRef } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 import { useGetSingleUserQuery } from "../../features/auth/authApi";
 import { FaPlus } from "react-icons/fa";
@@ -530,9 +530,11 @@ import pd from "../../assets/nft-image/pd.png";
 import threeD from "../../assets/nft-image/3d.png";
 import { useAddOrderMutation} from "../../features/order/orderApi";
 import Swal from "sweetalert2";
+import AddOrUpdateAddress from "../Dashboard/AddOrUpdateAddress";
 
 const OrderForm = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEditAddress, setIsOpenEditAddress] = useState(false);
   const [addOrder] = useAddOrderMutation();
   const { userId } = useContext(AuthContext);
   const { data: getSingleUser } = useGetSingleUserQuery(userId);
@@ -831,7 +833,7 @@ const OrderForm = () => {
 
         {/* Right side - Form Fields */}
         <div className="space-y-6">
-          <h2 className="text-3xl text-gray-800 font-bold">{productName}</h2>
+          <h2 className="text-3xl text-gray-800 font-bold capitalize">{productName}</h2>
 
           {/* Digital Assets Mobile Dropdown */}
           <div className="mb-3 md:hidden relative" ref={dropdownRef}>
@@ -1039,14 +1041,14 @@ const OrderForm = () => {
               <h3 className="text-[23px] md:text-2xl font-semibold">
                 Delivery Address
               </h3>
-              <button
-                type="button"
+              <Link
+              to="/manageAccount"
                 className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
               >
                 <FaPlus />
-              </button>
+              </Link>
             </div>
-
+         
             <div className="space-y-3">
               {userInfo?.addresses?.map((address) => (
                 <div
@@ -1150,7 +1152,7 @@ const OrderForm = () => {
                 }))
               }
               className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
-              placeholder="Enter FOF Lab Link"
+              placeholder="Enter Crossmint ID"
             />
           </div>
 
@@ -1171,6 +1173,7 @@ const OrderForm = () => {
           </button>
         </div>
       </div>
+      
     </form>
   );
 };

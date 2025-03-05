@@ -476,7 +476,7 @@
 // export default AdminSideBar;
 
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import HoveredText from "../../icons/HoveredText";
 import { AuthContext } from "../../Context/UserContext";
@@ -500,6 +500,23 @@ const AdminSideBar = () => {
   const [openHomeControl, setOpenHomeControl] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // If the user has scrolled down at all, set isScrolled to true
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    // Listen for scroll events
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
   const location = useLocation();
   const isPageActive = (path) => {
@@ -508,6 +525,8 @@ const AdminSideBar = () => {
   const { logout: originalLogout } = useAuthCheck();
   const { singleUser } = useContext(AuthContext);
   const userEmail = singleUser && singleUser?.data?.email;
+
+  console.log("userEmail",userEmail);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -530,7 +549,7 @@ const AdminSideBar = () => {
         icon: "success",
         text: "Logged out successfully!",
       });
-      navigate("/login");
+     // navigate("/login");
     }
   };
 
@@ -538,6 +557,7 @@ const AdminSideBar = () => {
   const SidebarContent = () => (
     <>
       {/* dashboard */}
+      <img className="hidden md:block mb-10" src="/nft-logo.png" alt="" />
       <div className="sidebar-list">
         <Link to="/manageAccount" className="relative">
           <div
@@ -573,9 +593,10 @@ const AdminSideBar = () => {
       </div>
 
       {/* product */}
+      { userEmail === "arrr@gmail.com" &&
       <div className="sidebar-list">
         <Link 
-       // to="/manageAccount/all-products" 
+        to="/manageAccount/all-products" 
         className="relative">
           <div
             className={`${
@@ -608,11 +629,12 @@ const AdminSideBar = () => {
           </div>
         </Link>
       </div>
-
+}
       {/* collections */}
+      { userEmail === "arrr@gmail.com" &&
       <div className="sidebar-list">
         <Link 
-        // to="/manageAccount/all-collections" 
+        to="/manageAccount/all-collections" 
         className="relative">
           <div
             className={`${
@@ -645,6 +667,7 @@ const AdminSideBar = () => {
           </div>
         </Link>
       </div>
+      }
 
       {/* order */}
       <div className="sidebar-list">
@@ -679,6 +702,7 @@ const AdminSideBar = () => {
       </div>
 
       {/* home control */}
+      { userEmail === "arrr@gmail.com" &&
       <div className="sidebar-list">
         <Link 
          to="/manageAccount/home-page-controls" 
@@ -714,6 +738,7 @@ const AdminSideBar = () => {
           </div>
         </Link>
       </div>
+      }
 
       {/* setting */}
       <div className="sidebar-list">
@@ -819,7 +844,7 @@ const AdminSideBar = () => {
       </div>
 
       {/* Mini Sidebar */}
-      <ul className="hidden absolute shadow-xl left-0 top-[90px] 3xl:block w-[80px] bg-[#fff] lg:flex flex-col items-center justify-start py-5 space-y-4 lg:space-y-5 z-50">
+      <ul className={`hidden absolute shadow-xl left-0 top-[90px] 3xl:block w-[80px] bg-[#fff] lg:flex flex-col items-center justify-start py-5 space-y-4 lg:space-y-5  ${isScrolled ? "z-0" : "z-50"} `}>
         {/* Hamburger Menu Button */}
         <li className="w-full flex justify-center mb-4">
           <button
@@ -873,7 +898,7 @@ const AdminSideBar = () => {
 
 
          {/* product */}
-
+         { userEmail === "arrr@gmail.com" &&
          <li className="sidebar-list">
            <Link to="/manageAccount/all-products" className="relative">
              <p>
@@ -902,9 +927,9 @@ const AdminSideBar = () => {
              )}
            </Link>
          </li>
-
+}
          {/* collection */}
-
+         { userEmail === "arrr@gmail.com" &&
          <li className="sidebar-list">
            <Link to="/manageAccount/all-collections" className="relative">
              <p>
@@ -933,7 +958,7 @@ const AdminSideBar = () => {
              )}
            </Link>
          </li>
-
+}
          {/* order */}
 
          <li className="sidebar-list">
@@ -962,7 +987,7 @@ const AdminSideBar = () => {
            </Link>
          </li>
          {/* home page control */}
-
+         { userEmail === "arrr@gmail.com" &&
          <li className="sidebar-list">
            <Link to="/manageAccount/home-page-controls" className="relative">
              <p>
@@ -991,6 +1016,7 @@ const AdminSideBar = () => {
              )}
            </Link>
          </li>
+         }
          {/* setting */}
          <li className="sidebar-list">
            <Link to="/manageAccount/settings" className="relative">

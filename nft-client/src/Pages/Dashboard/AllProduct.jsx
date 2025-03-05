@@ -5,12 +5,13 @@ import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useDeleteProductMutation, useGetAllProductQuery } from "../../features/product/productApi";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 
 const AllProduct = () => {
   const { data: getAllProduct } = useGetAllProductQuery();
   const [deleteProduct] = useDeleteProductMutation();
   const products = getAllProduct?.data;
-
+  const { user } = useSelector((state) => state.auth);
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -39,8 +40,10 @@ const AllProduct = () => {
     });
   };
 
+  console.log(user.email);
+
   return (
-    <div className="p-3 xl:p-8 ">
+    <div className="p-3 xl:p-8 z-10">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">All Products</h1>
       </div>
@@ -53,12 +56,14 @@ const AllProduct = () => {
             className="w-full pl-9 md:pl-12 py-1 md:py-3 bg-[rgb(246,244,243)] rounded-lg"
           />
         </div>
+       
         <Link to="/manageAccount/add-new-product">
           <button className="bg-[#26B893] hover:bg-emerald-600 py-2 px-3 flex rounded-lg items-center space-x-2">
             <FaPlus className="h-4 w-4 md:mr-2 text-white" />
             <p className="text-white hidden md:block">Create new product</p>
           </button>
         </Link>
+  
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

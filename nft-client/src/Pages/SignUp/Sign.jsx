@@ -8,6 +8,8 @@ import { useSignUpMutation } from "../../features/auth/authApi.js";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AiOutlineEye } from "react-icons/ai";
+import { IoText } from "react-icons/io5";
+import { CiPhone } from "react-icons/ci";
 const Sign = () => {
   const [signUp, { data: responseData, isLoading, error: responseError }] =
     useSignUpMutation();
@@ -36,7 +38,7 @@ const Sign = () => {
     role: "",
     country: "",
     profilePic: "",
-    address: [],
+    addresses: [],
     emailVerified: true,
     verificationToken: "",
   });
@@ -107,7 +109,7 @@ const Sign = () => {
           title: "Well Done !!!",
           text: "Account has been created successfully!",
         });
-        // navigate(`/verify-your-email`);
+         navigate(`/login`);
       }
     } else if (responseError?.data) {
       // console.log("Response Error:", responseError.data)
@@ -124,89 +126,121 @@ const Sign = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center rounded-xl bg-gray filter:blur(2px) backdrop-filter:blur(20px) md:mx-10 xl:mx-20 py-10">
-        <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start ">
+     <div className="flex justify-center items-center  bg-no-repeat bg-cover min-h-screen">
+     <div className="py-5 md:py-0 mx-0 md:mx-10 lg:mx-20 w-full flex flex-col md:flex-row justify-between items-center   rounded-[20px]  shadow-[-7px_-7px_19px_rgba(255,_255,_255,_0.6),_9px_9px_16px_rgba(163,_177,_198,_0.6)] box-border border-[0.8px] border-solid border-gray">
           {/*********************** Left image **********************/}
-          <div
-            data-aos="fade-up-right"
-            data-aos-duration="1200"
-            className="lg:w-5/12 lg:h-[550px]"
-          >
-            {/* <img className="lg:h-[530px]" alt="" src={HeroImage} /> */}
+          <div className="p-5 space-y-4 md:space-y-0 w-full md:w-6/12">
+          <div className="md:hidden bg-white w-[300px] rounded-[20px] shadow-[-7px_-7px_19px_rgba(255,_255,_255,_0.6),_9px_9px_16px_rgba(163,_177,_198,_0.6)] box-border border-[0.8px] border-solid border-gray">
+            <img
+              src="https://img.freepik.com/free-vector/key-concept-illustration_114360-6305.jpg"
+              className="p-7 w-[300px] md:w-[250px]"
+              loading="lazy"
+              alt=""
+            />
           </div>
+          <div className="flex justify-center items-center p-8 hidden md:block">
+            <img
+              src="https://img.freepik.com/free-vector/key-concept-illustration_114360-6305.jpg"
+              className="w-[280px] lg:w-[850px] xl:w-[900px]"
+              loading="lazy"
+              alt=""
+            />
+          </div>
+        </div>
           {/*********************** Right form **********************/}
-          <div
-            data-aos="fade-up-left"
-            data-aos-duration="1200"
-            className="lg:w-5/12  p-3"
-          >
+         
             <div
-              className="bg-[#d1fbf7] 
-              mb-0 space-y-4 rounded-lg p-4 border shadow-lg "
+              className="-mt-14 ml-16 md:ml-0  py-6 px-3  md:px-5 md:py-16 xl:py-24 space-y-3 lg:space-y-6 flex flex-col h-full w-12/12 md:w-7/12 lg:w-6/12 bg-gray-50 md:mt-8 rounded-tl-[30px] rounded-br-[30px] md:rounded-tl-[60px] md:rounded-br-[0px]"
             >
-              <p className="text-center text-2xl font-medium py-2">{`Create an account as {USE} ! `}</p>
-
+               <h1 className="text-blue-500 text-xl md:text-2xl font-bold pl-5">
+           Create an Account
+          </h1>
               <form action="" className="space-y-3">
+              <div className="flex justify-between items-center border-b">
                 <input
                   type="text"
                   id="firstName"
                   name="firstName"
                   value={formData.name.firstName}
                   onChange={handleInputChange}
-                  className="w-full bg-white shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)_inset] filter:blur(2px) backdrop-filter:blur(20px)  rounded-lg border-gray-200 p-4 pe-12  text-lg outline-none"
+                 className="h-12 w-11/12 outline-none  p-4"
                   placeholder="Enter first name"
                 />
+                <IoText className="text-gray-500 text-xl" />
+                 </div>
                 {/* // */}
+                <div className="flex justify-between items-center border-b">
                 <input
                   type="text"
                   id="lastName"
                   name="lastName"
                   value={formData?.name?.lastName}
                   onChange={handleInputChange}
-                  className="w-full bg-white shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)_inset] filter:blur(2px) backdrop-filter:blur(20px) rounded-lg border-gray-200 p-4 pe-12 text-lg outline-none"
+                  className="h-12 w-11/12 outline-none  p-4"
                   placeholder="Enter last name"
                 />
+                <IoText className="text-gray-500 text-xl" />
+                 </div>
                 {/*  */}
+                <div className="flex justify-between items-center border-b">
                 <input
                   type="email"
                   id="email"
                   name="email"
                   defaultValue={formData?.email}
                   onChange={handleInputChange}
-                  className="w-full bg-white shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)_inset] filter:blur(2px) backdrop-filter:blur(20px) rounded-lg border-gray-200 p-4 pe-12 text-lg outline-none"
+                  className="h-12 w-11/12 outline-none  p-4"
                   placeholder="Enter email address"
                 />
+                 <MdOutlineEmail className="text-gray-500 text-xl" />
+                 </div>
                 {/*  */}
+                <div className="flex justify-between items-center border-b">
                 <input
                   type="text"
                   id="phoneNumber"
                   name="phoneNumber"
                   defaultValue={formData?.phoneNumber}
                   onChange={handleInputChange}
-                  className="w-full bg-white shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)_inset] filter:blur(2px) backdrop-filter:blur(20px) rounded-lg border-gray-200 p-4 pe-12 text-lg outline-none"
+                  className="h-12 w-11/12 outline-none  p-4"
                   placeholder="Enter mobile number"
                 />
+                <CiPhone className="text-gray-900 text-xl" />
+                 </div>
                 {/*  */}
+                <div className="flex justify-between items-center border-b">
                 <input
-                  type="password"
+                  type={passwordType}
                   id="password"
                   name="password"
                   defaultValue={formData?.password}
                   onChange={handleInputChange}
-                  className="w-full bg-white shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)_inset] filter:blur(2px) backdrop-filter:blur(20px) rounded-lg border-gray-200 p-4 pe-12 text-lg outline-none"
+                  className="h-12 w-11/12 outline-none  p-4"
                   placeholder="Enter password"
                 />
+                 {passwordType === "password" ? (
+              <AiOutlineEye
+                onClick={togglePassword}
+                className="text-gray-500 text-xl"
+              />
+            ) : (
+              <GoEyeClosed
+                onClick={togglePassword}
+                className="text-gray-500 text-xl"
+              />
+            )}
+          </div>
                 {/* <span>Password must contain at least 1 uppercase and lowercase alphabetical character, 1 numeric character, 1 special character & must be 8 characters or longer</span> */}
                 {/*  */}
                 <button
                   type="submit"
-                  className="block w-full rounded-lg  bg-gray  shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)] hover:shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)_inset] filter:blur(2px) backdrop-filter:blur(20px) px-5 py-3 text-xl font-medium text-gray-700"
+                  className="flex justify-center items-center text-xl md:text-2xl text-white font-semibold bg-blue-500 py-1 md:py-2 rounded-[30px] w-full"
                   onClick={handleSubmit}
                 >
-                  Save
+                  Create Account
                 </button>
               </form>
-              <p className="text-lg text-center py-0">
+              <p className="text-sm md:text-[16px] xl:text-lg text-center py-0">
                 Already have an account?{" "}
                 <span className="hover:text-blue-500 hover:underline">
                   <Link to="/login">Sign in here</Link>
@@ -214,7 +248,7 @@ const Sign = () => {
               </p>
             </div>
           </div>
-        </div>
+    
       </div>
     </>
   );

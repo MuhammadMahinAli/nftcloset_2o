@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
   // State for form data — adjust or remove as needed
 const [updateOrderStatus] = useUpdateOrderStatusMutation()
-  console.log(order);
+
   const product = order?.productID;
   const orderInfo = order?.productInfo;
   const customerInfo = order?.orderedBy;
@@ -16,7 +16,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
   const {email, name, phoneNumber} = customerInfo;
   const {street, country, city, homeAddress } = deliveryAddress;
   // Only show the modal if isOpen is true
-
+  console.log(order?.productInfo);
 
   const [formData, setFormData] = useState({
     trackingLink: "",
@@ -50,7 +50,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
   ;
     console.log(formData);
         try {
-          const response = await   updateOrderStatus ({
+          const response = await   updateOrderStatus({
             id:orderId,
             data: formData,
           }).unwrap();
@@ -68,7 +68,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
               status: "",
               digitalAsset: "",
             });
-            onClose()
+           onClose()
           }
         } catch (error) {
           Swal.fire({
@@ -157,7 +157,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
           <p className="text-gray-500 text-[18px]">City: {city}</p>
           <p className="text-gray-500 text-[18px]">Country: {country}</p>
         </div>
-<form onClick={handleSubmit}>
+<form onSubmit={handleSubmit}>
         {/* Tracking Link */}
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-1 text-[20px]" htmlFor="trackingLink">
@@ -186,6 +186,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
             value={formData.status}
             onChange={handleInputChange}
           >
+            <option value="">Select a status</option>
             <option value="approved">Approved</option>
             <option value="declined">Declined</option>
           </select>
@@ -202,14 +203,16 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
             value={formData.digitalAsset}
             onChange={handleInputChange}
           >
+             <option value="">Select a status</option>
             <option value="claimed">Claimed</option>
-            <option value="recieved">Recieved</option>
+            <option value="received">Recieved</option>
           </select>
         </div>
 
         {/* Save Button */}
         <div className="flex justify-end">
           <button
+          type='submit'
             className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded"
           >
             Save

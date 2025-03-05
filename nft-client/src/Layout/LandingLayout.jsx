@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Loading from "../Pages/Loading/Loading";
 import { AuthContext } from "../Context/UserContext";
 import HomePage from "../Pages/Homepage/Homepage";
+import ScrollToTop from "./ScrollToTop";
 
 const LandingLayout = () => {
   const authChecked = useAuthCheck();
@@ -22,7 +23,7 @@ const LandingLayout = () => {
   }, []);
 
   return (
-    <>
+    <ScrollToTop>
       {!authChecked ? (
         <div>Checking Authentication....</div>
       ) : (
@@ -36,7 +37,7 @@ const LandingLayout = () => {
           )}
         </>
       )}
-    </>
+    </ScrollToTop>
   );
 };
 

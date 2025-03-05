@@ -8,8 +8,7 @@ import DashboardApprovedOrder from "./orders/DashboardApprovedOrder";
 import DashboardDeclinedOrder from "./orders/DashboardDeclinedOrder";
 import DashboardNotClaimedOrder from "./orders/DashboardNotClaimedOrder";
 import DashboardRecievedOrder from "./orders/DashboardRecievedOrder";
-import Swal from "sweetalert2";
-import { useSendDigitalAssetsEmailMutation } from "../../features/auth/authApi";
+import { useSelector } from "react-redux";
 
 const AllOrders = () => {
   // States for tabs
@@ -21,13 +20,20 @@ const AllOrders = () => {
   const [isReceived, setIsReceived] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const [sendDigitalAssetsEmail] = useSendDigitalAssetsEmailMutation();
+  const { user } = useSelector((state) => state.auth);
+  const userEmail = user?.email;
 
+  const handleOpenModal = (order) => {
+    setIsOpenModal(true);
+    setSelectedOrder(order);
+  };
 
-  const onClose = ()=>{
-    setIsOpenModal(false)
-  }
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+    setSelectedOrder(null);
+  };
 
   // Function to handle tab clicks
   const handleTabClick = (tab) => {
@@ -66,13 +72,11 @@ const AllOrders = () => {
 
   function formatIsoDateToHumanReadable(isoDateString) {
     const date = new Date(isoDateString);
-  
-  
+
     if (isNaN(date.getTime())) {
       return "";
     }
-  
-  
+
     const monthNames = [
       "January",
       "February",
@@ -87,38 +91,14 @@ const AllOrders = () => {
       "November",
       "December",
     ];
-  
-    const day = date.getDate(); 
+
+    const day = date.getDate();
     const month = monthNames[date.getMonth()];
     const year = date.getFullYear();
-  
+
     return `${day} ${month}, ${year}`;
   }
 
-  const handleSendAssetsByEmail = async (e, email, orderID, digitalAssets) => {
-    e.preventDefault(); 
-    try {
-      const result = await sendDigitalAssetsEmail({
-        email,
-        orderID,
-        digitalAssets,
-      }).unwrap();
-      alert(result.message);
- 
-    } catch (err) {
-      alert(`Error: ${err.message}`);
-    }
-  };
-
-  const handlePendingOrder = () => {
-    Swal.fire({
-      icon: "info",
-      title: "Mission Failed!",
-      text: "Your Order is not approved yet.",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
   return (
     <div className="p-3 xs:p-4 md:p-7">
       <div className="flex justify-between items-center">
@@ -140,22 +120,40 @@ const AllOrders = () => {
           {isOpenDropDown && (
             <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10 border border-gray-200">
               <ul className="py-1">
-                <li className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <li
+                  onClick={() => handleTabClick("all")}
+                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   All
                 </li>
-                <li className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <li
+                  onClick={() => handleTabClick("pending")}
+                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Pending
                 </li>
-                <li className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <li
+                  onClick={() => handleTabClick("approved")}
+                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Approved
                 </li>
-                <li className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <li
+                  onClick={() => handleTabClick("declined")}
+                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Declined
                 </li>
-                <li className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <li
+                  onClick={() => handleTabClick("claimed")}
+                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Claimed
                 </li>
-                <li className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <li
+                  onClick={() => handleTabClick("received")}
+                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Received
                 </li>
               </ul>
@@ -365,33 +363,82 @@ const AllOrders = () => {
         </div>
       </div> */}
       <div className="min-h-screen">
-      {
-        isOpenModal &&
-        <RequestDetailsModal isOpenModal={isOpenModal} onClose={onClose} />
-      }
-      {/* Tab content sections    */}
-      {isAll && <div className="">
-        <DashboardAllOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
-        </div>}
-      {isPending && <div className="mt-4">
-        <DashboardPendingOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
-        </div>}
-      {isApproved && <div className="mt-4">
-        <DashboardApprovedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
-        </div>}
-      {isDeclined && <div className="mt-4">
-        <DashboardDeclinedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
-        </div>}
-      {isClaimed && <div className="mt-4">
-        <DashboardNotClaimedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
-        </div>}
-      {isReceived && <div className="mt-4">
-        <DashboardRecievedOrder handlePendingOrder={handlePendingOrder} handleSendAssetsByEmail={handleSendAssetsByEmail} formatIsoDateToHumanReadable={formatIsoDateToHumanReadable} />
-        </div>}
-        </div>
+        {/* Tab content sections    */}
+        {isAll && (
+          <div className="">
+            <DashboardAllOrder
+              userEmail={userEmail}
+              selectedOrder={selectedOrder}
+              isOpenModal={isOpenModal}
+              handleOpenModal={handleOpenModal}
+              handleCloseModal={handleCloseModal}
+              formatIsoDateToHumanReadable={formatIsoDateToHumanReadable}
+            />
+          </div>
+        )}
+        {isPending && (
+          <div className="mt-4">
+            <DashboardPendingOrder
+              userEmail={userEmail}
+              selectedOrder={selectedOrder}
+              isOpenModal={isOpenModal}
+              handleOpenModal={handleOpenModal}
+              handleCloseModal={handleCloseModal}
+              formatIsoDateToHumanReadable={formatIsoDateToHumanReadable}
+            />
+          </div>
+        )}
+        {isApproved && (
+          <div className="mt-4">
+            <DashboardApprovedOrder
+              userEmail={userEmail}
+              selectedOrder={selectedOrder}
+              isOpenModal={isOpenModal}
+              handleOpenModal={handleOpenModal}
+              handleCloseModal={handleCloseModal}
+              formatIsoDateToHumanReadable={formatIsoDateToHumanReadable}
+            />
+          </div>
+        )}
+        {isDeclined && (
+          <div className="mt-4">
+            <DashboardDeclinedOrder
+              userEmail={userEmail}
+              selectedOrder={selectedOrder}
+              isOpenModal={isOpenModal}
+              handleOpenModal={handleOpenModal}
+              handleCloseModal={handleCloseModal}
+              formatIsoDateToHumanReadable={formatIsoDateToHumanReadable}
+            />
+          </div>
+        )}
+        {isClaimed && (
+          <div className="mt-4">
+            <DashboardNotClaimedOrder
+              userEmail={userEmail}
+              selectedOrder={selectedOrder}
+              isOpenModal={isOpenModal}
+              handleOpenModal={handleOpenModal}
+              handleCloseModal={handleCloseModal}
+              formatIsoDateToHumanReadable={formatIsoDateToHumanReadable}
+            />
+          </div>
+        )}
+        {isReceived && (
+          <div className="mt-4">
+            <DashboardRecievedOrder
+              userEmail={userEmail}
+              selectedOrder={selectedOrder}
+              isOpenModal={isOpenModal}
+              handleOpenModal={handleOpenModal}
+              handleCloseModal={handleCloseModal}
+              formatIsoDateToHumanReadable={formatIsoDateToHumanReadable}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default AllOrders;
-

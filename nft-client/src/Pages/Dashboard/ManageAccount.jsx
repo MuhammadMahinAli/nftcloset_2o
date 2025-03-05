@@ -12,15 +12,23 @@ import { useContext, useState } from "react";
 import { useGetSingleUserQuery } from "../../features/auth/authApi";
 import { AuthContext } from "../../Context/UserContext";
 import AddOrUpdateAddress from "./AddOrUpdateAddress";
+import { useSelector } from "react-redux";
+import { useGetAllOrderByMemberQuery, useGetAllOrderQuery } from "../../features/order/orderApi";
 
 const ManageAccount = () => {
   const { userId } = useContext(AuthContext);
   const [isOpenEditAddress, setIsOpenEditAddress] = useState(false);
   const { data: getSingleUser } = useGetSingleUserQuery(userId);
+    const { data: getAllOrder, isLoading } = useGetAllOrderQuery();
+    const { data: getAllOrderByMember } = useGetAllOrderByMemberQuery(userId);
+    const allOrder = getAllOrder?.data;
+    const allMyOrder = getAllOrderByMember?.data;
   const userInfo = getSingleUser?.data;
 
-  const totalAddress = userInfo?.addresses;
+  console.log(allMyOrder);
 
+  const totalAddress = userInfo?.addresses;
+  const { user } = useSelector((state) => state.auth);
   const orders = [
     {
       id: 1,
@@ -50,13 +58,11 @@ const ManageAccount = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "Completed":
+      case "approved":
         return "text-green-600";
-      case "Shipping":
-        return "text-purple-600";
-      case "Refund":
+      case "pending":
         return "text-yellow-600";
-      case "Pending":
+      case "declined":
         return "text-red-600";
       default:
         return "text-gray-600";
@@ -66,7 +72,7 @@ const ManageAccount = () => {
     {
       name: "All Orders",
       icon: <OrderOne />,
-      href: "/orders",
+      to: "/manageAccount/orders",
       color: "#ff947a",
       iconColor: "text-orange-600",
       bgColor: "#fff4de",
@@ -74,7 +80,7 @@ const ManageAccount = () => {
     {
       name: "All Products",
       icon: <ProductOne />,
-      href: "/products",
+      to: "/manageAccount/all-products",
       color: "#3cd856",
       iconColor: "text-emerald-600",
       bgColor: "#dcfce7",
@@ -82,7 +88,7 @@ const ManageAccount = () => {
     {
       name: "All Collections",
       icon: <CollectionOne />,
-      href: "/collections",
+      to: "/manageAccount/all-collections",
       color: "#fa5a7d",
       iconColor: "text-pink-600",
       bgColor: "#ffe2e5",
@@ -90,17 +96,16 @@ const ManageAccount = () => {
     {
       name: "Add New Product",
       icon: <FaPlus className="text-2xl font-bold text-white" />,
-      href: "/products/new",
+      to: "/manageAccount/add-new-product",
       color: "#bf83ff",
       iconColor: "text-violet-600",
       bgColor: "#f3e8ff",
     },
   ];
+  console.log("user", user);
   return (
     <>
-      <h1 className="text-2xl xl:text-3xl font-bold pl-6 py-6 text-center">
-        Admin Dashboard!
-      </h1>
+          { user?.email !== "arrr@gmail.com" ?
       <div className="pl-1 xl:pl-10 3xl:pl-5 py-9  grid grid-cols-1 lg:grid-cols-2 space-x-0 lg:space-x-7 space-y-6 lg:space-y-0">
         {/* left side */}
         <div className="w-full ">
@@ -132,29 +137,29 @@ const ManageAccount = () => {
                 View All
               </button>
             </div>
-            <div className="grid gap-4 xl:gap-6 3xl:gap-4">
-              {orders.map((order) => (
+            <div className="min-h-[200px] grid gap-4 xl:gap-6 3xl:gap-4">
+              {allMyOrder?.map((order) => (
                 <div
                   key={order.id}
                   className={`${order.bgColor} rounded-lg p-3 xl:p-4 flex items-center justify-between`}
                 >
                   <div className="flex  items-center space-x-2">
-                    <div className="w-10 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
                       <img
-                        src="https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
-                        alt={order.product}
+                        src={order?.productID.displayImage || "https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D" }
+                        alt={order?.productID?.productName}
                         className="w-8 h-10 object-cover"
                       />
                     </div>
-                    <span className="text-[15px] xl:text-[18px] font-medium">
-                      {order.product}
+                    <span className="text-[15px] xl:text-[18px] font-medium capitalize">
+                    {order?.productID?.productName}
                     </span>
                   </div>
 
                   <span
                     className={`${getStatusColor(
                       order.status
-                    )} text-[15px] xl:text-[18px] font-medium`}
+                    )} text-[15px] xl:text-[18px] font-medium capitalize`}
                   >
                     {order.status}
                   </span>
@@ -165,6 +170,10 @@ const ManageAccount = () => {
                   </div>
                 </div>
               ))}
+{
+  allMyOrder?.length === 0 &&
+  <p  className="text-lg xl:text-xl font-semibold text-gray-600">No Order available to show.</p>
+}
             </div>
           </div>
         </div>
@@ -320,25 +329,25 @@ const ManageAccount = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                {orders.map((action) => (
+                {allMyOrder?.map((action) => (
                   <div
                     className={`${action.bgColor} rounded-lg md:h-[180px] lg:h-[200px] 3xl:h-[250px]  border p-6 flex flex-col justify-center items-center`}
                     key={action.name}
                   >
                     <div className={` flex items-center justify-center mb-4`}>
                       <img
-                        src="https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
+                        src={action?.productID.displayImage || "https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"}
                         className="w-14 h-16"
                         alt=""
                       />
                     </div>
-                    <h3 className="text-sm md:text-lg xl:text-xl font-bold text-center ">
-                      {action.product}
+                    <h3 className="text-sm md:text-lg xl:text-xl font-bold text-center capitalize">
+                      {action?.productID?.productName}
                     </h3>
                     <h3
                       className={` ${getStatusColor(
                         action.status
-                      )} text-sm md:text-lg xl:text-xl font-bold text-center `}
+                      )} text-sm md:text-lg xl:text-xl font-bold text-center capitalize`}
                     >
                       {action.status}
                     </h3>
@@ -348,12 +357,12 @@ const ManageAccount = () => {
             </div>
           </div>
         </div>
-        {/* </div> */}
+        {isOpenEditAddress && (
+          <AddOrUpdateAddress setIsOpenEditAddress={setIsOpenEditAddress} />
+        )}
       </div>
 
-      <h1 className="text-2xl xl:text-3xl font-bold pl-6 py-6 text-center">
-        User Dashboard!
-      </h1>
+      :
       <div className="pl-1 xl:pl-10 3xl:pl-5 py-9  grid grid-cols-1 lg:grid-cols-2 space-x-0 lg:space-x-7 space-y-6 lg:space-y-0">
         {/* left side */}
         <div className="w-full  ">
@@ -381,33 +390,33 @@ const ManageAccount = () => {
           <div className="hidden lg:block mt-8 bg-white rounded-lg p-6 shadow-lg">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg xl:text-xl font-bold">Latest Orders</h3>
-              <button className=" xl:text-lg font-bold text-gray-700 text-sm">
+              <Link to="/manageAccount/orders" className=" xl:text-lg font-bold text-gray-700 text-sm">
                 View All
-              </button>
+              </Link>
             </div>
             <div className="grid gap-4 xl:gap-6 3xl:gap-4">
-              {orders.map((order) => (
+              {allOrder?.slice(0, 4).map((order) => (
                 <div
                   key={order.id}
                   className={`${order.bgColor} rounded-lg p-3 xl:p-4 flex items-center justify-between`}
                 >
-                  <div className="flex  items-center space-x-2">
+                  <div className="flex  items-center space-x-2 w-4/12">
                     <div className="w-10 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
                       <img
-                        src="https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"
-                        alt={order.product}
+                        src={ order?.productID?.displayImage || "https://images.unsplash.com/photo-1627389955646-6596047473d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8M2QlMjBncmFwaGljc3xlbnwwfHwwfHx8MA%3D%3D"}
+                        alt={order?.productID?.productName}
                         className="w-8 h-10 object-cover"
                       />
                     </div>
-                    <span className="text-[15px] xl:text-[18px] font-medium">
-                      {order.product}
+                    <span className="text-[15px] xl:text-[18px] font-medium capitalize">
+                    {order?.productID?.productName}
                     </span>
                   </div>
 
                   <span
                     className={`${getStatusColor(
                       order.status
-                    )} text-[15px] xl:text-[18px] font-medium`}
+                    )} text-[15px] xl:text-[18px] font-medium capitalize`}
                   >
                     {order.status}
                   </span>
@@ -430,7 +439,8 @@ const ManageAccount = () => {
           {/* Manage Account Section */}
           <div className="grid grid-cols-2 gap-4">
             {actions.map((action) => (
-              <div
+              <Link 
+              to={action.to}
                 style={{ backgroundColor: action.bgColor }}
                 className={`md:h-[180px] lg:h-[200px] 3xl:h-[250px]  border p-6 flex flex-col justify-center items-center`}
                 key={action.name}
@@ -444,15 +454,14 @@ const ManageAccount = () => {
                 <h3 className="text-sm md:text-lg xl:text-xl font-bold text-center ">
                   {action.name}
                 </h3>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
-        {isOpenEditAddress && (
-          <AddOrUpdateAddress setIsOpenEditAddress={setIsOpenEditAddress} />
-        )}
+      
         {/* </div> */}
       </div>
+      }
     </>
   );
 };

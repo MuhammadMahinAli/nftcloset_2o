@@ -140,13 +140,13 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center  bg-no-repeat bg-cover min-h-screen">
-      <div className="py-5 md:py-0 md:mx-10 lg:mx-20 w-full flex flex-col md:flex-row justify-between items-center   rounded-[20px]  shadow-[-7px_-7px_19px_rgba(255,_255,_255,_0.6),_9px_9px_16px_rgba(163,_177,_198,_0.6)] box-border border-[0.8px] border-solid border-gray">
+      <div className="py-5 md:py-0 mx-0 md:mx-10 lg:mx-20 w-full flex flex-col md:flex-row justify-between items-center     shadow-[-7px_-7px_19px_rgba(255,_255,_255,_0.6),_9px_9px_16px_rgba(163,_177,_198,_0.6)] box-border border-[0.8px] border-solid border-gray">
         {/* left */}
         <div className="p-5 space-y-4 md:space-y-0 md:w-6/12">
-          <div className="md:hidden w-[350px] rounded-[20px] shadow-[-7px_-7px_19px_rgba(255,_255,_255,_0.6),_9px_9px_16px_rgba(163,_177,_198,_0.6)] box-border border-[0.8px] border-solid border-gray">
+          <div className="md:hidden w-[300px] rounded-[20px] shadow-[-7px_-7px_19px_rgba(255,_255,_255,_0.6),_9px_9px_16px_rgba(163,_177,_198,_0.6)] box-border border-[0.8px] border-solid border-gray">
             <img
               src="https://img.freepik.com/free-vector/key-concept-illustration_114360-6305.jpg"
-              className="p-7 w-[250px]"
+              className="p-7 w-[300px]"
               loading="lazy"
               alt=""
             />
@@ -163,7 +163,7 @@ const Login = () => {
         {/* right */}
         <form
           onSubmit={handleSubmit}
-          className="-mt-14 ml-16 md:ml-0  py-6 px-3  md:px-5 md:py-16 xl:py-24 space-y-3 lg:space-y-6 flex flex-col h-full w-9/12 md:w-7/12 lg:w-6/12 bg-gray-50 md:mt-8 rounded-tl-[30px] rounded-br-[30px] md:rounded-tl-[60px] md:rounded-br-[0px]"
+          className="-mt-14 ml-16 md:ml-0  py-6 px-3  md:px-5 md:py-16 xl:py-24 space-y-3 lg:space-y-6 flex flex-col h-full w-12/12 md:w-7/12 lg:w-6/12 bg-gray-50 md:mt-8 rounded-tl-[30px] rounded-br-[30px] md:rounded-tl-[60px] md:rounded-br-[0px]"
         >
           <h1 className="text-blue-500 text-xl md:text-2xl font-bold pl-5">
             Login Your Account
@@ -220,7 +220,7 @@ const Login = () => {
             Forgot Password?
           </button>
           
-          <p className="text-center">
+          <p className="text-sm md:text-[16px] xl:text-lg text-center">
             {"Don't have any account ? "}
             <Link
               to="/sign-up"

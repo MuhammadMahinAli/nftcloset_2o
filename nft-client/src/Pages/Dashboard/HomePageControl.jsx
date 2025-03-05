@@ -20,25 +20,27 @@ const HomePageControl = () => {
   
   return (
     <div className="py-5">
+       <div className="flex justify-between items-center">
       <h1 className="text-xl lg:text-3xl font-bold text-gray-700 rounded-xl py-5">
         Homepage Controls
       </h1>
 
-   
-
-      {/* Banners Section */}
-      <div className="mt-8">
-        <div className="flex justify-between items-center">
-          <p className="text-lg lg:text-xl font-bold text-gray-700 rounded-xl py-5">
-            Banners
-          </p>
-          <Link
+      <Link
             to='/manageAccount/update-home-page-content'
-            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-200"
+            className="text-xl px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-200"
           >
             Update
           </Link>
-        </div>
+          </div>
+
+      {/* Banners Section */}
+      <div className="mt-8">
+       
+          <p className="text-lg lg:text-xl font-bold text-gray-700 rounded-xl py-5">
+            Banners
+          </p>
+    
+   
         <CollectionSlider getFeaturedCollection={getFeaturedCollection} />
       </div>
 

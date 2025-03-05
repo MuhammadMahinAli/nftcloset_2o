@@ -43,6 +43,14 @@ export const orderApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["Order"],
     }),
+    getOrderStatusForAdmin: builder.query({
+      // Expect an object argument containing { status, id }
+      query: ({ status }) => ({
+        url: `/order/getOrderStatusForAdmin/${status}`,
+        method: "GET",
+      }),
+      providesTags: ["Order"],
+    }),
     getPendingOrder: builder.query({
       query: (id) => ({
         url: `/order/getPendingOrder/${id}`,
@@ -87,4 +95,4 @@ export const orderApi = apiSlice.injectEndpoints({
   }),
 });
 
- export const { useGetOrderStatusAndAssetsQuery ,useUpdateOrderDigitalAssetStatusMutation,useUpdateOrderStatusMutation,useAddOrderMutation, useGetAllOrderQuery,useGetAllOrderByMemberQuery,useGetPendingOrderQuery,useGetOrderByIdQuery } = orderApi;
+ export const {useGetOrderStatusForAdminQuery, useGetOrderStatusAndAssetsQuery ,useUpdateOrderDigitalAssetStatusMutation,useUpdateOrderStatusMutation,useAddOrderMutation, useGetAllOrderQuery,useGetAllOrderByMemberQuery,useGetPendingOrderQuery,useGetOrderByIdQuery } = orderApi;

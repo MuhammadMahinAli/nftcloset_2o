@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import { catchAsync } from "../../../utils/catchAsync.js";
 import { sendResponse } from "../../../utils/sendResponse.js";
-import { addOrderService, deleteOrderService, getAllOrderByMemberService, getAllOrderService, getApprovedOrdersByMemberService, getClaimedOrdersByMemberService, getDeclinedOrdersByMemberService, getOrderByIdService, getOrdersByStatusService, getPendingOrdersByMemberService, getReceivedOrdersByMemberService, updateOrderDigitalAssetStatusService, updateOrderStatusService } from "./order.service.js";
+import { addOrderService, deleteOrderService, getAllOrderByMemberService, getAllOrderService, getApprovedOrdersByMemberService, getClaimedOrdersByMemberService, getDeclinedOrdersByMemberService, getOrderByIdService, getOrdersByStatusForAdminService, getOrdersByStatusService, getPendingOrdersByMemberService, getReceivedOrdersByMemberService, updateOrderDigitalAssetStatusService, updateOrderStatusService } from "./order.service.js";
 
 //------create an order
 
@@ -66,8 +66,18 @@ export const getOrderByIdController = catchAsync(async (req, res) => {
 
 export const getOrdersByStatusController = async (req, res) => {
   try {
-    const { status, id } = req.params; // e.g., /getOrderStatus/approved/123
+    const { status, id } = req.params; 
     const orders = await getOrdersByStatusService(status, id);
+    return res.status(200).json(orders);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({ message: error.message });
+  }
+};
+export const getOrdersByStatusForAdminController = async (req, res) => {
+  try {
+    const { status } = req.params; 
+    const orders = await getOrdersByStatusForAdminService(status);
     return res.status(200).json(orders);
   } catch (error) {
     console.error(error);

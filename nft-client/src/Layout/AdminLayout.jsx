@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Nav } from "../Pages/shared/NavBar/Nav";
 import AdminSideBar from "../common/AdminSidebar/AdminSideBar";
 import Footer from "../Pages/shared/Footer/Footer";
+import ScrollToTop from "./ScrollToTop";
 
 const AdminLayout = () => {
   const authChecked = useAuthCheck();
@@ -22,7 +23,7 @@ const AdminLayout = () => {
     <>
       {/* { 
     user?.email === 'researchbdy@gmail.com' && */}
-      <>
+      <ScrollToTop>
         {!authChecked ? (
           <div>Checking Authentication....</div>
         ) : (
@@ -38,7 +39,7 @@ const AdminLayout = () => {
             <Footer/>
           </div>
         )}
-      </>
+      </ScrollToTop>
       {/* } */}
     </>
   );
