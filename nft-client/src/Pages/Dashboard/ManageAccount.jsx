@@ -395,7 +395,7 @@ const ManageAccount = () => {
               </Link>
             </div>
             <div className="grid gap-4 xl:gap-6 3xl:gap-4">
-              {allOrder?.slice(0, 4).map((order) => (
+              {allOrder?.slice(0, 3).map((order) => (
                 <div
                   key={order.id}
                   className={`${order.bgColor} rounded-lg p-3 xl:p-4 flex items-center justify-between`}

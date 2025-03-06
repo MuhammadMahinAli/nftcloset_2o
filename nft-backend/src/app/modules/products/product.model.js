@@ -33,7 +33,7 @@ const ProductSchema = new Schema(
     displayImage: { type: String, required: true },
     colors: [{ type: String }],
     price: { type: Number, required: true },
-    stock: { type: Number, required: true },
+    stock:{ type: String, enum: ["notAvailable", "available"] },
     buyingLink: { type: String },
     extraVideos: [{ type: String }],
     extraImages: [{ type: String }],
@@ -48,8 +48,6 @@ const ProductSchema = new Schema(
     tokenDetails: { type: TokenDetailsSchema },
     sizeChart: { type: String },
     sizeWithMaterial: [SizeWithMaterialSchema],
-    isFeatured: { type: Boolean },
-    isBestProduct: { type: Boolean },
   },
   {
     timestamps: true,

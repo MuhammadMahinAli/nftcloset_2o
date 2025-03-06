@@ -27,6 +27,8 @@ const DashboardPendingOrder = ({
   if (isLoading) return <p>Orders is Loading...</p>;
   if (getAllOrder?.length === 0)
     return <p className="text-xl font-semibold">No order available.</p>;
+
+  console.log(getAllOrderForAdmin);
   return (
     <div>
       {orderData?.map((order, i) => (

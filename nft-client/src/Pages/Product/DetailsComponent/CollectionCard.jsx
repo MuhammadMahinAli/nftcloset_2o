@@ -73,7 +73,7 @@ const CollectionCard = ({ collection }) => {
               </div>
               {/* for dekstop */}
 
-              <div className="hidden lg:flex  items-center gap-4 mt-4">
+              {/* <div className="hidden lg:flex  items-center gap-4 mt-4">
                 <button className="hover:opacity-80">
                   <CiStar className="text-gray-400 text-4xl" />
                 </button>
@@ -89,11 +89,11 @@ const CollectionCard = ({ collection }) => {
                 <button className="hover:opacity-80">
                   <BsInstagram className="text-gray-400 text-3xl" />
                 </button>
-              </div>
+              </div> */}
             </div>
 
             {/* for mbl */}
-            <div className="lg:hidden flex items-center justify-start gap-4 py-3 px-3">
+            {/* <div className="lg:hidden flex items-center justify-start gap-4 py-3 px-3">
               <button className="hover:opacity-80">
                 <CiStar className="text-gray-700 text-3xl" />
               </button>
@@ -109,7 +109,7 @@ const CollectionCard = ({ collection }) => {
               <button className="hover:opacity-80">
                 <BsInstagram className="text-gray-700 text-2xl" />
               </button>
-            </div>
+            </div> */}
             {/* for dekstop */}
 
             <div className="lg:flex flex-col p-4 hidden  ">

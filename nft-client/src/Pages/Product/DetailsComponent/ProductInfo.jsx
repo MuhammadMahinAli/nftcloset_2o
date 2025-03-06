@@ -10,7 +10,7 @@ const ProductInfo = ({productName}) => {
                 <RiVerifiedBadgeFill className="text-blue-500 bg-blue-100 rounded-full text-xl" />
           
             </div>
-          <h1 className="text-2xl md:text-4xl font-bold">{productName}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold  capitalize">{productName}</h1>
          
           {/* Creator Info */}
           <div className="flex items-center gap-2 md:gap-4 lg:p-4  rounded-lg">

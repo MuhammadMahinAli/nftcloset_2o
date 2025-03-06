@@ -13,11 +13,11 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   if (!user?._id) {
-    navigate("/only-for-admin-login-route");
+    navigate("/login");
     return;
   }
 
-  console.log("uu", user);
+
 
   return (
     <>

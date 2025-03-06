@@ -78,3 +78,5 @@ export const deleteProductController = catchAsync(async (req, res) => {
     data: product,
   });
 });
+
+

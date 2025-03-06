@@ -2,10 +2,12 @@ import { IoIosSearch } from "react-icons/io";
 import banner from "../../assets/nft-image/banner.png";
 import banner1280 from "../../assets/nft-image/banner1280.jpg";
 import { IoCartOutline, IoReloadSharp } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Context/UserContext";
 
 const CollectionDetails = () => {
+   const {userId} = useContext(AuthContext);
   const data = useLoaderData();
   const collectionInfo = data?.data;
   const {
@@ -320,15 +322,15 @@ const CollectionDetails = () => {
                 </div>
               </>
               {isOpenIndex === i && (
-                <a
-                  href={product.buyingLink}
+                <Link
+                  to={`${userId ? `/orders/${product?._id}` : "/login"}`}
                   className="absolute bottom-0 w-full flex justify-between bg-[#12C9B5] py-1 xl:py-2"
                 >
                   <p className="text-center w-10/12 border-r text-lg lg:text-[16px] xl:text-[18px] text-white">
                     {isOfferValid ? "Buy with discount" : "Buy now"}
                   </p>
                   <IoCartOutline className="text-3xl text-white mr-3 ssm:mr-5 lg:mr-8 xl:mr-5" />
-                </a>
+                </Link>
               )}
             </div>
           );

@@ -51,29 +51,22 @@ const DashboardAllOrder = ({userEmail, selectedOrder, isOpenModal,handleOpenModa
                 <p className="text-sm xl:text-base  text-gray-700">
                   {formatIsoDateToHumanReadable(order?.updatedAt)}
                 </p>
+                <p className="text-sm xl:text-base  text-gray-700">
+                  ID: {order?.orderID}
+                </p>
               </div>
             </div>
 
             {/* right */}
 
-            {userEmail !== "arrr@gmail.com" ? (
-              <div className="flex justify-between items-center space-x-5">
-                <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
-                  Confirm Reciept
-                </button>
-
-                <p className="text-sm xl:text-xl  text-gray-700 hover:underline">
-                  Track
-                </p>
-              </div>
-            ) : (
+      
               <p
                 onClick={() => handleOpenModal(order)}
                 className="cursor-pointer text-sm xl:text-xl text-gray-700 hover:underline"
               >
                 Details
               </p>
-            )}
+         
           </div>
           <OrderCardPrompt order={order} />
         </div>
@@ -114,7 +107,7 @@ const DashboardAllOrder = ({userEmail, selectedOrder, isOpenModal,handleOpenModa
 
             {/* right */}
 
-            {userEmail !== "arrr@gmail.com" ? (
+ 
               <div className="flex justify-between items-center space-x-5">
                 <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
                   Confirm Reciept
@@ -124,14 +117,7 @@ const DashboardAllOrder = ({userEmail, selectedOrder, isOpenModal,handleOpenModa
                   Track
                 </p>
               </div>
-            ) : (
-              <p
-                onClick={() => handleOpenModal(order)}
-                className="cursor-pointer text-sm xl:text-xl text-gray-700 hover:underline"
-              >
-                Details
-              </p>
-            )}
+          
           </div>
           <OrderCardPrompt order={order} />
         </div>

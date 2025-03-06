@@ -4,8 +4,6 @@ import { Product } from "../product.model.js";
 
 export const addProductService = async (productInfo) => {
   try {
-    productInfo.isFeatured = false;
-    productInfo.isBestProduct = false;
     const result = await Product.create(productInfo);
     if (!result) {
       throw new ApiError(

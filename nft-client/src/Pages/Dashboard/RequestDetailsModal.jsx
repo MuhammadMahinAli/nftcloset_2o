@@ -126,18 +126,25 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
 
         {/* Product Information */}
         <div className="mb-4 space-y-1">
-          <p className="text-gray-900 font-bold text-[20px]">
+          <p className="text-gray-900 font-bold text-[20px] capitalize">
             Product Name: <span >{productName}</span>
           </p>
           <p className="text-gray-500 font-medium text-[18px]">
-            Size: <span className="font-normal">{size}</span>
+            Size: <span className="font-normal capitalize">{size}</span>
           </p>
           <p className="text-gray-500 font-medium text-[18px]">
-            Color: <span className="font-normal">{color}</span>
+            Metarial: <span className="font-normal capitalize">{material}</span>
+          </p>
+          <p className="text-gray-500 font-medium text-[18px]">
+            Color: <span className="font-normal capitalize">{color}</span>
           </p>
         </div>
 
         {/* Customer Details */}
+        <div className="mb-4 space-y-1">
+          <p className="text-gray-700 font-bold mb-1 text-[20px]">Crossmint Order ID</p>
+          <p className="text-gray-500 text-[18px]">ID: {order?.crossMintOrderId}</p>
+        </div>
         <div className="mb-4 space-y-1">
           <p className="text-gray-700 font-bold mb-1 text-[20px]">Customer Details</p>
           <p className="text-gray-500 text-[18px]">Email:{email}</p>
@@ -147,7 +154,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
 
         {/* Address Details */}
         <div className="mb-4 space-y-1">
-          <p className="text-gray-700 font-bold mb-1 text-[20px]">Customer Details</p>
+          <p className="text-gray-700 font-bold mb-1 text-[20px]">Delivery Address</p>
           <p className="text-gray-500 text-[18px]">
             Address: {homeAddress}
           </p>

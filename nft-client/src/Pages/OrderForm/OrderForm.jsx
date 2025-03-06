@@ -523,12 +523,13 @@ import lobby from "../../assets/nft-image/lobby.png";
 import certification from "../../assets/nft-image/certification.png";
 import recroom from "../../assets/nft-image/recroom.png";
 import animated from "../../assets/nft-image/animated.png";
+import crossmint from "../../assets/nft-image/crossmint-logo.jpg";
 import vrChat from "../../assets/nft-image/vr-chat.png";
 import sandbox from "../../assets/nft-image/sandbox.png";
 import story from "../../assets/nft-image/story.png";
 import pd from "../../assets/nft-image/pd.png";
 import threeD from "../../assets/nft-image/3d.png";
-import { useAddOrderMutation} from "../../features/order/orderApi";
+import { useAddOrderMutation } from "../../features/order/orderApi";
 import Swal from "sweetalert2";
 import AddOrUpdateAddress from "../Dashboard/AddOrUpdateAddress";
 
@@ -538,7 +539,6 @@ const OrderForm = () => {
   const [addOrder] = useAddOrderMutation();
   const { userId } = useContext(AuthContext);
   const { data: getSingleUser } = useGetSingleUserQuery(userId);
-
 
   const dropdownRef = useRef(null);
   const data = useLoaderData();
@@ -552,6 +552,7 @@ const OrderForm = () => {
     colors,
     sizeWithMaterial,
     sizeChart,
+    buyingLink
   } = productInfo || {};
 
   // Form state
@@ -732,15 +733,45 @@ const OrderForm = () => {
   const handleColorSelect = (color) => {
     setSelectedColor(color);
   };
+  const handleMaterialSelect = (material) => {
+    setSelectedMaterial(material);
+  };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(formData);
+
     // Validate required fields
-    if (!formData.productID || !formData.orderedBy || !selectedAddress) {
-      alert("Please fill in all required fields");
-      return;
+    const requiredFields = [
+      { value: formData.productID, label: "Product ID" },
+      { value: formData.productInfo.material, label: "Material" },
+      { value: formData.productInfo.size, label: "Size" },
+      { value: formData.productInfo.color, label: "Color" },
+      {
+        value: formData.deliveryAddress.homeAddress,
+        label: "Delivery Address",
+      },
+      { value: formData.deliveryAddress.country, label: "Country" },
+      { value: formData.deliveryAddress.city, label: "City" },
+      { value: formData.deliveryAddress.street, label: "Street" },
+      { value: formData.orderedBy, label: "Ordered By" },
+      { value: formData.crossMintOrderId, label: "CrossMint Order ID" },
+    ];
+
+    for (const field of requiredFields) {
+      if (
+        !field.value ||
+        (typeof field.value === "string" && field.value.trim() === "")
+      ) {
+        Swal.fire({
+          icon: "error",
+          title: "Required Field Missing",
+          text: `Please fill in the ${field.label} field`,
+        });
+        return;
+      }
     }
 
     try {
@@ -781,14 +812,6 @@ const OrderForm = () => {
         text: "Something went wrong. !",
       });
     }
-
-    // try {
-
-    //   console.log("Form data to submit:", formData);
-    //   addOrder(formData)
-    // } catch (error) {
-    //   console.error("Error submitting order:", error);
-    // }
   };
 
   const hexColors = colors?.map((hex) => {
@@ -833,7 +856,9 @@ const OrderForm = () => {
 
         {/* Right side - Form Fields */}
         <div className="space-y-6">
-          <h2 className="text-3xl text-gray-800 font-bold capitalize">{productName}</h2>
+          <h2 className="text-3xl text-gray-800 font-bold capitalize">
+            {productName}
+          </h2>
 
           {/* Digital Assets Mobile Dropdown */}
           <div className="mb-3 md:hidden relative" ref={dropdownRef}>
@@ -955,7 +980,7 @@ const OrderForm = () => {
                 <button
                   key={item._id}
                   type="button"
-                  onClick={() => setSelectedMaterial(item.material)}
+                  onClick={() => handleMaterialSelect(item.material)}
                   className={`capitalize px-4 py-1 border rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none ${
                     selectedMaterial === item.material
                       ? "border-gray-600 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
@@ -1042,13 +1067,13 @@ const OrderForm = () => {
                 Delivery Address
               </h3>
               <Link
-              to="/manageAccount"
+                to="/manageAccount"
                 className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
               >
                 <FaPlus />
               </Link>
             </div>
-         
+
             <div className="space-y-3">
               {userInfo?.addresses?.map((address) => (
                 <div
@@ -1132,8 +1157,26 @@ const OrderForm = () => {
             </div>
           </div>
 
-          {/* crossmint id */}
-          <div className="max-w-2xl">
+         
+
+          {/* Submit Button */}
+          <a
+          href={buyingLink}
+           target="blank"
+            className={`w-full flex justify-center items-center space-x-4 py-3 bg-[#0c0c0c] text-gray-100 hover:bg-gray-900 rounded-lg text-lg font-medium transition-colors
+              `}
+          >
+            <img className="h-10 w-10" src={crossmint} alt="Crossmint" />
+            <p> Pay with Crossmint</p>
+          </a>
+          <label
+              htmlFor="crossMintOrderId"
+              className="block text-sm md:text-[17px] font-bold text-red-600 mb-0"
+            >
+            ***Buyer need to covers minting fee
+            </label>
+           {/* crossmint id */}
+           <div className="max-w-2xl">
             <label
               htmlFor="crossMintOrderId"
               className="block text-lg font-bold text-gray-700 mb-2"
@@ -1155,8 +1198,6 @@ const OrderForm = () => {
               placeholder="Enter Crossmint ID"
             />
           </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={!formData.crossMintOrderId}
@@ -1173,7 +1214,6 @@ const OrderForm = () => {
           </button>
         </div>
       </div>
-      
     </form>
   );
 };

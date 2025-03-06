@@ -1,9 +1,13 @@
 import { useContext } from "react";
-import { useGetOrderStatusAndAssetsQuery, useGetOrderStatusForAdminQuery } from "../../../features/order/orderApi";
+import {
+  useGetOrderStatusAndAssetsQuery,
+  useGetOrderStatusForAdminQuery,
+} from "../../../features/order/orderApi";
 import Cube from "../../../icons/NFTIcon/Cube";
 import { AuthContext } from "../../../Context/UserContext";
 import OrderCardPrompt from "./OrderCardPrompt";
 import RequestDetailsModal from "../RequestDetailsModal";
+import Swal from "sweetalert2";
 
 const DashboardNotClaimedOrder = ({
   userEmail,
@@ -19,12 +23,37 @@ const DashboardNotClaimedOrder = ({
     id: userId,
   });
 
-    const { data: getAllOrderForAdmin} = useGetOrderStatusForAdminQuery({
-      status: "claimed",
-    });
+  const { data: getAllOrderForAdmin } = useGetOrderStatusForAdminQuery({
+    status: "claimed",
+  });
+
+  const orderData =
+    userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
+
+    const confirmReceipt = async (orderId) => {
+      const result = await Swal.fire({
+        title: 'Did you receive your parcel?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, confirm',
+        cancelButtonText: 'No, cancel',
+      });
   
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`http://localhost:4000/api/v1/order/confirmReceipt/${orderId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+          });
   
-  const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
+          if (!response.ok) throw new Error('Failed to confirm receipt');
+  
+          Swal.fire('Confirmed!', 'Receipt has been confirmed.', 'success');
+        } catch (err) {
+          Swal.fire('Error!', err.message, 'error');
+        }
+      }
+    };
 
   if (isLoading) return <p>Orders is Loading...</p>;
   if (getAllOrder?.length === 0)
@@ -59,10 +88,14 @@ const DashboardNotClaimedOrder = ({
 
             {userEmail !== "arrr@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
-                <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
-                  Confirm Reciept
-                </button>
-
+                {order?.isConfirmRecipt === false && (
+                  <button
+                    onClick={() => confirmReceipt(order?._id)}
+                    className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80"
+                  >
+                    Confirm Reciept
+                  </button>
+                )}
                 <p className="text-sm xl:text-xl  text-gray-700 hover:underline">
                   Track
                 </p>
@@ -80,7 +113,7 @@ const DashboardNotClaimedOrder = ({
           <OrderCardPrompt order={order} />
         </div>
       ))}
-            {isOpenModal && (
+      {isOpenModal && (
         <RequestDetailsModal
           isOpenModal={isOpenModal}
           onClose={handleCloseModal}

@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addOrderController,
+  confirmReceiptController,
   deleteOrderController,
   getAllOrderByMemberController,
   getAllOrderController,
@@ -29,7 +30,7 @@ router.put('/updateStatus/:id', updateOrderStatusController);
 router.put('/updatedigitalAssetStatus/:id', updateOrderDigitalAssetStatusController);
 router.get("/getReceivedOrder/:id", getReceivedOrdersByMemberController);
 router.delete("/deleteOrder/:id", deleteOrderController);
-// router.put('/updateUser/:id', updateMemberById);
+router.put("/confirmReceipt/:orderId", confirmReceiptController);
 
 
 

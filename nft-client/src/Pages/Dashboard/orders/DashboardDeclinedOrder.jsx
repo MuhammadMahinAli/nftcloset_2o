@@ -1,9 +1,10 @@
-import { useContext } from "react";
-import { useGetOrderStatusAndAssetsQuery, useGetOrderStatusForAdminQuery } from "../../../features/order/orderApi";
+import { useContext, useEffect } from "react";
+import { useGetOrderStatusAndAssetsQuery } from "../../../features/order/orderApi";
 import Cube from "../../../icons/NFTIcon/Cube";
 import { AuthContext } from "../../../Context/UserContext";
 import OrderCardPrompt from "./OrderCardPrompt";
 import RequestDetailsModal from "../RequestDetailsModal";
+import { useState } from "react";
 
 const DashboardDeclinedOrder = ({
   userEmail,
@@ -13,20 +14,41 @@ const DashboardDeclinedOrder = ({
   handleCloseModal,
   formatIsoDateToHumanReadable,
 }) => {
+  const [orders, setOrders] = useState([]);
+  const [issLoading, setIssLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:4000/api/v1/order/getOrderStatusForAdmin/declined"
+        );
+        if (!response.ok) throw new Error("Failed to fetch orders");
+        const data = await response.json();
+        setOrders(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIssLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+
+
   const { userId } = useContext(AuthContext);
   const { data: getAllOrder, isLoading } = useGetOrderStatusAndAssetsQuery({
     status: "declined",
     id: userId,
   });
 
-    const { data: getAllOrderForAdmin} = useGetOrderStatusForAdminQuery({
-      status: "declined",
-    });
-  
-  
-  const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
+  const orderData = userEmail === "arrr@gmail.com" ? orders : getAllOrder;
+
   if (isLoading) return <p>Orders is Loading...</p>;
-  if (getAllOrder?.length === 0)
+  if (orderData?.length === 0)
     return <p className="text-xl font-semibold">No order available.</p>;
 
   return (
@@ -59,10 +81,11 @@ const DashboardDeclinedOrder = ({
 
             {userEmail !== "arrr@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
+                {order?.isConfirmRecipt === false &&
                 <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
                   Confirm Reciept
                 </button>
-
+}
                 <p className="text-sm xl:text-xl  text-gray-700 hover:underline">
                   Track
                 </p>
@@ -80,7 +103,7 @@ const DashboardDeclinedOrder = ({
           <OrderCardPrompt order={order} />
         </div>
       ))}
-            {isOpenModal && (
+      {isOpenModal && (
         <RequestDetailsModal
           isOpenModal={isOpenModal}
           onClose={handleCloseModal}

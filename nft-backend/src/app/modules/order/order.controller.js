@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import { catchAsync } from "../../../utils/catchAsync.js";
 import { sendResponse } from "../../../utils/sendResponse.js";
-import { addOrderService, deleteOrderService, getAllOrderByMemberService, getAllOrderService, getApprovedOrdersByMemberService, getClaimedOrdersByMemberService, getDeclinedOrdersByMemberService, getOrderByIdService, getOrdersByStatusForAdminService, getOrdersByStatusService, getPendingOrdersByMemberService, getReceivedOrdersByMemberService, updateOrderDigitalAssetStatusService, updateOrderStatusService } from "./order.service.js";
+import { addOrderService, confirmReceiptService, deleteOrderService, getAllOrderByMemberService, getAllOrderService, getApprovedOrdersByMemberService, getClaimedOrdersByMemberService, getDeclinedOrdersByMemberService, getOrderByIdService, getOrdersByStatusForAdminService, getOrdersByStatusService, getPendingOrdersByMemberService, getReceivedOrdersByMemberService, updateOrderDigitalAssetStatusService, updateOrderStatusService } from "./order.service.js";
 
 //------create an order
 
@@ -189,3 +189,18 @@ export const updateOrderDigitalAssetStatusController = catchAsync(async (req, re
     data: order,
   });
 });
+
+
+
+export const confirmReceiptController = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const updatedOrder = await confirmReceiptService(orderId);
+    if (!updatedOrder) return res.status(404).json({ message: "Order not found" });
+
+    return res.status(200).json({ message: "Receipt confirmed", order: updatedOrder });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+};

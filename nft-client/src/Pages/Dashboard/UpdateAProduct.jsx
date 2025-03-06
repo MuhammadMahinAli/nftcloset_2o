@@ -929,18 +929,20 @@ const UpdateAProduct = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">
-                    Stock
-                  </label>
-                  <input
-                    name="stock"
-                    value={formData.stock}
-                    onChange={onInputChange}
-                    type="number"
-                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
-                    placeholder="56"
-                  />
-                </div>
+  <label className="block text-sm font-medium mb-2">
+    Stock
+  </label>
+  <select
+    name="stock"
+    value={formData.stock}
+    onChange={onInputChange}
+    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
+  >
+    <option value="">Select</option>
+    <option value="available">In Stock</option>
+    <option value="notAvailable">Out of Stock</option>
+  </select>
+</div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
                     Buying link
@@ -1154,19 +1156,7 @@ const UpdateAProduct = () => {
                 <h2 className="text-lg font-semibold mb-4">
                   Size And Materials:
                 </h2>
-                {/* <div className="flex  items-center space-x-2 mb-4">
-                  <h2 className="text-lg font-medium ">Size Chart:</h2>
-                  <label htmlFor="size">
-                    <img className="h-14 w-24" src={sizeChart} />
-                  </label>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    id="size"
-                    onChange={handleSizeChartUpload}
-                    className="w-full hidden p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
-                  />
-                </div> */}
+
 
                 <div className="flex items-center space-x-2 mb-4">
                   <h2 className="text-lg font-medium">Size Chart:</h2>

@@ -11,6 +11,7 @@ export const generateOrderId = () => {
 export const addOrderService = async (orderInfo) => {
   try {
     orderInfo.orderID = generateOrderId();
+    orderInfo.isConfirmRecipt = false;
     const result = await Order.create(orderInfo);
     if (!result) {
       throw new ApiError(
@@ -85,10 +86,8 @@ export const getOrdersByStatusService = async (status, userId) => {
 };
 export const getOrdersByStatusForAdminService = async (status) => {
   try {
-    // Build a query object
-    const query = { };
-
-    // Decide if we use `status` or `digitalAsset` in the query
+    const query = {};
+    
     switch (status) {
       case "pending":
       case "approved":
@@ -101,20 +100,23 @@ export const getOrdersByStatusForAdminService = async (status) => {
         query.digitalAsset = status;
         break;
       default:
-        throw new Error("Invalid status. Must be pending, approved, declined, claimed, or received.");
+        throw new Error("Invalid status.");
     }
 
-    // Fetch matching orders
+    console.log("Running Query:", query); // Debugging
     const orders = await Order.find(query)
       .populate("productID")
       .populate("orderedBy")
       .sort({ createdAt: -1 });
 
+    console.log("Orders found:", orders.length); // Debugging
     return orders;
   } catch (error) {
-    throw new Error(`Error fetching "${status}" orders for  user all : ${error.message}`);
+    console.error(error);
+    throw new Error(`Error fetching "${status}" orders: ${error.message}`);
   }
 };
+
 
 // ---------- get pending order
 
@@ -279,4 +281,13 @@ export const updateOrderDigitalAssetStatusService = async (id, data) => {
 export const deleteOrderService = async (id) => {
   const result = await Order.findByIdAndDelete({ _id: id });
   return result;
+};
+
+export const confirmReceiptService = async (orderId) => {
+  const updatedOrder = await Order.findByIdAndUpdate(
+    orderId,
+    { isConfirmRecipt: true },
+    { new: true }
+  );
+  return updatedOrder;
 };

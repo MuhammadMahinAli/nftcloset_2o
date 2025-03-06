@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { CiFilter } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useGetAllProductQuery } from "../../features/product/productApi";
+import { AuthContext } from "../../Context/UserContext";
+import { BsFillCartXFill } from "react-icons/bs";
 
 const AllProducts = () => {
+  const { userId } = useContext(AuthContext);
   const { data: getAllProduct } = useGetAllProductQuery();
   const [isOpenOption, setIsOpenOption] = useState(false);
   const [isOpenIndex, setIsOpenIndex] = useState(null);
@@ -78,6 +81,7 @@ const AllProducts = () => {
         </li>
         <li className="text-[16px] font-bold text-gray-700 px-3 py-1 ">30d</li>
       </ul>
+
       <div className="xs:p-5 md:p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 pt-3">
         {products?.map((product, i) => (
           <div
@@ -86,6 +90,12 @@ const AllProducts = () => {
             key={product.id}
             className="pb-8  2xl:pb-12 relative overflow-hidden bg-white rounded-xl shadow-xl"
           >
+            {product?.stock === "notAvailable" && (
+              <span className="text-[12px] absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-3 font-medium uppercase tracking-widest text-white">
+                Out of stock
+              </span>
+            )}
+
             <Link to={`/products-details/${product._id}`}>
               <div className="flex justify-center items-center py-4 h-[64%] lg:h-[72%] xl:h-[68%] 3xl:h-[72%]">
                 <img
@@ -104,15 +114,28 @@ const AllProducts = () => {
                 </p>
               </div>
             </Link>
-             {isOpenIndex === i && ( 
-            <Link 
-            to={`/orders/${product?._id}`}  className="absolute bottom-0  w-full flex justify-between bg-[#12C9B5] py-1 xl:py-2">
-              <p className="text-center w-10/12 border-r text-lg md:text-lg text-white">
-                Buy now
-              </p>
-              <IoCartOutline className="text-3xl text-white mr-3 ssm:mr-5 lg:mr-8 xl:mr-5" />
-            </Link >
-              )} 
+            {isOpenIndex === i && (
+              <>
+                {product?.stock === "notAvailable" ? (
+                  <button className="absolute bottom-0  w-full flex justify-between cursor-not-allowed py-1 xl:py-2 bg-[#7c7c7c]">
+                    <p className="text-center w-10/12 border-r text-lg md:text-lg text-white">
+                      Out of Stock
+                    </p>
+                    <BsFillCartXFill  className="text-2xl text-white mr-3 ssm:mr-5 lg:mr-8 xl:mr-5" />
+                  </button>
+                ) : (
+                  <Link
+                    to={`${userId ? `/orders/${product?._id}` : "/login"}`}
+                    className={`bg-[#12C9B5] absolute bottom-0  w-full flex justify-between  py-1 xl:py-2`}
+                  >
+                    <p className="text-center w-10/12 border-r text-lg md:text-lg text-white">
+                     Buy now
+                    </p>
+                    <IoCartOutline className="text-3xl text-white mr-3 ssm:mr-5 lg:mr-8 xl:mr-5" />
+                  </Link>
+                )}
+              </>
+            )}
           </div>
         ))}
       </div>

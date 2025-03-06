@@ -3,13 +3,11 @@ import { fileUpload } from "../../utils/cloudinary.js";
 import { rawFileUpload } from "../../utils/cloudinaryForRaw.js";
 import Swal from "sweetalert2";
 import { addproduct } from "../../features/product/productSlice.js";
-import {
-  useAddProductMutation,
-} from "../../features/product/productApi.js";
+import { useAddProductMutation } from "../../features/product/productApi.js";
 import UpdateProduct from "../NFT/UpdateProduct/UpdateProduct.jsx";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import sizeChart from "../../assets/nft-image/size-chart.png";
-import {  FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { useGetAllCollectionQuery } from "../../features/collection/collectionApi.js";
 import { FiCheckCircle } from "react-icons/fi";
 
@@ -47,7 +45,7 @@ const AddProduct = () => {
       recroom: "",
     },
     collection: {
-      collectionId:""
+      collectionId: "",
     },
     tokenDetails: {
       blockchain: "",
@@ -246,88 +244,89 @@ const AddProduct = () => {
       });
     }
   };
-// size
+  // size
 
-// Add these states at the top of your component
-const [sizeChartUploadCount, setSizeChartUploadCount] = useState(0);
-const [isSizeChartUploading, setIsSizeChartUploading] = useState(false);
+  // Add these states at the top of your component
+  const [sizeChartUploadCount, setSizeChartUploadCount] = useState(0);
+  const [isSizeChartUploading, setIsSizeChartUploading] = useState(false);
 
-// Add this useEffect for size chart upload progress
-useEffect(() => {
-  if (!isSizeChartUploading) {
-    setSizeChartUploadCount(0);
-    return;
-  }
-
-  const generateRandomSteps = () => {
-    const numberOfSteps = 8;
-    let steps = [];
-    let previousTarget = 0;
-
-    for (let i = 0; i < numberOfSteps - 1; i++) {
-      const minTarget = previousTarget + 5;
-      const maxTarget = Math.min(95, previousTarget + 25);
-      const target = Math.floor(Math.random() * (maxTarget - minTarget) + minTarget);
-
-      steps.push({
-        target,
-        duration: Math.random() * 1000 + 500
-      });
-
-      previousTarget = target;
+  // Add this useEffect for size chart upload progress
+  useEffect(() => {
+    if (!isSizeChartUploading) {
+      setSizeChartUploadCount(0);
+      return;
     }
 
-    steps.push({ target: 100, duration: 2000 });
-    return steps;
-  };
+    const generateRandomSteps = () => {
+      const numberOfSteps = 8;
+      let steps = [];
+      let previousTarget = 0;
 
-  const steps = generateRandomSteps();
-  let currentStep = 0;
+      for (let i = 0; i < numberOfSteps - 1; i++) {
+        const minTarget = previousTarget + 5;
+        const maxTarget = Math.min(95, previousTarget + 25);
+        const target = Math.floor(
+          Math.random() * (maxTarget - minTarget) + minTarget
+        );
 
-  const animate = () => {
-    if (currentStep >= steps.length) return;
+        steps.push({
+          target,
+          duration: Math.random() * 1000 + 500,
+        });
 
-    const step = steps[currentStep];
-    const startValue = currentStep > 0 ? steps[currentStep - 1].target : 0;
-    const increment = (step.target - startValue) / (step.duration / 50);
-    let currentValue = startValue;
-
-    const interval = setInterval(() => {
-      currentValue += increment;
-      if (currentValue >= step.target) {
-        currentValue = step.target;
-        clearInterval(interval);
-        currentStep++;
-        if (currentStep < steps.length) {
-          animate();
-        } else {
-          setIsSizeChartUploading(false);
-        }
+        previousTarget = target;
       }
-      setSizeChartUploadCount(Math.round(currentValue));
-    }, 50);
 
-    return () => clearInterval(interval);
-  };
+      steps.push({ target: 100, duration: 2000 });
+      return steps;
+    };
 
-  animate();
-}, [isSizeChartUploading]);
+    const steps = generateRandomSteps();
+    let currentStep = 0;
 
-// Update the handleSizeChartUpload function
-const handleSizeChartUpload = async (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
+    const animate = () => {
+      if (currentStep >= steps.length) return;
 
-  setIsSizeChartUploading(true);
+      const step = steps[currentStep];
+      const startValue = currentStep > 0 ? steps[currentStep - 1].target : 0;
+      const increment = (step.target - startValue) / (step.duration / 50);
+      let currentValue = startValue;
 
-     try {
+      const interval = setInterval(() => {
+        currentValue += increment;
+        if (currentValue >= step.target) {
+          currentValue = step.target;
+          clearInterval(interval);
+          currentStep++;
+          if (currentStep < steps.length) {
+            animate();
+          } else {
+            setIsSizeChartUploading(false);
+          }
+        }
+        setSizeChartUploadCount(Math.round(currentValue));
+      }, 50);
+
+      return () => clearInterval(interval);
+    };
+
+    animate();
+  }, [isSizeChartUploading]);
+
+  // Update the handleSizeChartUpload function
+  const handleSizeChartUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    setIsSizeChartUploading(true);
+
+    try {
       const uploadedUrl = await rawFileUpload(file, "raw");
       setFormData({ ...formData, sizeChart: uploadedUrl });
     } catch (error) {
       console.error("Error uploading size chart:", error);
     }
-};
-
+  };
 
   // const handleVideoUpload = async (event) => {
   //   const file = event.target.files[0];
@@ -445,7 +444,6 @@ const handleSizeChartUpload = async (event) => {
       }
     }
 
-
     // Check if at least one of extraImages or extraVideos has data
     if (
       formData.extraImages.length === 0 &&
@@ -514,7 +512,7 @@ const handleSizeChartUpload = async (event) => {
             animated: "",
           },
           collection: {
-            collectionId:""
+            collectionId: "",
           },
           tokenDetails: {
             blockchain: "",
@@ -524,7 +522,10 @@ const handleSizeChartUpload = async (event) => {
           },
           sizeChart: "",
           sizeWithMaterial: [
-            { material: "cotton", sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"] },
+            {
+              material: "cotton",
+              sizes: ["XS", "S", "M", "L", "XL", "2XL", "3XL"],
+            },
           ],
         });
 
@@ -556,9 +557,6 @@ const handleSizeChartUpload = async (event) => {
     setSelectedProduct(product);
     setEditMode(true);
   };
-
- 
-
 
   //console.log("sp", selectedProduct);
   //console.log("nf", newFormData);
@@ -607,7 +605,7 @@ const handleSizeChartUpload = async (event) => {
                     placeholder="Lorem Ipsum Dolor Sit Amet Consectetur."
                   ></textarea>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium">Colors</label>
                   <div className="flex  items-center space-x-2">
@@ -897,14 +895,16 @@ const handleSizeChartUpload = async (event) => {
                   <label className="block text-sm font-medium mb-2">
                     Stock
                   </label>
-                  <input
+                  <select
                     name="stock"
                     value={formData.stock}
                     onChange={onInputChange}
-                    type="number"
                     className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
-                    placeholder="56"
-                  />
+                  >
+                    <option value="">Select</option>
+                    <option value="available">In Stock</option>
+                    <option value="notAvailable">Out of Stock</option>
+                  </select>
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">
@@ -915,7 +915,7 @@ const handleSizeChartUpload = async (event) => {
                     name="buyingLink"
                     value={formData.buyingLink}
                     onChange={onInputChange}
-                   className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
+                    className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#26B893]"
                     placeholder="Crossmint link"
                   />
                 </div>
@@ -962,7 +962,7 @@ const handleSizeChartUpload = async (event) => {
                       "Sandbox Wearable",
                       "VR Chat Wearable",
                       "Animated",
-                      "Recroom"
+                      "Recroom",
                     ].map((label, index) => (
                       <div key={index} className="mb-4">
                         <label className="block text-sm font-medium mb-2 ">
@@ -1040,8 +1040,9 @@ const handleSizeChartUpload = async (event) => {
                       onClick={() => setIsOpenDropDown(!isOpenDropDown)}
                       className="px-3 py-2 my-5 capitalize w-full text-gray-600 hover:bg-gray-100 rounded-md flex justify-between items-center border focus:ring-2 focus:ring-[#26B893] border-gray-300"
                     >
-                    {collections?.find(c => c._id === formData.collection?.collectionId)?.collectionName || 
-     "Select Collection"}
+                      {collections?.find(
+                        (c) => c._id === formData.collection?.collectionId
+                      )?.collectionName || "Select Collection"}
                       <IoIosArrowDropdownCircle className="text-2xl" />
                     </div>
 
@@ -1062,8 +1063,8 @@ const handleSizeChartUpload = async (event) => {
                                     setFormData({
                                       ...formData,
                                       collection: {
-                                        collectionId: collection._id
-                                      }
+                                        collectionId: collection._id,
+                                      },
                                     });
                                     setIsOpenDropDown(false);
                                   }}
@@ -1132,68 +1133,76 @@ const handleSizeChartUpload = async (event) => {
                   />
                 </div> */}
 
+                <div className="flex items-center space-x-2 mb-4">
+                  <h2 className="text-lg font-medium">Size Chart:</h2>
+                  <label htmlFor="size" className="relative cursor-pointer">
+                    {formData.sizeChart ? (
+                      <div
+                        className="py-2 px-3 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
+                        onClick={() =>
+                          document.getElementById("image-upload").click()
+                        }
+                      >
+                        <span className="text-[#26B893] font-bold">
+                          Uploaded
+                        </span>{" "}
+                        <FiCheckCircle className="text-xl ml-2 text-[#26B893]" />
+                      </div>
+                    ) : (
+                      <img
+                        className="h-14 w-24"
+                        src={sizeChart}
+                        alt="Size Chart"
+                      />
+                    )}
 
-<div className="flex items-center space-x-2 mb-4">
-  <h2 className="text-lg font-medium">Size Chart:</h2>
-  <label htmlFor="size" className="relative cursor-pointer">
-    {formData.sizeChart ? 
-        <div
-        className="py-2 px-3 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-[#26B893] hover:bg-gray-100"
-        onClick={() =>
-          document.getElementById("image-upload").click()
-        }
-      >
-        <span className="text-[#26B893] font-bold">Uploaded</span> <FiCheckCircle className="text-xl ml-2 text-[#26B893]" />
-      </div>
-      
-      :
-      <img className="h-14 w-24" src={sizeChart} alt="Size Chart" />
-     
-    }
-    
-    {/* Progress Indicator */}
-    {isSizeChartUploading && (
-      <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
-        <div className="relative">
-          <svg className="w-12 h-12 transform -rotate-90">
-            <circle
-              className="text-gray-200"
-              strokeWidth="4"
-              stroke="currentColor"
-              fill="transparent"
-              r="20"
-              cx="24"
-              cy="24"
-            />
-            <circle
-              className="text-[#26B893]"
-              strokeWidth="4"
-              strokeDasharray={125.6}
-              strokeDashoffset={125.6 * ((100 - sizeChartUploadCount) / 100)}
-              strokeLinecap="round"
-              stroke="currentColor"
-              fill="transparent"
-              r="20"
-              cx="24"
-              cy="24"
-            />
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-sm font-semibold">{sizeChartUploadCount}%</span>
-          </div>
-        </div>
-      </div>
-    )}
-  </label>
-  <input
-    type="file"
-    accept=".pdf, .png, .jpg, .jpeg, .gif, .webp"
-    id="size"
-    onChange={handleSizeChartUpload}
-    className="hidden"
-    disabled={isSizeChartUploading}
-  />
-</div>
+                    {/* Progress Indicator */}
+                    {isSizeChartUploading && (
+                      <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
+                        <div className="relative">
+                          <svg className="w-12 h-12 transform -rotate-90">
+                            <circle
+                              className="text-gray-200"
+                              strokeWidth="4"
+                              stroke="currentColor"
+                              fill="transparent"
+                              r="20"
+                              cx="24"
+                              cy="24"
+                            />
+                            <circle
+                              className="text-[#26B893]"
+                              strokeWidth="4"
+                              strokeDasharray={125.6}
+                              strokeDashoffset={
+                                125.6 * ((100 - sizeChartUploadCount) / 100)
+                              }
+                              strokeLinecap="round"
+                              stroke="currentColor"
+                              fill="transparent"
+                              r="20"
+                              cx="24"
+                              cy="24"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-sm font-semibold">
+                              {sizeChartUploadCount}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </label>
+                  <input
+                    type="file"
+                    accept=".pdf, .png, .jpg, .jpeg, .gif, .webp"
+                    id="size"
+                    onChange={handleSizeChartUpload}
+                    className="hidden"
+                    disabled={isSizeChartUploading}
+                  />
+                </div>
 
                 <div className="relative">
                   {formData.sizeWithMaterial.map((entry, index) => (
