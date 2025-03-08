@@ -4,9 +4,9 @@ import expand from "../../../assets/nft-image/expand.png";
 
 const ProductImage = ({displayImage}) => {
     return (
-        <div className="bg-white shadow-xl  space-y-5">
+        <div className="bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]  space-y-5">
         {/* img */}
-           <div className="relative border rounded-xl shadow-lg h-[370px] md:h-[350px] lg:h-[500px] py-5 px-3 md:px-0">
+           <div className="relative border rounded-xl  h-[370px] md:h-[350px] lg:h-[500px] py-5 px-3 md:px-0">
              <div className="flex justify-center items-center">
                <div className="relative w-[300px] lg:w-[400px] aspect-square">
                  <img

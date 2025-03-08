@@ -12,7 +12,6 @@ import AdminLayout from "../Layout/AdminLayout";
 import UpdateUserProfile from "../Pages/Dashboard/UpdateUserProfile";
 import Pages from "../Pages/Ai/Pages";
 import UserSetting from "../Pages/Dashboard/UserSetting";
-import ProductDetails from "../components/ProductDetails";
 import AllOrders from "../Pages/Dashboard/AllOrders";
 import AllProduct from "../Pages/Dashboard/AllProduct";
 import AllCollections from "../Pages/Dashboard/AllCollections";

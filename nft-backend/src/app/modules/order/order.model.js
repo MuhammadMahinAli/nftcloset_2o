@@ -28,7 +28,7 @@ const OrderSchema = new Schema(
     crossMintOrderId: { type: String },
     trackingLink: { type: String },
     status: { type: String, enum: ["pending", "approved", "declined"] },
-    digitalAsset: { type: String, enum: ["notClaimed", "claimed", "received"] },
+    digitalAsset: { type: String, enum: ["notClaimed", "claimed", "shipping" ,  "received"] },
     isConfirmRecipt: { type: Boolean },
   },
   {

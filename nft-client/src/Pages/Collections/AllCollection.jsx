@@ -31,6 +31,7 @@ const AllCollection = () => {
   };
   
 
+
   return (
     <div className="p-3 md:p-7 lg:p-10 ">
       {/* <div className="flex items-center justify-between mb-8">
@@ -87,7 +88,7 @@ const AllCollection = () => {
         {collections?.map((product) => (
           <div
             key={product.id}
-            className="relative overflow-hidden bg-white rounded-2xl shadow-xl"
+            className="relative overflow-hidden bg-white rounded-2xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]"
           >
             <div className="h-[150px] md:h-[200px] lg:h-[250px] flex justify-center items-center w-full  ">
               <img

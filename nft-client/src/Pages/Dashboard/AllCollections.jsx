@@ -92,7 +92,7 @@ const AllCollections = () => {
         {collections?.map((product) => (
           <div
             key={product.id}
-            className=" relative overflow-hidden bg-white rounded-2xl shadow-xl"
+            className=" relative overflow-hidden bg-white rounded-2xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]"
           >
             <div className="pt-14 flex justify-center items-center w-full  ">
               <img

@@ -17,7 +17,7 @@ import pd from "../../../assets/nft-image/pd.png";
 import threeD from "../../../assets/nft-image/3d.png";
 import { useEffect, useState } from "react";
 
-const VersionSlider = ({digitalAssets,displayImage}) => {
+const VersionSlider = ({ digitalAssets, displayImage }) => {
   console.log(digitalAssets);
   const [activeIndex, setActiveIndex] = useState(0);
   const [topSwiper, setTopSwiper] = useState(null);
@@ -95,157 +95,181 @@ const VersionSlider = ({digitalAssets,displayImage}) => {
     {
       id: 1,
       icon: ar,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Experience augmented reality with our AR viewer.",
       title: "View In AR",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 2,
       icon: vvr,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Dive into virtual reality with our immersive VR experience.",
       title: "View In VR",
+      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
     },
     {
       id: 3,
       icon: threeD,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Explore the details of our 3D file with an interactive view.",
       title: "3D File",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 4,
       icon: book,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Access the technical design book for in-depth insights.",
       title: "Technical design book",
+      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
     },
     {
       id: 5,
       icon: pd,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Discover the elegance of our physical dress collection.",
       title: "Physical Dress",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 6,
       icon: cartNft,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Own a unique digital asset with our exclusive NFT.",
       title: "NFT",
+      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
     },
     {
       id: 7,
       icon: lobby,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Unlock access to exclusive spaces with your virtual lobby key.",
       title: "Virtual lobby access key",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 8,
       icon: certification,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Review the official certification to ensure authenticity.",
       title: "Certification",
+      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
     },
     {
       id: 9,
       icon: recroom,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Explore the innovative design of our Recroom wearable.",
       title: "Recroom wearable",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 10,
       icon: animated,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Enjoy a dynamic display with our animated design.",
       title: "Animated",
+      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
     },
     {
       id: 11,
       icon: vrChat,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Customize your avatar with this exclusive VR Chat wearable.",
       title: "VR Chat Wearable",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 12,
       icon: sandbox,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Step into a new world with our innovative sandbox wearable.",
       title: "Sandbox wearable",
+      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
     },
     {
       id: 13,
       icon: story,
-      text: "lorem ispam lorem ispam lorem ispam",
+      text: "Own the narrative behind our creation with story ownership.",
       title: "Ownership of story",
+      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
   ];
-
+  
 
   // Create a mapping object for feature text to digitalAssets keys
-const featureKeyMap = {
-  "View In AR": "arversion",
-  "View In VR": "vrversion",
-  "3D File": "dfile",
-  "Technical design book": "technicaldesignbook",
-  "Virtual lobby access key": "virtuallobbyaccesskey",
-  "Ownership of story": "ownershipofstory",
-  "Certification": "certification",
-  "Sandbox wearable": "sandboxwearable",
-  "VR Chat Wearable": "vrchatwearable",
-  "Animated": "animated",
-  "Recroom wearable": "recroom",
- 
-};
+  const featureKeyMap = {
+    "View In AR": "arversion",
+    "View In VR": "vrversion",
+    "3D File": "dfile",
+    "Technical design book": "technicaldesignbook",
+    "Virtual lobby access key": "virtuallobbyaccesskey",
+    "Ownership of story": "ownershipofstory",
+    Certification: "certification",
+    "Sandbox wearable": "sandboxwearable",
+    "VR Chat Wearable": "vrchatwearable",
+    Animated: "animated",
+    "Recroom wearable": "recroom",
+  };
 
-// Filter available features using the mapping
-const availableFeatures = features.filter(feature => {
-  const digitalAssetsKey = featureKeyMap[feature.text];
-  return digitalAssetsKey && digitalAssets[digitalAssetsKey] && digitalAssets[digitalAssetsKey] !== "";
-});
-
-// Filter slider data using the same mapping
-const availableSliderData = sliderData.filter(slide => {
-  const digitalAssetsKey = featureKeyMap[slide.title];
-  return digitalAssetsKey && digitalAssets[digitalAssetsKey] && digitalAssets[digitalAssetsKey] !== "";
-});
-    // ... keep all your imports and initial states ...
-  
-    // // Filter available features and slider data based on digitalAssets
-    // const availableFeatures = features.filter(feature => {
-    //   const featureKey = feature.text.toLowerCase().replace(/\s+/g, '');
-    //   return digitalAssets[featureKey] && digitalAssets[featureKey] !== "";
-    // });
-  
-    // const availableSliderData = sliderData.filter(slide => {
-    //   const slideKey = slide.title.toLowerCase().replace(/\s+/g, '');
-    //   return digitalAssets[slideKey] && digitalAssets[slideKey] !== "";
-    // });
-  
-    // Reset activeIndex if it's out of bounds after filtering
-    useEffect(() => {
-      if (activeIndex >= availableFeatures.length) {
-        setActiveIndex(0);
-      }
-    }, [availableFeatures.length, activeIndex]);
-  
+  // Filter available features using the mapping
+  const availableFeatures = features.filter((feature) => {
+    const digitalAssetsKey = featureKeyMap[feature.text];
     return (
-      <div className="p-3">
-        <div className="flex flex-col justify-center items-center ">
-          {/* Top Slider */}
-          <div className="rounded-lg w-[170px] h-[265px] bg-white md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[400px] xl:w-[250px]">
-            <Swiper
-              effect={"cards"}
-              grabCursor={true}
-              modules={[EffectCards, Autoplay]}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              className="mySwiper"
-              onSwiper={setTopSwiper}
-              onSlideChange={(swiper) => {
-                setActiveIndex(swiper.activeIndex);
-                if (bottomSwiper && bottomSwiper.activeIndex !== swiper.activeIndex) {
-                  bottomSwiper.slideTo(swiper.activeIndex);
-                }
-              }}
-            >
-              {availableSliderData.map((feature, index) => (
-                <SwiperSlide key={feature.id}>
-                                  <div
-                  className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[170px] h-[265px] md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[400px] xl:w-[250px] transition-all duration-300
+      digitalAssetsKey &&
+      digitalAssets[digitalAssetsKey] &&
+      digitalAssets[digitalAssetsKey] !== ""
+    );
+  });
+
+  // Filter slider data using the same mapping
+  const availableSliderData = sliderData.filter((slide) => {
+    const digitalAssetsKey = featureKeyMap[slide.title];
+    return (
+      digitalAssetsKey &&
+      digitalAssets[digitalAssetsKey] &&
+      digitalAssets[digitalAssetsKey] !== ""
+    );
+  });
+  // ... keep all your imports and initial states ...
+
+  // // Filter available features and slider data based on digitalAssets
+  // const availableFeatures = features.filter(feature => {
+  //   const featureKey = feature.text.toLowerCase().replace(/\s+/g, '');
+  //   return digitalAssets[featureKey] && digitalAssets[featureKey] !== "";
+  // });
+
+  // const availableSliderData = sliderData.filter(slide => {
+  //   const slideKey = slide.title.toLowerCase().replace(/\s+/g, '');
+  //   return digitalAssets[slideKey] && digitalAssets[slideKey] !== "";
+  // });
+
+  // Reset activeIndex if it's out of bounds after filtering
+  useEffect(() => {
+    if (activeIndex >= availableFeatures.length) {
+      setActiveIndex(0);
+    }
+  }, [availableFeatures.length, activeIndex]);
+
+  return (
+    <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] space-y-4 p-3">
+      <h1  className="font-bold text-gray-700 text-sm lg:text-[15px] xl:text-xl text-center py-3">Unleash the Full Potential of Your NFT</h1>
+      <div className="flex flex-col justify-center items-center ">
+        {/* Top Slider */}
+        <div className="rounded-lg w-[200px] h-[340px] bg-white md:h-[350px] m lg:h-[360px] lg:w-[200px] xl:h-[450px] xl:w-[300px]">
+          <Swiper
+            effect={"cards"}
+            grabCursor={true}
+            modules={[EffectCards, Autoplay]}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            className="mySwiper"
+            onSwiper={setTopSwiper}
+            onSlideChange={(swiper) => {
+              setActiveIndex(swiper.activeIndex);
+              if (
+                bottomSwiper &&
+                bottomSwiper.activeIndex !== swiper.activeIndex
+              ) {
+                bottomSwiper.slideTo(swiper.activeIndex);
+              }
+            }}
+          >
+            {availableSliderData.map((feature, index) => (
+              <SwiperSlide key={feature.id}>
+                <div
+                  className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[200px] h-[340px] md:h-[350px] m lg:h-[360px] lg:w-[200px] xl:h-[450px] xl:w-[300px] transition-all duration-300
                       ${
                         index === activeIndex
                           ? "transform -translate-y-4 rounded-lg "
@@ -253,19 +277,23 @@ const availableSliderData = sliderData.filter(slide => {
                       }
                     `}
                 >
-                  <div className="h-[60%] md:h-[50%] xl:h-[60%] rounded-t-lg bg-gradient-to-b from-[#7e7e7e] via-[#aeaeae] to-[#eaeaea] w-full flex justify-center items-center">
-                    <img
+                  <div className="h-[80%] md:h-[50%] xl:h-[60%] rounded-t-lg bg-gradient-to-b from-[#7e7e7e] via-[#aeaeae] to-[#eaeaea] w-full flex justify-center items-center">
+                    {/* <img
                      // src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
                       src={displayImage}
                       className="w-20 md:w-32 lg:w-32 py-2 mt-5"
-                    />
+                    /> */}
+                    <video className="rounded-lg" muted autoPlay playsInline loop>
+                      <source src={feature?.video} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
-                  <div className="flex flex-col justify-center items-center space-y-1 lg:space-y-2 px-1 md:px-3 pt-3 pb-6 md:pb-2 xl:pb-6">
-                    <p className="text-[15px] md:text-[16px] lg:text-xl font-bold text-gray-800 text-center">
+                  <div className="flex flex-col justify-center items-center space-y-1 lg:space-y-2 px-1 md:px-3 pt-3 xl:pt-6 pb-6 md:pb-2 xl:pb-6">
+                    <p className="text-[15px] md:text-[16px] lg:text-[15px] xl:text-xl font-bold text-gray-800 text-center">
                       {" "}
                       {feature.title}
                     </p>
-                    <p className=" text-[14px] lg:text-[16px] text-center">
+                    <p className=" text-[14px] xl:text-[16px] text-center">
                       {" "}
                       {feature.text}
                     </p>
@@ -274,23 +302,23 @@ const availableSliderData = sliderData.filter(slide => {
                     </button>
                   </div>
                 </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-  
-          {/* Bottom Slider for tab and desktop */}
-          <div className="hidden md:block relative w-full bg-white rounded-xl p-2">
-            <div className="overflow-hidden">
-              <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(-${activeIndex * 50}%)`,
-                }}
-              >
-                {availableFeatures.map((feature, index) => (
-                  <div key={feature.id} className="w-1/2 flex-shrink-0 px-2">
-                                    <button
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Bottom Slider for tab and desktop */}
+        <div className="hidden md:block relative w-full bg-white rounded-xl p-2">
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${activeIndex * 50}%)`,
+              }}
+            >
+              {availableFeatures.map((feature, index) => (
+                <div key={feature.id} className="w-1/2 flex-shrink-0 px-2">
+                  <button
                     onClick={() => {
                       setActiveIndex(index);
                       topSwiper?.slideTo(index);
@@ -320,41 +348,45 @@ const availableSliderData = sliderData.filter(slide => {
                       </span>
                     </div>
                   </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-  
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {availableFeatures.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setActiveIndex(index);
-                    topSwiper?.slideTo(index);
-                  }}
-                  className={`
-                    h-1.5 rounded-full transition-all duration-300
-                    ${index === activeIndex ? "w-6 bg-[#12c9b5]" : "w-1.5 bg-gray-200"}
-                  `}
-                />
+                </div>
               ))}
             </div>
           </div>
-  
-          {/* Bottom Slider for mobile */}
-          <div className="md:hidden w-11/12 bg-white p-2 shadow-lg rounded-xl">
-            <div className="overflow-hidden">
-              <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(-${activeIndex * 100}%)`,
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center gap-2 mt-6">
+            {availableFeatures.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveIndex(index);
+                  topSwiper?.slideTo(index);
                 }}
-              >
-                {availableFeatures.map((feature, index) => (
-                  <div key={feature.id} className="w-full flex-shrink-0">
-                                   <button
+                className={`
+                    h-1.5 rounded-full transition-all duration-300
+                    ${
+                      index === activeIndex
+                        ? "w-6 bg-[#12c9b5]"
+                        : "w-1.5 bg-gray-200"
+                    }
+                  `}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Slider for mobile */}
+        <div className="md:hidden w-11/12 bg-white p-2 shadow-lg rounded-xl">
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${activeIndex * 100}%)`,
+              }}
+            >
+              {availableFeatures.map((feature, index) => (
+                <div key={feature.id} className="w-full flex-shrink-0">
+                  <button
                     onClick={() => {
                       setActiveIndex(index);
                       topSwiper?.slideTo(index);
@@ -384,33 +416,37 @@ const availableSliderData = sliderData.filter(slide => {
                       </span>
                     </div>
                   </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-  
-            <div className="flex justify-center gap-2 mt-4">
-              {availableFeatures.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setActiveIndex(index);
-                    topSwiper?.slideTo(index);
-                  }}
-                  className={`
-                    h-1.5 rounded-full transition-all duration-300
-                    ${index === activeIndex ? "w-6 bg-[#12c9b5]" : "w-1.5 bg-gray-200"}
-                  `}
-                />
+                </div>
               ))}
             </div>
+          </div>
+
+          <div className="flex justify-center gap-2 mt-4">
+            {availableFeatures.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveIndex(index);
+                  topSwiper?.slideTo(index);
+                }}
+                className={`
+                    h-1.5 rounded-full transition-all duration-300
+                    ${
+                      index === activeIndex
+                        ? "w-6 bg-[#12c9b5]"
+                        : "w-1.5 bg-gray-200"
+                    }
+                  `}
+              />
+            ))}
           </div>
         </div>
       </div>
-    );
-  };
-  
-  export default VersionSlider;
+    </div>
+  );
+};
+
+export default VersionSlider;
 // import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/css";
 // import "swiper/css/effect-cards";
@@ -584,8 +620,6 @@ const availableSliderData = sliderData.filter(slide => {
 //     },
 //   ];
 
-  
-
 //   //   useEffect(() => {
 //   //     const interval = setInterval(() => {
 //   //       if (bottomSwiper && topSwiper) {
@@ -602,7 +636,7 @@ const availableSliderData = sliderData.filter(slide => {
 //     <div className="p-3">
 //       <div className="flex flex-col justify-center items-center ">
 //         {/* Top Slider */}
-//         <div className="rounded-lg w-[170px] h-[265px] bg-white md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[400px] xl:w-[250px]">
+//         <div className="rounded-lg w-[170px] h-[265px] bg-white md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[450px] xl:w-[250px]">
 //           <Swiper
 //             effect={"cards"}
 //             grabCursor={true}
@@ -625,35 +659,35 @@ const availableSliderData = sliderData.filter(slide => {
 //           >
 //             {sliderData.map((feature, index) => (
 //               <SwiperSlide key={feature.id}>
-                // <div
-                //   className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[170px] h-[265px] md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[400px] xl:w-[250px] transition-all duration-300
-                //       ${
-                //         index === activeIndex
-                //           ? "transform -translate-y-4 rounded-lg "
-                //           : ""
-                //       }
-                //     `}
-                // >
-                //   <div className="h-[60%] md:h-[50%] xl:h-[60%] rounded-t-lg bg-gradient-to-b from-[#7e7e7e] via-[#aeaeae] to-[#eaeaea] w-full flex justify-center items-center">
-                //     <img
-                //       src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
-                //       className="w-20 md:w-32 lg:w-32 py-2 mt-5"
-                //     />
-                //   </div>
-                //   <div className="flex flex-col justify-center items-center space-y-1 lg:space-y-2 px-1 md:px-3 pt-3 pb-6 md:pb-2 xl:pb-6">
-                //     <p className="text-[15px] md:text-[16px] lg:text-xl font-bold text-gray-800 text-center">
-                //       {" "}
-                //       {feature.title}
-                //     </p>
-                //     <p className=" text-[14px] lg:text-[16px] text-center">
-                //       {" "}
-                //       {feature.text}
-                //     </p>
-                //     <button className="text-[15px] lg:text-[16px] border border-gray-700 rounded-3xl px-9 py-1 lg:py-2">
-                //       Buy to get
-                //     </button>
-                //   </div>
-                // </div>
+// <div
+//   className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[170px] h-[265px] md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[450px] xl:w-[250px] transition-all duration-300
+//       ${
+//         index === activeIndex
+//           ? "transform -translate-y-4 rounded-lg "
+//           : ""
+//       }
+//     `}
+// >
+//   <div className="h-[60%] md:h-[50%] xl:h-[60%] rounded-t-lg bg-gradient-to-b from-[#7e7e7e] via-[#aeaeae] to-[#eaeaea] w-full flex justify-center items-center">
+//     <img
+//       src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
+//       className="w-20 md:w-32 lg:w-32 py-2 mt-5"
+//     />
+//   </div>
+//   <div className="flex flex-col justify-center items-center space-y-1 lg:space-y-2 px-1 md:px-3 pt-3 pb-6 md:pb-2 xl:pb-6">
+//     <p className="text-[15px] md:text-[16px] lg:text-xl font-bold text-gray-800 text-center">
+//       {" "}
+//       {feature.title}
+//     </p>
+//     <p className=" text-[14px] lg:text-[16px] text-center">
+//       {" "}
+//       {feature.text}
+//     </p>
+//     <button className="text-[15px] lg:text-[16px] border border-gray-700 rounded-3xl px-9 py-1 lg:py-2">
+//       Buy to get
+//     </button>
+//   </div>
+// </div>
 //               </SwiperSlide>
 //             ))}
 //           </Swiper>
@@ -741,7 +775,7 @@ const availableSliderData = sliderData.filter(slide => {
 //                     }}
 //                     className={`
 //                   w-full flex justify-center items-center rounded-xl
-//                   transition-all duration-300 
+//                   transition-all duration-300
 //                   ${
 //                     index === activeIndex
 //                       ? "bg-[#12c9b5] text-white py-4 px-4"

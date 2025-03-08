@@ -309,7 +309,7 @@ const collectionId = collectionData?.data?._id
         <h1 className="text-2xl font-semibold mb-6">Update Collection</h1>
 
         {/* Display Image Section */}
-        <div className="mb-8 bg-white rounded-xl shadow-lg p-5">
+        <div className="mb-8 bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-5">
           <h2 className="text-lg xl:text-xl font-gray-700 font-medium">
             Display Image
           </h2>
@@ -389,7 +389,7 @@ const collectionId = collectionData?.data?._id
         {/* General Information and Products & Discount Sections */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* General Information */}
-          <div className="bg-white rounded-xl shadow-lg p-3 md:p-5">
+          <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-3 md:p-5">
             <h2 className="text-lg xl:text-2xl font-gray-700 font-medium">
               General Information
             </h2>
@@ -480,7 +480,7 @@ const collectionId = collectionData?.data?._id
           </div>
 
           {/* Products & Discount Section */}
-          <div className="space-y-6 bg-white rounded-xl shadow-lg p-3 md:p-5">
+          <div className="space-y-6 bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-3 md:p-5">
             <div>
               <div>
                 <h2 className="text-sm xl:text-xl text-gray-600 font-bold mb-2">
@@ -546,7 +546,7 @@ const collectionId = collectionData?.data?._id
                   </button>
 
                   {isOpenDropDown && (
-                    <div className="absolute z-10 w-full mt-1 bg-white border rounded-md shadow-lg max-h-[300px] overflow-y-auto">
+                    <div className="absolute z-10 w-full mt-1 bg-white border rounded-md shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] max-h-[300px] overflow-y-auto">
                       <div className="py-1">
                         {products?.map((product) => {
                           const isSelected = formData.products.some(

@@ -88,7 +88,7 @@ const AllProducts = () => {
             onMouseEnter={() => toggleActive(i)}
             onMouseLeave={toggleInactive}
             key={product.id}
-            className="pb-8  2xl:pb-12 relative overflow-hidden bg-white rounded-xl shadow-xl"
+            className="pb-8  2xl:pb-12 relative overflow-hidden bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]"
           >
             {product?.stock === "notAvailable" && (
               <span className="text-[12px] absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-3 py-3 font-medium uppercase tracking-widest text-white">

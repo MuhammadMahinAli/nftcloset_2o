@@ -58,7 +58,7 @@ const UserSetting = () => {
   };
   return (
     <>
-      <div className="border shadow-lg bg-white rounded-lg p-6 my-10 mx-5">
+      <div className="border shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] bg-white rounded-lg p-6 my-10 mx-5">
         <div className="flex  justify-between items-center mb-6">
           <h2 className="text-xl  xl:text-3xl  font-bold">Manage My Account</h2>
           <Link to="/manageAccount/update-profile">

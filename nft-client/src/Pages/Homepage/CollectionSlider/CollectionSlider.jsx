@@ -34,7 +34,7 @@ const CollectionSlider = () => {
   }, [currentSlide]);
 
   return (
-    <div className="relative w-full pb-10">
+    <div className="relative w-full mb-10 ">
   
       <div className="relative h-[150px] md:h-[200px] lg:h-[250px] xl:h-[350px] 3xl:h-[400px] mx-10 md:mx-14 rounded-xl overflow-hidden">
    
@@ -70,7 +70,7 @@ const CollectionSlider = () => {
       </button>
 
       {/* Dots indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
         {getFeaturedCollection?.map((_, index) => (
           <button
             key={index}

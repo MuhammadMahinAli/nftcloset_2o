@@ -70,7 +70,7 @@ const AllProduct = () => {
         {products?.map((product) => (
           <div
             key={product._id}
-            className="relative overflow-hidden bg-white rounded-xl shadow-xl"
+            className="relative overflow-hidden bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]"
           >
           
               <div className="flex justify-center items-center py-4 h-[67%] lg:h-[72%] xl:h-[68%] 3xl:h-[75%]">

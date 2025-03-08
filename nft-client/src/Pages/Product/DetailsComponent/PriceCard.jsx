@@ -62,7 +62,7 @@ const PriceCard = ({ _id, price, collection }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-4 space-y-4">
+    <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-4 space-y-4">
       {/* Sale Date */}
       {isOfferValid && discount > 0 && (
         <div className="flex items-center gap-2 text-gray-600">

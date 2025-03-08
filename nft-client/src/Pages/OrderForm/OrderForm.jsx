@@ -179,7 +179,7 @@
 //         <div className="space-y-6 ">
 //           <div className="flex  flex-col justify-center items-center ">
 //             {/* Product Image */}
-//             <div className="border  w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-lg rounded-lg">
+//             <div className="border  w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] rounded-lg">
 //               <img
 //                 src={displayImage}
 //                 alt="Black Hoodie #43"
@@ -238,7 +238,7 @@
 
 //               {/* Dropdown Menu */}
 //               {isOpen && (
-//                 <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+//                 <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] z-50">
 //                   <div className="p-2 flex flex-col gap-2">
 //                     {features.map((feature) => (
 //                       <button
@@ -552,7 +552,7 @@ const OrderForm = () => {
     colors,
     sizeWithMaterial,
     sizeChart,
-    buyingLink
+    buyingLink,
   } = productInfo || {};
 
   // Form state
@@ -832,7 +832,7 @@ const OrderForm = () => {
         {/* Left side - Product Image */}
         <div className="space-y-6">
           <div className="flex flex-col justify-center items-center">
-            <div className="border w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-lg rounded-lg">
+            <div className="border w-[300px] lg:w-[400px] lg:h-[400px] bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] rounded-lg">
               <img
                 src={displayImage}
                 alt={productName}
@@ -889,7 +889,7 @@ const OrderForm = () => {
 
             {/* Mobile Dropdown Menu */}
             {isOpen && (
-              <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <div className="absolute top-full left-0 mt-2 w-max bg-white border border-gray-200 rounded-lg shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] z-50">
                 <div className="p-2 flex flex-col gap-2">
                   {availableFeatures.map((feature) => (
                     <button
@@ -939,7 +939,7 @@ const OrderForm = () => {
                   className="h-5 w-5"
                   alt={feature.text}
                 />
-                <span className="whitespace-nowrap font-semibold text-sm md:text-lg lg:text-xl">
+                <span className="whitespace-nowrap font-semibold text-sm md:text-lg lg:text-lg">
                   {feature.text}
                 </span>
               </button>
@@ -1157,12 +1157,10 @@ const OrderForm = () => {
             </div>
           </div>
 
-         
-
           {/* Submit Button */}
           <a
-          href={buyingLink}
-           target="blank"
+            href={buyingLink}
+            target="blank"
             className={`w-full flex justify-center items-center space-x-4 py-3 bg-[#0c0c0c] text-gray-100 hover:bg-gray-900 rounded-lg text-lg font-medium transition-colors
               `}
           >
@@ -1170,13 +1168,13 @@ const OrderForm = () => {
             <p> Pay with Crossmint</p>
           </a>
           <label
-              htmlFor="crossMintOrderId"
-              className="block text-sm md:text-[17px] font-bold text-red-600 mb-0"
-            >
+            htmlFor="crossMintOrderId"
+            className="block text-sm md:text-[17px] font-bold text-red-600 mb-0"
+          >
             ***Buyer need to covers minting fee
-            </label>
-           {/* crossmint id */}
-           <div className="max-w-2xl">
+          </label>
+          {/* crossmint id */}
+          <div className="max-w-2xl">
             <label
               htmlFor="crossMintOrderId"
               className="block text-lg font-bold text-gray-700 mb-2"

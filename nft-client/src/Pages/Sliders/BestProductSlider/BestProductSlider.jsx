@@ -77,7 +77,7 @@ const BestProductSlider = () => {
                   ?.map((product) => (
                     <div
                       key={product.id}
-                      className="flex-1 h-full bg-white hover:bg-[#edecec] rounded-lg overflow-hidden shadow-xl hover:shadow-md transition-shadow duration-300"
+                      className="flex-1 h-full bg-white hover:bg-[#edecec] rounded-lg overflow-hidden shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] hover:shadow-md transition-shadow duration-300"
                     >
                       <div className="relative  overflow-hidden flex justify-center items-center">
                         <img

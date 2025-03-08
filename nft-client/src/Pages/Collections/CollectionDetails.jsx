@@ -278,7 +278,8 @@ const CollectionDetails = () => {
           const savingAmount = originalPrice - finalPrice;
 
           return (
-            <div
+            <Link
+            to={`${userId ? `/products-details/${product?.productId?._id}` : "/login"}`}
               onMouseEnter={() => toggleActive(i)}
               onMouseLeave={toggleInactive}
               key={product.id}
@@ -332,7 +333,7 @@ const CollectionDetails = () => {
                   <IoCartOutline className="text-3xl text-white mr-3 ssm:mr-5 lg:mr-8 xl:mr-5" />
                 </Link>
               )}
-            </div>
+            </Link>
           );
         })}
       </div>

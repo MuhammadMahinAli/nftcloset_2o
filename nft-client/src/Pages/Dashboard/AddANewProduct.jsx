@@ -575,7 +575,7 @@ const AddProduct = () => {
 
             {/* box 1 */}
             <>
-              <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6 rounded-lg">
+              <div className="col-span-1 lg:col-span-2 bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   General Information
                 </h2>
@@ -645,7 +645,7 @@ const AddProduct = () => {
 
             {/* box 2 */}
             <>
-              <div className="bg-white shadow-lg p-2">
+              <div className="bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-2">
                 <h2 className="text-lg font-semibold mb-4">Display Image</h2>
 
                 <input
@@ -701,7 +701,7 @@ const AddProduct = () => {
             </>
 
             {/* box 3 */}
-            <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6">
+            <div className="col-span-1 lg:col-span-2 bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6">
               <div className="mb-8">
                 <h2 className="text-lg font-semibold mb-4">Extra Videos</h2>
                 <div className="grid grid-cols-3 gap-y-2 md:gap-y-4 md:grid-cols-6 lg:grid-cols-4 xl:grid-cols-6 3xl:grid-cols-7 xl:gap-x-1 mb-4">
@@ -874,7 +874,7 @@ const AddProduct = () => {
             {/* box 4 */}
             {/* Pricing And Stock */}
             <>
-              <div className=" bg-white shadow-lg p-6 rounded-lg">
+              <div className=" bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   Pricing And Stock
                 </h2>
@@ -925,7 +925,7 @@ const AddProduct = () => {
             {/* box 5 */}
             {/* Digital Assets */}
             <>
-              <div className="col-span-1 lg:col-span-2 bg-white shadow-lg p-6 rounded-lg">
+              <div className="col-span-1 lg:col-span-2 bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">Digital Assets</h2>
                 {[
                   "AR Version",
@@ -1031,7 +1031,7 @@ const AddProduct = () => {
             <>
               {/* Token Details */}
               <div className="space-y-5">
-                <div className="bg-white shadow-lg p-6 rounded-lg">
+                <div className="bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">
                   <h2 className="text-sm xl:text-xl text-gray-600 font-bold mb-2">
                     Collection
                   </h2>
@@ -1047,7 +1047,7 @@ const AddProduct = () => {
                     </div>
 
                     {isOpenDropDown && (
-                      <div className="absolute right-0 mt-0 w-full bg-white rounded-md shadow-lg z-10 border border-gray-200">
+                      <div className="absolute right-0 mt-0 w-full bg-white rounded-md shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] z-10 border border-gray-200">
                         <ul className="py-1">
                           {collections?.map((collection, i) => (
                             <li key={i}>
@@ -1085,7 +1085,7 @@ const AddProduct = () => {
                   </div>
                 </div>
 
-                <div className="bg-white shadow-lg p-6 rounded-lg">
+                <div className="bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">
                   <h2 className="text-lg font-semibold mb-4">Token Details</h2>
                   {[
                     "Blockchain",
@@ -1115,7 +1115,7 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              <div className="col-span-1 lg:col-span-3 bg-white shadow-lg p-6 rounded-lg">
+              <div className="col-span-1 lg:col-span-3 bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">
                 <h2 className="text-lg font-semibold mb-4">
                   Size And Materials:
                 </h2>

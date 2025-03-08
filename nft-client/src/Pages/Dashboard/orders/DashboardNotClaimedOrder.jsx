@@ -88,17 +88,23 @@ const DashboardNotClaimedOrder = ({
 
             {userEmail !== "arrr@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
-                {order?.isConfirmRecipt === false && (
+                 {order?.digitalAsset === "shipping" &&
                   <button
                     onClick={() => confirmReceipt(order?._id)}
                     className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80"
                   >
                     Confirm Reciept
                   </button>
-                )}
-                <p className="text-sm xl:text-xl  text-gray-700 hover:underline">
+                }
+                      {order?.isConfirmRecipt === true &&
+                <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
+                  Confirmed Reciept
+                </button>
+      }
+
+                   <a href={order?.trackingLink} target="blank" className="text-sm xl:text-xl  text-gray-700 hover:underline">
                   Track
-                </p>
+                </a>
               </div>
             ) : (
               <p

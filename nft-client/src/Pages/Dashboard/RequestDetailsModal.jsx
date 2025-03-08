@@ -212,6 +212,7 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
           >
              <option value="">Select a status</option>
             <option value="claimed">Claimed</option>
+            <option value="shipping">Shipping</option>
             <option value="received">Recieved</option>
           </select>
         </div>

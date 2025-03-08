@@ -11,7 +11,7 @@ const TokenCard = ({ tokenDetails }) => {
   const toggleTokenDetails = () => setIsTokenExpanded(!isTokenExpanded);
   return (
     <div>
-      <div className="bg-white rounded-xl shadow-lg space-y-4">
+      <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] space-y-4">
         <button
           onClick={toggleTokenDetails}
           className="w-full flex items-center justify-between bg-[#edecec] px-2 py-3 rounded-t-xl"

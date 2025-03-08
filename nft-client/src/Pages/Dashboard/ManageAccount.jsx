@@ -64,6 +64,8 @@ const ManageAccount = () => {
         return "text-yellow-600";
       case "declined":
         return "text-red-600";
+        case "shipping":
+          return "text-orange-600";
       default:
         return "text-gray-600";
     }
@@ -110,7 +112,7 @@ const ManageAccount = () => {
         {/* left side */}
         <div className="w-full ">
           {/* Header Section */}
-          <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-lg">
+          <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
             <div className="flex items-center justify-between py-5">
               <div>
                 <h1 className="text-2xl xl:text-3xl font-bold">
@@ -130,7 +132,7 @@ const ManageAccount = () => {
             </div>
           </div>
           {/* Latest Orders */}
-          <div className="hidden lg:block mt-8 bg-white rounded-lg p-6 shadow-lg">
+          <div className="hidden lg:block mt-8 bg-white rounded-lg p-6 shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg xl:text-xl font-bold">Latest Orders</h3>
               <button className=" xl:text-lg font-bold text-gray-700 text-sm">
@@ -179,9 +181,9 @@ const ManageAccount = () => {
         </div>
 
         {/* right side */}
-        <div className="w-full   shadow-lg">
+        <div className="w-full   ">
           {/* Manage Account Section */}
-          <div className="bg-white rounded-lg p-6 shadow-sm">
+          <div className="bg-white rounded-lg p-6 shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
             <div className="flex  justify-between items-center mb-6">
               <h2 className="text-xl  xl:text-3xl  font-bold">
                 Manage My Account
@@ -367,7 +369,7 @@ const ManageAccount = () => {
         {/* left side */}
         <div className="w-full  ">
           {/* Header Section */}
-          <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-lg">
+          <div className="bg-white rounded-lg px-4 py-4 md:py-0 mb-0 shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl xl:text-3xl font-bold">
@@ -387,7 +389,7 @@ const ManageAccount = () => {
             </div>
           </div>
           {/* Latest Orders */}
-          <div className="hidden lg:block mt-8 bg-white rounded-lg p-6 shadow-lg">
+          <div className="hidden lg:block mt-8 bg-white rounded-lg p-6 shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg xl:text-xl font-bold">Latest Orders</h3>
               <Link to="/manageAccount/orders" className=" xl:text-lg font-bold text-gray-700 text-sm">
@@ -432,7 +434,7 @@ const ManageAccount = () => {
         </div>
 
         {/* right side */}
-        <div className="w-full  bg-white px-5 py-5 lg:py-0 shadow-xl">
+        <div className="w-full  bg-white px-5 py-5 lg:py-0 shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
           <h1 className=" text-2xl xl:text-3xl font-bold py-6">
             Quick Actions
           </h1>

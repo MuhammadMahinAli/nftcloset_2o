@@ -224,7 +224,7 @@ const ExtraAssets = ({ extraVideos, extraImages }) => {
                   <div
                     key={asset.id}
                     onClick={() => handleAssetClick(asset)}
-                    className="flex-1 h-full bg-white hover:bg-[#edecec] rounded-lg overflow-hidden shadow-xl hover:shadow-md transition-shadow duration-300 cursor-pointer relative"
+                    className="flex-1 h-full bg-white  rounded-lg overflow-hidden shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] hover:shadow-md transition-shadow duration-300 cursor-pointer relative"
                   >
                     <div className="relative h-full overflow-hidden flex justify-center items-center">
                       {asset.type === 'video' ? (

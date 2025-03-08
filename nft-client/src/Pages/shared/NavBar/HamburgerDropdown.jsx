@@ -46,7 +46,7 @@ const HamburgerDropdown = ({setIsHamburgerDropdownVisible}) => {
       {/* list for mbl */}
 
       {/* list for dekstop */}
-      <div data-aos="fade-top" data-aos-duration="500" className=" overflow-y-scroll absolute end-0 z-10 top-10 md:top-20 left-0 md:-left-3   lg:w-[500px] 3xl:w-[450px] px-2 py-5 divide-y divide-gray-100 rounded-md border border-gray-100 bg-[#fff] shadow-xl" role="menu">
+      <div data-aos="fade-top" data-aos-duration="100" className=" overflow-y-scroll absolute end-0 z-10 top-10 md:top-20 left-0 md:-left-3   lg:hidden px-2 py-5 divide-y divide-gray-100 rounded-md border border-gray-100 bg-[#fff] shadow-xl" role="menu">
         <div className="float-right" onClick={() => setIsHamburgerDropdownVisible(false)}>
           <AiOutlineCloseCircle className="text-2xl 3xl:text-3xl" />
         </div>
@@ -67,31 +67,24 @@ const HamburgerDropdown = ({setIsHamburgerDropdownVisible}) => {
            <Link to={userId ? "/manageAccount":"/login"}>
               <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">{userId ? "Dashboard" : "Login"}</h1>
             </Link>
-           {/*   <Link to="/supply-chain">
-              <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Supply Chain</h1>
+           <Link to={userId ? "/manageAccount/orders":"/login"}>
+              <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Orders</h1>
             </Link>
-            <Link to="/lucky-draw">
-              <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Lucky draw</h1>
+           <Link to={userId ? "/manageAccount/settings":"/login"}>
+              <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Settings</h1>
             </Link>
-            <Link to="/market-x">
-              <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Market-X</h1>
-            </Link> */}
+    {
+      userId &&
+      <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Logout</h1> 
+    }
           </div>
-          {/* center */}
-          {/* <div className="hidden w-full lg:w-4/12 3xl:w-11/12 ">
-            <a href="/">
-              <h1 className="hidden lg:block 3xl:hidden rounded-md text-xl font-bold p-2  m-2 cursor-pointer">
-                {" "}
-                Home
-              </h1>
-            </a>
-
-            <Link to="/market">
-              <h1 className="3xl:hidden rounded-md text-xl font-bold p-2 m-2 cursor-pointer">
-                Market
-              </h1>
-            </Link>
-          </div> */}
+          {/* {location.pathname === "/manageAccount" && (
+        <Link to="/manageAccount/orders">
+          <div className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">
+            Orders
+          </div>
+        </Link>
+      )} */}
         </div>
       </div>
     </>

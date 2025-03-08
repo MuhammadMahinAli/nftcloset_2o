@@ -17,7 +17,7 @@ const CollectionCard = ({ collection }) => {
     setIsCollectionExpanded(!isCollectionExpanded);
   return (
     <div>
-      <div className="bg-white rounded-xl shadow-lg pace-y-4">
+      <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] space-y-4">
         {/* <button 
           onClick={toggleCollectionDetails}
           className="w-full flex justify-between items-center mb-4"

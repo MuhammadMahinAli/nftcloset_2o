@@ -14,7 +14,7 @@ const ActivityCard = () => {
 
 
   return (
-    <div className="bg-white rounded-xl shadow-lg space-y-4 hidden md:block">
+    <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] space-y-4 hidden md:block">
       <div className="">
         {/* Header */}
         <button

@@ -151,40 +151,6 @@ const DashboardRecievedOrder = ({
     );
   }, [initialOrders, initialOrdersForAdmin, userEmail]);
 
-  const confirmReceipt = async (orderId) => {
-    const result = await Swal.fire({
-      title: "Did you receive your parcel?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, confirm",
-      cancelButtonText: "No, cancel",
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const response = await fetch(
-          `http://localhost:4000/api/v1/order/confirmReceipt/${orderId}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
-        if (!response.ok) throw new Error("Failed to confirm receipt");
-
-        setOrders((prevOrders) =>
-          prevOrders.map((order) =>
-            order._id === orderId ? { ...order, isConfirmRecipt: true } : order
-          )
-        );
-
-        Swal.fire("Confirmed!", "Receipt has been confirmed.", "success");
-      } catch (err) {
-        Swal.fire("Error!", err.message, "error");
-      }
-    }
-  };
-
   if (isLoading) return <p>Orders is Loading...</p>;
   if (!orders.length)
     return <p className="text-xl font-semibold">No order available.</p>;
@@ -216,22 +182,17 @@ const DashboardRecievedOrder = ({
 
             {userEmail !== "arrr@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
-                {order.isConfirmRecipt === false ? (
-                  <button
-                    onClick={() => confirmReceipt(order._id)}
-                    className="hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg text-white bg-[#2CBA7A] hover:text-primary/80"
-                  >
-                    Confirm Receipt
-                  </button>
-                ) : (
-                  <div className="hidden md:block px-3 py-2 rounded-md cursor-not-allowed text-sm xl:text-lg text-white bg-[#2CBA7A] hover:text-primary/80">
-                    Confirmed Receipt
-                  </div>
-                )}
+                <button className="hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg text-white bg-[#2CBA7A] hover:text-primary/80">
+                  Confirmed Receipt
+                </button>
 
-                <p className="text-sm xl:text-xl text-gray-700 hover:underline ">
+                <a
+                  href={order?.trackingLink}
+                  target="blank"
+                  className="text-sm xl:text-xl  text-gray-700 hover:underline"
+                >
                   Track
-                </p>
+                </a>
               </div>
             ) : (
               <p

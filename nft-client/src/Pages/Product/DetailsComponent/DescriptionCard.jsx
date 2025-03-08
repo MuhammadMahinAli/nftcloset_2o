@@ -6,7 +6,7 @@ const DescriptionCard = ({productDescription}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg">
+    <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]">
       {/* Header */}
       <button 
         onClick={() => setIsExpanded(!isExpanded)}
