@@ -8,6 +8,7 @@ import ActivityCard from "./DetailsComponent/ActivityCard";
 import ProductImage from "./DetailsComponent/ProductImage";
 import ProductInfo from "./DetailsComponent/ProductInfo";
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 const ProductsDetails = () => {
   const data = useLoaderData();
@@ -15,7 +16,7 @@ const ProductsDetails = () => {
 const { productName,
   _id,
   productDescription,
-  displayImage,
+  displayImage: initialDisplayImage,
   price,
   stock,
   buyingLink,
@@ -27,6 +28,9 @@ const { productName,
   tokenDetails,
   sizeWithMaterial,
   sizeChart} = productInfo;
+
+
+  const [displayImage, setDisplayImage] = useState(initialDisplayImage);
 
   return (
     <div>
@@ -86,7 +90,7 @@ const { productName,
         {/* left */}
         <div className=" space-y-5">
           <ProductImage displayImage={displayImage} />
-          <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} />
+          <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} onAssetClick={setDisplayImage} />
           <PriceCard _id={_id} price={price} collection={collection} />
           <TokenCard tokenDetails={tokenDetails} />
           <CollectionCard collection={collection} />
@@ -102,7 +106,7 @@ const { productName,
       <div className="lg:hidden grid grid-cols-1 gap-3 py-4 px-5">
         <ProductInfo  productName={productName}/>
         <ProductImage displayImage={displayImage}/>
-        <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} />
+        <ExtraAssets extraVideos={extraVideos} extraImages={extraImages} onAssetClick={setDisplayImage} />
         <VersionSlider digitalAssets={digitalAssets} displayImage={displayImage} />
         <DescriptionCard  productDescription={productDescription} />
         <PriceCard _id={_id} price={price} collection={collection}   />

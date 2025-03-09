@@ -51,10 +51,17 @@ export const productApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
-   
+    createNewRequest: builder.mutation({
+      query: (data) => ({
+        url: "/deliveryCharge/new-request",
+        method: "POST",
+        body: data,
+      }),
+     invalidateTags: ["Product"],
+    }),
   }),
 });
 
- export const {useDeleteProductMutation ,useAddProductMutation, useGetAllProductQuery, useUpdateProductInfoMutation } = productApi;
+ export const {useCreateNewRequestMutation,useDeleteProductMutation ,useAddProductMutation, useGetAllProductQuery, useUpdateProductInfoMutation } = productApi;
 
 // useGetAllPostQuery   useDeleteFriendRequestMutation ,useGetAllSentPendingFriendRequestQuery,useGetAllStatusFriendRequestQuery, useGetFriendRequestQuery,useGetAcceptedFriendRequestQuery, useGetOthersAcceptedFriendRequestQuery,useUpdateFriendRequestStatusMutation

@@ -145,7 +145,7 @@ import { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaPlay } from "react-icons/fa"; // Import play icon for videos
 
-const ExtraAssets = ({ extraVideos, extraImages }) => {
+const ExtraAssets = ({ extraVideos, extraImages,onAssetClick }) => {
   // Combine videos and images into one array
   const allAssets = [...extraVideos, ...extraImages].map((asset, index) => ({
     id: index,
@@ -223,7 +223,8 @@ const ExtraAssets = ({ extraVideos, extraImages }) => {
                 .map((asset) => (
                   <div
                     key={asset.id}
-                    onClick={() => handleAssetClick(asset)}
+                    
+                    onClick={() => onAssetClick(asset.url)}
                     className="flex-1 h-full bg-white  rounded-lg overflow-hidden shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] hover:shadow-md transition-shadow duration-300 cursor-pointer relative"
                   >
                     <div className="relative h-full overflow-hidden flex justify-center items-center">

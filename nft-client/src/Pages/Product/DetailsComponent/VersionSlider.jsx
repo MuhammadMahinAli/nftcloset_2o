@@ -15,6 +15,16 @@ import sandbox from "../../../assets/nft-image/sandbox.png";
 import story from "../../../assets/nft-image/story.png";
 import pd from "../../../assets/nft-image/pd.png";
 import threeD from "../../../assets/nft-image/3d.png";
+import lobbySlider from "../../../assets/nft-image/lobby-slide.png";
+import nftSlider from "../../../assets/nft-image/nft-slide.png";
+import phySlider from "../../../assets/nft-image/Physical-slide.png";
+import recroomSlider from "../../../assets/nft-image/Recroom-slide.png";
+import sandboxSlider from "../../../assets/nft-image/sandbox-slide.png";
+import techdesignbookSlider from "../../../assets/nft-image/TechnicalDesignBook-slide.png";
+import vrChatSlider from "../../../assets/nft-image/vrchat-slide.png";
+import vrSlider from "../../../assets/nft-image/VR-slide.png";
+import comingSlider from "../../../assets/nft-image/coming-soon.png";
+import threedSlider from "../../../assets/nft-image/3d-slide.png";
 import { useEffect, useState } from "react";
 
 const VersionSlider = ({ digitalAssets, displayImage }) => {
@@ -97,94 +107,94 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
       icon: ar,
       text: "Experience augmented reality with our AR viewer.",
       title: "View In AR",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      video:
+        "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
     },
     {
       id: 2,
       icon: vvr,
       text: "Dive into virtual reality with our immersive VR experience.",
       title: "View In VR",
-      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
+      image: vrSlider,
     },
     {
       id: 3,
       icon: threeD,
       text: "Explore the details of our 3D file with an interactive view.",
       title: "3D File",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      image: threedSlider,
     },
     {
       id: 4,
       icon: book,
       text: "Access the technical design book for in-depth insights.",
       title: "Technical design book",
-      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
+      image: techdesignbookSlider,
     },
     {
       id: 5,
       icon: pd,
       text: "Discover the elegance of our physical dress collection.",
       title: "Physical Dress",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      image: phySlider,
     },
     {
       id: 6,
       icon: cartNft,
       text: "Own a unique digital asset with our exclusive NFT.",
       title: "NFT",
-      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
+      image: nftSlider,
     },
     {
       id: 7,
       icon: lobby,
       text: "Unlock access to exclusive spaces with your virtual lobby key.",
       title: "Virtual lobby access key",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      image: lobbySlider,
     },
     {
       id: 8,
       icon: certification,
       text: "Review the official certification to ensure authenticity.",
       title: "Certification",
-      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
+      image: comingSlider,
     },
     {
       id: 9,
       icon: recroom,
       text: "Explore the innovative design of our Recroom wearable.",
       title: "Recroom wearable",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      image: recroomSlider,
     },
     {
       id: 10,
       icon: animated,
       text: "Enjoy a dynamic display with our animated design.",
       title: "Animated",
-      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
+      image: comingSlider,
     },
     {
       id: 11,
       icon: vrChat,
       text: "Customize your avatar with this exclusive VR Chat wearable.",
       title: "VR Chat Wearable",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      image: vrChatSlider,
     },
     {
       id: 12,
       icon: sandbox,
       text: "Step into a new world with our innovative sandbox wearable.",
       title: "Sandbox wearable",
-      video: "https://onchain.dressx.com/static/assets/images/Artwork_Video.mp4",
+      image: sandboxSlider,
     },
     {
       id: 13,
       icon: story,
       text: "Own the narrative behind our creation with story ownership.",
       title: "Ownership of story",
-      video: "https://onchain.dressx.com/static/assets/images/AR%20dressing_Video.mp4",
+      image: comingSlider,
     },
   ];
-  
 
   // Create a mapping object for feature text to digitalAssets keys
   const featureKeyMap = {
@@ -242,10 +252,12 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] space-y-4 p-3">
-      <h1  className="font-bold text-gray-700 text-sm lg:text-[15px] xl:text-xl text-center py-3">Unleash the Full Potential of Your NFT</h1>
+      <h1 className="font-bold text-gray-700 text-sm lg:text-[15px] xl:text-xl text-center py-3">
+        Unleash the Full Potential of Your NFT
+      </h1>
       <div className="flex flex-col justify-center items-center ">
         {/* Top Slider */}
-        <div className="rounded-lg w-[200px] h-[340px] bg-white md:h-[350px] m lg:h-[360px] lg:w-[200px] xl:h-[450px] xl:w-[300px]">
+        <div className="rounded-xl w-[200px] h-[373px] bg-white md:h-[380px] m lg:h-[400px] lg:w-[200px] xl:h-[515px] xl:w-[300px] 3xl:h-[512px]">
           <Swiper
             effect={"cards"}
             grabCursor={true}
@@ -269,7 +281,7 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
             {availableSliderData.map((feature, index) => (
               <SwiperSlide key={feature.id}>
                 <div
-                  className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[200px] h-[340px] md:h-[350px] m lg:h-[360px] lg:w-[200px] xl:h-[450px] xl:w-[300px] transition-all duration-300
+                  className={`flex flex-col justify-center items-center rounded-xl  bg-white w-[200px] h-[373px] md:h-[380px]  lg:h-[400px] lg:w-[200px] xl:h-[515px] xl:w-[300px] 3xl:h-[512px] transition-all duration-300
                       ${
                         index === activeIndex
                           ? "transform -translate-y-4 rounded-lg "
@@ -277,16 +289,25 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
                       }
                     `}
                 >
-                  <div className="h-[80%] md:h-[50%] xl:h-[60%] rounded-t-lg bg-gradient-to-b from-[#7e7e7e] via-[#aeaeae] to-[#eaeaea] w-full flex justify-center items-center">
-                    {/* <img
-                     // src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
-                      src={displayImage}
-                      className="w-20 md:w-32 lg:w-32 py-2 mt-5"
-                    /> */}
-                    <video className="rounded-lg" muted autoPlay playsInline loop>
-                      <source src={feature?.video} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                  <div className="h-[80%] md:h-[50%] xl:h-[60%] rounded-t-lg  w-full flex justify-center items-center">
+                    {feature.video ? (
+                      <video
+                        className="rounded-lg"
+                        muted
+                        autoPlay
+                        playsInline
+                        loop
+                      >
+                        <source src="/arVideo.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img
+                        src={feature.image}
+                        alt={feature.title}
+                        className="object-cover rounded-lg w-full"
+                      />
+                    )}
                   </div>
                   <div className="flex flex-col justify-center items-center space-y-1 lg:space-y-2 px-1 md:px-3 pt-3 xl:pt-6 pb-6 md:pb-2 xl:pb-6">
                     <p className="text-[15px] md:text-[16px] lg:text-[15px] xl:text-xl font-bold text-gray-800 text-center">
@@ -636,7 +657,7 @@ export default VersionSlider;
 //     <div className="p-3">
 //       <div className="flex flex-col justify-center items-center ">
 //         {/* Top Slider */}
-//         <div className="rounded-lg w-[170px] h-[265px] bg-white md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[450px] xl:w-[250px]">
+//         <div className="rounded-lg w-[170px] h-[265px] bg-white md:h-[380px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[515px] xl:w-[250px] 3xl:h-[512px]">
 //           <Swiper
 //             effect={"cards"}
 //             grabCursor={true}
@@ -660,7 +681,7 @@ export default VersionSlider;
 //             {sliderData.map((feature, index) => (
 //               <SwiperSlide key={feature.id}>
 // <div
-//   className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[170px] h-[265px] md:h-[350px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[450px] xl:w-[250px] transition-all duration-300
+//   className={`flex flex-col justify-center items-center rounded-lg  bg-white w-[170px] h-[265px] md:h-[380px] md:w-[250px] lg:h-[360px] lg:w-[250px] xl:h-[515px] xl:w-[250px] 3xl:h-[512px] transition-all duration-300
 //       ${
 //         index === activeIndex
 //           ? "transform -translate-y-4 rounded-lg "

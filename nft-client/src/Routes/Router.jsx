@@ -28,6 +28,9 @@ import AddProduct from "../Pages/NFT/AddProduct/AddProduct";
 import UpdateACollection from "../Pages/Dashboard/UpdateACollection";
 import UpdateAProduct from "../Pages/Dashboard/UpdateAProduct";
 import UpdateHomepageContent from "../Pages/Dashboard/UpdateHomepageContent";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
+import PaymentFailed from "../Pages/PaymentFailed/PaymentFailed";
+import AddDeliveryArea from "../Pages/Dashboard/AddDeliveryArea";
 
 
 
@@ -88,8 +91,12 @@ const router = createBrowserRouter([
         element: <HomePageControl/>,
       },
       {
-        path: "/manageAccount//update-home-page-content",
+        path: "/manageAccount/update-home-page-content",
         element: <UpdateHomepageContent/>,
+      },
+      {
+        path: "/manageAccount/add",
+        element: <AddDeliveryArea/>,
       },
       {
         path: "/manageAccount/update-collection/:id",
@@ -163,7 +170,14 @@ const router = createBrowserRouter([
   //   element: <ProductDetails />,
   // },
 
- 
+  {
+    path: "/success",
+    element: <PaymentSuccess />,
+  },
+  {
+    path: "/funding-failed",
+    element: <PaymentFailed />,
+  },
   {
     path: "/sign-up",
     element: <Sign />,

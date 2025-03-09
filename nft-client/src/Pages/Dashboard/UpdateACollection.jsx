@@ -3,9 +3,10 @@ import { IoIosArrowDropdownCircle } from "react-icons/io";
 import Swal from "sweetalert2";
 import { useGetAllProductQuery } from "../../features/product/productApi";
 import { RiCloseFill } from "react-icons/ri";
-import {  useUpdateCollectionInfoMutation } from "../../features/collection/collectionApi";
+import { useUpdateCollectionInfoMutation } from "../../features/collection/collectionApi";
 import { useLoaderData } from "react-router-dom";
 import { fileUpload } from "../utils/cloudinary";
+import { rawFileUpload } from "../utils/cloudinaryForRaw";
 
 const UpdateACollection = () => {
   const collectionData = useLoaderData();
@@ -24,7 +25,6 @@ const UpdateACollection = () => {
     products: [],
     storyLink: "",
   });
-
 
   const products = getAllProduct?.data;
 
@@ -161,76 +161,116 @@ const UpdateACollection = () => {
   }, []);
 
   // Handle image upload
+  // const handleImageUpload = async (event) => {
+  //   const file = event.target.files[0];
+  //   if (!file) return;
+
+  //   try {
+  //     setIsUploading(true);
+  //     setUploadProgress(0);
+
+  //     const uploadedUrl = await fileUpload(file, (progress) => {
+  //       setUploadProgress(Math.round(progress));
+  //     });
+
+  //     setFormData((prev) => ({
+  //       ...prev,
+  //       displayImage: uploadedUrl,
+  //     }));
+  //   } catch (error) {
+  //     console.error("Error uploading image:", error);
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Upload Failed",
+  //       text: "Failed to upload image. Please try again.",
+  //     });
+  //   } finally {
+  //     setIsUploading(false);
+  //     setUploadProgress(0);
+  //   }
+  // };
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
 
-    try {
-      setIsUploading(true);
-      setUploadProgress(0);
-
-      const uploadedUrl = await fileUpload(file, (progress) => {
-        setUploadProgress(Math.round(progress));
-      });
-
-      setFormData((prev) => ({
-        ...prev,
-        displayImage: uploadedUrl,
-      }));
-    } catch (error) {
-      console.error("Error uploading image:", error);
+    // Check file type
+    if (!file.type.startsWith("image/")) {
       Swal.fire({
         icon: "error",
-        title: "Upload Failed",
-        text: "Failed to upload image. Please try again.",
+        title: "Invalid File Type",
+        text: "Please upload an image file",
       });
-    } finally {
-      setIsUploading(false);
-      setUploadProgress(0);
+      return;
     }
-  };
 
+    // Check image dimensions
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = async () => {
+      if (img.width !== 1024 || img.height !== 320) {
+        Swal.fire({
+          icon: "error",
+          title: "Invalid Image Dimensions",
+          text: "Image must be exactly 1024 x 320 pixels",
+        });
+        return;
+      }
+
+      setIsUploading(true);
+      try {
+        const uploadedUrl = await rawFileUpload(file, "image", (progress) =>
+          setUploadProgress(progress)
+        );
+
+        setFormData((prev) => ({
+          ...prev,
+          displayImage: uploadedUrl,
+        }));
+      } finally {
+        setIsUploading(false);
+        setUploadProgress(0);
+      }
+    };
+  };
   // Handle product selection
 
-// handleProductSelection function
-const handleProductSelection = (product) => {
-  setFormData((prev) => {
-    const isSelected = prev.products.some(
-      (item) => item.productId._id === product._id
-    );
+  // handleProductSelection function
+  const handleProductSelection = (product) => {
+    setFormData((prev) => {
+      const isSelected = prev.products.some(
+        (item) => item.productId._id === product._id
+      );
 
-    if (isSelected) {
-      return {
-        ...prev,
-        products: prev.products.filter(
-          (item) => item.productId._id !== product._id
-        ),
-      };
-    } else {
-      return {
-        ...prev,
-        products: [
-          ...prev.products,
-          {
-            productId: {
-              _id: product._id
-            }
-          }
-        ],
-      };
-    }
-  });
-};
-
-
+      if (isSelected) {
+        return {
+          ...prev,
+          products: prev.products.filter(
+            (item) => item.productId._id !== product._id
+          ),
+        };
+      } else {
+        return {
+          ...prev,
+          products: [
+            ...prev.products,
+            {
+              productId: {
+                _id: product._id,
+              },
+            },
+          ],
+        };
+      }
+    });
+  };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log(formData);
-const collectionId = collectionData?.data?._id
-
+    const collectionId = collectionData?.data?._id;
 
     // Validation checks remain the same
     const requiredFields = {
@@ -257,7 +297,7 @@ const collectionId = collectionData?.data?._id
     try {
       const response = await updateCollectionInfo({
         id: collectionId,
-        data: formData
+        data: formData,
       }).unwrap();
 
       if (response.success) {
@@ -272,7 +312,9 @@ const collectionId = collectionData?.data?._id
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: err.data?.message || "Something went wrong while updating the collection!",
+        text:
+          err.data?.message ||
+          "Something went wrong while updating the collection!",
       });
     }
   };
@@ -362,7 +404,7 @@ const collectionId = collectionData?.data?._id
                       />
                     </svg>
                     <p className="text-base text-gray-500">Upload PNG</p>
-                    <p className="text-sm text-gray-400">1280 x 720 Pixels</p>
+                    <p className="text-sm text-gray-400">1024 x 320 Pixels</p>
                   </div>
                 )}
 
@@ -370,7 +412,7 @@ const collectionId = collectionData?.data?._id
                 {isUploading && (
                   <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
                     <div className="relative">
-                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#26B893]"></div>
+                      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#26B893]"></div>
                     </div>
                   </div>
                 )}

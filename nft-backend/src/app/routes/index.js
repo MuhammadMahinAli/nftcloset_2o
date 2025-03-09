@@ -5,6 +5,7 @@ import { ProductRoutes } from "../modules/products/product.routes.js";
 import {CollectionRoutes} from '../modules/collection/collection.routes.js'
 import { OrderRoutes } from "../modules/order/order.routes.js";
 import { HomePageControlRoutes } from "../modules/homePageControl/homePageControl.routes.js";
+import { FundRequestRoutes } from "../modules/deliveryCharge/deliveryCharge.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -14,6 +15,7 @@ const moduleRoutes = [
   { path: "/collection", route: CollectionRoutes },
   { path: "/order", route: OrderRoutes },
   { path: "/homePageControl", route: HomePageControlRoutes },
+  { path: "/deliveryCharge", route: FundRequestRoutes },
   
 
 ];

@@ -1,26 +1,10 @@
-import HeroImage from "../../../assets/nft-clogetlogo-2@2x.png";
-import blurHeroImage from "../../../assets/blur-hero.png";
-import digitalCollection from "../../../assets/frame-18@2x.png";
+import HeroImage from "../../../assets/nft-image/nftcloset_logo.png";
 import MintModal from "../MintNFTModal/MintModal";
-import { useContext, useEffect, useState } from "react";
-//import { useAuthCheck } from "../../../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import Swal from "sweetalert2";
+import { Link} from "react-router-dom";
+
 
 const HeroSection = () => {
-  AOS.init();
-  const [openMintModal, setOpenMintModal] = useState(false);
-  const navigate = useNavigate();
 
-  const handleMint = () => {
-    if (!userEmail) {
-      navigate("/seller/signup");
-    } else {
-      setOpenMintModal(true);
-    }
-  };
   return (
     <>
       <div
@@ -61,7 +45,7 @@ const HeroSection = () => {
               <div className="flex  items-center  bg-gray-900  text-white hover:bg-white hover:text-gray-900 border border-gray-900 px-2 bg-gray rounded-xl filter:blur(2px) backdrop-filter:blur(20px) h-[47px]">
                 <label
                   htmlFor="mint-popup"
-                  onClick={handleMint}
+                  //onClick={handleMint}
                   className="capitalize cursor-pointer text-[18px] font-semibold px-3"
                 >
                   Mint NFT
@@ -76,17 +60,11 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-        {openMintModal === true && (
-          <MintModal
-            openMintModal={openMintModal}
-            setOpenMintModal={setOpenMintModal}
-          />
-        )}
         {/****************************************** Right content ***********************************/}
 
         <div
-          // data-aos="fade-up-right"
-          // data-aos-duration="1200"
+          data-aos="fade-up-right"
+          data-aos-duration="1200"
           className=" border border-white px-3 py-4 lg:pt-5 rounded-xl  shadow-[5px_5px_10px_5px_rgba(155,_155,_155,_0.3)] backdrop-filter:blur(20px); xl:ml-10  w-11/12 md:w-[380px] lg:w-[450px] lg:h-[480px] xl:h-[500px] 3xl:w-[500px] 3xl:h-[530px]"
         >
           <img

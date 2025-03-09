@@ -164,11 +164,11 @@ const CreateNewCollection = () => {
     img.src = URL.createObjectURL(file);
 
     img.onload = async () => {
-      if (img.width !== 1280 || img.height !== 752) {
+      if (img.width !== 1024 || img.height !== 320) {
         Swal.fire({
           icon: "error",
           title: "Invalid Image Dimensions",
-          text: "Image must be exactly 1280 x 720 pixels",
+          text: "Image must be exactly 1024 x 320 pixels",
         });
         return;
       }
@@ -423,7 +423,7 @@ const CreateNewCollection = () => {
                       />
                     </svg>
                     <p className="text-base text-gray-500">Upload PNG</p>
-                    <p className="text-sm text-gray-400">1280 x 720 Pixels</p>
+                    <p className="text-sm text-gray-400">1024 x 320 Pixels</p>
                   </div>
                 )}
 
@@ -797,7 +797,7 @@ export default CreateNewCollection;
 //               />
 //             </svg>
 //             <p className="text-base text-gray-500">Upload PNG</p>
-//             <p className="text-sm text-gray-400">1280 x 720 Pixels</p>
+//             <p className="text-sm text-gray-400">1024 x 320 Pixels</p>
 //           </div>
 //         </div>
 //       </div>
