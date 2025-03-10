@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         element: <UpdateHomepageContent/>,
       },
       {
-        path: "/manageAccount/add",
+        path: "/manageAccount/addArea",
         element: <AddDeliveryArea/>,
       },
       {

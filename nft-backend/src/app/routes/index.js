@@ -6,6 +6,7 @@ import {CollectionRoutes} from '../modules/collection/collection.routes.js'
 import { OrderRoutes } from "../modules/order/order.routes.js";
 import { HomePageControlRoutes } from "../modules/homePageControl/homePageControl.routes.js";
 import { FundRequestRoutes } from "../modules/deliveryCharge/deliveryCharge.routes.js";
+import { DeliveryAreaRoutes } from "../modules/deliveryAreaForAdmin/deliveryArea.routes.js";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -16,7 +17,7 @@ const moduleRoutes = [
   { path: "/order", route: OrderRoutes },
   { path: "/homePageControl", route: HomePageControlRoutes },
   { path: "/deliveryCharge", route: FundRequestRoutes },
-  
+  { path: "/deliveryArea", route: DeliveryAreaRoutes },
 
 ];
 
