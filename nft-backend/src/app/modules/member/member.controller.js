@@ -351,6 +351,8 @@ export const getAllMemberByFilterController = catchAsync(async (req, res) => {
 export const sendDigitalAssetsEmailController = async (req, res) => {
   try {
     const { email, orderID, digitalAssets } = req.body;
+
+    console.log("email check",email,orderID);
     const result = await sendDigitalAssetsEmailService(email, orderID, digitalAssets);
     return res.status(200).json(result);
   } catch (error) {

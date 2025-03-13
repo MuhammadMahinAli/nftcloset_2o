@@ -28,7 +28,7 @@ const DashboardNotClaimedOrder = ({
   });
 
   const orderData =
-    userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
+    userEmail === "nftclosetx@gmail.com" ? getAllOrderForAdmin : getAllOrder;
 
     const confirmReceipt = async (orderId) => {
       const result = await Swal.fire({
@@ -86,7 +86,7 @@ const DashboardNotClaimedOrder = ({
 
             {/* right */}
 
-            {userEmail !== "arrr@gmail.com" ? (
+            {userEmail !== "nftclosetx@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
                  {order?.digitalAsset === "shipping" &&
                   <button

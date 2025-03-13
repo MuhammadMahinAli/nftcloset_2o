@@ -23,7 +23,7 @@ const DashboardPendingOrder = ({
     });
   
   
-  const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
+  const orderData = userEmail === "nftclosetx@gmail.com" ? getAllOrderForAdmin : getAllOrder;
   if (isLoading) return <p>Orders is Loading...</p>;
   if (getAllOrder?.length === 0)
     return <p className="text-xl font-semibold">No order available.</p>;
@@ -57,7 +57,7 @@ const DashboardPendingOrder = ({
 
             {/* right */}
 
-            {userEmail !== "arrr@gmail.com" ? (
+            {userEmail !== "nftclosetx@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
                        {/* {order?.digitalAsset === "shipping" &&
                 <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">

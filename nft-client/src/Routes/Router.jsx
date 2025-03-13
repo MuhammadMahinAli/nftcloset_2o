@@ -31,6 +31,8 @@ import UpdateHomepageContent from "../Pages/Dashboard/UpdateHomepageContent";
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentFailed from "../Pages/PaymentFailed/PaymentFailed";
 import AddDeliveryArea from "../Pages/Dashboard/AddDeliveryArea";
+import Test from "../Pages/test/Test";
+import ResetPassword from "../Pages/SignUp/ResetPassword";
 
 
 
@@ -165,10 +167,10 @@ const router = createBrowserRouter([
     ],
   },
 
-  // {
-  //   path: "/test",
-  //   element: <ProductDetails />,
-  // },
+  {
+    path: "/test",
+    element: <Test />,
+  },
 
   {
     path: "/success",
@@ -178,6 +180,10 @@ const router = createBrowserRouter([
     path: "/funding-failed",
     element: <PaymentFailed />,
   },
+   {
+    path: "/reset-password",
+    element: <ResetPassword  />,
+   },
   {
     path: "/sign-up",
     element: <Sign />,

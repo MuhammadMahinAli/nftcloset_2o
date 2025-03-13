@@ -25,10 +25,10 @@ const HeroSection = () => {
           className="flex flex-col items-center lg:items-start lg:space-y-5 3xl:space-y-10 "
         >
           <div className="py-3 flex flex-col space-y-3 lg:space-y-10 3xl:space-y-16 ">
-            <b className="font-extrabold text-center lg:text-start text-2xl md:text-4xl lg:text-[50px] 3xl:text-[60px] tracking-[0.05em] capitalize inline-block text-gray-800">
+            <b className="font-extrabold roboto text-center lg:text-start text-2xl md:text-4xl lg:text-[50px] 3xl:text-[60px] tracking-[0.05em] capitalize inline-block text-gray-800">
               Unlock Digital
             </b>
-            <b className="font-extrabold text-center lg:text-start text-2xl md:text-4xl lg:text-[50px] 3xl:text-[60px] tracking-[0.05em] capitalize inline-block text-gray-800">
+            <b className="font-extrabold  roboto text-center lg:text-start text-2xl md:text-4xl lg:text-[50px] 3xl:text-[60px] tracking-[0.05em] capitalize inline-block text-gray-800">
               Fashion Trends
             </b>
           </div>
@@ -36,7 +36,7 @@ const HeroSection = () => {
             <div className="flex justify-center items-center">
               <Link
                 to="/seller/signup"
-                className="bg-gradient-to-r text-2xl  md:text-4xl lg:text-6xl uppercase font-extrabold from-[#D71EF9] via-[#0EB8DA] to-[#17D6A7] inline-block text-transparent bg-clip-text cursor-pointer"
+                className="bg-gradient-to-r text-2xl roboto md:text-4xl lg:text-6xl uppercase font-extrabold from-[#D71EF9] via-[#0EB8DA] to-[#17D6A7] inline-block text-transparent bg-clip-text cursor-pointer"
               >
                 MINT NOW
               </Link>

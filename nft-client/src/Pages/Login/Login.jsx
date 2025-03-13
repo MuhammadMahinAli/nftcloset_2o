@@ -115,7 +115,7 @@ const Login = () => {
       preConfirm: async (email) => {
         try {
           const response = await axios.post(
-            "https://test-two-22w0.onrender.com/api/v1/member/sendResetPasswordEmail",
+            "http://localhost:4000/api/v1/member/sendResetPasswordEmail",
             { email }
           );
           return response.data.message;

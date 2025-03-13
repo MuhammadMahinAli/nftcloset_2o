@@ -107,7 +107,7 @@ const ManageAccount = () => {
   console.log("user", user);
   return (
     <>
-          { user?.email !== "arrr@gmail.com" ?
+          { user?.email !== "nftclosetx@gmail.com" ?
       <div className="pl-1 xl:pl-10 3xl:pl-5 py-9  grid grid-cols-1 lg:grid-cols-2 space-x-0 lg:space-x-7 space-y-6 lg:space-y-0">
         {/* left side */}
         <div className="w-full ">

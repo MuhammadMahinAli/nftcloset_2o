@@ -10,6 +10,7 @@ import sizeChart from "../../assets/nft-image/size-chart.png";
 import { FaPlus } from "react-icons/fa";
 import { useGetAllCollectionQuery } from "../../features/collection/collectionApi.js";
 import { FiCheckCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const AddProduct = () => {
   const [addProduct] = useAddProductMutation();
@@ -1080,9 +1081,9 @@ const AddProduct = () => {
                       </div>
                     )}
                   </div>
-                  <div className="w-40 text-base text-gray-700 font-bold bg-[#a7f8d3] px-4 py-2 rounded-2xl">
+                  <Link to='/manageAccount/create-collection' className="w-40 text-base text-gray-700 font-bold bg-[#a7f8d3] px-4 py-2 rounded-2xl">
                     Add Collection
-                  </div>
+                  </Link>
                 </div>
 
                 <div className="bg-white shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)] p-6 rounded-lg">

@@ -3,11 +3,13 @@ import pen from "../../assets/nft-image/edit.png";
 import location from "../../assets/nft-image/location.png";
 import { Link } from "react-router-dom";
 import { useGetSingleUserQuery } from "../../features/auth/authApi";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/UserContext";
+import AddOrUpdateAddress from "./AddOrUpdateAddress";
 
 const UserSetting = () => {
   const { userId } = useContext(AuthContext);
+  const [isOpenEditAddress,setIsOpenEditAddress] = useState(false)
   const { data: getSingleUser } = useGetSingleUserQuery(userId);
   const userInfo = getSingleUser?.data;
 
@@ -153,7 +155,7 @@ const UserSetting = () => {
           <h3 className="text-[12px] xl:text-[18px] font-bold text-gray-700">
             Address Book
           </h3>
-          <button className="text-green-500 text-sm border-l pl-1">EDIT</button>
+          <button    onClick={() => setIsOpenEditAddress(true)} className="text-green-500 text-sm border-l pl-1">EDIT</button>
         </div>
 
         {/* Address Book List */}
@@ -234,6 +236,9 @@ const UserSetting = () => {
             ))}
           </div>
         </div>
+          {isOpenEditAddress && (
+                  <AddOrUpdateAddress setIsOpenEditAddress={setIsOpenEditAddress} />
+                )}
       </div>
     </>
   );

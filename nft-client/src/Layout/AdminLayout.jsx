@@ -22,7 +22,7 @@ const AdminLayout = () => {
   return (
     <>
       {/* { 
-    user?.email === 'researchbdy@gmail.com' && */}
+    user?.email === 'nftclosetx@gmail.com' && */}
       <ScrollToTop>
         {!authChecked ? (
           <div>Checking Authentication....</div>

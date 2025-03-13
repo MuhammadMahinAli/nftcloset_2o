@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useUpdateOrderStatusMutation } from '../../features/order/orderApi';
-import Swal from 'sweetalert2';
+import React, { useEffect, useState } from "react";
+import { useUpdateOrderStatusMutation } from "../../features/order/orderApi";
+import Swal from "sweetalert2";
 
 const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
   // State for form data — adjust or remove as needed
-const [updateOrderStatus] = useUpdateOrderStatusMutation()
+  const [updateOrderStatus] = useUpdateOrderStatusMutation();
 
   const product = order?.productID;
   const orderInfo = order?.productInfo;
   const customerInfo = order?.orderedBy;
   const deliveryAddress = order?.deliveryAddress;
 
-  const {productName, displayImage} = product;
-  const {material, size, color} = orderInfo;
-  const {email, name, phoneNumber} = customerInfo;
-  const {street, country, city, homeAddress } = deliveryAddress;
+  const { productName, displayImage } = product;
+  const { material, size, color } = orderInfo;
+  const { email, name, phoneNumber } = customerInfo;
+  const { street, country, city, homeAddress } = deliveryAddress;
   // Only show the modal if isOpen is true
   console.log(order?.productInfo);
 
@@ -24,17 +24,16 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
     digitalAsset: "",
   });
 
-    useEffect(() => {
-      if (order) {
-        setFormData({
-          trackingLink: order.trackingLink,
-          status: order.status,
-          digitalAsset: order.digitalAsset,
-        });
-;
-      }
-    }, [order]);
-        
+  useEffect(() => {
+    if (order) {
+      setFormData({
+        trackingLink: order.trackingLink,
+        status: order.status,
+        digitalAsset: order.digitalAsset,
+      });
+    }
+  }, [order]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -46,38 +45,37 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const orderId = order?._id
-  ;
+    const orderId = order?._id;
     console.log(formData);
-        try {
-          const response = await   updateOrderStatus({
-            id:orderId,
-            data: formData,
-          }).unwrap();
-    
-          if (response.success) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Success!',
-              text: 'Status are updated successfully',
-              showConfirmButton: false,
-              timer: 1500
-            });
-            setFormData({
-              trackingLink: "",
-              status: "",
-              digitalAsset: "",
-            });
-           onClose()
-          }
-        } catch (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.data?.message || 'Something went wrong!',
-          });
-        }
-  }
+    try {
+      const response = await updateOrderStatus({
+        id: orderId,
+        data: formData,
+      }).unwrap();
+
+      if (response.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Status are updated successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setFormData({
+          trackingLink: "",
+          status: "",
+          digitalAsset: "",
+        });
+        onClose();
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.data?.message || "Something went wrong!",
+      });
+    }
+  };
 
   if (!isOpenModal) return null;
   return (
@@ -117,17 +115,13 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
 
         {/* Product Image (replace src with your product image) */}
         <div className="flex justify-center mb-4">
-          <img
-            src={displayImage}
-            alt={productName}
-            className="w-32  rounded"
-          />
+          <img src={displayImage} alt={productName} className="w-32  rounded" />
         </div>
 
         {/* Product Information */}
         <div className="mb-4 space-y-1">
           <p className="text-gray-900 font-bold text-[20px] capitalize">
-            Product Name: <span >{productName}</span>
+            Product Name: <span>{productName}</span>
           </p>
           <p className="text-gray-500 font-medium text-[18px]">
             Size: <span className="font-normal capitalize">{size}</span>
@@ -142,91 +136,110 @@ const [updateOrderStatus] = useUpdateOrderStatusMutation()
 
         {/* Customer Details */}
         <div className="mb-4 space-y-1">
-          <p className="text-gray-700 font-bold mb-1 text-[20px]">Crossmint Order ID</p>
-          <p className="text-gray-500 text-[18px]">ID: {order?.crossMintOrderId}</p>
+          <p className="text-gray-700 font-bold mb-1 text-[20px]">
+            Crossmint Order ID
+          </p>
+          <p className="text-gray-500 text-[18px]">
+            ID: {order?.crossMintOrderId}
+          </p>
         </div>
         <div className="mb-4 space-y-1">
-          <p className="text-gray-700 font-bold mb-1 text-[20px]">Customer Details</p>
+          <p className="text-gray-700 font-bold mb-1 text-[20px]">
+            Customer Details
+          </p>
           <p className="text-gray-500 text-[18px]">Email:{email}</p>
-          <p className="text-gray-500 text-[18px]">Name: {name?.firstName} {name?.lastName}</p>
-          <p className="text-gray-500 text-[18px]">Phone Number: {phoneNumber}</p>
+          <p className="text-gray-500 text-[18px]">
+            Name: {name?.firstName} {name?.lastName}
+          </p>
+          <p className="text-gray-500 text-[18px]">
+            Phone Number: {phoneNumber}
+          </p>
+          <p className="text-gray-500 text-[18px]">
+            Contact: {order?.contactType || "Not mentioned"}
+          </p>
         </div>
 
         {/* Address Details */}
         <div className="mb-4 space-y-1">
-          <p className="text-gray-700 font-bold mb-1 text-[20px]">Delivery Address</p>
-          <p className="text-gray-500 text-[18px]">
-            Address: {homeAddress}
+          <p className="text-gray-700 font-bold mb-1 text-[20px]">
+            Delivery Address
           </p>
-          <p className="text-gray-500 text-[18px]">
-            Street: {street}
-          </p>
+          <p className="text-gray-500 text-[18px]">Address: {homeAddress}</p>
+          <p className="text-gray-500 text-[18px]">Street: {street}</p>
           <p className="text-gray-500 text-[18px]">City: {city}</p>
           <p className="text-gray-500 text-[18px]">Country: {country}</p>
         </div>
-<form onSubmit={handleSubmit}>
-        {/* Tracking Link */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-1 text-[20px]" htmlFor="trackingLink">
-            Tracking Link:
-          </label>
-          <input
-            id="trackingLink"
-            name="trackingLink"
-            type="text"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Enter tracking link"
-            value={formData.trackingLink}
-            onChange={handleInputChange}
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          {/* Tracking Link */}
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-bold mb-1 text-[20px]"
+              htmlFor="trackingLink"
+            >
+              Tracking Link:
+            </label>
+            <input
+              id="trackingLink"
+              name="trackingLink"
+              type="text"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Enter tracking link"
+              value={formData.trackingLink}
+              onChange={handleInputChange}
+            />
+          </div>
 
-        {/* Status */}
-        <div className="mb-6">
-          <label className="font-bold block text-gray-700 mb-1 text-[20px]" htmlFor="statusSelect">
-            Status:
-          </label>
-          <select
-            id="status"
-            name="status"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-            value={formData.status}
-            onChange={handleInputChange}
-          >
-            <option value="">Select a status</option>
-            <option value="approved">Approved</option>
-            <option value="declined">Declined</option>
-          </select>
-        </div>
-        {/* Status */}
-        <div className="mb-6">
-          <label className="font-bold block text-gray-700 mb-1 text-[20px]" htmlFor="statusSelect">
-          Digital Assets claim  Status:
-          </label>
-          <select
-            id="digitalAsset"
-            name="digitalAsset"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-            value={formData.digitalAsset}
-            onChange={handleInputChange}
-          >
-             <option value="">Select a status</option>
-            <option value="claimed">Claimed</option>
-            <option value="shipping">Shipping</option>
-            <option value="received">Recieved</option>
-          </select>
-        </div>
+          {/* Status */}
+          <div className="mb-6">
+            <label
+              className="font-bold block text-gray-700 mb-1 text-[20px]"
+              htmlFor="statusSelect"
+            >
+              Status:
+            </label>
+            <select
+              id="status"
+              name="status"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              value={formData.status}
+              onChange={handleInputChange}
+            >
+              <option value="">Select a status</option>
+              <option value="approved">Approved</option>
+              <option value="declined">Declined</option>
+            </select>
+          </div>
+          {/* Status */}
+          <div className="mb-6">
+            <label
+              className="font-bold block text-gray-700 mb-1 text-[20px]"
+              htmlFor="statusSelect"
+            >
+              Digital Assets claim Status:
+            </label>
+            <select
+              id="digitalAsset"
+              name="digitalAsset"
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              value={formData.digitalAsset}
+              onChange={handleInputChange}
+            >
+              <option value="">Select a status</option>
+              <option value="claimed">Claimed</option>
+              <option value="shipping">Shipping</option>
+              <option value="received">Recieved</option>
+            </select>
+          </div>
 
-        {/* Save Button */}
-        <div className="flex justify-end">
-          <button
-          type='submit'
-            className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded"
-          >
-            Save
-          </button>
-          
-        </div>
+          {/* Save Button */}
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded"
+            >
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </div>

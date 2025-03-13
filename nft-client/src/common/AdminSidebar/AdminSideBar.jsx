@@ -593,7 +593,7 @@ const AdminSideBar = () => {
       </div>
 
       {/* product */}
-      { userEmail === "arrr@gmail.com" &&
+      { userEmail === "nftclosetx@gmail.com" &&
       <div className="sidebar-list">
         <Link 
         to="/manageAccount/all-products" 
@@ -631,7 +631,7 @@ const AdminSideBar = () => {
       </div>
 }
       {/* collections */}
-      { userEmail === "arrr@gmail.com" &&
+      { userEmail === "nftclosetx@gmail.com" &&
       <div className="sidebar-list">
         <Link 
         to="/manageAccount/all-collections" 
@@ -702,7 +702,7 @@ const AdminSideBar = () => {
       </div>
 
       {/* home control */}
-      { userEmail === "arrr@gmail.com" &&
+      { userEmail === "nftclosetx@gmail.com" &&
       <div className="sidebar-list">
         <Link 
          to="/manageAccount/home-page-controls" 
@@ -898,7 +898,7 @@ const AdminSideBar = () => {
 
 
          {/* product */}
-         { userEmail === "arrr@gmail.com" &&
+         { userEmail === "nftclosetx@gmail.com" &&
          <li className="sidebar-list">
            <Link to="/manageAccount/all-products" className="relative">
              <p>
@@ -929,7 +929,7 @@ const AdminSideBar = () => {
          </li>
 }
          {/* collection */}
-         { userEmail === "arrr@gmail.com" &&
+         { userEmail === "nftclosetx@gmail.com" &&
          <li className="sidebar-list">
            <Link to="/manageAccount/all-collections" className="relative">
              <p>
@@ -987,7 +987,7 @@ const AdminSideBar = () => {
            </Link>
          </li>
          {/* home page control */}
-         { userEmail === "arrr@gmail.com" &&
+         { userEmail === "nftclosetx@gmail.com" &&
          <li className="sidebar-list">
            <Link to="/manageAccount/home-page-controls" className="relative">
              <p>

@@ -5,11 +5,12 @@ import {useAuthCheck} from "../../utils/authCheck";
 import {useUniqueRouteAccess} from "../../utils/useUniqueRouteAccess";
 import {pathGenerate} from "../../utils/pathGenerate";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 // import {NFTMarketplaceContext} from "../../../../Context/NFTMarketplaceContext";
 // import {truncate} from "../../utils/truncate";
 const HamburgerDropdown = ({setIsHamburgerDropdownVisible}) => {
   const uniqueRouteAccess = useUniqueRouteAccess();
-  const {role, userEmail} = useAuthCheck();
+  const {role,  logout: originalLogout} = useAuthCheck();
 
     //set user email & role
     const { user } = useSelector((state) => state.auth);
@@ -23,23 +24,29 @@ const HamburgerDropdown = ({setIsHamburgerDropdownVisible}) => {
     const path = pathGenerate(role, uniqueRouteAccess);
     setToPath(path);
   }, [role]);
-  // const walletPopup = () => {
-  //   Swal.fire("Oops!", `Use Dekstop / Laptop to connect wallet !!`, "error");
-  // };
-  // const [wallet, setWallet] = useState("");
-  // const [walletChange, setWalletChange] = useState(false);
-  // useEffect(() => {
-  //   const connectWallet = async () => {
-  //     const walletData = await checkWalletConnected();
-  //     // console.log(walletData);
-  //     setWallet(() => walletData);
-  //   };
-  //   connectWallet();
-  // }, [userEmail, checkContract, checkWalletConnected]);
-  // const walletConnect = async () => {
-  //   await checkContract();
-  //   setWalletChange((prev) => !prev);
-  // };
+
+
+
+  const logout = async () => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out!",
+    });
+
+    if (result.isConfirmed) {
+      originalLogout();
+      Swal.fire({
+        icon: "success",
+        text: "Logged out successfully!",
+      });
+     // navigate("/login");
+    }
+  };
 
   return (
     <>
@@ -75,7 +82,7 @@ const HamburgerDropdown = ({setIsHamburgerDropdownVisible}) => {
             </Link>
     {
       userId &&
-      <h1 className="rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Logout</h1> 
+      <h1       onClick={logout} className=" rounded-md text-xl font-bold p-2 m-2 cursor-pointer">Logout</h1> 
     }
           </div>
           {/* {location.pathname === "/manageAccount" && (

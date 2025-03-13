@@ -103,7 +103,7 @@ const PriceCard = ({ _id, price, collection }) => {
           to={`/orders/${_id}`} 
           className={`flex-1 py-3 px-3 md:px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 ${
             isOfferValid && discount > 0 
-              ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
+              ? 'bg-[#847EF4] hover:bg-indigo-700 text-white'
               : 'bg-indigo-500 hover:bg-indigo-600 text-white'
           }`}
         >

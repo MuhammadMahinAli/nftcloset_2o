@@ -25,6 +25,7 @@ const OrderSchema = new Schema(
       ref: "Member",
       required: true,
     },
+    contactType: { type: String },
     crossMintOrderId: { type: String },
     trackingLink: { type: String },
     status: { type: String, enum: ["pending", "approved", "declined"] },

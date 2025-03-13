@@ -155,8 +155,8 @@ const AddOrUpdateAddress = ({ setIsOpenEditAddress }) => {
   };
 
   return (
-    <div className="p-4 md:p-8 xl:p-10 fixed lg:left-14  inset-0 flex justify-center items-center bg-black/50 ">
-      <div className="bg-white md:w-11/12  overflow-y-auto min-h-[300px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-[550px] 3xl:min-h-[550px] max-h-screen md:max-h-[400px] lg:max-h-[500px] xl:max-h-[550px] 3xl:max-h-[550px]  mt-16 rounded-lg p-5">
+    <div className="p-4 md:p-8 xl:p-10 fixed lg:left-0  inset-0 flex justify-center items-center bg-black/50 ">
+      <div className="bg-white md:w-11/12  overflow-y-auto min-h-[300px] md:min-h-[400px] lg:min-h-[450px] xl:min-h-[500px] 3xl:min-h-[550px] max-h-screen md:max-h-[400px] lg:max-h-[500px] xl:max-h-[550px] 3xl:max-h-[550px]  mt-16 rounded-lg p-5">
         <button
           className="float-right"
           onClick={() => setIsOpenEditAddress(false)}

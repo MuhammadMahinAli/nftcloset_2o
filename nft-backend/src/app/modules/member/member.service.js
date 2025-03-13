@@ -42,7 +42,7 @@ export const createMemberService = async (userInfo) => {
   //   subject: "Verify Your Email Address",
   //   html: `
   //    <div style="font-family: Arial, sans-serif;">
-  //     <img src="https://i.ibb.co/g9fcnQq/logo.png" alt="Research Buddy" style="width: 50px; height: auto;"/>
+  //     <img src=" https://i.ibb.co.com/jkSbtgQc/nft-logo.png" alt="Research Buddy" style="width: 50px; height: auto;"/>
   //     <p style="padding-top: 10px;">Dear ${newUser.name.firstName} ${newUser.name.lastName},</p>
   //     <p>Thank you for signing up with us! We're excited to have you on board. To ensure the security and activation of your account, please verify your email address.</p>
   //     <p>To get started, click the link below:</p>
@@ -103,7 +103,7 @@ export const resendEmailService = async (email) => {
     subject: "Verify Your Email Address",
     html: `
      <div style="font-family: Arial, sans-serif;">
-      <img src="https://i.ibb.co/g9fcnQq/logo.png" alt="Research Buddy" style="width: 50px; height: auto;"/>
+      <img src=" https://i.ibb.co.com/jkSbtgQc/nft-logo.png" alt="Research Buddy" style="width: 50px; height: auto;"/>
       <p style="padding-top: 10px;">Dear ${member.name.firstName} ${member.name.lastName},</p>
       <p>Thank you for signing up with us! We're excited to have you on board. To ensure the security and activation of your account, please verify your email address.</p>
       <p>To get started, click the link below:</p>
@@ -121,7 +121,7 @@ export const resendEmailService = async (email) => {
 ///--------- get all users
 
 // export const getAllMemberService = async () => {
-//   const users = await Member.find({ email: { $ne: "researchbdy@gmail.com" } }); // Exclude "researchbdy@gmail.com"
+//   const users = await Member.find({ email: { $ne: "nftclosetx@gmail.com" } }); // Exclude "nftclosetx@gmail.com"
 //   return users;
 // };
 export const getAllMemberService = async (filter, page = 1) => {
@@ -129,7 +129,7 @@ export const getAllMemberService = async (filter, page = 1) => {
   const skip = (page - 1) * pageSize;
 
   const query = {
-    email: { $ne: "researchbdy@gmail.com" }, // Exclude "researchbdy@gmail.com"
+    email: { $ne: "nftclosetx@gmail.com" }, // Exclude "nftclosetx@gmail.com"
     ...filter, // Add dynamic filtering based on the request
   };
 
@@ -353,6 +353,8 @@ export const sendForgetPasswordEmailService = async (email) => {
     throw new Error("Member not found");
   }
 
+  console.log("Member not found", email);
+
   const resetToken = crypto.randomBytes(32).toString("hex");
   const resetPasswordExpires = Date.now() + 5 * 60 * 1000; // 5 minutes
 
@@ -365,7 +367,7 @@ export const sendForgetPasswordEmailService = async (email) => {
   console.log(user?._id, resetToken, timeRemaining);
 
   // Create the reset URL with token
-  const resetUrl = `https://researchbdy.com/reset-password?id=${user._id}&token=${resetToken}&timeRemaining=${timeRemaining}`;
+  const resetUrl = `http://localhost:5173/reset-password?id=${user._id}&token=${resetToken}&timeRemaining=${timeRemaining}`;
 
   // Send email using utility function
   await sendPasswordResetEmail(user.email, user, resetUrl);
@@ -427,78 +429,7 @@ export const getAllMemberByFilterService = async (page, limit, uniqueId) => {
   };
 };
 
-// export const sendDigitalAssetsEmailService = async (email, orderID, digitalAssets) => {
-//   // 1. Find the member by email
-//   const member = await Member.findOne({ email });
-//   if (!member) {
-//     throw new ApiError(httpStatus.NOT_FOUND, "Member not found");
-//   }
 
-//   // 2. Extract assets (defaults to empty strings if undefined)
-//   const {
-//     arversion = "",
-//     vrversion = "",
-//     dfile = "",
-//     technicaldesignbook = "",
-//     virtuallobbyaccesskey = "",
-//     ownershipofstory = "",
-//     certification = "",
-//     sandboxwearable = "",
-//     vrchatwearable = "",
-//     animated = "",
-//     recroom = "",
-//   } = digitalAssets || {};
-
-//   // 3. Build the digital assets HTML
-//   const digitalAssetsHTML = `
-//     <ul>
-//       <li><strong>AR Version:</strong> ${arversion}</li>
-//       <li><strong>VR Version:</strong> ${vrversion}</li>
-//       <li><strong>D File:</strong> ${dfile}</li>
-//       <li><strong>Technical Design Book:</strong> ${technicaldesignbook}</li>
-//       <li><strong>Virtual Lobby Access Key:</strong> ${virtuallobbyaccesskey}</li>
-//       <li><strong>Ownership of Story:</strong> ${ownershipofstory}</li>
-//       <li><strong>Certification:</strong> ${certification}</li>
-//       <li><strong>Sandbox Wearable:</strong> ${sandboxwearable}</li>
-//       <li><strong>VRChat Wearable:</strong> ${vrchatwearable}</li>
-//       <li><strong>Animated:</strong> ${animated}</li>
-//       <li><strong>Rec Room:</strong> ${recroom}</li>
-//     </ul>
-//   `;
-
-//   // 4. Compose and send the email
-//   await sendEmail({
-//     to: email,
-//     subject: "Your Digital Assets",
-//     html: `
-//       <div style="font-family: Arial, sans-serif;">
-//         <img
-//           src="https://i.ibb.co/g9fcnQq/logo.png"
-//           alt="Research Buddy"
-//           style="width:50px; height:auto;"
-//         />
-//         <p>Dear ${member.name.firstName} ${member.name.lastName},</p>
-//         <p>
-//          You've requested for digital assets.
-//         </p>
-//         <p>
-//           Below are your digital assets for order id: ${orderID}
-//         </p>
-//         ${digitalAssetsHTML}
-//         <p>
-//           If you have any questions, feel free to contact us.
-//         </p>
-//         <p>
-//           Best regards,<br />
-//           The Research Buddy Team
-//         </p>
-//       </div>
-//     `,
-//   });
-
-//   // 5. Return a success message
-//   return { message: "Digital assets email sent" };
-// };
 export const sendDigitalAssetsEmailService = async (
   email,
   orderID,
@@ -509,6 +440,8 @@ export const sendDigitalAssetsEmailService = async (
   if (!member) {
     throw new ApiError(httpStatus.NOT_FOUND, "Member not found");
   }
+
+  console.log("email check",email,orderID ,member);
 
   // 2. Map your asset keys to human-readable labels
   const assetLabels = {
@@ -544,35 +477,38 @@ export const sendDigitalAssetsEmailService = async (
   // 4. Compose and send the email
   await sendEmail({
     to: email,
-    subject: "Your Digital Assets",
+    subject: "Regarding Digital Assets from NFT Closet X",
     html: `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="UTF-8" />
-          <title>Your Digital Assets</title>
         </head>
         <body style="font-family: Arial, sans-serif;">
           <div>
+          <div style="text-align: center;">
             <img 
-              src="https://i.ibb.co/g9fcnQq/logo.png"
-              alt="Research Buddy"
-              style="width:50px; height:auto;"
+              src=" https://i.ibb.co.com/jkSbtgQc/nft-logo.png"
+              alt="NFT Closet X"
+              style="width:200px; height:auto;"
             />
-            <p>Dear ${member.name.firstName} ${member.name.lastName},</p>
+            </div>
+            <br />
+            <p style="text-transform: capitalize;">Dear ${member.name.firstName} ${member.name.lastName},</p>
             <p>
              You've requested digital assets.
             </p>
             <p>
               Below are your digital assets for Order ID: <strong>${orderID}</strong>
-            </p>
+            </p> <br />
             ${digitalAssetsHTML}
             <p>
               If you have any questions, feel free to contact us.
             </p>
+            <br />
             <p>
               Best regards,<br />
-              The Research Buddy Team
+              NFT Closet X Team
             </p>
           </div>
         </body>

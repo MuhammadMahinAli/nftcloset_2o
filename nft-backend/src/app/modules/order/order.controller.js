@@ -74,6 +74,7 @@ export const getOrdersByStatusController = async (req, res) => {
     return res.status(400).json({ message: error.message });
   }
 };
+
 export const getOrdersByStatusForAdminController = async (req, res) => {
   try {
     const { status } = req.params; 
@@ -86,7 +87,7 @@ export const getOrdersByStatusForAdminController = async (req, res) => {
 };
 
 
-// ---------- get pending order
+// ---------- get pending order 3,18>> 8.26
 
 export const getPendingOrdersByMemberController = catchAsync(async (req, res, next) => {
   const { id } = req.params;

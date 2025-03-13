@@ -349,12 +349,12 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
                   transition-all duration-300 
                   ${
                     index === activeIndex
-                      ? "bg-[#12c9b5] text-white py-4 px-4"
-                      : "bg-transparent text-gray-700 py-3 px-4"
+                      ? "bg-[#847EF4] text-white py-4 px-4"
+                      : "bg-transparent text-gray-700 py-3 px-4  hover:bg-[#847EF4] hover:text-white"
                   }
                 `}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 ">
                       <img
                         src={feature.icon}
                         alt=""
@@ -387,7 +387,7 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
                     h-1.5 rounded-full transition-all duration-300
                     ${
                       index === activeIndex
-                        ? "w-6 bg-[#12c9b5]"
+                        ? "w-6 bg-[#847EF4]"
                         : "w-1.5 bg-gray-200"
                     }
                   `}
@@ -417,8 +417,8 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
                   transition-all duration-300 
                   ${
                     index === activeIndex
-                      ? "bg-[#12c9b5] text-white py-4 px-4"
-                      : "bg-transparent text-gray-700 py-3 px-4"
+                      ? "bg-[#847EF4] text-white py-4 px-4"
+                      : "bg-transparent text-gray-700 py-3 px-4 hover:bg-[#847EF4] hover:text-white"
                   }
                 `}
                   >
@@ -454,7 +454,7 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
                     h-1.5 rounded-full transition-all duration-300
                     ${
                       index === activeIndex
-                        ? "w-6 bg-[#12c9b5]"
+                        ? "w-6 bg-[#847EF4]"
                         : "w-1.5 bg-gray-200"
                     }
                   `}
@@ -736,7 +736,7 @@ export default VersionSlider;
 //                 transition-all duration-300
 //                 ${
 //                   index === activeIndex
-//                     ? "bg-[#12c9b5] text-white py-4 px-1"
+//                     ? "bg-[#847EF4] text-white py-4 px-1"
 //                     : "bg-transparent text-gray-700 py-3 px-4"
 //                 }
 //               `}

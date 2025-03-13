@@ -531,8 +531,7 @@ import pd from "../../assets/nft-image/pd.png";
 import threeD from "../../assets/nft-image/3d.png";
 import { useAddOrderMutation } from "../../features/order/orderApi";
 import Swal from "sweetalert2";
-import AddOrUpdateAddress from "../Dashboard/AddOrUpdateAddress";
-
+import adminlogo from "../../assets/nft-image/nftcloset_logo.png";
 const OrderForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditAddress, setIsOpenEditAddress] = useState(false);
@@ -548,6 +547,7 @@ const OrderForm = () => {
     productName,
     _id,
     displayImage,
+    stock,
     digitalAssets,
     colors,
     sizeWithMaterial,
@@ -570,6 +570,7 @@ const OrderForm = () => {
       street: "",
       isDefault: false,
     },
+    contactType: "",
     orderedBy: userId || "",
     crossMintOrderId: "",
     trackingLink: "",
@@ -758,6 +759,7 @@ const OrderForm = () => {
       { value: formData.deliveryAddress.street, label: "Street" },
       { value: formData.orderedBy, label: "Ordered By" },
       { value: formData.crossMintOrderId, label: "CrossMint Order ID" },
+      { value: formData.contactType, label: "Contact Via" },
     ];
 
     for (const field of requiredFields) {
@@ -841,7 +843,7 @@ const OrderForm = () => {
             </div>
           </div>
           {/* Creator Section */}
-          <div className="flex items-center gap-3 mb-8">
+          {/* <div className="flex items-center gap-3 mb-8">
             <img
               src="https://res.cloudinary.com/dv51da0o9/image/upload/v1737951598/iofkn2cviuxpedwus7uk.png"
               alt="Creator"
@@ -851,7 +853,17 @@ const OrderForm = () => {
               <p className="text-[17px] md:text-2xl font-bold">Creator</p>
               <p className="text-[16px] md:text-xl text-green-600">Online</p>
             </div>
-          </div>
+          </div> */}
+            <div className="flex items-center gap-2 md:gap-3 lg:p-3  rounded-lg">
+        <img
+          src={adminlogo}
+          alt="Creator"
+          className="h-10 md:w-14 w-10 md:h-14 rounded-full border-2 border-white shadow-md"
+        />
+        <div>
+          <p className="text-lg capitalize font-bold">NFT closet x </p>
+        </div>
+      </div>
         </div>
 
         {/* Right side - Form Fields */}
@@ -1053,11 +1065,54 @@ const OrderForm = () => {
           </div>
 
           {/* Stock Status */}
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span className="text-[17px] md:text-xl text-gray-600">
-              In Stock
-            </span>
+
+          {stock === "notAvailable" ? (
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+              <span className="text-[17px] md:text-xl text-gray-600">
+                Out of Stock
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-[17px] md:text-xl text-gray-600">
+                In Stock
+              </span>
+            </div>
+          )}
+
+          {/* Contact Selection */}
+          <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
+              Contact
+            </h3>
+            <Link
+                to="/manageAccount/settings"
+                className=" text-gray-700 px-4 py-2 rounded-lg underline transition-colors"
+              >
+              View profile 
+              </Link>
+            </div>
+            <div className="flex gap-2">
+              {["Via Email", "Via WhatsApp"].map((type, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() =>
+                    setFormData({ ...formData, contactType: type })
+                  }
+                  className={`capitalize px-4 py-1 border rounded-full text-[17px] md:text-xl hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ${
+                    formData.contactType === type
+                      ? "border-gray-600 bg-gray-100"
+                      : "border-gray-300"
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Delivery Address */}
@@ -1067,7 +1122,7 @@ const OrderForm = () => {
                 Delivery Address
               </h3>
               <Link
-                to="/manageAccount"
+                to="/manageAccount/settings"
                 className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
               >
                 <FaPlus />

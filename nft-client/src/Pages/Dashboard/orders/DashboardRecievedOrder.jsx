@@ -41,7 +41,7 @@
 //       }
 //     };
 //   console.log(getAllOrder,getAllOrderForAdmin);
-//   const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
+//   const orderData = userEmail === "nftclosetx@gmail.com" ? getAllOrderForAdmin : getAllOrder;
 //   if (isLoading) return <p>Orders is Loading...</p>;
 //   if (getAllOrder?.length === 0)
 //     return <p className="text-xl font-semibold">No order available.</p>;
@@ -73,7 +73,7 @@
 
 //             {/* right */}
 
-//             {userEmail !== "arrr@gmail.com" ? (
+//             {userEmail !== "nftclosetx@gmail.com" ? (
 //               <div className="flex justify-between items-center space-x-5">
 //                {order?.isConfirmRecipt === false && (
 //                   <button
@@ -145,7 +145,7 @@ const DashboardRecievedOrder = ({
 
   useEffect(() => {
     setOrders(
-      userEmail === "arrr@gmail.com"
+      userEmail === "nftclosetx@gmail.com"
         ? initialOrdersForAdmin || []
         : initialOrders || []
     );
@@ -180,7 +180,7 @@ const DashboardRecievedOrder = ({
               </div>
             </div>
 
-            {userEmail !== "arrr@gmail.com" ? (
+            {userEmail !== "nftclosetx@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
                 <button className="hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg text-white bg-[#2CBA7A] hover:text-primary/80">
                   Confirmed Receipt

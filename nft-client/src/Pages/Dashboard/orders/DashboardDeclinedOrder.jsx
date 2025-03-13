@@ -45,7 +45,7 @@ const DashboardDeclinedOrder = ({
     id: userId,
   });
 
-  const orderData = userEmail === "arrr@gmail.com" ? orders : getAllOrder;
+  const orderData = userEmail === "nftclosetx@gmail.com" ? orders : getAllOrder;
 
   if (isLoading) return <p>Orders is Loading...</p>;
   if (orderData?.length === 0)
@@ -79,7 +79,7 @@ const DashboardDeclinedOrder = ({
 
             {/* right */}
 
-            {userEmail !== "arrr@gmail.com" ? (
+            {userEmail !== "nftclosetx@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
 
 <a href={order?.trackingLink} target="blank" className="text-sm xl:text-xl  text-gray-700 hover:underline">

@@ -1,25 +1,34 @@
 import { useContext } from "react";
-import { useGetOrderStatusAndAssetsQuery, useGetOrderStatusForAdminQuery } from "../../../features/order/orderApi";
+import {
+  useGetOrderStatusAndAssetsQuery,
+  useGetOrderStatusForAdminQuery,
+} from "../../../features/order/orderApi";
 import Cube from "../../../icons/NFTIcon/Cube";
 import { AuthContext } from "../../../Context/UserContext";
 import OrderCardPrompt from "./OrderCardPrompt";
 import RequestDetailsModal from "../RequestDetailsModal";
+import Swal from "sweetalert2";
 
-
-const DashboardApprovedOrder = ({userEmail, selectedOrder, isOpenModal,handleOpenModal, handleCloseModal, formatIsoDateToHumanReadable}) => {
+const DashboardApprovedOrder = ({
+  userEmail,
+  selectedOrder,
+  isOpenModal,
+  handleOpenModal,
+  handleCloseModal,
+  formatIsoDateToHumanReadable,
+}) => {
   const { userId } = useContext(AuthContext);
-  
+
   const { data: getAllOrder, isLoading } = useGetOrderStatusAndAssetsQuery({
     status: "approved",
     id: userId,
   });
-  const { data: getAllOrderForAdmin} = useGetOrderStatusForAdminQuery({
+  const { data: getAllOrderForAdmin } = useGetOrderStatusForAdminQuery({
     status: "approved",
   });
 
-
-const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllOrder;
-
+  const orderData =
+    userEmail === "nftclosetx@gmail.com" ? getAllOrderForAdmin : getAllOrder;
 
   if (isLoading) return <p>Orders is Loading...</p>;
   if (orderData?.length === 0)
@@ -41,7 +50,7 @@ const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllO
                 <p className="text-lg xl:text-xl font-semibold  text-gray-900">
                   Approved
                 </p>
-                
+
                 <p className="text-sm xl:text-base  text-gray-700">
                   {formatIsoDateToHumanReadable(order?.updatedAt)}
                 </p>
@@ -52,17 +61,20 @@ const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllO
             </div>
 
             {/* right */}
-         
-            {userEmail !== "arrr@gmail.com" ? (
-            
+
+            {userEmail !== "nftclosetx@gmail.com" ? (
               <div className="flex justify-between items-center space-x-5">
-                      {/* {order?.digitalAsset === "shipping" &&
+                {/* {order?.digitalAsset === "shipping" &&
                 <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
                   Confirm Reciept
                 </button>
             } */}
 
-                <a href={order?.trackingLink} target="blank" className="text-sm xl:text-xl  text-gray-700 hover:underline">
+                <a
+                  href={order?.trackingLink}
+                  target="blank"
+                  className="text-sm xl:text-xl  text-gray-700 hover:underline"
+                >
                   Track
                 </a>
               </div>
@@ -79,7 +91,7 @@ const orderData = userEmail === "arrr@gmail.com" ? getAllOrderForAdmin : getAllO
           <OrderCardPrompt order={order} />
         </div>
       ))}
-            {isOpenModal && (
+      {isOpenModal && (
         <RequestDetailsModal
           isOpenModal={isOpenModal}
           onClose={handleCloseModal}
