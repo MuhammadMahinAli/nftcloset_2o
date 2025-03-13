@@ -283,7 +283,7 @@ const CollectionDetails = () => {
               onMouseEnter={() => toggleActive(i)}
               onMouseLeave={toggleInactive}
               key={product.id}
-              className="pb-12 md:pb-14 3xl:pb-[60px] relative overflow-hidden bg-white rounded-xl shadow-xl"
+              className="pb-10 md:pb-10 3xl:pb-[60px] relative overflow-hidden bg-white rounded-xl shadow-xl"
             >
               <>
                 <div className="flex justify-center items-center py-4 h-[65%] lg:h-[70%] xl:h-[65%] 2xl:h-[70%] 3xl:h-[72%] relative">
@@ -293,7 +293,7 @@ const CollectionDetails = () => {
                     className="w-28 lg:w-40 h-full pt-2 object-cover"
                   />
                   {isOfferValid && (
-                    <span className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                    <span className=" rounded-bl-2xl rounded-tr-2xl bg-rose-600 absolute -right-px -top-px text-white text-xs px-3 py-2">
                       Save $ {savingAmount.toFixed(2)}
                     </span>
                   )}

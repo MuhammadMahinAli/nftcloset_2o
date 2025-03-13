@@ -90,14 +90,14 @@ const AllCollection = () => {
             key={product.id}
             className="relative overflow-hidden bg-white rounded-2xl shadow-[4px_2px_14px_-1px_rgba(0,_0,_0,_0.1)]"
           >
-            <div className="h-[150px] md:h-[200px] lg:h-[250px] flex justify-center items-center w-full  ">
+            <div className="h-[150px] md:h-[200px] lg:h-[250px] flex justify-center items-center w-full  -mt-8">
               <img
                 src={product.displayImage}
                 alt={product.collectionName}
                 className=" rounded-2xl w-full object-cover"
               />
             </div>
-            <div className="px-2 xl:px-4 py-2">
+            <div className="px-2 xl:px-4 ">
               <div className="flex justify-between items-center">
                 <p className="text-sm xl:text-lg text-gray-700">
                   Drop date: {formatDate(product.fromDate)}

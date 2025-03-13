@@ -21,42 +21,113 @@ const OrderCardPrompt = ({ order }) => {
   //   }
   // };
 
-  const handleSendAssetsByEmail = async (e, email, orderID, digitalAssets) => {
-    e.preventDefault();
-    try {
-      const result = await sendDigitalAssetsEmail({
-        email,
-        orderID,
-        digitalAssets,
-      }).unwrap();
+  // const handleSendAssetsByEmail = async (e, email, orderID, digitalAssets) => {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await sendDigitalAssetsEmail({
+  //       email,
+  //       orderID,
+  //       digitalAssets,
+  //     }).unwrap();
   
-      // Replace alert with SweetAlert2 success alert:
+  //     // Replace alert with SweetAlert2 success alert:
+  //     Swal.fire({
+  //       title: 'Success!',
+  //       text: result.message,
+  //       icon: 'success',
+  //       confirmButtonText: 'OK',
+  //     });
+  //   } catch (err) {
+  //     // Replace alert with SweetAlert2 error alert:
+  //     Swal.fire({
+  //       title: 'Error!',
+  //       text: err.message,
+  //       icon: 'error',
+  //       confirmButtonText: 'OK',
+  //     });
+  //   }
+  // };
+  // const handlePendingOrder = () => {
+  //   Swal.fire({
+  //     icon: "info",
+  //     title: "Mission Failed!",
+  //     text: "Your Order is not approved yet.",
+  //     showConfirmButton: false,
+  //     timer: 1500,
+  //   });
+  // };
+
+  const handleClaimDigitalAssets = async (e) => {
+    e.preventDefault();
+  
+    if (!order) {
       Swal.fire({
-        title: 'Success!',
-        text: result.message,
-        icon: 'success',
-        confirmButtonText: 'OK',
+        icon: "error",
+        title: "Order Not Found",
+        text: "No order information available.",
+        showConfirmButton: false,
+        timer: 1500,
       });
-    } catch (err) {
-      // Replace alert with SweetAlert2 error alert:
-      Swal.fire({
-        title: 'Error!',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK',
-      });
+      return;
+    }
+  
+    switch (order.status) {
+      case "approved":
+        try {
+          const result = await sendDigitalAssetsEmail({
+            email: order.orderedBy?.email,
+            orderID: order.orderID,
+            digitalAssets: order.productID?.digitalAssets,
+          }).unwrap();
+  
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: result.message,
+            confirmButtonText: "OK",
+          });
+        } catch (err) {
+          Swal.fire({
+            icon: "error",
+            title: "Error!",
+            text: err.message,
+            confirmButtonText: "OK",
+          });
+        }
+        break;
+  
+      case "pending":
+        Swal.fire({
+          icon: "info",
+          title: "Order Pending",
+          text: "Your order is still pending approval. Please wait until it is approved to claim your digital assets.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        break;
+  
+      case "declined":
+        Swal.fire({
+          icon: "error",
+          title: "Order Declined",
+          text: "Your order has been declined. You cannot claim your digital assets.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        break;
+  
+      default:
+        Swal.fire({
+          icon: "warning",
+          title: "Invalid Order Status",
+          text: "Your order status is not recognized.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        break;
     }
   };
-  const handlePendingOrder = () => {
-    Swal.fire({
-      icon: "info",
-      title: "Mission Failed!",
-      text: "Your Order is not approved yet.",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
-
+  
 
   const handleOrderForPhy = async (e) => {
     e.preventDefault();
@@ -184,9 +255,11 @@ const OrderCardPrompt = ({ order }) => {
             <h3 className="text-lg xl:text-2xl font-semibold text-foreground capitalize">
               {order?.productID?.productName}
             </h3>
-            <p className="text-sm xl:text-lg text-gray-500 -foreground mt-1">
-              Lorem ipsum dolor icing elit. Quod, at!
-            </p>
+            {order?.productID?.productDescription &&
+              <p className="text-sm xl:text-lg text-gray-500 -foreground mt-1">
+              {order?.productID?.productDescription.slice(0,40)}...
+             </p>
+            }
             <p className="text-sm xl:text-lg text-gray-500 -foreground mt-1 capitalize">
               Metarial: {order?.productInfo?.material}
             </p>
@@ -198,17 +271,7 @@ const OrderCardPrompt = ({ order }) => {
         {user?.email !== "nftclosetx@gmail.com" && (
           <div className="w-full md:w-4/12 xl:w-5/12 flex flex-col gap-3">
             <button
-              onClick={
-                order?.status === "approved"
-                  ? (e) =>
-                      handleSendAssetsByEmail(
-                        e,
-                        order?.orderedBy?.email,
-                        order?.orderID,
-                        order?.productID?.digitalAssets
-                      )
-                  : handlePendingOrder
-              }
+                onClick={handleClaimDigitalAssets}
               className="py-2 xl:py-4 rounded-md text-[11px] xs:text-sm xl:text-xl font-medium bg-black text-white text-primary-foreground hover:bg-primary/90"
             >
               Claim Your Digital Assets

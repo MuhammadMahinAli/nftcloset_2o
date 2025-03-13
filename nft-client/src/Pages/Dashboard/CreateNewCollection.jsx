@@ -635,7 +635,10 @@ const CreateNewCollection = () => {
                   className="px-3 py-2 my-5 w-full text-gray-600 hover:bg-gray-100 rounded-md flex justify-between items-center border focus:ring-2 focus:ring-[#26B893] border-gray-300"
                 >
                   Select Products
-                  <IoIosArrowDropdownCircle className="text-2xl" />
+                  <IoIosArrowDropdownCircle
+                      className={`text-2xl ml-1 text-gray-400 transition-transform ${
+                        isOpenDropDown ? "-rotate-180" : "-rotate-0"
+                      }`}/>
                 </button>
 
                 {/* Dropdown menu */}

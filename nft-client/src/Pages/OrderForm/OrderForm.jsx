@@ -854,16 +854,16 @@ const OrderForm = () => {
               <p className="text-[16px] md:text-xl text-green-600">Online</p>
             </div>
           </div> */}
-            <div className="flex items-center gap-2 md:gap-3 lg:p-3  rounded-lg">
-        <img
-          src={adminlogo}
-          alt="Creator"
-          className="h-10 md:w-14 w-10 md:h-14 rounded-full border-2 border-white shadow-md"
-        />
-        <div>
-          <p className="text-lg capitalize font-bold">NFT closet x </p>
-        </div>
-      </div>
+          <div className="flex items-center gap-2 md:gap-3 lg:p-3  rounded-lg">
+            <img
+              src={adminlogo}
+              alt="Creator"
+              className="h-10 md:w-14 w-10 md:h-14 rounded-full border-2 border-white shadow-md"
+            />
+            <div>
+              <p className="text-lg capitalize font-bold">NFT closet x </p>
+            </div>
+          </div>
         </div>
 
         {/* Right side - Form Fields */}
@@ -938,17 +938,17 @@ const OrderForm = () => {
               <button
                 key={feature.id}
                 type="button"
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all
-                  ${
-                    feature.isPrimary
-                      ? "bg-indigo-500 text-white hover:bg-indigo-600"
-                      : "bg-white border border-gray-200 hover:bg-gray-50"
-                  }
-                `}
+                className={`group flex items-center gap-2 px-4 py-2 rounded-lg transition-all
+      ${
+        feature.isPrimary
+          ? "bg-indigo-500 text-white hover:bg-indigo-600"
+          : "bg-white border border-gray-200 hover:bg-indigo-500 hover:text-white"
+      }
+    `}
               >
                 <img
                   src={feature.icon}
-                  className="h-5 w-5"
+                  className="h-5 w-5 transition-all group-hover:[filter:brightness(0)_invert(1)]"
                   alt={feature.text}
                 />
                 <span className="whitespace-nowrap font-semibold text-sm md:text-lg lg:text-lg">
@@ -1084,15 +1084,15 @@ const OrderForm = () => {
 
           {/* Contact Selection */}
           <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
-              Contact
-            </h3>
-            <Link
+            <div className="flex justify-between items-center">
+              <h3 className="text-gray-700 text-[17px] md:text-xl font-medium">
+                Contact
+              </h3>
+              <Link
                 to="/manageAccount/settings"
                 className=" text-gray-700 px-4 py-2 rounded-lg underline transition-colors"
               >
-              View profile 
+                View profile
               </Link>
             </div>
             <div className="flex gap-2">

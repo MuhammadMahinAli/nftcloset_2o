@@ -1,4 +1,5 @@
 import { FaDiscord, FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-gray-100 px-5  w-full">
@@ -45,12 +46,12 @@ const Footer = () => {
               </li>
 
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/market"
                   className="font-semibold text-xl text-gray-800 hover:text-teal-500"
                 >
                   Market
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -74,12 +75,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/collections"
                   className="font-semibold text-xl text-gray-800 hover:text-teal-500"
                 >
                   Collections
-                </a>
+                </Link>
               </li>
               <li>
                 <a

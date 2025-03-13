@@ -113,7 +113,10 @@ const AllOrders = () => {
             className="px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-md flex items-center border border-gray-600"
           >
             Status
-            <IoIosArrowDropdownCircle className="ml-1" />
+            <IoIosArrowDropdownCircle
+                      className={`text-xl ml-1 text-gray-400 transition-transform ${
+                        isOpenDropDown ? "-rotate-180" : "-rotate-0"
+                      }`}/>
           </button>
 
           {/* Dropdown menu */}
@@ -122,37 +125,37 @@ const AllOrders = () => {
               <ul className="py-1">
                 <li
                   onClick={() => handleTabClick("all")}
-                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="cursor-pointer block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   All
                 </li>
                 <li
                   onClick={() => handleTabClick("pending")}
-                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="cursor-pointer block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Pending
                 </li>
                 <li
                   onClick={() => handleTabClick("approved")}
-                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="cursor-pointer block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Approved
                 </li>
                 <li
                   onClick={() => handleTabClick("declined")}
-                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="cursor-pointer block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Declined
                 </li>
                 <li
                   onClick={() => handleTabClick("claimed")}
-                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="cursor-pointer block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Claimed
                 </li>
                 <li
                   onClick={() => handleTabClick("received")}
-                  className="block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="cursor-pointer block text-right font-semibold px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Received
                 </li>

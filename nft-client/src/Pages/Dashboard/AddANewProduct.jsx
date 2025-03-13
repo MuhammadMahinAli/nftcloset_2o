@@ -1044,7 +1044,10 @@ const AddProduct = () => {
                       {collections?.find(
                         (c) => c._id === formData.collection?.collectionId
                       )?.collectionName || "Select Collection"}
-                      <IoIosArrowDropdownCircle className="text-2xl" />
+                                 <IoIosArrowDropdownCircle
+                      className={`text-xl ml-1  text-gray-400 transition-transform ${
+                        isOpenDropDown ? "-rotate-180" : "-rotate-0"
+                      }`}/>
                     </div>
 
                     {isOpenDropDown && (

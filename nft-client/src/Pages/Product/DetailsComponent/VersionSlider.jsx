@@ -338,7 +338,7 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
               }}
             >
               {availableFeatures.map((feature, index) => (
-                <div key={feature.id} className="w-1/2 flex-shrink-0 px-2">
+                <div key={feature.id} className="w-1/2 flex-shrink-0 px-2 group transition-all">
                   <button
                     onClick={() => {
                       setActiveIndex(index);
@@ -358,7 +358,7 @@ const VersionSlider = ({ digitalAssets, displayImage }) => {
                       <img
                         src={feature.icon}
                         alt=""
-                        className={`w-6 h-6 ${
+                        className={`w-6 h-6  transition-all group-hover:[filter:brightness(0)_invert(1)] ${
                           index === activeIndex
                             ? "filter brightness-0 invert"
                             : ""
