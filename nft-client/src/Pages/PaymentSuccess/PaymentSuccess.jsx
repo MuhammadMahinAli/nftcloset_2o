@@ -20,7 +20,7 @@ const PaymentSuccess = () => {
   const confirmPayment = async (sessionId) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/v1/deliveryCharge/confirm-payment?session_id=${sessionId}`,
+        `https://nftcloset-2o.onrender.com/api/v1/deliveryCharge/confirm-payment?session_id=${sessionId}`,
         {
           method: "GET",
         }

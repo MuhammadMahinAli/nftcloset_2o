@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import banner1280 from "../../assets/nft-image/banner1280.jpg";
 import { IoReloadSharp } from "react-icons/io5";
 import { useGetAllCollectionQuery } from "../../features/collection/collectionApi";
+import Loading from "../Loading/Loading";
 
 const AllCollection = () => {
-  const { data: getAllCollection } = useGetAllCollectionQuery();
+  const { data: getAllCollection,isLoading } = useGetAllCollectionQuery();
   const collections = getAllCollection?.data;
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -30,10 +31,12 @@ const AllCollection = () => {
     }).replace(/(\d+)/, `$1${ordinal(day)}`);
   };
   
-
+  if(isLoading){
+    return <Loading />;
+  }
 
   return (
-    <div className="p-3 md:p-7 lg:p-10 ">
+    <div className="min-h-screen p-3 md:p-7 lg:p-10 ">
       {/* <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">All Collections</h1>
       </div> */}

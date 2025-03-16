@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import { useDeleteProductMutation, useGetAllProductQuery } from "../../features/product/productApi";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
+import Loading from '../Loading/Loading'
 
 const AllProduct = () => {
-  const { data: getAllProduct } = useGetAllProductQuery();
+  const { data: getAllProduct, isLoading } = useGetAllProductQuery();
   const [deleteProduct] = useDeleteProductMutation();
   const products = getAllProduct?.data;
   const { user } = useSelector((state) => state.auth);
@@ -42,8 +43,12 @@ const AllProduct = () => {
 
   console.log(user.email);
 
+if(isLoading){
+  return <Loading />;
+}
+
   return (
-    <div className="p-3 xl:p-8 z-10">
+    <div className="min-h-screen p-3 xl:p-8 z-10">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">All Products</h1>
       </div>

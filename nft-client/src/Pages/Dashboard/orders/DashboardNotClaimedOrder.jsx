@@ -41,7 +41,7 @@ const DashboardNotClaimedOrder = ({
   
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:4000/api/v1/order/confirmReceipt/${orderId}`, {
+          const response = await fetch(`https://nftcloset-2o.onrender.com/api/v1/order/confirmReceipt/${orderId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
           });

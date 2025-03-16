@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 export const Nav = () => {
   const [userr, setUserr] = useState({});
-  const localhost = "http://localhost:4000/api/v1";
+  const localhost = "https://nftcloset-2o.onrender.com/api/v1";
   // const {   logout } = useContext(AuthContext);
   const [isSearchbarVisible, setSearchbarVisible] = useState(false);
 
