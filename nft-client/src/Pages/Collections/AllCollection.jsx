@@ -32,9 +32,10 @@ const AllCollection = () => {
   };
   
   if(isLoading){
-    return <Loading />;
+    return <div className="min-h-screen">
+      <Loading />
+      </div>;
   }
-
   return (
     <div className="min-h-screen p-3 md:p-7 lg:p-10 ">
       {/* <div className="flex items-center justify-between mb-8">

@@ -35,7 +35,7 @@ const HomepageLayout = () => {
 
   return (
     <ScrollToTop>
-      <div className="bg-white text-gray-800">
+      <div className="bg-white text-gray-800 min-h-srceen">
         <Nav />
         <div className="bg-[url('locofy.png')] bg-no-repeat text-gray-500">
           <Outlet />

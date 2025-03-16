@@ -44,7 +44,9 @@ const AllProduct = () => {
   console.log(user.email);
 
 if(isLoading){
-  return <Loading />;
+  return <div className="min-h-screen">
+    <Loading />
+    </div>;
 }
 
   return (
@@ -217,3 +219,9 @@ export default AllProduct;
 // };
 
 // export default AllProduct;
+// According to my check, the free certificate for nftclosetx.com has expired on Nov/17/2024. To our regret, a free certificate can be activated for one year only and for domains that never had free certificates.
+
+
+// To extend the secure connection, it is necessary to replace the expired certificate on the hosting server with a new one with an extended validity period. You can purchase any kind of certificate here: https://www.namecheap.com/security/ssl-certificates/, so the price depends on the chosen SSL certificate type and period.
+
+// You can also purchase the PositiveSSL that you previously had and pay for it here: https://www.namecheap.com/security/ssl-certificates/comodo/positivessl/
