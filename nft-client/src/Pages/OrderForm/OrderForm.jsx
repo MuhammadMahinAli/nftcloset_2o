@@ -508,7 +508,7 @@
 
 // export default OrderForm;
 
-import React, { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 import { useGetSingleUserQuery } from "../../features/auth/authApi";
@@ -534,7 +534,6 @@ import Swal from "sweetalert2";
 import adminlogo from "../../assets/nft-image/nftcloset_logo.png";
 const OrderForm = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenEditAddress, setIsOpenEditAddress] = useState(false);
   const [addOrder] = useAddOrderMutation();
   const { userId } = useContext(AuthContext);
   const { data: getSingleUser } = useGetSingleUserQuery(userId);

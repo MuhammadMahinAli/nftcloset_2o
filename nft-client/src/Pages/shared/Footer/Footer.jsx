@@ -1,3 +1,4 @@
+import { FaLinkedin, FaLinkedinIn } from "react-icons/fa";
 import { FaDiscord, FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 const Footer = () => {
@@ -21,12 +22,12 @@ const Footer = () => {
               />
               <p className="font-bold pl-2 text-[17px]">English</p>
             </div>
-            <a href="#" className="border rounded-lg p-2">
-              <FaDiscord className="text-2xl" />
+            <a href="https://www.linkedin.com/company/kwstechnology/" target="blank" className="border rounded-lg p-2">
+            <FaLinkedinIn className="text-2xl" />
             </a>
-            <a href="#" className="border rounded-lg p-2">
+            {/* <a href="#" className="border rounded-lg p-2">
               <FaXTwitter className="text-2xl" />
-            </a>
+            </a> */}
           </div>
         </div>
         <div className="w-full lg:w-1/3 flex flex-col md:flex-row lg:justify-between py-3 lg:-mt-28 md:space-x-14">
