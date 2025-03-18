@@ -215,7 +215,7 @@ const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
               className="font-bold block text-gray-700 mb-1 text-[20px]"
               htmlFor="statusSelect"
             >
-              Digital Assets claim Status:
+              Physical Assets Claim Status:
             </label>
             <select
               id="digitalAsset"

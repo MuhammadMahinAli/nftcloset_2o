@@ -514,7 +514,7 @@ import { AuthContext } from "../../Context/UserContext";
 import { useGetSingleUserQuery } from "../../features/auth/authApi";
 import { FaPlus } from "react-icons/fa";
 import namer from "color-namer";
-import ar from "../../assets/nft-image/vr.png";
+import ar from "../../assets/nft-image/darkvr.png";
 import darkAr from "../../assets/nft-image/darkvr.png";
 import vvr from "../../assets/nft-image/vvr.png";
 import book from "../../assets/nft-image/book.png";
@@ -591,7 +591,6 @@ const OrderForm = () => {
       id: 1,
       icon: ar,
       text: "View In AR",
-      isPrimary: true,
     },
     {
       id: 2,

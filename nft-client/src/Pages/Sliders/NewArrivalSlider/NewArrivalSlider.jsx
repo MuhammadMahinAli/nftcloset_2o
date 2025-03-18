@@ -54,7 +54,7 @@ const NewArrivalSlider = () => {
 
   return (
     <div className="py-3 md:py-10">
-           <h1 className="text-gray-600 text-3xl lg:text-5xl font-bold capitalize text-center pb-4 md:pb-3 lg:pb-5">
+           <h1 className="roboto text-gray-600 text-3xl lg:text-5xl font-bold capitalize text-center pb-4 md:pb-3 lg:pb-5">
           New Arraivals
         </h1>
       <div className="relative w-full">

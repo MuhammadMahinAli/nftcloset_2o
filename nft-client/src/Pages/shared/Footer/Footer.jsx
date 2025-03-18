@@ -7,10 +7,7 @@ const Footer = () => {
         <div className="w-full flex flex-col justify-center items-center md:items-start lg:w-1/3">
           <img className="" src="nft-logo.png" alt="" />
           <p className="mt-4 text-lg text-gray-600 text-center md:text-left">
-            NFT Closet is the go-to marketplace for digital fashion. Mint, buy,
-            and sell fashion NFTs with AR, VR, and virtual try-on features.
-            Upgrade your e-commerce site to Web3 with our API. Partnered with
-            AWS for seamless supply chain management.
+          NFT Closet X - Redefining Fashion in the Digital Age. Explore, Create, and Own the Future of Fashion.
           </p>
           <h2 className="font-semibold text-xl pt-8 text-gray-800">
             Follow Us
@@ -36,60 +33,50 @@ const Footer = () => {
           <div>
             <h2 className="font-semibold text-2xl text-gray-800"></h2>
             <ul className="mt-4 space-y-3">
-              <li>
-                <a
-                  href="#"
+            <li>
+                <p
                   className="font-semibold text-xl text-gray-800 hover:text-teal-500"
                 >
-                  About Us
-                </a>
+              Quick Links
+                </p>
               </li>
-
-              <li>
+            <li>
                 <Link
                   to="/market"
-                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                  className="font-medium text-lg text-gray-800 hover:text-teal-500"
                 >
                   Market
                 </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                <Link
+                  to="/collections"
+                  className="font-medium text-lg text-gray-800 hover:text-teal-500"
                 >
-                  Contact Us
-                </a>
+                  Collections
+                </Link>
               </li>
             </ul>
           </div>
           <div>
             <h2 className=""></h2>
             <ul className="mt-4 space-y-3">
-              <li>
-                <a
-                  href="#"
+            <li>
+                <p
                   className="font-semibold text-xl text-gray-800 hover:text-teal-500"
                 >
-                  Virtual Try-On
-                </a>
+             Support
+                </p>
               </li>
-              <li>
+            <li>
                 <Link
-                  to="/collections"
-                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
+                  to="/market"
+                  className="font-medium text-lg text-gray-800 hover:text-teal-500"
                 >
-                  Collections
+               nftclosetx@gmail.com
                 </Link>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="font-semibold text-xl text-gray-800 hover:text-teal-500"
-                >
-                  Market X
-                </a>
-              </li>
+
             </ul>
           </div>
         </div>

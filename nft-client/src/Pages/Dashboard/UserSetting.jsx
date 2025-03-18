@@ -82,8 +82,7 @@ const UserSetting = () => {
               />
               <div>
                 <h3 className="font-semibold text-lg  xl:text-xl  text-center md:text-left">
-                  {userInfo?.name.firstName}
-                  {userInfo?.name.lastName}
+                  {userInfo?.name.firstName} {userInfo?.name.lastName}
                 </h3>
                 <p className="text-gray-500 text-base  xl:text-lg  text-center md:text-left">
                   {userInfo?.email}

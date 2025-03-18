@@ -10,14 +10,16 @@ const HeroSection = () => {
       <div
         className={`lg:bg-gradient-to-b from-pink-100 to-white relative md:m-6 rounded-xl bg-no-repeat flex flex-col lg:flex-row lg:justify-between items-center  md:px-10 2xl:px-14  md:py-5 lg:py-20 text-gray-500 overflow-x-hidden scrollbar-hide space-y-4`}
       >
-        {/****************************************** Left content ***********************************/}
-        <div className="absolute flex justify-center items-center">
+
+<div className="absolute top-[0%] left-[15%]">
           <img
-            className="w-7/12 p-20 opacity-30 blur-md object-cover"
+            className="h-[700px]  opacity-30 blur-md object-cover"
             alt=""
             src={HeroImage}
           />
         </div>
+        {/****************************************** Left content ***********************************/}
+      
 
         <div
           data-aos="fade-up-left"

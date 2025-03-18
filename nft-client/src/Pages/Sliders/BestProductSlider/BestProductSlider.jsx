@@ -54,7 +54,7 @@ const BestProductSlider = () => {
 
   return (
     <div className="py-5 md:py-10">
-           <h1 className="text-gray-600 text-3xl lg:text-5xl font-bold capitalize text-center pb-5 md:pb-3 lg:pb-5">
+           <h1 className="roboto text-gray-600 text-3xl lg:text-5xl font-bold capitalize text-center pb-5 md:pb-3 lg:pb-5">
       Best Products
         </h1>
       <div className="relative w-full">

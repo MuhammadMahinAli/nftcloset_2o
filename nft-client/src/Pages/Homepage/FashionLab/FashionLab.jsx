@@ -1,16 +1,22 @@
-import fashionSlider from "../../../assets/nft-image/future-slider.png";
+import fashionSlider from "../../../assets/nft-image/future-slider1.png";
+import { useGetAllHomePageControlQuery } from "../../../features/homePageControl/homePageControlApi";
 const FashionLab = () => {
+    const { data: getAllHomePageControl } = useGetAllHomePageControlQuery();
+    const getAllHomePageControlItem = getAllHomePageControl?.data;
+
+   // console.log(getAllHomePageControlItem);
+    const labLink = getAllHomePageControlItem?.fofLabLink;
   return (
     <div className="px-5 py-7 lg:p-10 bg-[url('/future-bg.png')] bg-no-repeat bg-cover">
       <div className="flex items-center justify-center mb-8">
-        <h1 className="text-white text-2xl lg:text-5xl font-bold capitalize text-center py-2 md:py-3 lg:py-5">
+        <h1 className="text-white text-2xl lg:text-5xl font-bold roboto capitalize text-center py-2 md:py-3 lg:py-5">
           Future of Fashion Lab
         </h1>
       </div>
       <div className="flex flex-col lg:flex-row lg:py-3">
         {/* left */}
-        <div className="w-full lg:w-1/2 flex justify-center items-center mb-4">
-          <img src={fashionSlider} className="w-60 md:w-[450px] lg:w-[400px] 3xl:w-[500px]" />
+        <div className="w-full lg:w-1/2 flex justify-center items-center mb-4 ">
+          <img src={fashionSlider} className="w-60 md:w-[450px] lg:w-[400px] 3xl:w-[500px] border-2 border-white rounded-xl" />
         </div>
         {/* right */}
 
@@ -26,14 +32,13 @@ const FashionLab = () => {
               </h2>
 
               <p className="text-white/80 text-[16px] md:text-[17px] 3xl:text-[24px] mb-3">
-                Lorem ipsum Dolor Sit Amet Consectetur. Vitae Varius
-                Pellentesque Libero Est Adipiscing Sit Egestas.
+              The Future of Fashion Lab will feature a virtual lobby, 3D dress designs, AR/VR versions of outfits, sandbox wear, animated videos, and many more immersive features, redefining the fashion experience.
               </p>
             </div>
           </div>
-          <button className="text-[17px] lg:text-[20px] float-right px-4 py-3 bg-white/60 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-white/30 transition-colors">
+          <a href={labLink} target="blank" className="text-[17px] lg:text-[20px] float-right px-4 py-3 bg-white/60 backdrop-blur-sm rounded-lg text-white text-sm hover:bg-white/30 transition-colors">
             View Details
-          </button>
+          </a>
         </div>
       </div>
     </div>

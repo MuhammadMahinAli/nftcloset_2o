@@ -367,7 +367,7 @@ export const sendForgetPasswordEmailService = async (email) => {
   console.log(user?._id, resetToken, timeRemaining);
 
   // Create the reset URL with token
-  const resetUrl = `http://localhost:5173/reset-password?id=${user._id}&token=${resetToken}&timeRemaining=${timeRemaining}`;
+  const resetUrl = `https://www.nftclosetx.com/reset-password?id=${user._id}&token=${resetToken}&timeRemaining=${timeRemaining}`;
 
   // Send email using utility function
   await sendPasswordResetEmail(user.email, user, resetUrl);

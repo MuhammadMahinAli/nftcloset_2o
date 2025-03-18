@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import {
   useGetAllOrderByMemberQuery,
   useGetAllOrderQuery,
+  useUpdateOrderStatusMutation,
 } from "../../../features/order/orderApi";
 import Cube from "../../../icons/NFTIcon/Cube";
 import RequestDetailsModal from "../RequestDetailsModal";
@@ -24,10 +25,12 @@ const DashboardAllOrder = ({
 
   const { data: getAllOrder, isLoading } = useGetAllOrderQuery();
   const { data: getAllOrderByMember } = useGetAllOrderByMemberQuery(userId);
+  const [updateOrderStatus] = useUpdateOrderStatusMutation();
   const allOrder = getAllOrder?.data;
   const allMyOrder = getAllOrderByMember?.data;
 
-  const confirmReceipt = async (orderId) => {
+  const confirmReceipt = async (order) => {
+    const orderId = order?._id;
     const result = await Swal.fire({
       title: "Did you receive your parcel?",
       icon: "question",
@@ -47,6 +50,16 @@ const DashboardAllOrder = ({
         );
 
         if (!response.ok) throw new Error("Failed to confirm receipt");
+        const formData = {
+          trackingLink: order.trackingLink,
+          status: order.status, // Keep the status the same (still "approved")
+          digitalAsset: "recieved",
+        };
+
+        await updateOrderStatus({
+          id: orderId,
+          data: formData,
+        }).unwrap();
 
         Swal.fire("Confirmed!", "Receipt has been confirmed.", "success");
       } catch (err) {
@@ -142,17 +155,18 @@ const DashboardAllOrder = ({
                 <div className="flex justify-between items-center space-x-5">
                   {order?.digitalAsset === "shipping" && (
                     <button
-                      onClick={() => confirmReceipt(order?._id)}
+                      onClick={() => confirmReceipt(order)}
                       className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80"
                     >
                       Confirm Reciept
                     </button>
                   )}
-                  {order?.isConfirmRecipt === true && (
-                    <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
-                      Confirmed Reciept
-                    </button>
-                  )}
+                  {order?.digitalAsset === "recieved" &&
+                    order?.isConfirmRecipt === true && (
+                      <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
+                        Confirmed Reciept
+                      </button>
+                    )}
 
                   <a
                     href={order?.trackingLink}
