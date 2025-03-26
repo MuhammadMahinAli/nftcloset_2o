@@ -42,7 +42,7 @@ const DashboardAllOrder = ({
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          `https://nftcloset-2o.onrender.com/api/v1/order/confirmReceipt/${orderId}`,
+          `https://test-two-22w0.onrender.com/api/v1/order/confirmReceipt/${orderId}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -53,7 +53,8 @@ const DashboardAllOrder = ({
         const formData = {
           trackingLink: order.trackingLink,
           status: order.status, // Keep the status the same (still "approved")
-          digitalAsset: "recieved",
+          digitalAsset: "received",
+          deliveryTypeInfo: order.deliveryTypeInfo
         };
 
         await updateOrderStatus({
@@ -161,7 +162,7 @@ const DashboardAllOrder = ({
                       Confirm Reciept
                     </button>
                   )}
-                  {order?.digitalAsset === "recieved" &&
+                  {order?.digitalAsset === "received" &&
                     order?.isConfirmRecipt === true && (
                       <button className=" hidden md:block px-3 py-2 rounded-md text-sm xl:text-lg  text-white bg-[#2CBA7A] hover:text-primary/80">
                         Confirmed Reciept

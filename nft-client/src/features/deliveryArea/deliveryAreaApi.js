@@ -53,6 +53,13 @@ export const deliveryAreaApi = apiSlice.injectEndpoints({
       invalidateTags: ["DeliveryArea"],
     }),
   
+    getDeliveryArea: builder.mutation({
+      query: ({ country, city }) => ({
+        url: `/deliveryArea/${country}/${city}`,
+        method: "GET",
+      }),
+      invalidateTags: ["DeliveryArea"],
+    }),
 
     deleteDeliveryArea: builder.mutation({
       query: (id) => ({
@@ -65,4 +72,4 @@ export const deliveryAreaApi = apiSlice.injectEndpoints({
   }),
 });
 
- export const {useUpdateDeliveryAreaMutation,useAddDeliveryAreaMutation, useGetAllDeliveryAreaQuery,useDeleteDeliveryAreaMutation } = deliveryAreaApi;
+ export const {useGetDeliveryAreaMutation,useUpdateDeliveryAreaMutation,useAddDeliveryAreaMutation, useGetAllDeliveryAreaQuery,useDeleteDeliveryAreaMutation } = deliveryAreaApi;

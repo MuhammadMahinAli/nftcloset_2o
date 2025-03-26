@@ -18,7 +18,7 @@ const DeliveryAreaSchema = new Schema({
       default: 0,
     },
     featured: {
-      type: [String], // An array of strings (e.g., ["Cash on delivery", "Tracking available"])
+      type: [String], 
       default: [],
     },
     deliveryDay: {

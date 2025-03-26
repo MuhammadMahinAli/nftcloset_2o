@@ -89,3 +89,18 @@ export const deleteDeliveryAreaService = async (deliveryAreaId) => {
     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
   }
 };
+
+// get area by country & city// 🔍 Get delivery areas by country & city (case-insensitive)
+export const findDeliveryAreasService = async (country, city) => {
+  const filter = {};
+
+  if (country?.trim()) {
+    filter.country = { $regex: new RegExp(`^${country.trim()}$`, "i") };
+  }
+
+  if (city?.trim()) {
+    filter.city = { $regex: new RegExp(`^${city.trim()}$`, "i") };
+  }
+
+  return await DeliveryArea.find(filter);
+};

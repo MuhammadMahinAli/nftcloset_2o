@@ -2,8 +2,14 @@ import Swal from "sweetalert2";
 import { useSendDigitalAssetsEmailMutation } from "../../../features/auth/authApi";
 import { useSelector } from "react-redux";
 import { useUpdateOrderStatusMutation } from "../../../features/order/orderApi";
+import { useGetDeliveryAreaMutation } from "../../../features/deliveryArea/deliveryAreaApi";
+import { useState } from "react";
 
 const OrderCardPrompt = ({ order }) => {
+  const [triggerGetDeliveryArea] = useGetDeliveryAreaMutation();
+const [selectedDelivery, setSelectedDelivery] = useState(null); // Store selected one here
+const [showPopup, setShowPopup] = useState(false);
+const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [sendDigitalAssetsEmail] = useSendDigitalAssetsEmailMutation();
   const [updateOrderStatus] = useUpdateOrderStatusMutation();
   const { user } = useSelector((state) => state.auth);
@@ -129,116 +135,212 @@ const OrderCardPrompt = ({ order }) => {
   };
   
 
+  // const handleOrderForPhy = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!order) return;
+
+  //   const deliveryCity = order?.deliveryAddress?.city
+  //   const deliveryCountry = order?.deliveryAddress?.country
+
+  //   const {getDeliveryArea} = useGetDeliveryAreaMutation({
+  //     city:deliveryCity,
+  //     country:deliveryCountry
+  //   });
+  
+  //   // 1. Check the order's status first
+  //   if (order.status === "approved") {
+  //     // 2. If status is "approved", proceed to handle the digitalAsset logic
+  //     const { digitalAsset } = order;
+  
+  //     switch (digitalAsset) {
+  //       case "notClaimed":
+  //         try {
+  //           const orderId = order._id;
+  
+            // // Mark as claimed
+            // const formData = {
+            //   trackingLink: order.trackingLink,
+            //   status: order.status,       // Keep the status the same (still "approved")
+            //   digitalAsset: "claimed",
+            // };
+  
+            // const response = await updateOrderStatus({
+            //   id: orderId,
+            //   data: formData,
+            // }).unwrap();
+  
+  //           if (response.success) {
+  //             Swal.fire({
+  //               icon: "success",
+  //               title: `Admin will contact you via ${order.contactType}`,
+  //               text: "Your request for claiming the Physical Version has been sent.",
+  //               showConfirmButton: false,
+  //               timer: 3500,
+  //             });
+  //           }
+  //         } catch (error) {
+  //           Swal.fire({
+  //             icon: "error",
+  //             title: "Error",
+  //             text: "Something went wrong while claiming the Physical Version.",
+  //             showConfirmButton: false,
+  //             timer: 3500,
+  //           });
+  //         }
+  //         break;
+  
+  //       case "shipping":
+  //         Swal.fire({
+  //           icon: "info",
+  //           title: "Shipping In Progress",
+  //           text: "Your order is currently in transit.",
+  //           showConfirmButton: false,
+  //           timer: 3500,
+  //         });
+  //         break;
+  
+  //       case "claimed":
+  //         Swal.fire({
+  //           icon: "info",
+  //           title: "You’ve already claimed a Physical Version.",
+  //           text: "Your order is still in process.",
+  //           showConfirmButton: false,
+  //           timer: 3500,
+  //         });
+  //         break;
+  
+  //       case "received":
+  //         Swal.fire({
+  //           icon: "success",
+  //           title: "Order Received",
+  //           text: "Your order has already been delivered!",
+  //           showConfirmButton: false,
+  //           timer: 3500,
+  //         });
+  //         break;
+  
+  //       default:
+  //         // Fallback or unknown digitalAsset
+  //         Swal.fire({
+  //           icon: "warning",
+  //           title: "Unknown Order Status",
+  //           text: "Please contact support for more details.",
+  //           showConfirmButton: false,
+  //           timer: 3500,
+  //         });
+  //         break;
+  //     }
+  //   } else if (order.status === "declined") {
+  //     // 3. If status is "declined"
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Order Declined",
+  //       text: "Your order has been declined. Please contact support for further details.",
+  //       showConfirmButton: false,
+  //       timer: 3500,
+  //     });
+  //   } else if (order.status === "pending") {
+  //     // 4. If status is "pending"
+  //     Swal.fire({
+  //       icon: "info",
+  //       title: "Order Pending",
+  //       text: "Your order is not approved yet. Please wait for further updates or contact support.",
+  //       showConfirmButton: false,
+  //       timer: 3500,
+  //     });
+  //   }
+  // };
+ 
+  
+  // const handleOrderForPhy = async (e) => {
+  //   e.preventDefault();
+  
+  //   if (!order) return;
+  
+  //   const deliveryCity = order?.deliveryAddress?.city;
+  //   const deliveryCountry = order?.deliveryAddress?.country;
+  
+  //   try {
+  //     const { data, error } = await triggerGetDeliveryArea({
+  //       city: deliveryCity,
+  //       country: deliveryCountry,
+  //     });
+  
+  //     if (error || !data || data.length === 0) {
+  //       Swal.fire("Not Found", "No delivery area found for this location.", "warning");
+  //       return;
+  //     }
+  
+  //     setDeliveryOptions(data);
+  //     setShowPopup(true); // Show popup with the delivery options
+  //   } catch (err) {
+  //     console.error("Fetch error", err);
+  //     Swal.fire("Error", "Something went wrong while fetching delivery options.", "error");
+  //   }
+  // };
+  
   const handleOrderForPhy = async (e) => {
     e.preventDefault();
-  
+
     if (!order) return;
-  
-    // 1. Check the order's status first
+
+    const deliveryCity = order?.deliveryAddress?.city;
+    const deliveryCountry = order?.deliveryAddress?.country;
+
     if (order.status === "approved") {
-      // 2. If status is "approved", proceed to handle the digitalAsset logic
       const { digitalAsset } = order;
-  
+
       switch (digitalAsset) {
         case "notClaimed":
           try {
-            const orderId = order._id;
-  
-            // Mark as claimed
-            const formData = {
-              trackingLink: order.trackingLink,
-              status: order.status,       // Keep the status the same (still "approved")
-              digitalAsset: "claimed",
-            };
-  
-            const response = await updateOrderStatus({
-              id: orderId,
-              data: formData,
-            }).unwrap();
-  
-            if (response.success) {
-              Swal.fire({
-                icon: "success",
-                title: `Admin will contact you via ${order.contactType}`,
-                text: "Your request for claiming the Physical Version has been sent.",
-                showConfirmButton: false,
-                timer: 3500,
-              });
+            const { data, error } = await triggerGetDeliveryArea({
+              city: deliveryCity,
+              country: deliveryCountry,
+            });
+
+            if (error || !data || data.length === 0) {
+              Swal.fire("Not Found", "No delivery area found for this location.", "warning");
+              return;
             }
+
+            setDeliveryOptions(data);
+            setShowPopup(true);
           } catch (error) {
             Swal.fire({
               icon: "error",
               title: "Error",
-              text: "Something went wrong while claiming the Physical Version.",
+              text: "Something went wrong while fetching delivery options.",
+              timer: 3000,
               showConfirmButton: false,
-              timer: 3500,
             });
           }
           break;
-  
+
         case "shipping":
-          Swal.fire({
-            icon: "info",
-            title: "Shipping In Progress",
-            text: "Your order is currently in transit.",
-            showConfirmButton: false,
-            timer: 3500,
-          });
+          Swal.fire("Shipping", "Your order is already in transit.", "info");
           break;
-  
+
         case "claimed":
-          Swal.fire({
-            icon: "info",
-            title: "You’ve already claimed a Physical Version.",
-            text: "Your order is still in process.",
-            showConfirmButton: false,
-            timer: 3500,
-          });
+          Swal.fire("Already Claimed", "Your physical version is being processed.", "info");
           break;
-  
+
         case "received":
-          Swal.fire({
-            icon: "success",
-            title: "Order Received",
-            text: "Your order has already been delivered!",
-            showConfirmButton: false,
-            timer: 3500,
-          });
+          Swal.fire("Received", "You have already received your physical product.", "success");
           break;
-  
+
         default:
-          // Fallback or unknown digitalAsset
-          Swal.fire({
-            icon: "warning",
-            title: "Unknown Order Status",
-            text: "Please contact support for more details.",
-            showConfirmButton: false,
-            timer: 3500,
-          });
+          Swal.fire("Unknown", "Unknown digital asset status.", "warning");
           break;
       }
     } else if (order.status === "declined") {
-      // 3. If status is "declined"
-      Swal.fire({
-        icon: "error",
-        title: "Order Declined",
-        text: "Your order has been declined. Please contact support for further details.",
-        showConfirmButton: false,
-        timer: 3500,
-      });
+      Swal.fire("Declined", "Your order was declined.", "error");
     } else if (order.status === "pending") {
-      // 4. If status is "pending"
-      Swal.fire({
-        icon: "info",
-        title: "Order Pending",
-        text: "Your order is not approved yet. Please wait for further updates or contact support.",
-        showConfirmButton: false,
-        timer: 3500,
-      });
+      Swal.fire("Pending", "Your order is still pending approval.", "info");
     }
   };
-  
-  
+
+  console.log(selectedDelivery);
   return (
     <div className=" bg-white border rounded-2xl shadow-lg p-5">
       <div className="flex flex-col md:flex-row justify-between items-center pb-7 space-y-5">
@@ -289,6 +391,94 @@ const OrderCardPrompt = ({ order }) => {
       <p className="text-sm xl:text-lg pt-5 text-gray-500 text-muted-foreground">
         The return/exchange window for this item is closed.
       </p>
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-white p-6 rounded-xl shadow-lg max-w-2xl w-full relative">
+            <h2 className="text-xl font-semibold mb-4 text-center">
+              Choose a Delivery Option
+            </h2>
+            <table className="w-full border-collapse mb-4 text-sm md:text-base">
+              <thead>
+                <tr className="border-b text-left">
+                  <th className="p-2">Type</th>
+                  <th className="p-2">Fee</th>
+                  <th className="p-2">Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                {deliveryOptions.map((area) => (
+                  <tr
+                    key={area._id}
+                    onClick={() => setSelectedDelivery(area)}
+                    className={`cursor-pointer ${
+                      selectedDelivery?._id === area._id
+                        ? "bg-green-100"
+                        : "hover:bg-gray-100"
+                    }`}
+                  >
+                    <td className="p-2">{area.deliveryType}</td>
+                    <td className="p-2">${area.deliveryFee}</td>
+                    <td className="p-2">{area.deliveryDay}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setShowPopup(false);
+                  setSelectedDelivery(null);
+                }}
+                className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  if (!selectedDelivery) {
+                    Swal.fire("Select Option", "Please select a delivery type", "info");
+                    return;
+                  }
+
+                  try {
+                    const formData = {
+                      trackingLink: order.trackingLink,
+                      status: "approved",
+                      digitalAsset: "claimed",
+                      deliveryTypeInfo: selectedDelivery._id,
+                    };
+
+                    const response = await updateOrderStatus({
+                      id: order._id,
+                      data: formData,
+                    }).unwrap();
+
+                    if (response.success) {
+                      setShowPopup(false);
+                      setSelectedDelivery(null);
+                      Swal.fire({
+                        icon: "success",
+                        title: "Delivery Option Selected",
+                        text: `Admin will contact you via ${order.contactType}`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                      });
+                    }
+                  } catch (error) {
+                    console.error("Order update failed", error);
+                    Swal.fire("Error", "Failed to claim the physical version.", "error");
+                  }
+                }}
+                className="px-4 py-2 rounded-md bg-teal-500 text-white  hover:bg-teal-600 transition-colors"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

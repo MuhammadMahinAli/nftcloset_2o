@@ -10,6 +10,7 @@ const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
   const orderInfo = order?.productInfo;
   const customerInfo = order?.orderedBy;
   const deliveryAddress = order?.deliveryAddress;
+const   deliveryTypeInfo = order?.deliveryTypeInfo;
 
   const { productName, displayImage } = product;
   const { material, size, color } = orderInfo;
@@ -22,6 +23,7 @@ const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
     trackingLink: "",
     status: "",
     digitalAsset: "",
+    deliveryTypeInfo: null,
   });
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
         trackingLink: order.trackingLink,
         status: order.status,
         digitalAsset: order.digitalAsset,
+        deliveryTypeInfo: order.deliveryTypeInfo
       });
     }
   }, [order]);
@@ -169,6 +172,21 @@ const RequestDetailsModal = ({ isOpenModal, onClose, order }) => {
           <p className="text-gray-500 text-[18px]">City: {city}</p>
           <p className="text-gray-500 text-[18px]">Country: {country}</p>
         </div>
+
+        {/* delivery area */}
+      {
+        order?.deliveryTypeInfo !== null &&
+          <div className="mb-4 space-y-1">
+          <p className="text-gray-700 font-bold mb-1 text-[20px]">
+            Delivery Service
+          </p>
+          <p className="text-gray-500 text-[18px]">Service: {deliveryTypeInfo?.deliveryType}</p>
+          <p className="text-gray-500 text-[18px]">Fee: $ {deliveryTypeInfo?.deliveryFee}</p>
+          <p className="text-gray-500 text-[18px]">Day: {deliveryTypeInfo?.deliveryDay} Days</p>
+        </div>
+      }
+
+
         <form onSubmit={handleSubmit}>
           {/* Tracking Link */}
           <div className="mb-4">

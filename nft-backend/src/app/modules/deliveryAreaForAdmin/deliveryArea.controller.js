@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import { sendResponse } from "../../../utils/sendResponse.js";
 import { catchAsync } from "../../../utils/catchAsync.js";
-import { createDeliveryAreaService, deleteDeliveryAreaService, getDeliveryAreasService, updateDeliveryAreaService } from "./deliveryArea.service.js";
+import { createDeliveryAreaService, findDeliveryAreasService,deleteDeliveryAreaService, getDeliveryAreasService, updateDeliveryAreaService } from "./deliveryArea.service.js";
 
 
 
@@ -66,3 +66,16 @@ export const deleteDeliveryAreaController = catchAsync(async (req, res) => {
     data: result,
   });
 });
+
+// get area by country & city
+export const findDeliveryAreasController = async (req, res) => {
+
+    try {
+      const { country, city } = req.params;
+      const areas = await findDeliveryAreasService(country, city);
+      res.status(200).json(areas);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+  

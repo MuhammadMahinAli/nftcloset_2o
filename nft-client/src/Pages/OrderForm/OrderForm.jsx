@@ -575,6 +575,7 @@ const OrderForm = () => {
     trackingLink: "",
     status: "pending",
     digitalAsset: "notClaimed",
+    deliveryTypeInfo: null,
   });
 
   // Local state for selections

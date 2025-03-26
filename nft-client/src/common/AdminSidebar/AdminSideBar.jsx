@@ -1,5 +1,3 @@
-
-
 // import { useContext, useState } from "react";
 // import { Link, useLocation } from "react-router-dom";
 // import HoveredText from "../../icons/HoveredText";
@@ -475,7 +473,6 @@
 
 // export default AdminSideBar;
 
-
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import HoveredText from "../../icons/HoveredText";
@@ -489,6 +486,7 @@ import AllCollectionIcon from "../../icons/NFTIcon/AllCollectionIcon";
 import HomePageControlIcon from "../../icons/NFTIcon/HomePageControlIcon";
 import { useAuthCheck } from "../../utils/useAuthCheck";
 import Swal from "sweetalert2";
+import { MdAddLocationAlt } from "react-icons/md";
 
 const AdminSideBar = () => {
   //---- states
@@ -498,6 +496,7 @@ const AdminSideBar = () => {
   const [openProduct, setOpenProduct] = useState(false);
   const [openCollection, setOpenCollection] = useState(false);
   const [openHomeControl, setOpenHomeControl] = useState(false);
+  const [openAddArea, setOpenAddArea] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -517,7 +516,6 @@ const AdminSideBar = () => {
     };
   }, []);
 
-
   const location = useLocation();
   const isPageActive = (path) => {
     return location.pathname === path;
@@ -526,7 +524,7 @@ const AdminSideBar = () => {
   const { singleUser } = useContext(AuthContext);
   const userEmail = singleUser && singleUser?.data?.email;
 
-  console.log("userEmail",userEmail);
+  console.log("userEmail", userEmail);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -549,7 +547,7 @@ const AdminSideBar = () => {
         icon: "success",
         text: "Logged out successfully!",
       });
-     // navigate("/login");
+      // navigate("/login");
     }
   };
 
@@ -562,14 +560,15 @@ const AdminSideBar = () => {
         <Link to="/manageAccount" className="relative">
           <div
             className={`${
-              openDashboard || isPageActive("/manageAccount")? "bg-[#dff5eb] rounded-lg " : ""
+              openDashboard || isPageActive("/manageAccount")
+                ? "bg-[#dff5eb] rounded-lg "
+                : ""
             } flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
-           
           >
             <div
-             onMouseEnter={() => setOpenDashboard(true)}
-             onMouseLeave={() => setOpenDashboard(false)}
-             onClick={()=>setIsOpen(false)}
+              onMouseEnter={() => setOpenDashboard(true)}
+              onMouseLeave={() => setOpenDashboard(false)}
+              onClick={() => setIsOpen(false)}
               className={`${
                 isPageActive("/manageAccount") ? "bg-[#dff5eb] rounded-lg" : ""
               } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-4 rounded-[5px]`}
@@ -593,100 +592,138 @@ const AdminSideBar = () => {
       </div>
 
       {/* product */}
-      { userEmail === "nftclosetx@gmail.com" &&
-      <div className="sidebar-list">
-        <Link 
-        to="/manageAccount/all-products" 
-        className="relative">
-          <div
-            className={`${
-              openProduct || isPageActive("/manageAccount/all-products") ? "bg-[#dff5eb] rounded-lg " : ""
-            } flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
-          
-          >
+      {userEmail === "nftclosetx@gmail.com" && (
+        <div className="sidebar-list">
+          <Link to="/manageAccount/all-products" className="relative">
             <div
-              onMouseEnter={() => setOpenProduct(true)}
-              onMouseLeave={() => setOpenProduct(false)}
-              onClick={()=>setIsOpen(false)}
               className={`${
-                isPageActive("/manageAccount/all-products") ? "" : ""
-              } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
+                openProduct || isPageActive("/manageAccount/all-products")
+                  ? "bg-[#dff5eb] rounded-lg "
+                  : ""
+              } flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
             >
-              <AllProductIcon
-                isPageActive={isPageActive}
-                openProduct={openProduct}
-              />
-              <p
+              <div
+                onMouseEnter={() => setOpenProduct(true)}
+                onMouseLeave={() => setOpenProduct(false)}
+                onClick={() => setIsOpen(false)}
                 className={`${
-                  isPageActive("/manageAccount/all-products")
-                    ? "text-[#2cba7a]"
-                    : "text-gray-600"
-                } hover:text-[#2cba7a] text-xl font-bold`}
+                  isPageActive("/manageAccount/all-products") ? "" : ""
+                } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
               >
-                All Products
-              </p>
+                <AllProductIcon
+                  isPageActive={isPageActive}
+                  openProduct={openProduct}
+                />
+                <p
+                  className={`${
+                    isPageActive("/manageAccount/all-products")
+                      ? "text-[#2cba7a]"
+                      : "text-gray-600"
+                  } hover:text-[#2cba7a] text-xl font-bold`}
+                >
+                  All Products
+                </p>
+              </div>
             </div>
-          </div>
-        </Link>
-      </div>
-}
+          </Link>
+        </div>
+      )}
       {/* collections */}
-      { userEmail === "nftclosetx@gmail.com" &&
-      <div className="sidebar-list">
-        <Link 
-        to="/manageAccount/all-collections" 
-        className="relative">
-          <div
-            className={`${
-           isPageActive("/manageAccount/all-collections")  ? "bg-[#dff5eb] rounded-lg " : ""
-            } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
-           
-          >
+      {userEmail === "nftclosetx@gmail.com" && (
+        <div className="sidebar-list">
+          <Link to="/manageAccount/all-collections" className="relative">
             <div
-             onMouseEnter={() => setOpenCollection(true)}
-             onMouseLeave={() => setOpenCollection(false)}
-             onClick={()=>setIsOpen(false)}
               className={`${
-                isPageActive("/manageAccount/all-collections") ? "" : ""
-              } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
+                isPageActive("/manageAccount/all-collections")
+                  ? "bg-[#dff5eb] rounded-lg "
+                  : ""
+              } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
             >
-              <AllCollectionIcon
-                isPageActive={isPageActive}
-                openCollection={openCollection}
-              />
-              <p
+              <div
+                onMouseEnter={() => setOpenCollection(true)}
+                onMouseLeave={() => setOpenCollection(false)}
+                onClick={() => setIsOpen(false)}
                 className={`${
-                  isPageActive("/manageAccount/all-collections")
-                    ? "text-[#2cba7a]"
-                    : "text-gray-600"
-                } hover:text-[#2cba7a] text-xl font-bold`}
+                  isPageActive("/manageAccount/all-collections") ? "" : ""
+                } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
               >
-                All Collections
-              </p>
+                <AllCollectionIcon
+                  isPageActive={isPageActive}
+                  openCollection={openCollection}
+                />
+                <p
+                  className={`${
+                    isPageActive("/manageAccount/all-collections")
+                      ? "text-[#2cba7a]"
+                      : "text-gray-600"
+                  } hover:text-[#2cba7a] text-xl font-bold`}
+                >
+                  All Collections
+                </p>
+              </div>
             </div>
-          </div>
-        </Link>
-      </div>
-      }
-
+          </Link>
+        </div>
+      )}
+      {/* add area*/}
+      {userEmail === "nftclosetx@gmail.com" && (
+        <div className="sidebar-list">
+          <Link to="/manageAccount/add-area" className="relative">
+            <div
+              className={`${
+                isPageActive("/manageAccount/add-area")
+                  ? "bg-[#dff5eb] rounded-lg "
+                  : ""
+              } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
+            >
+              <div
+                onMouseEnter={() => setOpenAddArea(true)}
+                onMouseLeave={() => setOpenAddArea(false)}
+                onClick={() => setIsOpen(false)}
+                className={`${
+                  isPageActive("/manageAccount/add-area") ? "" : ""
+                } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
+              >
+           <MdAddLocationAlt
+                      className={`text-3xl ${
+                        openAddArea || isPageActive("/manageAccount/add-area")
+                          ? "text-[#2CBA7A]"
+                          : "text-[#c3c3c3]"
+                      }`}
+                    />
+                <p
+                  className={`${
+                    isPageActive("/manageAccount/add-area")
+                      ? "text-[#2cba7a]"
+                      : "text-gray-600"
+                  } hover:text-[#2cba7a] text-xl font-bold`}
+                >
+                  Add Area
+                </p>
+              </div>
+            </div>
+          </Link>
+        </div>
+      )}
       {/* order */}
       <div className="sidebar-list">
         <Link to="/manageAccount/orders" className="relative">
           <div
             className={`${
-               isPageActive("/manageAccount/orders") ? "bg-[#dff5eb] rounded-lg " : ""
+              isPageActive("/manageAccount/orders")
+                ? "bg-[#dff5eb] rounded-lg "
+                : ""
             } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
-        
           >
             <div
-                onMouseEnter={() => setOpenOrder(true)}
-                onMouseLeave={() => setOpenOrder(false)}
-                onClick={()=>setIsOpen(false)}
+              onMouseEnter={() => setOpenOrder(true)}
+              onMouseLeave={() => setOpenOrder(false)}
+              onClick={() => setIsOpen(false)}
               className={`${
                 isPageActive("/manageAccount/orders") ? "" : ""
               } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
             >
-              <OrderIcon openOrder={openOrder}   isPageActive={isPageActive} />
+              <OrderIcon openOrder={openOrder} isPageActive={isPageActive} />
               <p
                 className={`${
                   isPageActive("/manageAccount/orders")
@@ -702,64 +739,63 @@ const AdminSideBar = () => {
       </div>
 
       {/* home control */}
-      { userEmail === "nftclosetx@gmail.com" &&
-      <div className="sidebar-list">
-        <Link 
-         to="/manageAccount/home-page-controls" 
-        className="relative">
-          <div
-            className={`${
-              openHomeControl  ? "bg-[#dff5eb] rounded-lg" : ""
-            } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
-     
-          >
+      {userEmail === "nftclosetx@gmail.com" && (
+        <div className="sidebar-list">
+          <Link to="/manageAccount/home-page-controls" className="relative">
             <div
-                   onMouseEnter={() => setOpenHomeControl(true)}
-                   onMouseLeave={() => setOpenHomeControl(false)}
-                   onClick={()=>setIsOpen(false)}
               className={`${
-                isPageActive("/manageAccount/home-page-controls") ? "" : ""
-              } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
+                openHomeControl ? "bg-[#dff5eb] rounded-lg" : ""
+              } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
             >
-              <HomePageControlIcon
-                isPageActive={isPageActive}
-                openHomeControl={openHomeControl}
-              />
-              <p
+              <div
+                onMouseEnter={() => setOpenHomeControl(true)}
+                onMouseLeave={() => setOpenHomeControl(false)}
+                onClick={() => setIsOpen(false)}
                 className={`${
-                  isPageActive("/manageAccount/home-page-controls")
-                    ? "text-[#2cba7a]"
-                    : "text-gray-600"
-                } hover:text-[#2cba7a] text-xl font-bold`}
+                  isPageActive("/manageAccount/home-page-controls") ? "" : ""
+                } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
               >
-                Home Page Control
-              </p>
+                <HomePageControlIcon
+                  isPageActive={isPageActive}
+                  openHomeControl={openHomeControl}
+                />
+                <p
+                  className={`${
+                    isPageActive("/manageAccount/home-page-controls")
+                      ? "text-[#2cba7a]"
+                      : "text-gray-600"
+                  } hover:text-[#2cba7a] text-xl font-bold`}
+                >
+                  Home Page Control
+                </p>
+              </div>
             </div>
-          </div>
-        </Link>
-      </div>
-      }
+          </Link>
+        </div>
+      )}
 
       {/* setting */}
       <div className="sidebar-list">
         <Link to="/manageAccount/settings" className="relative">
           <div
             className={`${
-             isPageActive("/manageAccount/settings")
+              isPageActive("/manageAccount/settings")
                 ? "bg-[#dff5eb] rounded-lg"
                 : ""
             } hover:bg-[#dff5eb] flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl`}
-       
           >
             <div
-                 onMouseEnter={() => setOpenSetting(true)}
-                 onMouseLeave={() => setOpenSetting(false)}
-                 onClick={()=>setIsOpen(false)}
+              onMouseEnter={() => setOpenSetting(true)}
+              onMouseLeave={() => setOpenSetting(false)}
+              onClick={() => setIsOpen(false)}
               className={`${
                 isPageActive("/manageAccount/settings") ? "" : ""
               } w-[250px] flex items-center space-x-3 box2 py-2 px-2 md:px-3`}
             >
-              <SettingIcon  isPageActive={isPageActive} openSetting={openSetting} />
+              <SettingIcon
+                isPageActive={isPageActive}
+                openSetting={openSetting}
+              />
               <p
                 className={`${
                   isPageActive("/manageAccount/settings")
@@ -844,7 +880,11 @@ const AdminSideBar = () => {
       </div>
 
       {/* Mini Sidebar */}
-      <ul className={`hidden absolute shadow-xl left-0 top-[90px] 3xl:block w-[80px] bg-[#fff] lg:flex flex-col items-center justify-start py-5 space-y-4 lg:space-y-5  ${isScrolled ? "z-0" : "z-50"} `}>
+      <ul
+        className={`hidden absolute shadow-xl left-0 top-[90px] 3xl:block w-[80px] bg-[#fff] lg:flex flex-col items-center justify-start py-5 space-y-4 lg:space-y-5  ${
+          isScrolled ? "z-0" : "z-50"
+        } `}
+      >
         {/* Hamburger Menu Button */}
         <li className="w-full flex justify-center mb-4">
           <button
@@ -870,10 +910,7 @@ const AdminSideBar = () => {
         {/* Dashboard */}
         <li className="sidebar-list">
           <Link to="/manageAccount" className="relative">
-            <div
-              className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-            
-            >
+            <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
               <div
                 onMouseEnter={() => setOpenDashboard(true)}
                 onMouseLeave={() => setOpenDashboard(false)}
@@ -895,183 +932,202 @@ const AdminSideBar = () => {
           </Link>
         </li>
 
-
-
-         {/* product */}
-         { userEmail === "nftclosetx@gmail.com" &&
-         <li className="sidebar-list">
-           <Link to="/manageAccount/all-products" className="relative">
-             <p>
-               <div
-                 className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-            
-               >
-                 <div
-                      onMouseEnter={() => setOpenProduct(true)}
-                      onMouseLeave={() => setOpenProduct(false)}
-                   className={`${
-                     isPageActive("/manageAccount/all-products") ? "" : ""
-                   } box2 py-2 px-2 md:px-3  rounded-[5px]`}
-                 >
-                   <AllProductIcon
-                     isPageActive={isPageActive}
-                     openProduct={openProduct}
-                   />
-                 </div>
-               </div>
-             </p>
-             {openProduct && (
-               <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"Product"} />
-               </div>
-             )}
-           </Link>
-         </li>
-}
-         {/* collection */}
-         { userEmail === "nftclosetx@gmail.com" &&
-         <li className="sidebar-list">
-           <Link to="/manageAccount/all-collections" className="relative">
-             <p>
-               <div
-                 className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-              
-               >
-                 <div
+        {/* product */}
+        {userEmail === "nftclosetx@gmail.com" && (
+          <li className="sidebar-list">
+            <Link to="/manageAccount/all-products" className="relative">
+              <p>
+                <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                  <div
+                    onMouseEnter={() => setOpenProduct(true)}
+                    onMouseLeave={() => setOpenProduct(false)}
+                    className={`${
+                      isPageActive("/manageAccount/all-products") ? "" : ""
+                    } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                  >
+                    <AllProductIcon
+                      isPageActive={isPageActive}
+                      openProduct={openProduct}
+                    />
+                  </div>
+                </div>
+              </p>
+              {openProduct && (
+                <div className="absolute left-16 top-2 ">
+                  <HoveredText text={"Product"} />
+                </div>
+              )}
+            </Link>
+          </li>
+        )}
+        {/* collection */}
+        {userEmail === "nftclosetx@gmail.com" && (
+          <li className="sidebar-list">
+            <Link to="/manageAccount/all-collections" className="relative">
+              <p>
+                <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                  <div
                     onMouseEnter={() => setOpenCollection(true)}
                     onMouseLeave={() => setOpenCollection(false)}
-                   className={`${
-                     isPageActive("/manageAccount/all-collections") ? "" : ""
-                   } box2 py-2 px-2 md:px-3  rounded-[5px]`}
-                 >
-                   <AllCollectionIcon
-                     isPageActive={isPageActive}
-                     openCollection={openCollection}
-                   />
-                 </div>
-               </div>
-             </p>
-             {openCollection && (
-               <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"Collection"} />
-               </div>
-             )}
-           </Link>
-         </li>
-}
-         {/* order */}
+                    className={`${
+                      isPageActive("/manageAccount/all-collections") ? "" : ""
+                    } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                  >
+                    <AllCollectionIcon
+                      isPageActive={isPageActive}
+                      openCollection={openCollection}
+                    />
+                  </div>
+                </div>
+              </p>
+              {openCollection && (
+                <div className="absolute left-16 top-2 ">
+                  <HoveredText text={"Collection"} />
+                </div>
+              )}
+            </Link>
+          </li>
+        )}
+        {/* add area */}
+        {userEmail === "nftclosetx@gmail.com" && (
+          <li className="sidebar-list">
+            <Link to="/manageAccount/add-area" className="relative">
+              <p>
+                <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                  <div
+                    onMouseEnter={() => setOpenAddArea(true)}
+                    onMouseLeave={() => setOpenAddArea(false)}
+                    className={`${
+                      isPageActive("/manageAccount/add-area") ? "" : ""
+                    } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                  >
+                    <MdAddLocationAlt
+                      className={`text-3xl ${
+                        openAddArea || isPageActive("/manageAccount/add-area")
+                          ? "text-[#2CBA7A]"
+                          : "text-[#c3c3c3]"
+                      }`}
+                    />
+                  </div>
+                </div>
+              </p>
+              {openAddArea && (
+                <div className="absolute left-16 top-2 ">
+                  <HoveredText text={"Area"} />
+                </div>
+              )}
+            </Link>
+          </li>
+        )}
+        {/* order */}
 
-         <li className="sidebar-list">
-           <Link to="/manageAccount/orders" className="relative">
-             <p>
-               <div
-                 className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-             
-               >
-                 <div
-                     onMouseEnter={() => setOpenOrder(true)}
-                     onMouseLeave={() => setOpenOrder(false)}
-                   className={`${
-                     isPageActive("/manageAccount/orders") ? "" : ""
-                   } box2 py-2 px-2 md:px-3  rounded-[5px]`}
-                 >
-                   <OrderIcon openOrder={openOrder} isPageActive={isPageActive} />
-                 </div>
-               </div>
-             </p>
-             {openOrder && (
-               <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"Order"} />
-               </div>
-             )}
-           </Link>
-         </li>
-         {/* home page control */}
-         { userEmail === "nftclosetx@gmail.com" &&
-         <li className="sidebar-list">
-           <Link to="/manageAccount/home-page-controls" className="relative">
-             <p>
-               <div
-                 className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-                
-               >
-                 <div
-                  onMouseEnter={() => setOpenHomeControl(true)}
-                  onMouseLeave={() => setOpenHomeControl(false)}
-                   className={`${
-                     isPageActive("/manageAccount/home-page-controls") ? "" : ""
-                   } box2 py-2 px-2 md:px-3  rounded-[5px]`}
-                 >
-                   <HomePageControlIcon
-                     isPageActive={isPageActive}
-                     openHomeControl={openHomeControl}
-                   />
-                 </div>
-               </div>
-             </p>
-             {openHomeControl && (
-               <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"Homepage Control"} />
-               </div>
-             )}
-           </Link>
-         </li>
-         }
-         {/* setting */}
-         <li className="sidebar-list">
-           <Link to="/manageAccount/settings" className="relative">
-             <p>
-               <div
-                 className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-               
-               >
-                 <div
-                   onMouseEnter={() => setOpenSetting(true)}
-                   onMouseLeave={() => setOpenSetting(false)}
-                   className={`${
-                     isPageActive("/manageAccount/settings") ? "" : ""
-                   } box2 py-2 px-2 md:px-3  rounded-[5px]`}
-                 >
-                   <SettingIcon  isPageActive={isPageActive} openSetting={openSetting} />
-                 </div>
-               </div>
-             </p>
-             {openSetting && (
-               <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"Setting"} />
-               </div>
-             )}
-           </Link>
-         </li>
+        <li className="sidebar-list">
+          <Link to="/manageAccount/orders" className="relative">
+            <p>
+              <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                <div
+                  onMouseEnter={() => setOpenOrder(true)}
+                  onMouseLeave={() => setOpenOrder(false)}
+                  className={`${
+                    isPageActive("/manageAccount/orders") ? "" : ""
+                  } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                >
+                  <OrderIcon
+                    openOrder={openOrder}
+                    isPageActive={isPageActive}
+                  />
+                </div>
+              </div>
+            </p>
+            {openOrder && (
+              <div className="absolute left-16 top-2 ">
+                <HoveredText text={"Order"} />
+              </div>
+            )}
+          </Link>
+        </li>
+        {/* home page control */}
+        {userEmail === "nftclosetx@gmail.com" && (
+          <li className="sidebar-list">
+            <Link to="/manageAccount/home-page-controls" className="relative">
+              <p>
+                <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                  <div
+                    onMouseEnter={() => setOpenHomeControl(true)}
+                    onMouseLeave={() => setOpenHomeControl(false)}
+                    className={`${
+                      isPageActive("/manageAccount/home-page-controls")
+                        ? ""
+                        : ""
+                    } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                  >
+                    <HomePageControlIcon
+                      isPageActive={isPageActive}
+                      openHomeControl={openHomeControl}
+                    />
+                  </div>
+                </div>
+              </p>
+              {openHomeControl && (
+                <div className="absolute left-16 top-2 ">
+                  <HoveredText text={"Homepage Control"} />
+                </div>
+              )}
+            </Link>
+          </li>
+        )}
+        {/* setting */}
+        <li className="sidebar-list">
+          <Link to="/manageAccount/settings" className="relative">
+            <p>
+              <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                <div
+                  onMouseEnter={() => setOpenSetting(true)}
+                  onMouseLeave={() => setOpenSetting(false)}
+                  className={`${
+                    isPageActive("/manageAccount/settings") ? "" : ""
+                  } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                >
+                  <SettingIcon
+                    isPageActive={isPageActive}
+                    openSetting={openSetting}
+                  />
+                </div>
+              </div>
+            </p>
+            {openSetting && (
+              <div className="absolute left-16 top-2 ">
+                <HoveredText text={"Setting"} />
+              </div>
+            )}
+          </Link>
+        </li>
 
-         {/* logout */}
+        {/* logout */}
 
-         <li className="sidebar-list">
-           <div className="relative">
-             <p>
-               <div
-                 className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl"
-              
-               >
-                 <div
-                 onClick={logout}
-                    onMouseEnter={() => setOpenLogout(true)}
-                    onMouseLeave={() => setOpenLogout(false)}
-                   className={`${
-                     isPageActive("/manageAccount") ? "" : ""
-                   } box2 py-2 px-2 md:px-3  rounded-[5px]`}
-                 >
-                   <LogoutIcon openLogout={openLogout} />
-                 </div>
-               </div>
-             </p>
-             {openLogout && (
-               <div className="absolute left-16 top-2 ">
-                 <HoveredText text={"Logout"} />
-               </div>
-             )}
-           </div>
-         </li>
+        <li className="sidebar-list">
+          <div className="relative">
+            <p>
+              <div className="flex items-center justify-center cursor-pointer [border:none] p-0 box1 rounded-xl">
+                <div
+                  onClick={logout}
+                  onMouseEnter={() => setOpenLogout(true)}
+                  onMouseLeave={() => setOpenLogout(false)}
+                  className={`${
+                    isPageActive("/manageAccount") ? "" : ""
+                  } box2 py-2 px-2 md:px-3  rounded-[5px]`}
+                >
+                  <LogoutIcon openLogout={openLogout} />
+                </div>
+              </div>
+            </p>
+            {openLogout && (
+              <div className="absolute left-16 top-2 ">
+                <HoveredText text={"Logout"} />
+              </div>
+            )}
+          </div>
+        </li>
       </ul>
     </>
   );

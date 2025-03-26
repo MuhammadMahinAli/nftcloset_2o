@@ -107,6 +107,7 @@ export const getOrdersByStatusForAdminService = async (status) => {
     const orders = await Order.find(query)
       .populate("productID")
       .populate("orderedBy")
+      .populate("deliveryTypeInfo") 
       .sort({ createdAt: -1 });
 
     console.log("Orders found:", orders.length); // Debugging
@@ -222,7 +223,8 @@ export const updateOrderStatusService = async (id, data) => {
     const updatedData = {
       trackingLink: data.trackingLink,
       status: data.status,
-      digitalAsset: data.digitalAsset
+      digitalAsset: data.digitalAsset,
+      deliveryTypeInfo:data.deliveryTypeInfo
     };
 
     const updatedProduct = await Order.findByIdAndUpdate(

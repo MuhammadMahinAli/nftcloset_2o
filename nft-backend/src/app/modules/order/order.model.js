@@ -11,7 +11,7 @@ const OrderSchema = new Schema(
     productInfo: {
       material: { type: String },
       size: { type: String },
-      color:{ type: String },
+      color: { type: String },
     },
     deliveryAddress: {
       homeAddress: { type: String },
@@ -25,11 +25,18 @@ const OrderSchema = new Schema(
       ref: "Member",
       required: true,
     },
+    deliveryTypeInfo: {
+      type: Schema.Types.ObjectId,
+      ref: "DeliveryArea",
+    },
     contactType: { type: String },
     crossMintOrderId: { type: String },
     trackingLink: { type: String },
     status: { type: String, enum: ["pending", "approved", "declined"] },
-    digitalAsset: { type: String, enum: ["notClaimed", "claimed", "shipping" ,  "received"] },
+    digitalAsset: {
+      type: String,
+      enum: ["notClaimed", "claimed", "shipping", "received"],
+    },
     isConfirmRecipt: { type: Boolean },
   },
   {
