@@ -38,49 +38,10 @@ const CollectionDetails = () => {
   const publishDatee = new Date(publishDate);
   const toDatee = new Date(toDate);
 
-  // const [timeLeft, setTimeLeft] = useState(() => {
-  //   const now = new Date();
-  //   const difference = publishDatee.getTime() - now.getTime();
 
-  //   if (difference <= 0) {
-  //     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-  //   }
-
-  //   return {
-  //     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-  //     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-  //     minutes: Math.floor((difference / (1000 * 60)) % 60),
-  //     seconds: Math.floor((difference / 1000) % 60),
-  //   };
-  // });
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     const now = new Date();
-  //     const difference = publishDatee.getTime() - now.getTime();
-
-  //     if (difference <= 0) {
-  //       clearInterval(timer);
-  //       setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  //       return;
-  //     }
-
-  //     setTimeLeft({
-  //       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-  //       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-  //       minutes: Math.floor((difference / 1000 / 60) % 60),
-  //       seconds: Math.floor((difference / 1000) % 60),
-  //     });
-  //   }, 1000);
-
-  //   return () => clearInterval(timer);
-  // }, []);
- 
  
   const [timeLeft, setTimeLeft] = useState(() => {
     const now = new Date();
-    // For Scheduled collections, calculate time until publish date
-    // For Instant collections with active offer, calculate time until offer ends
     const targetDate = publishType === "Scheduled" ? publishDatee : toDatee;
     const difference = targetDate.getTime() - now.getTime();
   
@@ -129,7 +90,7 @@ const CollectionDetails = () => {
   console.log(products);
 
   return (
-    <div className="p-3 md:p-8 lg:p-10 ">
+    <div className="bg-[url('/nftclosethoempage.png')] bg-no-repeat p-3 md:p-8 lg:p-10 ">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold capitalize">{collectionName}</h1>
       </div>

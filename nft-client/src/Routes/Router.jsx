@@ -120,14 +120,6 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/profile",
-        element: <UpdateProfile />,
-      },
-      {
-        path: "/order",
-        element: <ProductDescription />,
-      },
-      {
         path: "/market",
         element: <AllProducts />,
       },
@@ -140,15 +132,6 @@ const router = createBrowserRouter([
         element: <CollectionDetails/>,
         loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/collection/getCollectionById/${params.id}`)
       },
-     
-      {
-        path: "/collections",
-        element: <CreateCollection />,
-      },
-      {
-        path: "/allOrder",
-        element: <Order />,
-      },
       {
         path: "/products-details/:id",
         element: <ProductsDetails />,
@@ -159,17 +142,9 @@ const router = createBrowserRouter([
         element: <OrderForm />,
         loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/product/getProductById/${params.id}`)
       },
-      {
-        path: "/tests",
-        element: <AddProduct />,
-      },
+   
     
     ],
-  },
-
-  {
-    path: "/test",
-    element: <Test />,
   },
 
   {
