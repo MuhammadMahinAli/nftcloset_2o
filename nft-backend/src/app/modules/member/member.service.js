@@ -34,7 +34,7 @@ export const createMemberService = async (userInfo) => {
   //console.log("result", result);
   //console.log("userinfo", userInfo);
 
-  // const verificationUrl = `https://researchbdy.com/verified-email/${verificationToken}`;
+  // const verificationUrl = `https://www.nftclosetx.com/verified-email/${verificationToken}`;
 
   // // Send verification email
   // await sendEmail({
@@ -97,7 +97,7 @@ export const resendEmailService = async (email) => {
   //member.verificationToken = verificationToken;
   await member.save();
 
-  const verificationLink = `https://researchbdy.com/verified-email/${verificationToken}`;
+  const verificationLink = `https://www.nftclosetx.com/verified-email/${verificationToken}`;
   await sendEmail({
     to: email,
     subject: "Verify Your Email Address",

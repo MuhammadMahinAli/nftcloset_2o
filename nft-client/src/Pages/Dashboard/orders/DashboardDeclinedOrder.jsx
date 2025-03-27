@@ -22,7 +22,7 @@ const DashboardDeclinedOrder = ({
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "https://test-two-22w0.onrender.com/api/v1/order/getOrderStatusForAdmin/declined"
+          "https://nftcloset-2o.onrender.com/api/v1/order/getOrderStatusForAdmin/declined"
         );
         if (!response.ok) throw new Error("Failed to fetch orders");
         const data = await response.json();

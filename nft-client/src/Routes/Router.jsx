@@ -103,12 +103,12 @@ const router = createBrowserRouter([
       {
         path: "/manageAccount/update-collection/:id",
         element: <UpdateACollection/>,
-        loader: ({ params }) => fetch(`https://test-two-22w0.onrender.com/api/v1/collection/getCollectionById/${params.id}`)
+        loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/collection/getCollectionById/${params.id}`)
       },
       {
         path: "/manageAccount/update-product/:id",
         element: <UpdateAProduct/>,
-        loader: ({ params }) => fetch(`https://test-two-22w0.onrender.com/api/v1/product/getProductById/${params.id}`)
+        loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/product/getProductById/${params.id}`)
       },
 ]},
   {
@@ -138,7 +138,7 @@ const router = createBrowserRouter([
       {
         path: "/collection-details/:id",
         element: <CollectionDetails/>,
-        loader: ({ params }) => fetch(`https://test-two-22w0.onrender.com/api/v1/collection/getCollectionById/${params.id}`)
+        loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/collection/getCollectionById/${params.id}`)
       },
      
       {
@@ -152,12 +152,12 @@ const router = createBrowserRouter([
       {
         path: "/products-details/:id",
         element: <ProductsDetails />,
-        loader: ({ params }) => fetch(`https://test-two-22w0.onrender.com/api/v1/product/getProductById/${params.id}`)
+        loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/product/getProductById/${params.id}`)
       },
       {
         path: "/orders/:id",
         element: <OrderForm />,
-        loader: ({ params }) => fetch(`https://test-two-22w0.onrender.com/api/v1/product/getProductById/${params.id}`)
+        loader: ({ params }) => fetch(`https://nftcloset-2o.onrender.com/api/v1/product/getProductById/${params.id}`)
       },
       {
         path: "/tests",

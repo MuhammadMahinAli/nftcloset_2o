@@ -14,7 +14,7 @@ export const useReaction = (postId, user) => {
     const fetchReactions = async () => {
       try {
         const response = await fetch(
-          `https://test-two-22w0.onrender.com/api/v1/PostReact/allReactions/${postId}`
+          `https://nftcloset-2o.onrender.com/api/v1/PostReact/allReactions/${postId}`
         );
         const result = await response.json();
         if (result.success) {

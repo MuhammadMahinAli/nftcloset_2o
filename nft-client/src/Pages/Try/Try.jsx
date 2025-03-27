@@ -88,7 +88,7 @@ const Try = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://test-two-22w0.onrender.com/api/v1/member/getAll`,
+        `https://nftcloset-2o.onrender.com/api/v1/member/getAll`,
         {
           params: {
             page,
@@ -157,7 +157,7 @@ const Try = () => {
       switch (tab) {
         case "description":
           data = await apiFetch(
-            `https://test-two-22w0.onrender.com/api/v1/member/getUserById/${userId}`,
+            `https://nftcloset-2o.onrender.com/api/v1/member/getUserById/${userId}`,
             "GET"
           );
           setUserData((prevState) => ({
@@ -170,7 +170,7 @@ const Try = () => {
           break;
         case "skill":
           data = await apiFetch(
-            `https://test-two-22w0.onrender.com/api/v1/skill/getUserSkillById/${userId}`,
+            `https://nftcloset-2o.onrender.com/api/v1/skill/getUserSkillById/${userId}`,
             "GET"
           );
           setUserData((prevState) => ({
@@ -183,7 +183,7 @@ const Try = () => {
           break;
         case "project":
           data = await apiFetch(
-            `https://test-two-22w0.onrender.com/api/v1/project/getUserProjectById/${userId}`,
+            `https://nftcloset-2o.onrender.com/api/v1/project/getUserProjectById/${userId}`,
             "GET"
           );
           setUserData((prevState) => ({
@@ -196,7 +196,7 @@ const Try = () => {
           break;
         case "social":
           data = await apiFetch(
-            `https://test-two-22w0.onrender.com/api/v1/socialInfo/getSocialInfoByUser/${userId}`,
+            `https://nftcloset-2o.onrender.com/api/v1/socialInfo/getSocialInfoByUser/${userId}`,
             "GET"
           );
           setUserData((prevState) => ({
@@ -616,7 +616,7 @@ export default Try;
 //     setLoading(true);
 //     try {
 //       const response = await axios.get(
-//         `https://test-two-22w0.onrender.com/api/v1/member/getAll`,
+//         `https://nftcloset-2o.onrender.com/api/v1/member/getAll`,
 //         {
 //           params: {
 //             page,
@@ -2360,7 +2360,7 @@ export default Try;
 //     // try {
 //     //   // Submit form data to the API
 //     //   const response = await fetch(
-//     //     "https://test-two-22w0.onrender.com/api/v1/meeting/create-new",
+//     //     "https://nftcloset-2o.onrender.com/api/v1/meeting/create-new",
 //     //     {
 //     //       method: "POST",
 //     //       headers: {
@@ -3359,7 +3359,7 @@ export default Try;
 //     setLoading(true); // Set loading to true when fetching data
 //     try {
 //       const response = await axios.get(
-//         `https://test-two-22w0.onrender.com/api/v1/member/getAllMember`,
+//         `https://nftcloset-2o.onrender.com/api/v1/member/getAllMember`,
 //         {
 //           params: {
 //             page,
@@ -3549,7 +3549,7 @@ export default Try;
 //     setLoading(true); // Set loading to true when fetching data
 //     try {
 //       const response = await axios.get(
-//         `https://test-two-22w0.onrender.com/api/v1/project/getAllProject`,
+//         `https://nftcloset-2o.onrender.com/api/v1/project/getAllProject`,
 //         {
 //           params: {
 //             page,

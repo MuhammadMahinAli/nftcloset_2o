@@ -18,7 +18,16 @@ const DeliveryReturnNewsletter = () => {
     }, [role]);
   return (
     <div className="flex justify-center items-center py-5 md:py-12">
-  <div className="bg-white rounded-lg md:rounded-full md:w-[500px] p-5 md:p-10 shadow-lg relative mx-auto border border-[#EC7CB5]">
+  <div
+style={{
+  boxShadow: "0 0 10px rgba(236, 124, 181, 0.4), 0 0 60px rgba(125, 104, 255, 0.3)",
+  border: "2px solid transparent",
+  backgroundImage: "linear-gradient(white, white), linear-gradient(to right, #A66CFF, #EC7CB5)",
+  backgroundOrigin: "border-box",
+  backgroundClip: "padding-box, border-box",
+}}
+  
+  className="bg-white rounded-lg md:rounded-full md:w-[500px] p-5 md:p-10 shadow-lg relative mx-auto border border-[#EC7CB5]">
 
     
  

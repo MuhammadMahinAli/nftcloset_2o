@@ -37,7 +37,7 @@ const AllCollection = () => {
       </div>;
   }
   return (
-    <div className="min-h-screen p-3 md:p-7 lg:p-10 ">
+    <div className="bg-[url('/productnftbg.png')]  bg-no-repeat min-h-screen p-3 md:p-7 lg:p-10 ">
       {/* <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">All Collections</h1>
       </div> */}

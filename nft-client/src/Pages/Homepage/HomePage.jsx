@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <>
 
-      <main>
+      <main className="bg-[url('/nftclosethoempage.png')] bg-no-repeat">
         <HeroSection />
         <CollectionSlider/>
         <NewArrivalSlider/>

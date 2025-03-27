@@ -43,7 +43,7 @@ const DashboardNotClaimedOrder = ({
 
   //   if (result.isConfirmed) {
   //     try {
-  //       const response = await fetch(`https://test-two-22w0.onrender.com/api/v1/order/confirmReceipt/${orderId}`, {
+  //       const response = await fetch(`https://nftcloset-2o.onrender.com/api/v1/order/confirmReceipt/${orderId}`, {
   //         method: 'PUT',
   //         headers: { 'Content-Type': 'application/json' },
   //       });
@@ -109,7 +109,7 @@ const DashboardNotClaimedOrder = ({
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          `https://test-two-22w0.onrender.com/api/v1/order/confirmReceipt/${orderId}`,
+          `https://nftcloset-2o.onrender.com/api/v1/order/confirmReceipt/${orderId}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

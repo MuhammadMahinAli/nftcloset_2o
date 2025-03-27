@@ -27,7 +27,7 @@ const AdminLayout = () => {
         {!authChecked ? (
           <div>Checking Authentication....</div>
         ) : (
-          <div className="bg-[url('/landing.png')] bg-cover bg-center bg-no-repeat  w-full">
+          <div className="bg-[url('/productnftbg.png')]  bg-no-repeat min-h-screen w-full">
             <Nav />
             <div className=" flex items-center justify-center  md:items-start p-0 md:pr-2 ">
               <AdminSideBar />

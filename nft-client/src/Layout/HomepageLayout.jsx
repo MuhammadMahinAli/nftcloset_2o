@@ -32,12 +32,13 @@ const HomepageLayout = () => {
   if (isLoading) {
     return <Loading />;
   }
+  //bg-[url('/landing.png')] bg-center bg-no-repeat
 
   return (
     <ScrollToTop>
       <div className="bg-white text-gray-800 min-h-srceen">
         <Nav />
-        <div className="bg-[url('/landing.png')] bg-no-repeat text-gray-500">
+        <div className=" text-gray-500">
           <Outlet />
           <Footer />
         </div>

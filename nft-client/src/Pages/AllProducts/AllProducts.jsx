@@ -24,7 +24,7 @@ const AllProducts = () => {
     setIsOpenOption(false);
   };
   return (
-    <div className="px-3 py-3 md:px-5 md:py-7 lg:px-14 xl:py-10 xl:px-16 3xl:px-20">
+    <div className="bg-[url('/productnftbg.png')]  bg-no-repeat px-3 py-3 md:px-5 md:py-7 lg:px-14 xl:py-10 xl:px-16 3xl:px-20">
       {/* <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">All Products</h1>
       </div> */}
